@@ -15,7 +15,8 @@
                 </button>
                 <a class="flex ms-2 md:me-24">
                     <span
-                        class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-gray-100 text-gray-900">PROJECT MBKM</span>
+                        class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-gray-100 text-gray-900">PROJECT
+                        MBKM</span>
                 </a>
             </div>
             <div class="flex items-center">
@@ -76,34 +77,52 @@
     <div class="h-full px-3 pb-4 overflow-y-auto">
         <ul class="space-y-1 font-medium">
             @can('admin')
+                <span class="text-sm text-gray-900 dark:text-gray-100">Main</span>
                 <li>
-                    <span class="text-sm text-gray-900 dark:text-gray-100">Main</span>
-                    <a href=""
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/dashboard') ? 'bg-green-500 text-white' : '' }}">
+                    <a href="{{ route('dashboard') }}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-house-door"></i> Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.users') }}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/users') ? 'bg-green-500 text-white' : '' }}">
-                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-people"></i> List Users</span>
+                    <a id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/*') ? 'bg-green-500 text-white' : '' }}">
+                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-people"></i> Users</span> <i
+                            class="bi bi-caret-down"></i>
                     </a>
+
+                    <div id="dropdown"
+                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
+                        style="width: 90%">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                            <li>
+                                <a href="{{ route('admin.users') }}"
+                                    class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-white {{ Request::is('admin/users') ? 'bg-gray-300' : '' }}">List
+                                    Pengguna</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.users.create') }}"
+                                    class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-600 dark:hover:text-white {{ Request::is('admin/users/create') ? 'bg-gray-300' : '' }}">Buat
+                                    Pengguna</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             @endcan
-            @can('dokter')
+            @can('staff')
                 <li>
                     <span class="text-sm text-gray-900 dark:text-gray-100">Main</span>
                     <a href=""
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('beranda/dashboard/band/index.html') ? 'bg-green-500 text-white' : '' }}">
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('staff') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-house-door"></i> Dashboard</span>
                     </a>
                 </li>
             @endcan
-            @can('pegawai')
+            @can('mahasiswa')
                 <li>
                     <span class="text-sm text-gray-900 dark:text-gray-100">Main</span>
-                    <a href="{{ route('cafe.dashboard') }}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('beranda/dashboard/cafe/index.html') ? 'bg-green-500 text-white' : '' }}">
+                    <a href="{{ route('mahasiswa') }}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('mahasiswa') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-house-door"></i> Dashboard</span>
                     </a>
                 </li>

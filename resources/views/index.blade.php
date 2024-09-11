@@ -8,7 +8,15 @@
     {{-- @vite('resources/css/app.css') --}}
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Project MBKM</title>
+    <style>
+        #dropdown {
+            width: 100%;
+            max-width: 16rem;
+        }
+    </style>
+
 </head>
 
 <body class="bg-gray-100 dark:bg-gray-800">

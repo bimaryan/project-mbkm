@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    public function index()
+    {
+        return view('admin.dashboard.index');
+    }
+
     public function users()
     {
         $user = User::all();

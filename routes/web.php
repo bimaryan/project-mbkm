@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::middleware(['role:' . Role::ADMIN])->group(function () {
+        Route::get('admin', [AdminController::class, 'index'])->name('dashboard');
         Route::get('admin/users', [AdminController::class, 'users'])->name('admin.users');
         Route::get('admin/users/create', [AdminController::class, 'addUsers'])->name('admin.users.create');
         Route::post('admin/users/create', [AdminController::class, 'storeUsers'])->name('admin.users.proses');
