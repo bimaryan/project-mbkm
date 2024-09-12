@@ -50,10 +50,10 @@
 
             <!-- Username -->
             <div>
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-600">Username</label>
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-600">Nama Mahasiswa</label>
                 <input type="name" id="name" name="name"
                     class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    placeholder="joe biden">
+                    placeholder="Bima Ryan Alfarizi">
                 @error('name')
                     <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
                 @enderror
@@ -61,10 +61,10 @@
 
             <!-- Email -->
             <div>
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-600">Email</label>
-                <input type="email" id="email" name="email"
+                <label for="nim" class="block mb-2 text-sm font-medium text-gray-600">Nim</label>
+                <input type="nim" id="nim" name="nim"
                     class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    placeholder="you@example.com">
+                    placeholder="2205036">
                 @error('email')
                     <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
                 @enderror
@@ -72,11 +72,11 @@
 
             <!-- Password -->
             <div>
-                <label for="password" class="block mb-2 text-sm font-medium text-gray-600">Password</label>
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-600">Kata Sandi</label>
                 <input type="password" id="password" name="password"
                     class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     placeholder="********">
-                <p id="password-error" class="text-sm text-red-500 mt-2 hidden">Password must be at least 8 characters.
+                <p id="password-error" class="text-sm text-red-500 mt-2 hidden">Kata sandi anda kurang dari 8 karakter
                 </p>
                 @error('password')
                     <p class="text-sm text-red-500 mt-2">{{ $message }}</p>

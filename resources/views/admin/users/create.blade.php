@@ -1,6 +1,6 @@
 @extends('index')
 @section('content')
-    <div class="p-4 sm:ml-64 mt-2">
+    <div class="p-4 sm:ml-64">
         <div class="rounded-lg mt-14 space-y-4">
             <div>
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -12,7 +12,7 @@
                     <span class="mx-2 text-gray-500">/</span>
                     <li>
                         <div class="flex items-center">
-                            <a class="active text-sm font-medium text-gray-500 dark:text-gray-400">Daftar Pengguna</a>
+                            <a class="active text-sm font-medium text-gray-500 dark:text-gray-400">Kelola Pengguna</a>
                         </div>
                     </li>
                     <span class="mx-2 text-gray-500">/</span>
@@ -68,7 +68,7 @@
                                 @enderror
                             </div>
                             <div>
-                                <label for="role_id" class="block text-sm font-medium text-gray-700">Pilih Jabatan</label>
+                                <label for="role_id" class="block text-sm font-medium text-gray-700">Pilih Role</label>
                                 <select name="role_id" id="role_id"
                                     class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                     <option value="">Pilih Role</option>

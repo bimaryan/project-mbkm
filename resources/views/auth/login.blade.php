@@ -62,18 +62,18 @@
 
                 <!-- Email -->
                 <div>
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-600">Email</label>
-                    <input type="email" id="email" name="email"
+                    <label for="nim" class="block mb-2 text-sm font-medium text-gray-600">NIM</label>
+                    <input type="nim" id="nim" name="nim"
                         class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                        placeholder="you@example.com">
-                    @error('email')
+                        placeholder="2205036">
+                    @error('nim')
                         <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <!-- Password -->
                 <div>
-                    <label for="password" class="block mb-2 text-sm font-medium text-gray-600">Password</label>
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-600">Kata Sandi</label>
                     <input type="password" id="password" name="password"
                         class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         placeholder="********">

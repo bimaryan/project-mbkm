@@ -22,13 +22,13 @@
                     <span class="mx-2 text-gray-500">/</span>
                     <li>
                         <div class="flex items-center">
-                            <a class="active text-sm font-medium text-gray-500 dark:text-gray-400">Kelola Pengguna</a>
+                            <a class="active text-sm font-medium text-gray-500 dark:text-gray-400">Kelola Produk</a>
                         </div>
                     </li>
                     <span class="mx-2 text-gray-500">/</span>
                     <li>
                         <div class="flex items-center">
-                            <a class="active text-sm font-medium text-gray-500 dark:text-gray-400">Daftar Pengguna</a>
+                            <a class="active text-sm font-medium text-gray-500 dark:text-gray-400">List Alat Lab</a>
                         </div>
                     </li>
                 </ol>
@@ -36,14 +36,15 @@
             <div class="p-4 rounded-lg shadow-lg bg-white">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h3 class="text-2xl font-medium">Daftar Pengguna</h3>
+                        <h3 class="text-2xl font-medium">List Alat Lab</h3>
                     </div>
                     <div>
-                        <a href="{{ route('admin.users.create') }}"
+                        <a href="{{ route('admin.alat.proses') }}"
                             class="bg-green-500 hover:bg-green-800 text-white py-2 px-4 rounded">
                             Create
                         </a>
                     </div>
+
                 </div>
                 <div class="relative overflow-x-auto sm:rounded-lg mt-4">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -53,36 +54,32 @@
                                     No
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Username
+                                    Nama Alat
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Nim
+                                    Stock
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Jabatan
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Aksi
+                                    Status
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($user as $data)
-                                <tr
-                                    class="bg-white dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                    <td class="px-6 py-4">
+                            @foreach ($alats as $data)
+                                <tr>
+                                    <td scope="col" class="px-6 py-3">
                                         {{ $loop->iteration }}
                                     </td>
-                                    <td class="px-6 py-4">
-                                        {{ $data->name }}
+                                    <td scope="col" class="px-6 py-3">
+                                        {{ $data->nama_alat }}
                                     </td>
-                                    <td class="px-6 py-4">
-                                        {{ $data->nim }}
+                                    <td scope="col" class="px-6 py-3">
+                                        {{ $data->stock }}
                                     </td>
-                                    <td class="px-6 py-4">
-                                        {{ $data->getAkses->name }}
+                                    <td scope="col" class="px-6 py-3">
+                                        {{ $data->status }}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td scope="col" class="px-6 py-3">
 
                                     </td>
                                 </tr>

@@ -16,20 +16,23 @@ class UsersSeeder extends Seeder
         User::create([
             'name' => 'admin',
             'password' => bcrypt('password'),
-            'email' => 'admin@gmail.com',
-            'role_id' => 1
+            'nim' => 'admin',
+            'role_id' => 1,
+            'telepon' => '1234567891011'
         ]);
         User::create([
             'name' => 'staff',
             'password' => bcrypt('password'),
-            'email' => 'staff@gmail.com',
-            'role_id' => 2
+            'nim' => 'staff',
+            'role_id' => 2,
+            'telepon' => '1110987654321'
         ]);
         User::create([
-            'name' => 'mahasiswa',
+            'name' => 'Bima Ryan Alfarizi',
             'password' => bcrypt('password'),
-            'email' => 'mahasiswa@gmail.com',
-            'role_id' => 3
+            'nim' => '2205036',
+            'role_id' => 3,
+            'telepon' => '085157433395'
         ]);
     }
 }

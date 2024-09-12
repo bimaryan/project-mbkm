@@ -17,11 +17,11 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string',
+            'nim' => 'required|string',
+            'password' => 'required|string|min:8',
         ]);
 
-        $credentials = $request->only(['email', 'password']);
+        $credentials = $request->only(['nim', 'password']);
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();

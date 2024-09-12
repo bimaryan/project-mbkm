@@ -18,13 +18,13 @@ class RegisterController extends Controller
     {
         $request->validate([
             'name' => 'required|string|unique:users,name',
-            'email' => 'required|email|unique:users,email',
+            'nim' => 'required|string|unique:users,nim',
             'password' => 'required|string|min:8',
         ]);
 
         $user = new User();
         $user->name = $request->name;
-        $user->email = $request->email;
+        $user->nim = $request->nim;
         $user->role_id = 3;
         $user->password = Hash::make($request->password);
         $user->save();

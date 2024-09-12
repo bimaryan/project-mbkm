@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\WEB\Admin\AdminController;
+use App\Http\Controllers\WEB\Admin\ProdukController;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Auth\RegisterController;
 use App\Http\Controllers\WEB\Mahasiswa\MahasiswaController;
@@ -33,9 +34,16 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['role:' . Role::ADMIN])->group(function () {
         Route::get('admin', [AdminController::class, 'index'])->name('dashboard');
-        Route::get('admin/users', [AdminController::class, 'users'])->name('admin.users');
-        Route::get('admin/users/create', [AdminController::class, 'addUsers'])->name('admin.users.create');
-        Route::post('admin/users/create', [AdminController::class, 'storeUsers'])->name('admin.users.proses');
+
+        // ROUTE BUAT TAMBAH USERS
+        Route::get('admin/kelola-users/users', [AdminController::class, 'users'])->name('admin.users');
+        Route::get('admin/kelola-users/users/create', [AdminController::class, 'addUsers'])->name('admin.users.create');
+        Route::post('admin/kelola-users/users/create', [AdminController::class, 'storeUsers'])->name('admin.users.proses');
+
+        // ROUTE BUAT TAMBAH PRODUK ALAT LAB
+        Route::get('admin/kelola-produk/alat-lab/', [ProdukController::class, 'alatIndex'])->name('admin.alat');
+        Route::get('admin/kelola-produk/alat-lab/create', [ProdukController::class, 'alatCreate'])->name('admin.alat.create');
+        Route::post('admin/kelola-produk/alat-lab/create', [ProdukController::class, 'storeAlat'])->name('admin.alat.proses');
     });
 
     Route::middleware(['role:' . Role::STAFF])->group(function () {
