@@ -15,24 +15,27 @@ class UsersSeeder extends Seeder
     {
         User::create([
             'name' => 'admin',
+            'nama_lengkap' => 'admin',
             'password' => bcrypt('password'),
-            'nim' => 'admin',
             'role_id' => 1,
-            'telepon' => '1234567891011'
+            'telepon' => '1234567891011',
+            'keterangan' => 'ADMIN'
         ]);
         User::create([
-            'name' => 'staff',
+            'name' => 'dosen',
+            'nama_lengkap' => 'dosen',
             'password' => bcrypt('password'),
-            'nim' => 'staff',
             'role_id' => 2,
-            'telepon' => '1110987654321'
+            'telepon' => '1110987654321',
+            'keterangan' => 'DOSEN'
         ]);
         User::create([
-            'name' => 'Bima Ryan Alfarizi',
+            'name' => '2205036',
+            'nama_lengkap' => 'Bima Ryan Alfarizi',
             'password' => bcrypt('password'),
-            'nim' => '2205036',
             'role_id' => 3,
-            'telepon' => '085157433395'
+            'telepon' => '085157433395',
+            'keterangan' => 'MAHASISWA'
         ]);
     }
 }

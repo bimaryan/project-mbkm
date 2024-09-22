@@ -17,19 +17,19 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nim' => 'required|string',
+            'name' => 'required|string',
             'password' => 'required|string|min:8',
         ]);
 
-        $credentials = $request->only(['nim', 'password']);
+        $credentials = $request->only(['name', 'password']);
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
             if ($user->role_id == Role::ADMIN) {
-                return redirect()->route('admin.users');
-            } elseif ($user->role_id == Role::STAFF) {
-                return redirect()->route('staff');
+                return redirect()->route('admin');
+            } elseif ($user->role_id == Role::DOSEN) {
+                return redirect()->route('dosen');
             } elseif ($user->role_id == Role::MAHASISWA) {
                 return redirect()->route('mahasiswa');
             }

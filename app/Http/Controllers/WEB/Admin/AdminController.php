@@ -29,15 +29,19 @@ class AdminController extends Controller
     public function storeUsers(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email',
+            'name' => 'required|string|unique:users,name',
+            'nama_lengkap' => 'required|string',
+            'telepon' => 'nullable|string|max:15',
+            'keterangan' => 'nullable|string',
             'password' => 'required|string|min:8',
-            'role_id' => 'required|in:' . Role::STAFF . ',' . Role::MAHASISWA
+            'role_id' => 'required|in:' . Role::DOSEN . ',' . Role::MAHASISWA
         ]);
 
         $user = new User();
         $user->name = $request->name;
-        $user->email = $request->email;
+        $user->nama_lengkap = $request->nama_lengkap;
+        $user->telepon = $request->telepon;
+        $user->keterangan = $request->keterangan;
         $user->role_id = $request->role_id;
         $user->password = Hash::make($request->password);
         $user->save();

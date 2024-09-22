@@ -30,7 +30,7 @@
                                         {{ Auth::user()->getAkses ? Auth::user()->getAkses->name : 'No Role Assigned' }}</p>
                                 </div>
                             @endcan
-                            @can('staff')
+                            @can('dosen')
                                 <div class="md:flex flex-col text-right">
                                     <p class="text-sm">{{ Auth::user()->name }}</p>
                                     <p class="text-xs">
@@ -79,7 +79,7 @@
             @can('admin')
                 <span class="text-sm text-gray-900 dark:text-gray-100">Main</span>
                 <li>
-                    <a href="{{ route('dashboard') }}"
+                    <a href="{{ route('admin') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-house-door"></i> Dashboard</span>
                     </a>
@@ -106,39 +106,50 @@
                 </li>
                 <li>
                     <a id="kelolaproduk" data-collapse-toggle="dropdown"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/kelola-produk/*') ? 'bg-green-500 text-white' : '' }}">
-                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-box"></i> Kelola Produk</span> <i
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/kelola-barang/*') ? 'bg-green-500 text-white' : '' }}">
+                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-box"></i> Kelola Barang</span> <i
                             class="bi bi-caret-down"></i>
                     </a>
 
                     <ul id="dropdown" class="hidden py-2 space-y-2" aria-labelledby="kelolaproduk">
                         <li>
-                            <a href="{{ route('admin.alat') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-produk/alat-lab') ? 'bg-gray-300' : '' }}">List
-                                Alat Lab</a>
+                            <a href="{{ route('admin.barang') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-barang/data-barang') ? 'bg-gray-300' : '' }}">Data
+                                Barang</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.alat.create') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-produk/alat-lab/create') ? 'bg-gray-300' : '' }}">Tambah
-                                Alat Lab</a>
+                            <a href="{{ route('admin.barang.create') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-barang/data-barang/create') ? 'bg-gray-300' : '' }}">Tambah
+                                Data Barang</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a id="kelolakategori" data-collapse-toggle="kategori"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/kelola-kategori/*') ? 'bg-green-500 text-white' : '' }}">
+                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-ui-checks-grid"></i> Kelola Kategori</span> <i
+                            class="bi bi-caret-down"></i>
+                    </a>
+
+                    <ul id="kategori" class="hidden py-2 space-y-2" aria-labelledby="kelolakategori">
+                        <li>
+                            <a href="{{ route('admin.kategori') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-kategori/data-kategori') ? 'bg-gray-300' : '' }}">Data
+                                Kategori</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.kategori.create') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-kategori/create') ? 'bg-gray-300' : '' }}">Tambah
+                                Kategori</a>
                         </li>
                     </ul>
                 </li>
             @endcan
-            @can('staff')
+            @can('dosen')
                 <li>
                     <span class="text-sm text-gray-900 dark:text-gray-100">Main</span>
                     <a href=""
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('staff') ? 'bg-green-500 text-white' : '' }}">
-                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-house-door"></i> Dashboard</span>
-                    </a>
-                </li>
-            @endcan
-            @can('mahasiswa')
-                <li>
-                    <span class="text-sm text-gray-900 dark:text-gray-100">Main</span>
-                    <a href="{{ route('mahasiswa') }}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('mahasiswa') ? 'bg-green-500 text-white' : '' }}">
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('dosen') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-house-door"></i> Dashboard</span>
                     </a>
                 </li>

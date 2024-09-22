@@ -49,10 +49,11 @@
                                 @enderror
                             </div>
                             <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                                <input type="text" name="email" id="email"
+                                <label for="nama_lengkap" class="block text-sm font-medium text-gray-700">Nama
+                                    Lengkap</label>
+                                <input type="text" name="nama_lengkap" id="nama_lengkap"
                                     class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                @error('email')
+                                @error('nama_lengkap')
                                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -68,14 +69,33 @@
                                 @enderror
                             </div>
                             <div>
+                                <label for="telepon" class="block text-sm font-medium text-gray-700">Telepon</label>
+                                <input type="text" name="telepon" id="telepon"
+                                    class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                @error('telepon')
+                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <div>
                                 <label for="role_id" class="block text-sm font-medium text-gray-700">Pilih Role</label>
                                 <select name="role_id" id="role_id"
                                     class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                     <option value="">Pilih Role</option>
-                                    <option value="{{ \App\Models\Role::STAFF }}">Staff</option>
+                                    <option value="{{ \App\Models\Role::DOSEN }}">Dosen</option>
                                     <option value="{{ \App\Models\Role::MAHASISWA }}">Mahasiswa</option>
                                 </select>
                                 @error('role_id')
+                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div>
+                                <label for="keterangan" class="block text-sm font-medium text-gray-700">Keterangan</label>
+                                <textarea name="keterangan" id="keterangan"
+                                    class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"></textarea>
+                                @error('keterangan')
                                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                                 @enderror
                             </div>

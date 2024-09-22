@@ -56,10 +56,10 @@
                                     Username
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Nim
+                                    Nama Lengkap
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Jabatan
+                                    Keterangan
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Aksi
@@ -77,10 +77,10 @@
                                         {{ $data->name }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $data->nim }}
+                                        {{ $data->nama_lengkap }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $data->getAkses->name }}
+                                        {{ $data->keterangan }}
                                     </td>
                                     <td class="px-6 py-4">
 

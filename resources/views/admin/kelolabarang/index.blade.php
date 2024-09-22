@@ -22,13 +22,13 @@
                     <span class="mx-2 text-gray-500">/</span>
                     <li>
                         <div class="flex items-center">
-                            <a class="active text-sm font-medium text-gray-500 dark:text-gray-400">Kelola Produk</a>
+                            <a class="active text-sm font-medium text-gray-500 dark:text-gray-400">Kelola Barang</a>
                         </div>
                     </li>
                     <span class="mx-2 text-gray-500">/</span>
                     <li>
                         <div class="flex items-center">
-                            <a class="active text-sm font-medium text-gray-500 dark:text-gray-400">List Alat Lab</a>
+                            <a class="active text-sm font-medium text-gray-500 dark:text-gray-400">Data Barang</a>
                         </div>
                     </li>
                 </ol>
@@ -36,12 +36,12 @@
             <div class="p-4 rounded-lg shadow-lg bg-white">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h3 class="text-2xl font-medium">List Alat Lab</h3>
+                        <h3 class="text-2xl font-medium">Data Barang</h3>
                     </div>
                     <div>
-                        <a href="{{ route('admin.alat.proses') }}"
+                        <a href="{{ route('admin.barang.create') }}"
                             class="bg-green-500 hover:bg-green-800 text-white py-2 px-4 rounded">
-                            Create
+                            Tambah Barang
                         </a>
                     </div>
 
@@ -54,30 +54,39 @@
                                     No
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Nama Alat
+                                    Nama Barang
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Stock
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Status
+                                    Kategori Barang
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Posisi Barang
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Aksi
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($alats as $data)
+                            @foreach ($barangs as $data)
                                 <tr>
                                     <td scope="col" class="px-6 py-3">
                                         {{ $loop->iteration }}
                                     </td>
                                     <td scope="col" class="px-6 py-3">
-                                        {{ $data->nama_alat }}
+                                        {{ $data->name }}
                                     </td>
                                     <td scope="col" class="px-6 py-3">
                                         {{ $data->stock }}
                                     </td>
                                     <td scope="col" class="px-6 py-3">
-                                        {{ $data->status }}
+                                        {{ $data->kategori->kategori }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-3">
+                                        {{ $data->room->ruangan }}
                                     </td>
                                     <td scope="col" class="px-6 py-3">
 

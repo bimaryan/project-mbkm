@@ -26,21 +26,21 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define("admin", function ($user) {
             if (empty($user->getAkses)) {
-                return redirect("");
+                return redirect("/login");
             } else {
                 return $user->getAkses->id == Role::ADMIN;
             }
         });
-        Gate::define("staff", function ($user) {
+        Gate::define("dosen", function ($user) {
             if (empty($user->getAkses)) {
-                return redirect("");
+                return redirect("/login");
             } else {
-                return $user->getAkses->id == Role::STAFF;
+                return $user->getAkses->id == Role::DOSEN;
             }
         });
         Gate::define("mahasiswa", function ($user) {
             if (empty($user->getAkses)) {
-                return redirect("");
+                return redirect("/login");
             } else {
                 return $user->getAkses->id == Role::MAHASISWA;
             }

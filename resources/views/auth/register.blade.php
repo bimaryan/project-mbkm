@@ -8,7 +8,7 @@
     {{-- @vite('resources/css/app.css') --}}
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Project MBKM</title>
+    <title>Login &mdash; SILK</title>
     <style>
         .background {
             position: relative;
@@ -50,22 +50,22 @@
 
             <!-- Username -->
             <div>
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-600">Nama Mahasiswa</label>
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-600">Username Mahasiswa</label>
                 <input type="name" id="name" name="name"
                     class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    placeholder="Bima Ryan Alfarizi">
+                    placeholder="2205036">
                 @error('name')
                     <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
                 @enderror
             </div>
 
-            <!-- Email -->
+            <!-- Nama Lengkap -->
             <div>
-                <label for="nim" class="block mb-2 text-sm font-medium text-gray-600">Nim</label>
-                <input type="nim" id="nim" name="nim"
+                <label for="nama_lengkap" class="block mb-2 text-sm font-medium text-gray-600">Nama Lengkap</label>
+                <input type="nama_lengkap" id="nama_lengkap" name="nama_lengkap"
                     class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    placeholder="2205036">
-                @error('email')
+                    placeholder="Bima Ryan Alfarizi">
+                @error('nama_lengkap')
                     <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
                 @enderror
             </div>

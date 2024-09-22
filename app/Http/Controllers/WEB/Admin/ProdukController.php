@@ -3,44 +3,58 @@
 namespace App\Http\Controllers\WEB\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Alat;
+use App\Models\Barang;
+use App\Models\Kategori;
+use App\Models\Kondisi;
+use App\Models\Room;
+use App\Models\Satuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProdukController extends Controller
 {
-    public function alatIndex()
+    public function index()
     {
-        $alats = Alat::all();
-        return view('admin.kelolaproduk.alat.index', ['alats' => $alats]);
+        $barangs = Barang::all();
+        return view('admin.kelolabarang.index', ['barangs' => $barangs]);
     }
 
-    public function alatCreate()
+    public function barangCreate()
     {
-        return view('admin.kelolaproduk.alat.create');
+        $kategoris = Kategori::all();
+        $kondisis = Kondisi::all();
+        $satuans = Satuan::all();
+        $rooms = Room::all();
+        return view('admin.kelolabarang.create', compact('kategoris', 'satuans', 'rooms', 'kondisis'));
     }
 
-    public function storeAlat(Request $request)
+    public function storeBarang(Request $request)
     {
-        if (Auth::user()->role !== 'admin') {
-            return redirect()->back()->with('error', 'Anda tidak memiliki akses ini!');
-        }
-
         $request->validate([
-            'nama_alat' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
+            'name' => 'required|string|max:255',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'deskripsi' => 'required|string|max:1000',
             'stock' => 'required|integer|min:1',
-            'status' => 'required|in:Tersedia,Dipinjam',
+            'kategori_id' => 'required|exists:kategoris,id',
+            'satuan_id' => 'required|exists:satuans,id',
+            'room_id' => 'required|exists:rooms,id',
+            'kondisi_id' => 'required|exists:kondisis,id',
         ]);
 
-        Alat::create([
-            'users_id' => auth()->id(),
-            'nama_alat' => $request->nama_alat,
+        $filePath = $request->file('gambar')->move('uploads/barang', time() . '_' . $request->file('gambar')->getClientOriginalName());
+
+        Barang::create([
+            'users_id' => Auth::id(),
+            'name' => $request->name,
+            'gambar' => $filePath,
             'deskripsi' => $request->deskripsi,
             'stock' => $request->stock,
-            'status' => $request->status,
+            'kategori_id' => $request->kategori_id,
+            'satuan_id' => $request->satuan_id,
+            'room_id' => $request->room_id,
+            'kondisi_id' => $request->kondisi_id,
         ]);
 
-        return redirect()->back()->with('success', 'Alat berhasil ditambahkan!');
+        return redirect()->route('admin.barang')->with('success', 'Barang berhasil ditambahkan!');
     }
 }

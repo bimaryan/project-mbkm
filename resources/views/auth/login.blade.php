@@ -8,7 +8,7 @@
     {{-- @vite('resources/css/app.css') --}}
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Project 3 - Login</title>
+    <title>Login &mdash; SILK</title>
     <style>
         .background {
             position: relative;
@@ -62,11 +62,11 @@
 
                 <!-- Email -->
                 <div>
-                    <label for="nim" class="block mb-2 text-sm font-medium text-gray-600">NIM</label>
-                    <input type="nim" id="nim" name="nim"
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-600">Username</label>
+                    <input type="name" id="name" name="name"
                         class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         placeholder="2205036">
-                    @error('nim')
+                    @error('name')
                         <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
                     @enderror
                 </div>
