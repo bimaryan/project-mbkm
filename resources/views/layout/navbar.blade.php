@@ -93,13 +93,11 @@
                     <ul id="users" class="hidden py-2 space-y-2" aria-labelledby="kelolausers">
                         <li>
                             <a href="{{ route('admin.users') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-users/users') ? 'bg-gray-300' : '' }}">List
-                                Pengguna</a>
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-users/users') ? 'bg-gray-300' : '' }}">Mahasiswa</a>
                         </li>
                         <li>
                             <a href="{{ route('admin.users.create') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-users/users/create') ? 'bg-gray-300' : '' }}">Buat
-                                Pengguna</a>
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-users/users/create') ? 'bg-gray-300' : '' }}">Dosen dan Staff</a>
                         </li>
                     </ul>
                 </li>
