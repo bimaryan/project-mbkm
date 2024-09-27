@@ -36,16 +36,18 @@ Route::middleware(['auth'])->group(function () {
         // ROUTE BUAT TAMBAH USERS
         Route::get('admin/kelola-users/users', [AdminController::class, 'users'])->name('admin.users');
         Route::get('admin/kelola-users/users/create', [AdminController::class, 'addUsers'])->name('admin.users.create');
+        Route::put('admin/kelola-users/users/edit', [AdminController::class, 'edit'])->name('admin.users.edit');
         Route::post('admin/kelola-users/users/create', [AdminController::class, 'storeUsers'])->name('admin.users.proses');
 
         // ROUTE BUAT TAMBAH PRODUK ALAT LAB
-        Route::get('admin/kelola-barang/data-barang/', [ProdukController::class, 'index'])->name('admin.barang');
-        Route::get('admin/kelola-barang/data-barang/create', [ProdukController::class, 'barangCreate'])->name('admin.barang.create');
-        Route::post('admin/kelola-barang/data-barang/create/proses', [ProdukController::class, 'storeBarang'])->name('admin.barang.proses');
+        Route::get('admin/alat-dan-bahan/barang', [ProdukController::class, 'index'])->name('admin.barang');
+        Route::post('admin/alat-dan-bahan/barang/proses', [ProdukController::class, 'storeBarang'])->name('admin.barang.proses');
+        Route::delete('admin/alat-dan-bahan/barang/{barang}/delete', [ProdukController::class, 'hapus'])->name('admin.barang.hapus');
 
-        Route::get('admin/kelola-kategori/data-kategori', [KategoriController::class, 'index'])->name('admin.kategori');
-        Route::get('admin/kelola-kategori/data-kategori/create', [KategoriController::class, 'create'])->name('admin.kategori.create');
-        Route::get('admin/kelola-kategori/data-kategori/proses', [KategoriController::class, 'store'])->name('admin.kategori.proses');
+        Route::get('admin/alat-dan-bahan/kategori', [KategoriController::class, 'index'])->name('admin.kategori');
+        Route::post('admin/alat-dan-bahan/kategori/proses', [KategoriController::class, 'store'])->name('admin.kategori.proses');
+        Route::put('admin/alat-dan-bahan/kategori/{kategori}/edit', [KategoriController::class, 'edit'])->name('admin.kategori.edit');
+        Route::delete('admin/alat-dan-bahan/kategori/{kategori}/hapus', [KategoriController::class, 'hapus'])->name('admin.kategori.hapus');
     });
 
     Route::middleware(['role:' . Role::DOSEN])->group(function () {

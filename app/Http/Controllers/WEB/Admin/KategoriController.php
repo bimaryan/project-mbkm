@@ -29,6 +29,27 @@ class KategoriController extends Controller
             'kategori' => $request->kategori,
         ]);
 
-        return redirect()->route('admin.kelolakategoriindex')->with('success', 'Kategori berhasil ditambahkan');
+        return redirect()->route('admin.kategori')->with('success', 'Kategori berhasil ditambahkan');
+    }
+
+    public function edit(Request $request, Kategori $kategori)
+    {
+        $request->validate([
+            'kategori' => 'required|string',
+        ]);
+
+        $kategori->update([
+            'kategori' => $request->kategori
+        ]);
+
+        return redirect()->route('admin.kategori')->with('success', 'Kategori updated successfully.');
+    }
+
+
+    public function hapus(Kategori $kategori)
+    {
+        $kategori->delete();
+
+        return redirect()->route('admin.kategori')->with('success', 'Kategori deleted successfully.');
     }
 }

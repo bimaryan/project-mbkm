@@ -77,7 +77,6 @@
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
         <ul class="space-y-2 font-medium">
             @can('admin')
-                <span class="text-sm text-gray-900 dark:text-gray-100">Main</span>
                 <li>
                     <a href="{{ route('admin') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin') ? 'bg-green-500 text-white' : '' }}">
@@ -104,41 +103,26 @@
                 </li>
                 <li>
                     <a id="kelolaproduk" data-collapse-toggle="dropdown"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/kelola-barang/*') ? 'bg-green-500 text-white' : '' }}">
-                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-box"></i> Kelola Barang</span> <i
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/alat-dan-bahan/*') ? 'bg-green-500 text-white' : '' }}">
+                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-box"></i> Alat dan Bahan</span> <i
                             class="bi bi-caret-down"></i>
                     </a>
 
                     <ul id="dropdown" class="hidden py-2 space-y-2" aria-labelledby="kelolaproduk">
                         <li>
                             <a href="{{ route('admin.barang') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-barang/data-barang') ? 'bg-gray-300' : '' }}">Data
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/barang') ? 'bg-gray-300' : '' }}">Data
                                 Barang</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.barang.create') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-barang/data-barang/create') ? 'bg-gray-300' : '' }}">Tambah
-                                Data Barang</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a id="kelolakategori" data-collapse-toggle="kategori"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/kelola-kategori/*') ? 'bg-green-500 text-white' : '' }}">
-                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-ui-checks-grid"></i> Kelola Kategori</span> <i
-                            class="bi bi-caret-down"></i>
-                    </a>
-
-                    <ul id="kategori" class="hidden py-2 space-y-2" aria-labelledby="kelolakategori">
-                        <li>
                             <a href="{{ route('admin.kategori') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-kategori/data-kategori') ? 'bg-gray-300' : '' }}">Data
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/kategori') ? 'bg-gray-300' : '' }}">Data
                                 Kategori</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.kategori.create') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-kategori/create') ? 'bg-gray-300' : '' }}">Tambah
-                                Kategori</a>
+                            <a href=""
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/satuan') ? 'bg-gray-300' : '' }}">Data
+                                Satuan</a>
                         </li>
                     </ul>
                 </li>
