@@ -19,8 +19,5 @@ class KategoriSeeder extends Seeder
         Kategori::create([
             'kategori' => 'Bahan',
         ]);
-        Kategori::create([
-            'kategori' => 'File',
-        ]);
     }
 }
