@@ -129,22 +129,6 @@
                                                 @enderror
                                             </div>
 
-                                            <!-- Kondisi -->
-                                            {{-- <div class="mb-2">
-                                                <label for="kondisi_id"
-                                                    class="block text-sm font-medium text-gray-700">Kondisi</label>
-                                                <select name="kondisi_id" id="kondisi_id"
-                                                    class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                                    <!-- Assuming you load rooms from the database -->
-                                                    @foreach ($kondisis as $data)
-                                                        <option value="{{ $data->id }}">{{ $data->kondisi }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('kondisi_id')
-                                                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                                @enderror
-                                            </div> --}}
-
                                             <!-- Gambar -->
                                             <div class="mb-2">
                                                 <label for="gambar"
@@ -177,6 +161,107 @@
                 </div>
             </div>
             <div class="p-4 rounded-lg shadow-lg bg-white">
+                <button id="filterButton"
+                    class="mb-2 mt-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-800 sm:hidden">
+                    Tampilkan Filter
+                </button>
+
+                <!-- Form Filter -->
+                <form id="filterForm" action="{{ route('admin.barang') }}" method="GET"
+                    class="flex items-center gap-2 mb-4 mt-2 hidden sm:flex">
+                    <!-- Filter Nama Barang -->
+                    <input type="text" name="name" placeholder="Nama Barang" value="{{ request('name') }}"
+                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+
+                    <!-- Filter Kategori -->
+                    <select name="kategori_id"
+                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                        <option value="">Pilih Kategori</option>
+                        @foreach ($kategoris as $kategori)
+                            <option value="{{ $kategori->id }}"
+                                {{ request('kategori_id') == $kategori->id ? 'selected' : '' }}>
+                                {{ $kategori->kategori }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    <!-- Filter Kondisi -->
+                    <select name="kondisi"
+                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                        <option value="">Pilih Kondisi</option>
+                        <option value="baik" {{ request('kondisi') == 'baik' ? 'selected' : '' }}>Baik</option>
+                        <option value="terpakai" {{ request('kondisi') == 'terpakai' ? 'selected' : '' }}>Terpakai
+                        </option>
+                        <option value="hilang" {{ request('kondisi') == 'hilang' ? 'selected' : '' }}>Hilang</option>
+                        <option value="habis" {{ request('kondisi') == 'habis' ? 'selected' : '' }}>Habis</option>
+                    </select>
+
+                    <!-- Filter Stock -->
+                    <input type="number" name="stock" placeholder="Minimal Stock" value="{{ request('stock') }}"
+                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+
+                    <!-- Filter Satuan -->
+                    <select name="satuan_id"
+                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                        <option value="">Pilih Satuan</option>
+                        @foreach ($satuans as $satuan)
+                            <option value="{{ $satuan->id }}"
+                                {{ request('satuan_id') == $satuan->id ? 'selected' : '' }}>
+                                {{ $satuan->satuan }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    <button type="submit"
+                        class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-800">Filter</button>
+                </form>
+
+                <!-- Form Filter untuk Mobile -->
+                <div id="mobileFilterForm" class="grid grid-cols-2 gap-2 mb-4 hidden sm:hidden">
+                    <!-- Copy isi form filter ke sini untuk mobile -->
+                    <input type="text" name="name" placeholder="Nama Barang" value="{{ request('name') }}"
+                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+
+                    <select name="kategori_id"
+                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                        <option value="">Pilih Kategori</option>
+                        @foreach ($kategoris as $kategori)
+                            <option value="{{ $kategori->id }}"
+                                {{ request('kategori_id') == $kategori->id ? 'selected' : '' }}>
+                                {{ $kategori->kategori }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    <select name="kondisi"
+                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                        <option value="">Pilih Kondisi</option>
+                        <option value="baik" {{ request('kondisi') == 'baik' ? 'selected' : '' }}>Baik</option>
+                        <option value="terpakai" {{ request('kondisi') == 'terpakai' ? 'selected' : '' }}>Terpakai
+                        </option>
+                        <option value="hilang" {{ request('kondisi') == 'hilang' ? 'selected' : '' }}>Hilang</option>
+                        <option value="habis" {{ request('kondisi') == 'habis' ? 'selected' : '' }}>Habis</option>
+                    </select>
+
+                    <input type="number" name="stock" placeholder="Minimal Stock" value="{{ request('stock') }}"
+                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+
+                    <select name="satuan_id"
+                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                        <option value="">Pilih Satuan</option>
+                        @foreach ($satuans as $satuan)
+                            <option value="{{ $satuan->id }}"
+                                {{ request('satuan_id') == $satuan->id ? 'selected' : '' }}>
+                                {{ $satuan->satuan }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-800">
+                        Filter
+                    </button>
+                </div>
+
                 <div class="relative overflow-x-auto sm:rounded-lg">
                     <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
@@ -217,18 +302,18 @@
                                         {{ $data->kategori->kategori }}
                                     </td>
                                     <td scope="col" class="px-6 py-3">
-                                        @if ($data->stock == 0)
+                                        @if ($data->stock->stock == 0)
                                             <p class="bg-red-500 p-1 rounded-lg text-white">Habis</p>
-                                        @elseif ($data->stock > 0 && $data->is_stock_reduced)
+                                        @elseif ($data->stock->stock > 0 && $data->is_stock_reduced)
                                             <p class="bg-yellow-500 p-1 rounded-lg text-white">Terpakai</p>
-                                        @elseif ($data->stock > 0 && $data->is_stock_lost)
+                                        @elseif ($data->stock->stock > 0 && $data->is_stock_lost)
                                             <p class="bg-gray-500 p-1 rounded-lg text-white">Hilang</p>
                                         @else
                                             <p class="bg-green-500 p-1 rounded-lg text-white">Baik</p>
                                         @endif
                                     </td>
                                     <td scope="col" class="px-6 py-3">
-                                        {{ $data->stock }}
+                                        {{ $data->stock->stock }}
                                     </td>
                                     <td scope="col" class="px-6 py-3">
                                         {{ $data->satuan->satuan }}
@@ -301,7 +386,7 @@
                                                                 class="block text-sm font-medium text-gray-700">Stock
                                                                 Barang</label>
                                                             <input type="text" name="stock" id="stock"
-                                                                value="{{ $data->stock }}"
+                                                                value="{{ $data->stock->stock }}"
                                                                 class="mt-2 block w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                                         </div>
 
@@ -326,19 +411,29 @@
 
                                                         <!-- Satuan -->
                                                         <div class="mb-2">
-                                                            <label for="satuan_id"
-                                                                class="block text-sm font-medium text-gray-700">Satuan</label>
-                                                            <select name="satuan_id" id="satuan_id"
-                                                                value="{{ $data->satuan_id }}"
-                                                                class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                                                <!-- Assuming you load satuans from the database -->
-                                                                @foreach ($satuans as $satuan)
-                                                                    <option value="{{ $satuan->id }}"
-                                                                        {{ $satuan->id == $data->satuan_id ? 'selected' : '' }}>
-                                                                        {{ $satuan->satuan }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
+                                                            <div class="grid grid-cols-2 gap-2">
+                                                                <div>
+                                                                    <label for="persentase"
+                                                                        class="block text-sm font-medium text-gray-700">Persentase</label>
+                                                                    <input type="number" name="persentase"
+                                                                        id="persentase"
+                                                                        class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                                    </input>
+                                                                </div>
+                                                                <div>
+                                                                    <label for="satuan_id"
+                                                                        class="block text-sm font-medium text-gray-700">Satuan</label>
+                                                                    <select name="satuan_id" id="satuan_id"
+                                                                        class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                                        <!-- Assuming you load satuans from the database -->
+                                                                        @foreach ($satuans as $satuan)
+                                                                            <option value="{{ $satuan->id }}">
+                                                                                {{ $satuan->satuan }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
                                                             @error('satuan_id')
                                                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                                             @enderror
@@ -364,24 +459,8 @@
                                                             @enderror
                                                         </div>
 
-                                                        <!-- Kondisi -->
-                                                        {{-- <div class="mb-2">
-                                                            <label for="kondisi_id"
-                                                                class="block text-sm font-medium text-gray-700">Kondisi</label>
-                                                            <select name="kondisi_id" id="kondisi_id"
-                                                                class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                                                <!-- Assuming you load rooms from the database -->
-                                                                @foreach ($kondisis as $data)
-                                                                    <option value="{{ $data->id }}">{{ $data->kondisi }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                            @error('kondisi_id')
-                                                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                                                            @enderror
-                                                        </div> --}}
-
                                                         <!-- Gambar -->
-                                                        <div class="mb-2">
+                                                        <div class="mb-3">
                                                             <label for="gambar"
                                                                 class="block text-sm font-medium text-gray-700">Gambar</label>
                                                             <input type="file" name="gambar" id="gambar"
@@ -414,6 +493,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="mt-4">
+                    {{ $barangs->links() }}
+                </div>
             </div>
         </div>
     </div>
@@ -435,5 +517,12 @@
                 }
             })
         }
+    </script>
+
+    <script>
+        document.getElementById('filterButton').addEventListener('click', function() {
+            var filterForm = document.getElementById('mobileFilterForm');
+            filterForm.classList.toggle('hidden');
+        });
     </script>
 @endsection

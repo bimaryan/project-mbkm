@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('alat-dan-bahan/barang', [ProdukController::class, 'index'])->name('admin.barang');
             Route::post('alat-dan-bahan/barang/proses', [ProdukController::class, 'storeBarang'])->name('admin.barang.proses');
             Route::delete('alat-dan-bahan/barang/{barang}/delete', [ProdukController::class, 'hapus'])->name('admin.barang.hapus');
+            Route::put('alat-dan-bahan/barang/{barang}/edit', [ProdukController::class, 'hapus'])->name('admin.barang.edit');
 
             // ROUTE BUAT TAMBAH KATEGORI
             Route::get('alat-dan-bahan/kategori', [KategoriController::class, 'index'])->name('admin.kategori');

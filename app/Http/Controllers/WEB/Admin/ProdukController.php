@@ -15,27 +15,70 @@ use Illuminate\Support\Facades\Auth;
 
 class ProdukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $barangs = Barang::all();
+        $query = Barang::query();
+
+        // Filter by name
+        if ($request->has('name') && $request->name != '') {
+            $query->where('name', 'LIKE', '%' . $request->name . '%');
+        }
+
+        // Filter by category
+        if ($request->has('kategori_id') && $request->kategori_id != '') {
+            $query->where('kategori_id', $request->kategori_id);
+        }
+
+        // Filter by condition
+        if ($request->has('kondisi') && $request->kondisi != '') {
+            $query->whereHas('stock', function ($q) use ($request) {
+                if ($request->kondisi == 'habis') {
+                    $q->where('stock', 0);
+                } elseif ($request->kondisi == 'terpakai') {
+                    $q->where('is_stock_reduced', true);
+                } elseif ($request->kondisi == 'hilang') {
+                    $q->where('is_stock_lost', true);
+                } else {
+                    $q->where('stock', '>', 0);
+                }
+            });
+        }
+
+        // Filter by stock
+        if ($request->has('stock') && $request->stock != '') {
+            $query->whereHas('stock', function ($q) use ($request) {
+                $q->where('stock', '>=', $request->stock);
+            });
+        }
+
+        // Filter by unit (satuan)
+        if ($request->has('satuan_id') && $request->satuan_id != '') {
+            $query->where('satuan_id', $request->satuan_id);
+        }
+
+        // Get the filtered results
+        $barangs = $query->paginate(5);
+
         $kategoris = Kategori::all();
         $kondisis = Kondisi::all();
         $satuans = Satuan::all();
         $rooms = Room::all();
-        return view('admin.kelolabarang.index', ['barangs' => $barangs, 'kategoris' => $kategoris, 'kondisis' => $kondisis, 'satuans' => $satuans, 'rooms' => $rooms]);
+        $stocks = Stock::all();
+
+        return view('admin.kelolabarang.index', compact('barangs', 'kategoris', 'kondisis', 'satuans', 'rooms', 'stocks'));
     }
 
     public function storeBarang(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        //     'deskripsi' => 'nullable|string|max:1000',
-        //     'stock' => 'required|integer|min:1',
-        //     'kategori_id' => 'required|exists:kategoris,id',
-        //     'satuan_id' => 'required|exists:satuans,id',
-        //     'room_id' => 'required|exists:rooms,id',
-        // ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'deskripsi' => 'nullable|string|max:1000',
+            'stock' => 'required|integer|min:1',
+            'kategori_id' => 'required|exists:kategoris,id',
+            'satuan_id' => 'required|exists:satuans,id',
+            'room_id' => 'required|exists:rooms,id',
+        ]);
 
         // dd($request->all());
 
@@ -76,7 +119,7 @@ class ProdukController extends Controller
         return redirect()->route('admin.barang')->with('success', 'Barang berhasil dihapus!');
     }
 
-    public function edit(Request $request, Barang $barang)
+    public function edit(Request $request, Barang $barang,)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -102,10 +145,13 @@ class ProdukController extends Controller
         $barang->update([
             'name' => $request->name,
             'deskripsi' => $request->deskripsi,
-            'stock' => $request->stock,
             'kategori_id' => $request->kategori_id,
             'satuan_id' => $request->satuan_id,
             'room_id' => $request->room_id,
+        ]);
+
+        $barang->stock->update([
+            'stock' => $request->stock,
         ]);
 
         return redirect()->route('admin.barang')->with('success', 'Barang berhasil diperbarui!');
