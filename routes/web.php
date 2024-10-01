@@ -36,24 +36,31 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:' . Role::ADMIN])->group(function () {
         Route::get('admin', [AdminController::class, 'index'])->name('admin');
 
-        // User Management Routes
-        Route::prefix('admin/kelola-users')->group(function () {
-            Route::get('users', [AdminController::class, 'users'])->name('admin.users');
-            Route::get('users/create', [AdminController::class, 'addUsers'])->name('admin.users.create');
-            Route::put('users/edit', [AdminController::class, 'edit'])->name('admin.users.edit');
-            Route::delete('users/{id}/delete', [AdminController::class, 'destroy'])->name('admin.users.delete');
-            Route::post('users/create', [AdminController::class, 'storeUsers'])->name('admin.users.proses');
+        Route::prefix('admin')->group(function () {
+            // ROUTE BUAT TAMBAH USERS
+            Route::get('kelola-users/users', [AdminController::class, 'users'])->name('admin.users');
+            Route::get('kelola-users/users/create', [AdminController::class, 'addUsers'])->name('admin.users.create');
+            Route::put('kelola-users/users/edit', [AdminController::class, 'edit'])->name('admin.users.edit');
+            Route::delete('kelola-users/users/{id}/delete', [AdminController::class, 'destroy'])->name('admin.users.delete');
+            Route::post('kelola-users/users/create', [AdminController::class, 'storeUsers'])->name('admin.users.proses');
+
+            // ROUTE BUAT TAMBAH PRODUK ALAT LAB
+            Route::get('alat-dan-bahan/barang', [ProdukController::class, 'index'])->name('admin.barang');
+            Route::post('alat-dan-bahan/barang/proses', [ProdukController::class, 'storeBarang'])->name('admin.barang.proses');
+            Route::delete('alat-dan-bahan/barang/{barang}/delete', [ProdukController::class, 'hapus'])->name('admin.barang.hapus');
+
+            // ROUTE BUAT TAMBAH KATEGORI
+            Route::get('alat-dan-bahan/kategori', [KategoriController::class, 'index'])->name('admin.kategori');
+            Route::post('alat-dan-bahan/kategori/proses', [KategoriController::class, 'store'])->name('admin.kategori.proses');
+            Route::put('alat-dan-bahan/kategori/{kategori}/edit', [KategoriController::class, 'edit'])->name('admin.kategori.edit');
+            Route::delete('alat-dan-bahan/kategori/{kategori}/hapus', [KategoriController::class, 'hapus'])->name('admin.kategori.hapus');
+
+            // ROUTE BUAT TAMBAH SATUAN
+            Route::get('alat-dan-bahan/satuan', [SatuanController::class, 'index'])->name('admin.satuan');
+            Route::post('alat-dan-bahan/satuan/proses', [SatuanController::class, 'store'])->name('admin.satuan.proses');
+            Route::delete('alat-dan-bahan/satuan/{satuan}/delete', [SatuanController::class, 'hapus'])->name('admin.satuan.hapus');
+            Route::put('alat-dan-bahan/satuan/{satuan}/edit', [SatuanController::class, 'edit'])->name('admin.satuan.edit');
         });
-
-        // ROUTE BUAT TAMBAH PRODUK ALAT LAB
-        Route::get('admin/alat-dan-bahan/barang', [ProdukController::class, 'index'])->name('admin.barang');
-        Route::post('admin/alat-dan-bahan/barang/proses', [ProdukController::class, 'storeBarang'])->name('admin.barang.proses');
-        Route::delete('admin/alat-dan-bahan/barang/{barang}/delete', [ProdukController::class, 'hapus'])->name('admin.barang.hapus');
-
-        Route::get('admin/alat-dan-bahan/kategori', [KategoriController::class, 'index'])->name('admin.kategori');
-        Route::post('admin/alat-dan-bahan/kategori/proses', [KategoriController::class, 'store'])->name('admin.kategori.proses');
-        Route::put('admin/alat-dan-bahan/kategori/{kategori}/edit', [KategoriController::class, 'edit'])->name('admin.kategori.edit');
-        Route::delete('admin/alat-dan-bahan/kategori/{kategori}/hapus', [KategoriController::class, 'hapus'])->name('admin.kategori.hapus');
     });
 
     Route::middleware(['role:' . Role::DOSEN])->group(function () {
