@@ -2,7 +2,6 @@
 @section('content')
     <div class="p-4 sm:ml-64">
         <div class="rounded-lg mt-14 space-y-4">
-
             @if (session('success'))
                 <script>
                     Swal.fire({
@@ -13,54 +12,117 @@
                     });
                 </script>
             @endif
-
-            <!-- Breadcrumb Navigation -->
-            <div>
-                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-                    <li class="inline-flex items-center">
-                        <a class="inline-flex items-center text-gray-700 dark:text-white text-sm font-medium">
-                            Main
-                        </a>
-                    </li>
-                    <span class="mx-2 text-gray-500">/</span>
-                    <li>
-                        <div class="flex items-center">
-                            <a class="active text-sm font-medium text-gray-500 dark:text-gray-400">Kelola Pengguna</a>
-                        </div>
-                    </li>
-                    <span class="mx-2 text-gray-500">/</span>
-                    <li>
-                        <div class="flex items-center">
-                            <a class="active text-sm font-medium text-gray-500 dark:text-gray-400">Daftar Pengguna</a>
-                        </div>
-                    </li>
-                </ol>
-            </div>
-
-            <!-- Table & Add Button -->
-            <div class="p-4 rounded-lg shadow-lg bg-white">
-                <div class="space-y-4">
+            <div class="p-4 bg-white rounded-lg shadow-lg">
+                <div class="flex justify-between items-center">
                     <div>
-                        <h3 class="text-2xl font-medium">Daftar Mahasiswa</h3>
+                        <h3 class="text-lg font-semibold">Data Pengguna</h3>
                     </div>
                     <div>
-                        <button id="openModalBtn" 
-                            class="bg-green-500 hover:bg-green-800 text-white py-2 px-4 rounded">
-                            Tambah
+                        <button data-modal-target="barang" data-modal-toggle="barang"
+                            class="bg-green-500 hover:bg-green-800 text-white py-2 px-3 rounded"> Tambah
+                            <i class="bi bi-plus-square"></i>
                         </button>
+
+                        {{-- MODAL TAMBAH PENGGUNA --}}
+                        <div id="barang" tabindex="-1" aria-hidden="true"
+                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                            <div class="relative p-4 w-full max-w-2xl max-h-full">
+                                <!-- Modal content -->
+                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                    <!-- Modal header -->
+                                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                            Tambah Data Pengguna
+                                        </h3>
+                                        <button type="button"
+                                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                            data-modal-hide="barang">
+                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 14 14">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                            </svg>
+                                            <span class="sr-only">Close modal</span>
+                                        </button>
+                                    </div>
+                                    <!-- Modal body -->
+
+                                    <form action="{{ route('admin.users.proses') }}" class="p-4 md:p-5" method="POST">
+                                        @csrf
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                            <div class="mb-2">
+                                                <label for="name" class="block text-sm font-medium text-gray-700">Username</label>
+                                                <input type="text" name="name" id="name"
+                                                    class="mt-2 block w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                                @error('name')
+                                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="nama_lengkap" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                                                <input type="text" name="nama_lengkap" id="nama_lengkap"
+                                                    class="mt-2 block w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                                @error('nama_lengkap')
+                                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                                                <input type="password" name="password" id="password"
+                                                    class="mt-2 block w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                                @error('password')
+                                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="telepon" class="block text-sm font-medium text-gray-700">Telepon</label>
+                                                <input type="text" name="telepon" id="telepon"
+                                                    class="mt-2 block w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                                @error('telepon')
+                                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="role_id" class="block text-sm font-medium text-gray-700">Pilih Role</label>
+                                                <select name="role_id" id="role_id"
+                                                    class="mt-2 block w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                                    <option value="">Pilih Role</option>
+                                                    <option value="{{ \App\Models\Role::DOSEN }}">Dosen</option>
+                                                    <option value="{{ \App\Models\Role::MAHASISWA }}">Mahasiswa</option>
+                                                </select>
+                                                @error('role_id')
+                                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="keterangan" class="block text-sm font-medium text-gray-700">Keterangan</label>
+                                                <textarea name="keterangan" id="keterangan"
+                                                    class="mt-2 block w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50"></textarea>
+                                                @error('keterangan')
+                                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <button type="submit"
+                                            class="text-white bg-green-500 mt-4 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Simpan</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="relative overflow-x-auto sm:rounded-lg mt-4">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            </div>
+            <div class="p-4 rounded-lg shadow-lg bg-white">
+                <div class="relative overflow-x-auto sm:rounded-lg">
+                    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">No</th>
                                 <th scope="col" class="px-6 py-3">Nama Lengkap</th>
-                                <th scope="col" class="px-6 py-3">NIM</th>
-                                <th scope="col" class="px-6 py-3">Kelas</th>
-                                <th scope="col" class="px-6 py-3">Program Studi</th>
+                                <th scope="col" class="px-6 py-3">Username</th>
+                                <th scope="col" class="px-6 py-3">Telepon</th>
                                 <th scope="col" class="px-6 py-3">Role</th>
+                                <th scope="col" class="px-6 py-3">Keterangan</th>
                                 <th scope="col" class="px-6 py-3 text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -70,13 +132,23 @@
                                     <td class="px-6 py-4">{{ $loop->iteration }}</td>
                                     <td class="px-6 py-4">{{ $data->nama_lengkap }}</td>
                                     <td class="px-6 py-4">{{ $data->name }}</td>
-                                    <td class="px-6 py-4"></td>
-                                    <td class="px-6 py-4"></td>
+                                    <td class="px-6 py-4">{{ $data->telepon }}</td>
+                                    <td class="px-6 py-4">{{ $data->role_id }}</td>
                                     <td class="px-6 py-4">{{ $data->keterangan }}</td>
-                                    <td class="px-3 py-10 text-center">
-                                        <button type="button" class="text-white bg-yellow-300 hover:bg-yellow-500 py-2 px-5 rounded">Detail</button>
-                                        <button type="button" class="text-white bg-red-600 hover:bg-red-800 py-2 px-5 rounded">Hapus</button>
-                                        <button type="button" class="text-white bg-blue-500 hover:bg-blue-700 py-2 px-5 rounded">Ubah</button>
+                                    <td scope="col" class="px-6 py-4 flex justify-center items-center gap-2">
+                                        <button type="button" class="text-white bg-yellow-300 hover:bg-yellow-500 py-2 px-3 rounded">
+                                            <i class="bi bi-info-circle"></i>
+                                        </button>
+                                        <form id="delete-form-{{ $data->id }}" action="{{ route('admin.users.delete', $data->id) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" onclick="confirmDelete({{ $data->id }})" class="py-2 px-3 bg-red-500 rounded text-sm text-white flex items-center">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                        <button type="button" class="text-white bg-blue-500 hover:bg-blue-700 py-2 px-3 rounded">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -87,77 +159,22 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div id="addModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-lg hidden transition-all ease-in-out duration-300">
-        <div class="bg-white rounded-lg shadow-xl p-6 w-1/2 top-20 transform transition-transform duration-300 ease-in-out scale-95">
-            <h3 class="text-2xl font-medium mb-4">Tambah Pengguna</h3>
-            <form action="{{ route('admin.users.proses') }}" method="POST" class="space-y-4">
-                @csrf
-
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Username</label>
-                    <input type="text" name="name" id="name"
-                        class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
-                </div>
-
-                <div>
-                    <label for="nama_lengkap" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-                    <input type="text" name="nama_lengkap" id="nama_lengkap"
-                        class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
-                </div>
-
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                    <input type="password" name="password" id="password"
-                        class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
-                </div>
-
-                <div>
-                    <label for="telepon" class="block text-sm font-medium text-gray-700">Telepon</label>
-                    <input type="text" name="telepon" id="telepon"
-                        class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
-                </div>
-
-                <div>
-                    <label for="role_id" class="block text-sm font-medium text-gray-700">Pilih Role</label>
-                    <select name="role_id" id="role_id"
-                        class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
-                        <option value="">Pilih Role</option>
-                        <option value="{{ \App\Models\Role::DOSEN }}">Dosen</option>
-                        <option value="{{ \App\Models\Role::MAHASISWA }}">Mahasiswa</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="keterangan" class="block text-sm font-medium text-gray-700">Keterangan</label>
-                    <textarea name="keterangan" id="keterangan"
-                        class="mt-1 block w-full px-3 py-2 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"></textarea>
-                </div>
-
-                <div class="flex justify-between mt-4">
-                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-800 focus:outline-none">
-                        Simpan
-                    </button>
-                    <button type="button" id="closeModalBtn" class="bg-gray-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-gray-700 focus:outline-none">
-                        Batal
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- JavaScript for Modal -->
     <script>
-        document.getElementById('openModalBtn').addEventListener('click', function () {
-            const modal = document.getElementById('addModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('opacity-100', 'scale-100');
-        });
-
-        document.getElementById('closeModalBtn').addEventListener('click', function () {
-            const modal = document.getElementById('addModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('opacity-100', 'scale-100');
-        });
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + id).submit();
+                }
+            })
+        }
     </script>
 @endsection
