@@ -97,7 +97,8 @@
                         </li>
                         <li>
                             <a href="{{ route('admin.users.create') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-users/users/create') ? 'bg-gray-300' : '' }}">Dosen dan Staff</a>
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-users/users/create') ? 'bg-gray-300' : '' }}">Dosen
+                                dan Staff</a>
                         </li>
                     </ul>
                 </li>
@@ -120,7 +121,7 @@
                                 Kategori</a>
                         </li>
                         <li>
-                            <a href=""
+                            <a href="{{ route('admin.satuan') }}"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/satuan') ? 'bg-gray-300' : '' }}">Data
                                 Satuan</a>
                         </li>

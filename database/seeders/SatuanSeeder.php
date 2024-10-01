@@ -14,13 +14,19 @@ class SatuanSeeder extends Seeder
     public function run(): void
     {
         Satuan::create([
-            'satuan' => 'Unit'
+            'satuan' => 'Unit',
         ]);
         Satuan::create([
-            'satuan' => 'Pcs'
+            'satuan' => 'Pcs',
         ]);
         Satuan::create([
-            'satuan' => 'Lembar'
+            'satuan' => 'Lembar',
+        ]);
+        Satuan::create([
+            'satuan' => 'Liter',
+        ]);
+        Satuan::create([
+            'satuan' => 'ml',
         ]);
     }
 }

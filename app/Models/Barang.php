@@ -37,4 +37,9 @@ class Barang extends Model
     {
         return $this->belongsTo(Room::class);
     }
+
+    public function stock()
+    {
+        return $this->belongsTo(Stock::class);
+    }
 }

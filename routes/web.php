@@ -3,6 +3,7 @@
 use App\Http\Controllers\WEB\Admin\AdminController;
 use App\Http\Controllers\WEB\Admin\KategoriController;
 use App\Http\Controllers\WEB\Admin\ProdukController;
+use App\Http\Controllers\WEB\Admin\SatuanController;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Auth\RegisterController;
 use App\Http\Controllers\WEB\Dosen\DosenController;
@@ -43,11 +44,18 @@ Route::middleware(['auth'])->group(function () {
         Route::get('admin/alat-dan-bahan/barang', [ProdukController::class, 'index'])->name('admin.barang');
         Route::post('admin/alat-dan-bahan/barang/proses', [ProdukController::class, 'storeBarang'])->name('admin.barang.proses');
         Route::delete('admin/alat-dan-bahan/barang/{barang}/delete', [ProdukController::class, 'hapus'])->name('admin.barang.hapus');
+        Route::put('admin/alat-dan-bahan/barang/{barang}/edit', [ProdukController::class, 'edit'])->name('admin.barang.edit');
 
+        // ROUTE BUAT TAMBAH KATEGORI
         Route::get('admin/alat-dan-bahan/kategori', [KategoriController::class, 'index'])->name('admin.kategori');
         Route::post('admin/alat-dan-bahan/kategori/proses', [KategoriController::class, 'store'])->name('admin.kategori.proses');
         Route::put('admin/alat-dan-bahan/kategori/{kategori}/edit', [KategoriController::class, 'edit'])->name('admin.kategori.edit');
         Route::delete('admin/alat-dan-bahan/kategori/{kategori}/hapus', [KategoriController::class, 'hapus'])->name('admin.kategori.hapus');
+
+        Route::get('admin/alat-dan-bahan/satuan', [SatuanController::class, 'index'])->name('admin.satuan');
+        Route::post('admin/alat-dan-bahan/satuan/proses', [SatuanController::class, 'store'])->name('admin.satuan.proses');
+        Route::put('admin/alat-dan-bahan/satuan/{satuan}/edit', [SatuanController::class, 'edit'])->name('admin.satuan.edit');
+        Route::delete('admin/alat-dan-bahan/satuan/{satuan}/delete', [SatuanController::class, 'hapus'])->name('admin.satuan.hapus');
     });
 
     Route::middleware(['role:' . Role::DOSEN])->group(function () {
