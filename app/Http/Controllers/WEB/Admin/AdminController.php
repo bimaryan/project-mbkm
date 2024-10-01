@@ -17,8 +17,8 @@ class AdminController extends Controller
 
     public function users()
     {
-        $user = User::all();
-        return view('admin.users.index', ['user' => $user]);
+        $users = User::all(); // Fixed variable name for clarity
+        return view('admin.users.index', ['user' => $users]);
     }
 
     public function addUsers()
@@ -34,7 +34,7 @@ class AdminController extends Controller
             'telepon' => 'nullable|string|max:15',
             'keterangan' => 'nullable|string',
             'password' => 'required|string|min:8',
-            'role_id' => 'required|in:' . Role::DOSEN . ',' . Role::MAHASISWA
+            'role_id' => 'required|in:' . Role::DOSEN . ',' . Role::MAHASISWA,
         ]);
 
         $user = new User();
@@ -47,5 +47,49 @@ class AdminController extends Controller
         $user->save();
 
         return redirect()->route('admin.users')->with('success', 'Pendaftaran sudah berhasil.');
+    }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id); // Fetch the user by ID
+        return view('admin.users.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|unique:users,name,' . $id, // Allow current name
+            'nama_lengkap' => 'required|string',
+            'telepon' => 'nullable|string|max:15',
+            'keterangan' => 'nullable|string',
+            'role_id' => 'required|in:' . Role::DOSEN . ',' . Role::MAHASISWA,
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->nama_lengkap = $request->nama_lengkap;
+        $user->telepon = $request->telepon;
+        $user->keterangan = $request->keterangan;
+        $user->role_id = $request->role_id;
+
+        // Update password only if provided
+        if ($request->filled('password')) {
+            $request->validate([
+                'password' => 'string|min:8', // Validate new password
+            ]);
+            $user->password = Hash::make('@KEP2024');
+        }
+
+        $user->save();
+
+        return redirect()->route('admin.users')->with('success', 'User updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
     }
 }
