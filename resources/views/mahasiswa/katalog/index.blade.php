@@ -82,6 +82,9 @@
                 @endforeach
             </div>
         @endif
+        <div class="mt-4">
+            {{ $barangs->links() }}
+        </div>
     </div>
 
     @include('mahasiswa.footer.index')

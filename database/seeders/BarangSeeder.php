@@ -15,27 +15,29 @@ class BarangSeeder extends Seeder
      */
     public function run(): void
     {
-        // Membuat 10 barang
+        // Mengambil ID kategori untuk 'Alat' dan 'Bahan'
+        $kategoriAlat = DB::table('kategoris')->where('kategori', 'Alat')->value('id');
+        $kategoriBahan = DB::table('kategoris')->where('kategori', 'Bahan')->value('id');
+
         for ($i = 1; $i <= 1000; $i++) {
-            // Membuat barang baru
+            $kategori_id = ($i % 2 == 0) ? $kategoriBahan : $kategoriAlat;
+
             $barang = Barang::create([
                 'users_id' => 1,
                 'name' => 'Barang Contoh ' . $i,
                 'gambar' => 'uploads/barang/sample' . $i . '.jpg',
                 'deskripsi' => 'Ini adalah deskripsi barang contoh ' . $i . '.',
-                'kategori_id' => 1,
+                'kategori_id' => $kategori_id,  // Menggunakan kategori 'Alat' atau 'Bahan'
                 'satuan_id' => 1,
                 'room_id' => 1,
                 'kondisi_id' => 4,
             ]);
 
-            // Membuat persentase untuk barang
             Persentase::create([
                 'satuans_id' => 1,
                 'persentase' => rand(5, 20),
             ]);
 
-            // Membuat stok untuk barang
             Stock::create([
                 'barang_id' => $barang->id,
                 'stock' => rand(50, 200),

@@ -19,17 +19,14 @@ class ProdukController extends Controller
     {
         $query = Barang::query();
 
-        // Filter by name
         if ($request->has('name') && $request->name != '') {
             $query->where('name', 'LIKE', '%' . $request->name . '%');
         }
 
-        // Filter by category
         if ($request->has('kategori_id') && $request->kategori_id != '') {
             $query->where('kategori_id', $request->kategori_id);
         }
 
-        // Filter by condition
         if ($request->has('kondisi') && $request->kondisi != '') {
             $query->whereHas('stock', function ($q) use ($request) {
                 if ($request->kondisi == 'habis') {
@@ -44,19 +41,16 @@ class ProdukController extends Controller
             });
         }
 
-        // Filter by stock
         if ($request->has('stock') && $request->stock != '') {
             $query->whereHas('stock', function ($q) use ($request) {
                 $q->where('stock', '>=', $request->stock);
             });
         }
 
-        // Filter by unit (satuan)
         if ($request->has('satuan_id') && $request->satuan_id != '') {
             $query->where('satuan_id', $request->satuan_id);
         }
 
-        // Get the filtered results
         $barangs = $query->paginate(5);
 
         $kategoris = Kategori::all();
@@ -67,7 +61,6 @@ class ProdukController extends Controller
 
         return view('admin.kelolabarang.index', compact('barangs', 'kategoris', 'kondisis', 'satuans', 'rooms', 'stocks'));
     }
-
     public function storeBarang(Request $request)
     {
         $request->validate([

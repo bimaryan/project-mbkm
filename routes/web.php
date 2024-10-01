@@ -23,6 +23,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/', [MahasiswaController::class, 'home'])->name('mahasiswa');
+
 // Authentication Routes
 Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('login-proses', [LoginController::class, 'store'])->name('login.store');

@@ -83,8 +83,7 @@
                             <a href="{{ route('mahasiswa.viewbarang', ['name' => $data->name]) }}"
                                 class="w-full max-w-m p-3 rounded-lg border border-green-500 shadow-lg">
                                 <div class="flex justify-center w-full">
-                                    <img src="{{ url($data->gambar) }}"
-                                        class="object-cover zoom-image"
+                                    <img src="{{ url($data->gambar) }}" class="object-cover zoom-image"
                                         alt="{{ $data->name }}" />
                                 </div>
                                 <div class="mt-1">
