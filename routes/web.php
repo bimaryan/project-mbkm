@@ -34,9 +34,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Admin Routes
     Route::middleware(['role:' . Role::ADMIN])->group(function () {
-        Route::get('admin', [AdminController::class, 'index'])->name('admin');
 
         Route::prefix('admin')->group(function () {
+            Route::get('', [AdminController::class, 'index'])->name('admin');
+            
             // ROUTE BUAT TAMBAH USERS
             Route::get('kelola-users/users', [AdminController::class, 'users'])->name('admin.users');
             Route::get('kelola-users/users/create', [AdminController::class, 'addUsers'])->name('admin.users.create');
@@ -46,8 +47,10 @@ Route::middleware(['auth'])->group(function () {
 
             // ROUTE BUAT TAMBAH PRODUK ALAT LAB
             Route::get('alat-dan-bahan/barang', [ProdukController::class, 'index'])->name('admin.barang');
+            Route::get('alat-dan-bahan/barang/data', [ProdukController::class, 'getBarangs'])->name('admin.barang.data');
             Route::post('alat-dan-bahan/barang/proses', [ProdukController::class, 'storeBarang'])->name('admin.barang.proses');
             Route::delete('alat-dan-bahan/barang/{barang}/delete', [ProdukController::class, 'hapus'])->name('admin.barang.hapus');
+            Route::put('alat-dan-bahan/barang/{barang}/edit', [ProdukController::class, 'edit'])->name('admin.barang.edit');
 
             // ROUTE BUAT TAMBAH KATEGORI
             Route::get('alat-dan-bahan/kategori', [KategoriController::class, 'index'])->name('admin.kategori');

@@ -12,6 +12,7 @@ use App\Models\Satuan;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\DataTables;
 
 class ProdukController extends Controller
 {
@@ -25,17 +26,41 @@ class ProdukController extends Controller
         return view('admin.kelolabarang.index', ['barangs' => $barangs, 'kategoris' => $kategoris, 'kondisis' => $kondisis, 'satuans' => $satuans, 'rooms' => $rooms]);
     }
 
+    public function getBarangs()
+    {
+        $barangs = Barang::with(['kategori', 'satuan'])->get();
+
+        return DataTables::of($barangs)
+            ->addIndexColumn()
+            ->editColumn('kondisi', function ($data) {
+                if ($data->stock == 0) {
+                    return '<p class="bg-red-500 p-1 rounded-lg text-white">Habis</p>';
+                } elseif ($data->stock > 0 && $data->is_stock_reduced) {
+                    return '<p class="bg-yellow-500 p-1 rounded-lg text-white">Terpakai</p>';
+                } elseif ($data->stock > 0 && $data->is_stock_lost) {
+                    return '<p class="bg-gray-500 p-1 rounded-lg text-white">Hilang</p>';
+                } else {
+                    return '<p class="bg-green-500 p-1 rounded-lg text-white">Baik</p>';
+                }
+            })
+            ->addColumn('aksi', function ($data) {
+                return view('admin.kelolabarang.actions', compact('data'));
+            })
+            ->rawColumns(['kondisi', 'aksi'])
+            ->make(true);
+    }
+
     public function storeBarang(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        //     'deskripsi' => 'nullable|string|max:1000',
-        //     'stock' => 'required|integer|min:1',
-        //     'kategori_id' => 'required|exists:kategoris,id',
-        //     'satuan_id' => 'required|exists:satuans,id',
-        //     'room_id' => 'required|exists:rooms,id',
-        // ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'deskripsi' => 'nullable|string|max:1000',
+            'stock' => 'required|integer|min:1',
+            'kategori_id' => 'required|exists:kategoris,id',
+            'satuan_id' => 'required|exists:satuans,id',
+            'room_id' => 'required|exists:rooms,id',
+        ]);
 
         // dd($request->all());
 
