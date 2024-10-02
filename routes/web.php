@@ -2,13 +2,13 @@
 
 use App\Http\Controllers\WEB\Admin\AdminController;
 use App\Http\Controllers\WEB\Admin\KategoriController;
+use App\Http\Controllers\WEB\Admin\PeminjamanController;
 use App\Http\Controllers\WEB\Admin\ProdukController;
 use App\Http\Controllers\WEB\Admin\SatuanController;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Auth\RegisterController;
 use App\Http\Controllers\WEB\Dosen\DosenController;
 use App\Http\Controllers\WEB\Mahasiswa\MahasiswaController;
-use App\Http\Controllers\WEB\Staff\StaffController;
 use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
@@ -64,6 +64,9 @@ Route::middleware(['auth'])->group(function () {
             Route::post('alat-dan-bahan/satuan/proses', [SatuanController::class, 'store'])->name('admin.satuan.proses');
             Route::delete('alat-dan-bahan/satuan/{satuan}/delete', [SatuanController::class, 'hapus'])->name('admin.satuan.hapus');
             Route::put('alat-dan-bahan/satuan/{satuan}/edit', [SatuanController::class, 'edit'])->name('admin.satuan.edit');
+
+            // ROUTE BUAT VERIFIKASI PEMINJAMAN
+            Route::get('verifikasi-peminjaman', [PeminjamanController::class, 'index'])->name('admin.peminjaman');
         });
     });
 

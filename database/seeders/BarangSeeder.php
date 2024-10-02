@@ -15,7 +15,6 @@ class BarangSeeder extends Seeder
      */
     public function run(): void
     {
-        // Mengambil ID kategori untuk 'Alat' dan 'Bahan'
         $kategoriAlat = DB::table('kategoris')->where('kategori', 'Alat')->value('id');
         $kategoriBahan = DB::table('kategoris')->where('kategori', 'Bahan')->value('id');
 
@@ -27,7 +26,7 @@ class BarangSeeder extends Seeder
                 'name' => 'Barang Contoh ' . $i,
                 'gambar' => 'uploads/barang/sample' . $i . '.jpg',
                 'deskripsi' => 'Ini adalah deskripsi barang contoh ' . $i . '.',
-                'kategori_id' => $kategori_id,  // Menggunakan kategori 'Alat' atau 'Bahan'
+                'kategori_id' => $kategori_id,
                 'satuan_id' => 1,
                 'room_id' => 1,
                 'kondisi_id' => 4,

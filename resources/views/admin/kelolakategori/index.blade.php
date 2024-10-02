@@ -1,6 +1,6 @@
 @extends('index')
 @section('content')
-    <div class="p-4 sm:ml-64">
+    <div class="p-4 sm:ml-64 mt-3">
         <div class="rounded-lg mt-14 space-y-4">
             @if (session('success'))
                 <script>
@@ -15,12 +15,12 @@
             <div class="p-4 bg-white rounded-lg shadow-lg">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h3 class="text-lg font-semibold">Data Kategori</h3>
+                        <h3 class="text-2xl text-green-500 font-semibold">Data Kategori</h3>
                     </div>
                     <div>
                         <button data-modal-target="kategori" data-modal-toggle="kategori"
                             class="bg-green-500 hover:bg-green-800 text-white py-2 px-3 rounded">
-                            <i class="bi bi-plus-square"></i>
+                            <i class="fa-solid fa-plus"></i>
                         </button>
 
                         {{-- MODAL TAMBAH KATEGORI --}}
@@ -91,21 +91,23 @@
                                     </td>
                                     <td scope="col" class="px-6 py-3 flex justify-center items-center gap-2">
                                         <div>
+                                            <form id="delete-form-{{ $item->id }}"
+                                                action="{{ route('admin.kategori.hapus', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" onclick="confirmDelete({{ $item->id }})"
+                                                    class="py-2 px-2 bg-red-500 rounded text-sm text-white flex items-center">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div>
                                             <button type="button" data-modal-target="edit{{ $item->id }}"
                                                 data-modal-toggle="edit{{ $item->id }}"
-                                                class="py-1 px-2 bg-yellow-400 rounded text-sm text-white flex items-center">
-                                                <i class="bi bi-pencil-square"></i>
+                                                class="py-2 px-2 bg-blue-500 rounded text-sm text-white flex items-center">
+                                                <i class="fa-solid fa-pen-to-square"></i>
                                             </button>
                                         </div>
-                                        <form id="delete-form-{{ $item->id }}"
-                                            action="{{ route('admin.kategori.hapus', $item->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" onclick="confirmDelete({{ $item->id }})"
-                                                class="py-1 px-2 bg-red-500 rounded text-sm text-white flex items-center">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
                                     </td>
                                 </tr>
 

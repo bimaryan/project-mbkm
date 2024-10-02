@@ -1,6 +1,6 @@
 @extends('index')
 @section('content')
-    <div class="p-4 sm:ml-64">
+    <div class="p-4 sm:ml-64 mt-3">
         <div class="rounded-lg mt-14 space-y-4">
             @if (session('success'))
                 <script>
@@ -15,12 +15,12 @@
             <div class="p-4 bg-white rounded-lg shadow-lg">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h3 class="text-lg font-semibold">Data Barang</h3>
+                        <h3 class="text-2xl text-green-500 font-semibold">Data Barang</h3>
                     </div>
                     <div>
                         <button data-modal-target="barang" data-modal-toggle="barang"
                             class="bg-green-500 hover:bg-green-800 text-white py-2 px-3 rounded">
-                            <i class="bi bi-plus-square"></i>
+                            <i class="fa-solid fa-plus"></i>
                         </button>
 
                         {{-- MODAL TAMBAH BARANG --}}
@@ -160,12 +160,14 @@
                     </div>
                 </div>
             </div>
+
             <div class="p-4 rounded-lg shadow-lg bg-white">
                 <!-- Form Filter -->
                 <form id="filterForm" action="{{ route('admin.barang') }}" method="GET"
                     class="flex flex-col md:flex-row items-center gap-2 mb-4 mt-2">
                     <!-- Filter Nama Barang -->
-                    <input type="text" name="name" placeholder="Nama Barang" id="filterName" value="{{ request('name') }}"
+                    <input type="text" name="name" placeholder="Nama Barang" id="filterName"
+                        value="{{ request('name') }}"
                         class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
 
                     <!-- Filter Kategori -->
@@ -192,7 +194,8 @@
                     </select>
 
                     <!-- Filter Stock -->
-                    <input type="number" name="stock" id="filterStock" placeholder="Minimal Stock" value="{{ request('stock') }}"
+                    <input type="number" name="stock" id="filterStock" placeholder="Minimal Stock"
+                        value="{{ request('stock') }}"
                         class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
 
                     <!-- Filter Satuan -->

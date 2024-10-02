@@ -17,7 +17,7 @@ class AdminController extends Controller
 
     public function users()
     {
-        $users = User::all(); // Fixed variable name for clarity
+        $users = User::paginate(5);
         return view('admin.users.index', ['user' => $users]);
     }
 
