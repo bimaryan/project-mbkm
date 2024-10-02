@@ -12,6 +12,7 @@ use App\Models\Satuan;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\DataTables;
 
 class ProdukController extends Controller
 {
@@ -61,6 +62,7 @@ class ProdukController extends Controller
 
         return view('admin.kelolabarang.index', compact('barangs', 'kategoris', 'kondisis', 'satuans', 'rooms', 'stocks'));
     }
+
     public function storeBarang(Request $request)
     {
         $request->validate([

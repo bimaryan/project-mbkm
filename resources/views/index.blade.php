@@ -10,7 +10,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.7/css/dataTables.dataTables.css" />
-    <script src="https://kit.fontawesome.com/f74deb4653.js" crossorigin="anonymous"></script>
     <title>SILK</title>
     <style>
         #dropdown {
@@ -26,7 +25,6 @@
     @yield('content')
     @yield('scripts')
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
-    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
 </body>
 
 </html>
