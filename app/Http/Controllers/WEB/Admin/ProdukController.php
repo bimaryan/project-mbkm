@@ -16,38 +16,51 @@ use Yajra\DataTables\DataTables;
 
 class ProdukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $barangs = Barang::all();
+        $query = Barang::query();
+
+        if ($request->has('name') && $request->name != '') {
+            $query->where('name', 'LIKE', '%' . $request->name . '%');
+        }
+
+        if ($request->has('kategori_id') && $request->kategori_id != '') {
+            $query->where('kategori_id', $request->kategori_id);
+        }
+
+        if ($request->has('kondisi') && $request->kondisi != '') {
+            $query->whereHas('stock', function ($q) use ($request) {
+                if ($request->kondisi == 'habis') {
+                    $q->where('stock', 0);
+                } elseif ($request->kondisi == 'terpakai') {
+                    $q->where('is_stock_reduced', true);
+                } elseif ($request->kondisi == 'hilang') {
+                    $q->where('is_stock_lost', true);
+                } else {
+                    $q->where('stock', '>', 0);
+                }
+            });
+        }
+
+        if ($request->has('stock') && $request->stock != '') {
+            $query->whereHas('stock', function ($q) use ($request) {
+                $q->where('stock', '>=', $request->stock);
+            });
+        }
+
+        if ($request->has('satuan_id') && $request->satuan_id != '') {
+            $query->where('satuan_id', $request->satuan_id);
+        }
+
+        $barangs = $query->paginate(5);
+
         $kategoris = Kategori::all();
         $kondisis = Kondisi::all();
         $satuans = Satuan::all();
         $rooms = Room::all();
-        return view('admin.kelolabarang.index', ['barangs' => $barangs, 'kategoris' => $kategoris, 'kondisis' => $kondisis, 'satuans' => $satuans, 'rooms' => $rooms]);
-    }
+        $stocks = Stock::all();
 
-    public function getBarangs()
-    {
-        $barangs = Barang::with(['kategori', 'satuan'])->get();
-
-        return DataTables::of($barangs)
-            ->addIndexColumn()
-            ->editColumn('kondisi', function ($data) {
-                if ($data->stock == 0) {
-                    return '<p class="bg-red-500 p-1 rounded-lg text-white">Habis</p>';
-                } elseif ($data->stock > 0 && $data->is_stock_reduced) {
-                    return '<p class="bg-yellow-500 p-1 rounded-lg text-white">Terpakai</p>';
-                } elseif ($data->stock > 0 && $data->is_stock_lost) {
-                    return '<p class="bg-gray-500 p-1 rounded-lg text-white">Hilang</p>';
-                } else {
-                    return '<p class="bg-green-500 p-1 rounded-lg text-white">Baik</p>';
-                }
-            })
-            ->addColumn('aksi', function ($data) {
-                return view('admin.kelolabarang.actions', compact('data'));
-            })
-            ->rawColumns(['kondisi', 'aksi'])
-            ->make(true);
+        return view('admin.kelolabarang.index', compact('barangs', 'kategoris', 'kondisis', 'satuans', 'rooms', 'stocks'));
     }
 
     public function storeBarang(Request $request)
@@ -62,7 +75,7 @@ class ProdukController extends Controller
             'room_id' => 'required|exists:rooms,id',
         ]);
 
-        // dd($request->all());
+        dd($request->all());
 
         $filePath = $request->file('gambar')->move('uploads/barang', time() . '_' . $request->file('gambar')->getClientOriginalName());
 
@@ -101,7 +114,7 @@ class ProdukController extends Controller
         return redirect()->route('admin.barang')->with('success', 'Barang berhasil dihapus!');
     }
 
-    public function edit(Request $request, Barang $barang)
+    public function edit(Request $request, Barang $barang,)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -127,10 +140,13 @@ class ProdukController extends Controller
         $barang->update([
             'name' => $request->name,
             'deskripsi' => $request->deskripsi,
-            'stock' => $request->stock,
             'kategori_id' => $request->kategori_id,
             'satuan_id' => $request->satuan_id,
             'room_id' => $request->room_id,
+        ]);
+
+        $barang->stock->update([
+            'stock' => $request->stock,
         ]);
 
         return redirect()->route('admin.barang')->with('success', 'Barang berhasil diperbarui!');

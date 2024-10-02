@@ -40,6 +40,6 @@ class Barang extends Model
 
     public function stock()
     {
-        return $this->belongsTo(Stock::class);
+        return $this->hasOne(Stock::class, 'barang_id', 'id');
     }
 }

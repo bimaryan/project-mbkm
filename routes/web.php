@@ -2,13 +2,13 @@
 
 use App\Http\Controllers\WEB\Admin\AdminController;
 use App\Http\Controllers\WEB\Admin\KategoriController;
+use App\Http\Controllers\WEB\Admin\PeminjamanController;
 use App\Http\Controllers\WEB\Admin\ProdukController;
 use App\Http\Controllers\WEB\Admin\SatuanController;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Auth\RegisterController;
 use App\Http\Controllers\WEB\Dosen\DosenController;
 use App\Http\Controllers\WEB\Mahasiswa\MahasiswaController;
-use App\Http\Controllers\WEB\Staff\StaffController;
 use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +23,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/', [MahasiswaController::class, 'home'])->name('mahasiswa');
+
 // Authentication Routes
 Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('login-proses', [LoginController::class, 'store'])->name('login.store');
@@ -36,8 +39,6 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:' . Role::ADMIN])->group(function () {
 
         Route::prefix('admin')->group(function () {
-            Route::get('', [AdminController::class, 'index'])->name('admin');
-            
             // ROUTE BUAT TAMBAH USERS
             Route::get('kelola-users/users', [AdminController::class, 'users'])->name('admin.users');
             Route::get('kelola-users/users/create', [AdminController::class, 'addUsers'])->name('admin.users.create');
@@ -50,7 +51,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('alat-dan-bahan/barang/data', [ProdukController::class, 'getBarangs'])->name('admin.barang.data');
             Route::post('alat-dan-bahan/barang/proses', [ProdukController::class, 'storeBarang'])->name('admin.barang.proses');
             Route::delete('alat-dan-bahan/barang/{barang}/delete', [ProdukController::class, 'hapus'])->name('admin.barang.hapus');
-            Route::put('alat-dan-bahan/barang/{barang}/edit', [ProdukController::class, 'edit'])->name('admin.barang.edit');
 
             // ROUTE BUAT TAMBAH KATEGORI
             Route::get('alat-dan-bahan/kategori', [KategoriController::class, 'index'])->name('admin.kategori');
@@ -63,6 +63,9 @@ Route::middleware(['auth'])->group(function () {
             Route::post('alat-dan-bahan/satuan/proses', [SatuanController::class, 'store'])->name('admin.satuan.proses');
             Route::delete('alat-dan-bahan/satuan/{satuan}/delete', [SatuanController::class, 'hapus'])->name('admin.satuan.hapus');
             Route::put('alat-dan-bahan/satuan/{satuan}/edit', [SatuanController::class, 'edit'])->name('admin.satuan.edit');
+
+            // ROUTE BUAT VERIFIKASI PEMINJAMAN
+            Route::get('verifikasi-peminjaman', [PeminjamanController::class, 'index'])->name('admin.peminjaman');
         });
     });
 

@@ -1,7 +1,7 @@
 <nav class="fixed top-0 z-50 w-full dark:text-white bg-gray-100 shadow dark:bg-gray-900">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
-            <div class="flex items-center justify-start rtl:justify-end">
+            <div class="flex gap-2 items-center justify-start rtl:justify-end">
                 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
                     type="button"
                     class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-600">
@@ -13,10 +13,12 @@
                         </path>
                     </svg>
                 </button>
-                <a class="flex ms-2 md:me-24">
+                <a class="flex flex-col items-center space-x-3 rtl:space-x-reverse">
                     <span
-                        class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-gray-100 text-gray-900">PROJECT
-                        MBKM</span>
+                        class="self-center md:text-1xl text-2xl font-semibold whitespace-nowrap text-green-500">SILK</span>
+                    <span
+                        class="self-center hidden md:block text-xs font-semibold whitespace-nowrap text-green-500">Sistem
+                        Informasi Kesehatan</span>
                 </a>
             </div>
             <div class="flex items-center">
@@ -62,7 +64,7 @@
                             <li>
                                 <a href="{{ route('logout') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Sign out</a>
+                                    role="menuitem">Keluar <i class="fa-solid fa-right-from-bracket"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -80,24 +82,26 @@
                 <li>
                     <a href="{{ route('admin') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin') ? 'bg-green-500 text-white' : '' }}">
-                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-house-door"></i> Dashboard</span>
+                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-house"></i> Dashboard</span>
                     </a>
                 </li>
                 <li>
                     <a id="kelolausers" data-collapse-toggle="users" aria-controls="kelolausers"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/kelola-users/*') ? 'bg-green-500 text-white' : '' }}">
-                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-people"></i> Pengguna</span> <i
-                            class="bi bi-caret-down"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-users"></i> Pengguna</span> <i
+                            class="fa-solid fa-chevron-down"></i>
                     </a>
 
                     <ul id="users" class="hidden py-2 space-y-2" aria-labelledby="kelolausers">
                         <li>
                             <a href="{{ route('admin.users') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-users/users') ? 'bg-gray-300' : '' }}">Mahasiswa</a>
+                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-users/users') ? 'bg-gray-300' : '' }}"><i
+                                    class="fa-solid fa-user"></i> Mahasiswa</a>
                         </li>
                         <li>
                             <a href="{{ route('admin.users.create') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-users/users/create') ? 'bg-gray-300' : '' }}">Dosen
+                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-users/users/create') ? 'bg-gray-300' : '' }}"><i
+                                    class="fa-solid fa-user"></i> Dosen
                                 dan Staff</a>
                         </li>
                     </ul>
@@ -105,27 +109,37 @@
                 <li>
                     <a id="kelolaproduk" data-collapse-toggle="dropdown"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/alat-dan-bahan/*') ? 'bg-green-500 text-white' : '' }}">
-                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="bi bi-box"></i> Alat dan Bahan</span> <i
-                            class="bi bi-caret-down"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-folder"></i> Alat dan Bahan</span>
+                        <i class="fa-solid fa-chevron-down"></i>
                     </a>
 
                     <ul id="dropdown" class="hidden py-2 space-y-2" aria-labelledby="kelolaproduk">
                         <li>
                             <a href="{{ route('admin.barang') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/barang') ? 'bg-gray-300' : '' }}">Data
+                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/barang') ? 'bg-gray-300' : '' }}"><i
+                                    class="fa-solid fa-folder-open"></i> Data
                                 Barang</a>
                         </li>
                         <li>
                             <a href="{{ route('admin.kategori') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/kategori') ? 'bg-gray-300' : '' }}">Data
+                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/kategori') ? 'bg-gray-300' : '' }}"><i
+                                    class="fa-solid fa-folder-open"></i> Data
                                 Kategori</a>
                         </li>
                         <li>
                             <a href="{{ route('admin.satuan') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/satuan') ? 'bg-gray-300' : '' }}">Data
+                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/satuan') ? 'bg-gray-300' : '' }}"><i
+                                    class="fa-solid fa-folder-open"></i> Data
                                 Satuan</a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="{{ route('admin.peminjaman') }}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/verifikasi-peminjaman') ? 'bg-green-500 text-white' : '' }}">
+                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-square-check"></i>
+                            Peminjaman</span>
+                    </a>
                 </li>
             @endcan
             @can('dosen')

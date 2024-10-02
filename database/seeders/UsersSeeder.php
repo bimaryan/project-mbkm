@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UsersSeeder extends Seeder
@@ -21,21 +20,25 @@ class UsersSeeder extends Seeder
             'telepon' => '1234567891011',
             'keterangan' => 'ADMIN'
         ]);
-        User::create([
-            'name' => 'dosen',
-            'nama_lengkap' => 'dosen',
-            'password' => bcrypt('password'),
-            'role_id' => 2,
-            'telepon' => '1110987654321',
-            'keterangan' => 'DOSEN'
-        ]);
-        User::create([
-            'name' => '2205036',
-            'nama_lengkap' => 'Bima Ryan Alfarizi',
-            'password' => bcrypt('password'),
-            'role_id' => 3,
-            'telepon' => '085157433395',
-            'keterangan' => 'MAHASISWA'
-        ]);
+
+        for ($i = 1; $i <= 1000; $i++) {
+            User::create([
+                'name' => 'dosen' . $i,
+                'nama_lengkap' => 'Dosen ' . $i,
+                'password' => bcrypt('password'),
+                'role_id' => 2,
+                'telepon' => '1110987654' . str_pad($i, 4, '0', STR_PAD_LEFT),
+                'keterangan' => 'DOSEN'
+            ]);
+
+            User::create([
+                'name' => '22050' . str_pad($i, 3, '0', STR_PAD_LEFT), // ID mahasiswa unik
+                'nama_lengkap' => 'Mahasiswa ' . $i,
+                'password' => bcrypt('password'),
+                'role_id' => 3,
+                'telepon' => '085157433' . str_pad($i, 4, '0', STR_PAD_LEFT),
+                'keterangan' => 'MAHASISWA'
+            ]);
+        }
     }
 }
