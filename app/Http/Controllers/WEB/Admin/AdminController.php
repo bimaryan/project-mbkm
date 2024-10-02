@@ -37,14 +37,16 @@ class AdminController extends Controller
             'role_id' => 'required|in:' . Role::DOSEN . ',' . Role::MAHASISWA,
         ]);
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->nama_lengkap = $request->nama_lengkap;
-        $user->telepon = $request->telepon;
-        $user->keterangan = $request->keterangan;
-        $user->role_id = $request->role_id;
-        $user->password = Hash::make($request->password);
-        $user->save();
+        \DB::transaction(function () use ($request) {
+            $user = new User();
+            $user->name = $request->name;
+            $user->nama_lengkap = $request->nama_lengkap;
+            $user->telepon = $request->telepon;
+            $user->keterangan = $request->keterangan;
+            $user->role_id = $request->role_id;
+            $user->password = Hash::make($request->password);
+            $user->save();
+        });
 
         return redirect()->route('admin.users')->with('success', 'Pendaftaran sudah berhasil.');
     }
@@ -65,30 +67,34 @@ class AdminController extends Controller
             'role_id' => 'required|in:' . Role::DOSEN . ',' . Role::MAHASISWA,
         ]);
 
-        $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->nama_lengkap = $request->nama_lengkap;
-        $user->telepon = $request->telepon;
-        $user->keterangan = $request->keterangan;
-        $user->role_id = $request->role_id;
+        \DB::transaction(function () use ($request, $id) {
+            $user = User::findOrFail($id);
+            $user->name = $request->name;
+            $user->nama_lengkap = $request->nama_lengkap;
+            $user->telepon = $request->telepon;
+            $user->keterangan = $request->keterangan;
+            $user->role_id = $request->role_id;
 
-        // Update password only if provided
-        if ($request->filled('password')) {
-            $request->validate([
-                'password' => 'string|min:8', // Validate new password
-            ]);
-            $user->password = Hash::make('@KEP2024');
-        }
+            // Update password only if provided
+            if ($request->filled('password')) {
+                $request->validate([
+                    'password' => 'string|min:8', // Validate new password
+                ]);
+                $user->password = Hash::make('@KEP2024');
+            }
 
-        $user->save();
+            $user->save();
+        });
 
         return redirect()->route('admin.users')->with('success', 'User updated successfully.');
     }
 
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
+        \DB::transaction(function () use ($id) {
+            $user = User::findOrFail($id);
+            $user->delete();
+        });
 
         return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
     }
