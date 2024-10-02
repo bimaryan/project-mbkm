@@ -21,6 +21,8 @@ class LoginController extends Controller
             'password' => 'required|string|min:8',
         ]);
 
+        // dd($request->all());
+
         $credentials = $request->only(['name', 'password']);
 
         if (Auth::attempt($credentials)) {

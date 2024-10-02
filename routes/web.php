@@ -39,6 +39,9 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['role:' . Role::ADMIN])->group(function () {
 
         Route::prefix('admin')->group(function () {
+
+            Route::get('', [AdminController::class, 'index'])->name('admin');
+
             // ROUTE BUAT TAMBAH USERS
             Route::get('kelola-users/users', [AdminController::class, 'users'])->name('admin.users');
             Route::get('kelola-users/users/create', [AdminController::class, 'addUsers'])->name('admin.users.create');
