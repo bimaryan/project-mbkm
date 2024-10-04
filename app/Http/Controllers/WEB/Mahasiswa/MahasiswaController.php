@@ -23,14 +23,14 @@ class MahasiswaController extends Controller
             if (in_array($kategori, $validCategories)) {
                 $barangs = Barang::whereHas('kategori', function ($query) use ($kategori) {
                     $query->where('kategori', $kategori);
-                })->take(6)->get(); // Mengambil 6 barang per halaman
+                })->take(6)->get();
             } else {
                 $barangs = collect();
             }
         } else {
             $barangs = Barang::whereHas('kategori', function ($query) use ($validCategories) {
                 $query->whereIn('kategori', $validCategories);
-            })->take(6)->get(); // Mengambil 6 barang per halaman
+            })->take(6)->get();
         }
 
         $kategoris = Kategori::whereIn('kategori', $validCategories)->get();
@@ -84,5 +84,10 @@ class MahasiswaController extends Controller
         }
 
         return view('mahasiswa.detailbarang.index', ['view' => $view]);
+    }
+
+    public function informasi()
+    {
+        return view('mahasiswa.informasi.index');
     }
 }

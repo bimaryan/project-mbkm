@@ -9,9 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <script src="https://kit.fontawesome.com/f74deb4653.js" crossorigin="anonymous"></script>
-    <title>SILK</title>
-
+    <title>SILK &mdash; Informasi</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -19,33 +17,23 @@
             font-family: "Montserrat", sans-serif;
             font-style: normal;
         }
-
-        .background {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background-image: url('{{ asset('image/iteralab.png') }}');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .background::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: -1;
-        }
     </style>
 </head>
 
-<body class="background">
+<body>
     @include('mahasiswa.navbar.index')
-    @yield('content')
+
+    <div class="max-w-screen-xl mx-auto p-6 mt-14">
+        <div class="mt-4">
+            <p class="text-2xl font-semibold text-center text-green-500">Informasi Laboratorium</p>
+            <div class="bg-white rounded-lg shadow-lg p-4 border mt-4">
+
+            </div>
+        </div>
+    </div>
+
     @include('mahasiswa.footer.index')
+
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </body>
 

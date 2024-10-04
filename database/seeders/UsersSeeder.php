@@ -21,7 +21,7 @@ class UsersSeeder extends Seeder
             'keterangan' => 'ADMIN'
         ]);
 
-        for ($i = 1; $i <= 1000; $i++) {
+        for ($i = 1; $i <= 500; $i++) {
             User::create([
                 'name' => 'dosen' . $i,
                 'nama_lengkap' => 'Dosen ' . $i,

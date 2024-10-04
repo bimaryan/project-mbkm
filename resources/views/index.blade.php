@@ -13,6 +13,13 @@
     <script src="https://kit.fontawesome.com/f74deb4653.js" crossorigin="anonymous"></script>
     <title>SILK</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+        body {
+            font-family: "Montserrat", sans-serif;
+            font-style: normal;
+        }
+
         #dropdown {
             width: 100%;
             max-width: 16rem;

@@ -81,5 +81,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [MahasiswaController::class, 'home'])->name('mahasiswa');
         Route::get('katalog', [MahasiswaController::class, 'katalog'])->name('mahasiswa.katalog');
         Route::get('katalog/peminjaman-barang/{name}', [MahasiswaController::class, 'viewbarang'])->name('mahasiswa.viewbarang');
+        Route::get('informasi', [MahasiswaController::class, 'informasi'])->name('mahasiswa.informasi');
     });
 });

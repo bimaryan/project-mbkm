@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>SILK &mdash; Katalog</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+        body {
+            font-family: "Montserrat", sans-serif;
+            font-style: normal;
+        }
+
         .animate-card {
             transform: translateY(50px);
             opacity: 0;

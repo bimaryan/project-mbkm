@@ -28,10 +28,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('login', [LoginController::class, 'index'])->name('login');
-Route::post('login-proses', [LoginController::class, 'store'])->name('login.store');
-Route::get('register', [RegisterController::class, 'index'])->name('register');
-Route::post('register-proses', [RegisterController::class, 'store'])->name('register.store');
+Route::get('login', [LoginController::class, 'store'])->name('login');
+Route::get('register', [RegisterController::class, 'store'])->name('register');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');

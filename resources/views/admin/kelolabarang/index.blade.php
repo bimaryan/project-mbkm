@@ -162,7 +162,7 @@
             </div>
 
             <div class="p-4 rounded-lg shadow-lg bg-white">
-                <form action="{{ route('admin.barang') }}" method="GET" class="flex items-center gap-2 mb-4 mt-2">
+                <form action="{{ route('admin.barang') }}" method="GET" class="flex flex-col md:flex-row items-center gap-2 mb-4 mt-2">
                     <!-- Filter Nama Barang -->
                     <input type="text" name="name" placeholder="Nama Barang" value="{{ request('name') }}"
                         class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
@@ -207,7 +207,7 @@
                     </select>
 
                     <button type="submit"
-                        class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-800">Filter</button>
+                        class="px-4 py-2 w-full bg-green-500 text-white rounded-lg hover:bg-green-800">Filter</button>
                 </form>
 
                 <div id="tableContainer">

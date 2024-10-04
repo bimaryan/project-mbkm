@@ -56,6 +56,13 @@
                     </td>
                     <td scope="col" class="px-6 py-3 flex justify-center items-center gap-2">
                         <div>
+                            <button type="button" data-modal-target="detail{{ $data->id }}"
+                                data-modal-toggle="detail{{ $data->id }}"
+                                class="py-2 px-2 bg-yellow-400 rounded text-sm text-white flex items-center">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                        <div>
                             <form id="delete-form-{{ $data->id }}"
                                 action="{{ route('admin.barang.hapus', $data->id) }}" method="POST">
                                 @csrf
@@ -75,6 +82,61 @@
                         </div>
                     </td>
                 </tr>
+
+                {{-- MODAL DETAIL BARANG --}}
+                <div id="detail{{ $data->id }}" tabindex="-1" aria-hidden="true"
+                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative p-4 w-full max-w-2xl max-h-full">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <!-- Modal header -->
+                            <div
+                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                    Detail Barang
+                                </h3>
+                                <button type="button"
+                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                    data-modal-hide="detail{{ $data->id }}">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                    </svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="p-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                    <!-- Image -->
+                                    <div class="flex justify-center mb-3">
+                                        <img src="{{ asset($data->gambar) }}" alt="{{ $data->gambar }}"
+                                            class="object-cover rounded-lg border">
+                                    </div>
+                                    <div>
+                                        <div class="text-lg font-semibold">{{ $data->name }}</div>
+                                        <div class="mt-4">
+                                            Ruangan: {{ $data->room->ruangan }}
+                                        </div>
+                                        <div>
+                                            Kategori: {{ $data->kategori->kategori }}
+                                        </div>
+                                        <div>
+                                            Satuan: {{ $data->satuan->satuan }}
+                                        </div>
+                                        <div>
+                                            Kondisi: {{ $data->kondisi->kondisi }}
+                                        </div>
+                                        <div>
+                                            Stock: {{ $data->stock->stock }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 {{-- MODAL EDIT BARANG --}}
                 <div id="edit{{ $data->id }}" tabindex="-1" aria-hidden="true"
@@ -116,7 +178,8 @@
 
                                         <!-- Stock -->
                                         <div class="mb-2">
-                                            <label for="stock" class="block text-sm font-medium text-gray-700">Stock
+                                            <label for="stock"
+                                                class="block text-sm font-medium text-gray-700">Stock
                                                 Barang</label>
                                             <input type="text" name="stock" id="stock"
                                                 value="{{ $data->stock->stock }}"

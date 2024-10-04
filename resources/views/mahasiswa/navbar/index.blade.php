@@ -5,16 +5,51 @@
             <span class="self-center hidden md:block text-xs font-semibold whitespace-nowrap text-green-500">Sistem
                 Informasi Kesehatan</span>
         </a>
-        <button data-collapse-toggle="navbar-default" type="button"
-            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="navbar-default" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 17 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M1 1h15M1 7h15M1 13h15" />
-            </svg>
-        </button>
+        <div class="flex items-center md:order-2 space-x-1 md:space-x-0 rtl:space-x-reverse">
+            @if (Route::has('login'))
+                @auth
+                    <button type="button" data-dropdown-toggle="dropdown-menu"
+                        class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                        {{ auth()->user()->nama_lengkap }}
+                    </button>
+                    <!-- Dropdown -->
+                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
+                        id="dropdown-menu">
+                        <ul class="py-2 font-medium" role="none">
+                            <li>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    role="menuitem">
+                                    <i class="fa-solid fa-user"></i> Profil
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    role="menuitem">
+                                    <i class="fa-solid fa-right-from-bracket"></i> Keluar
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-gray-900 dark:text-white rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                        Login
+                    </a>
+                @endauth
+            @endif
+            <button data-collapse-toggle="navbar-default" type="button"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-default" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
+        </div>
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul
                 class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -35,25 +70,10 @@
            {{ Route::is('mahasiswa.viewbarang') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Peminjaman</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="{{ route('mahasiswa.informasi') }}"
                         class="block py-2 px-3 rounded md:border-0 md:p-0
-           {{ Route::is('informasi') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Informasi</a>
+           {{ Route::is('mahasiswa.informasi') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Informasi</a>
                 </li>
-                @if (Route::has('login'))
-                    @auth
-                        <li>
-                            <a href="#"
-                                class="block py-2 px-3 rounded md:border-0 md:p-0
-                   {{ Route::is('profil') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Profil</a>
-                        </li>
-                    @else
-                        <li>
-                            <a href="{{ route('login') }}"
-                                class="block py-2 px-3 rounded md:border-0 md:p-0
-                   {{ Route::is('login') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Login</a>
-                        </li>
-                    @endauth
-                @endif
             </ul>
         </div>
     </div>
