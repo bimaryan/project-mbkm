@@ -16,7 +16,7 @@ use Yajra\DataTables\DataTables;
 
 class ProdukController extends Controller
 {
-    public function index(Request $request)
+    public function barang(Request $request)
     {
         $query = Barang::query();
 
@@ -103,7 +103,7 @@ class ProdukController extends Controller
         return redirect()->route('admin.barang')->with('success', 'Barang berhasil ditambahkan!');
     }
 
-    public function hapus(Barang $barang)
+    public function deleteBarang(Barang $barang)
     {
         if ($barang->gambar && file_exists(public_path($barang->gambar))) {
             unlink(public_path($barang->gambar));
@@ -114,7 +114,7 @@ class ProdukController extends Controller
         return redirect()->route('admin.barang')->with('success', 'Barang berhasil dihapus!');
     }
 
-    public function edit(Request $request, Barang $barang,)
+    public function editBarang(Request $request, Barang $barang,)
     {
         $request->validate([
             'name' => 'required|string|max:255',
