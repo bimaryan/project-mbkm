@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\WEB\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
+use App\Models\Kelas;
+use App\Models\Mahasiswa;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,87 +18,76 @@ class AdminController extends Controller
         return view('admin.dashboard.index');
     }
 
-    public function users()
+    public function adminAndStaff(Request $request)
     {
-        $users = User::paginate(5);
-        return view('admin.users.index', ['user' => $users]);
+        $query = Admin::query();
+
+        $users = $query->paginate(5);
+        $role = Role::all();
+
+        return view('admin.pengguna.adminandstaff.index', ['user' => $users], ['role' => $role]); 
+        
     }
 
-    public function addUsers()
-    {
-        return view('admin.users.create');
-    }
-
-    public function storeUsers(Request $request)
+    public function storeAdminAndStaff(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|unique:users,name',
-            'nama_lengkap' => 'required|string',
-            'telepon' => 'nullable|string|max:15',
-            'keterangan' => 'nullable|string',
-            'password' => 'required|string|min:8',
-            'role_id' => 'required|in:' . Role::DOSEN . ',' . Role::MAHASISWA,
+            'nama' => 'required',
+            'nip' => 'required',
+            'username' => 'required',
+            'email' => 'required',
+            'password' => 'required|string',
+            'role_id' => 'required|exists:roles,id',
+            // 'foto'=> 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        \DB::transaction(function () use ($request) {
-            $user = new User();
-            $user->name = $request->name;
-            $user->nama_lengkap = $request->nama_lengkap;
-            $user->telepon = $request->telepon;
-            $user->keterangan = $request->keterangan;
-            $user->role_id = $request->role_id;
-            $user->password = Hash::make($request->password);
-            $user->save();
-        });
+        // $filePath = $request->file('foto')->move('uploads/photo', time() . '-' . $request->file('foto')->getClientOriginalName());
 
-        return redirect()->route('admin.users')->with('success', 'Pendaftaran sudah berhasil.');
+        // dd($request->all());
+
+        Admin::create([
+            'nama'=> $request->nama,
+            'nip' => $request->nip,
+            'username' => $request->username,
+            'email'=> $request->email,
+            'password'=> Hash::make($request->password),
+            'role_id'=> $request->role_id,
+            // 'foto' => $filePath,
+        ]);
+
+
+        return redirect()->route('data-admin-dan-staff')->with('success', 'Pendaftaran berhasil!');
     }
 
-    public function edit($id)
+    public function editAdminDanStaff(Request $request, Admin $user) 
     {
-        $user = User::findOrFail($id); // Fetch the user by ID
-        return view('admin.users.edit', compact('user'));
-    }
+        $role = Role::all();
 
-    public function update(Request $request, $id)
-    {
         $request->validate([
-            'name' => 'required|string|unique:users,name,' . $id, // Allow current name
-            'nama_lengkap' => 'required|string',
-            'telepon' => 'nullable|string|max:15',
-            'keterangan' => 'nullable|string',
-            'role_id' => 'required|in:' . Role::DOSEN . ',' . Role::MAHASISWA,
+            'nama'=> 'required',
+            'nip'=> 'required',
+            'username'=> 'required',
+            'email'=> 'required',
+            'password'=> 'required|string',
+            'role_id'=> 'required|exists:roles,id',
         ]);
 
-        \DB::transaction(function () use ($request, $id) {
-            $user = User::findOrFail($id);
-            $user->name = $request->name;
-            $user->nama_lengkap = $request->nama_lengkap;
-            $user->telepon = $request->telepon;
-            $user->keterangan = $request->keterangan;
-            $user->role_id = $request->role_id;
+            $user->update([
+                'nama'=> $request->nama,
+                'nip'=> $request->nip,
+                'username'=> $request->username,
+                'email'=> $request->email,
+                'password'=> Hash::make($request->password),
+                'role_id'=> $request->role_id,
+            ]);
 
-            // Update password only if provided
-            if ($request->filled('password')) {
-                $request->validate([
-                    'password' => 'string|min:8', // Validate new password
-                ]);
-                $user->password = Hash::make('@KEP2024');
-            }
 
-            $user->save();
-        });
-
-        return redirect()->route('admin.users')->with('success', 'User updated successfully.');
+        return redirect()->route('data-admin-dan-staff', ['role' => $role])->with('success', 'Pengguna berhasil di diperbarui!');
     }
 
-    public function destroy($id)
-    {
-        \DB::transaction(function () use ($id) {
-            $user = User::findOrFail($id);
-            $user->delete();
-        });
-
-        return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
+    public function deleteAdminDanStaff(Admin $user) {
+        // $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('data-admin-dan-staff')->with('success','Kelas berhasil di hapus!');
     }
 }

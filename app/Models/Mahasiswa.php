@@ -3,20 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Model;
 
 class Mahasiswa extends Model
 {
     use HasFactory;
 
-    protected $table = 'mahasiswas';
+    protected $fillable = ['nama', 'nim', 'kelas_id', 'email', 'password', 'foto'];
+    protected $hidden = ['password'];
 
-    protected $fillable = ['name', 'nim', 'kelas_id', 'users_id'];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'users_id');
-    }
 
     public function kelas()
     {

@@ -14,27 +14,29 @@ class LoginController extends Controller
         return view("auth.login");
     }
 
-    public function store(Request $request)
+    public function login(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
-            'password' => 'required|string|min:8',
+            'identifier' => 'required',
+            'password' => 'required',
         ]);
 
         // dd($request->all());
+        $credentials = $request->only('identifier', 'password');
 
-        $credentials = $request->only(['name', 'password']);
+        if (Auth::guard('admin')->attempt(['username' => $credentials['identifier'], 'password' => $request->password])) {
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
+            if (Auth::guard('admin')->user()->role->nama == 'Admin') {
+                return redirect()->route('dashboard');
+            }elseif (Auth::guard('admin')->user()->role->nama == 'Staff') {
+                return redirect()->route('dashboard');
+            } else {
+                return redirect()->back()->withErrors(['email' => 'Email atau password salah'])->withInput();
+            } 
+        }
 
-            if ($user->role_id == Role::ADMIN) {
-                return redirect()->route('admin');
-            } elseif ($user->role_id == Role::DOSEN) {
-                return redirect()->route('dosen');
-            } elseif ($user->role_id == Role::MAHASISWA) {
-                return redirect()->route('mahasiswa');
-            }
+        if (Auth::guard('mahasiswa')->attempt(['nim' => $credentials['identifier'], 'password' => $request->password])) {
+            return redirect()->route('home');
         }
 
         return redirect()->back()->withErrors(['email' => 'Email atau password salah'])->withInput();

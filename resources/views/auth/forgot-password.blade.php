@@ -55,42 +55,31 @@
         </div>
 
         <div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-lg">
-            <h2 class="mb-6 text-3xl font-bold text-center text-green-500">Masuk</h2>
+            <h2 class="mb-6 text-3xl font-bold text-center text-green-500">Lupa Kata Sandi</h2>
 
-            <form action="{{ route('login-process') }}" method="POST" class="space-y-4">
+            <form action="{{ route('forgot-password-process') }}" method="POST" class="space-y-4">
                 @csrf
 
                 <!-- Email -->
                 <div>
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-600">Username</label>
-                    <input type="text" id="name" name="identifier"
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-600">Email</label>
+                    <input type="email" id="email" name="email"
                         class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                        placeholder="2205036">
-                    @error('identifier')
+                        placeholder="Email">
+                    @error('email')
                         <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <!-- Password -->
-                <div>
-                    <label for="password" class="block mb-2 text-sm font-medium text-gray-600">Kata Sandi</label>
-                    <input type="password" id="password" name="password"
-                        class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                        placeholder="********">
-                    @error('password')
-                        <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <p class="mt-4 text-sm text-right text-gray-600">
-                    <a href="{{ route('forgot-password') }}" class="text-green-500 hover:underline">Lupa kata sandi?</a>
-                </p>
                 <!-- Login Button -->
                 <button type="submit"
-                    class="w-full px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Masuk</button>
+                    class="w-full px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Kirim</button>
             </form>
 
             <!-- Forgot Password -->
+            <p class="mt-4 text-sm text-center text-gray-600">
+                <a href="{{ route('login') }}" class="text-green-500 hover:underline">Kembali ke halaman Login</a>
+            </p>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>

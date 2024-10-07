@@ -54,13 +54,13 @@
             <ul
                 class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
-                    <a href="{{ route('mahasiswa') }}"
+                    <a href="{{ route('home') }}"
                         class="block py-2 px-3 rounded md:bg-transparent md:p-0
            {{ Route::is('mahasiswa') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}"
                         aria-current="page">Home</a>
                 </li>
                 <li>
-                    <a href="{{ route('mahasiswa.katalog') }}"
+                    <a href="#"
                         class="block py-2 px-3 rounded md:border-0 md:p-0
            {{ Route::is('mahasiswa.katalog') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Katalog</a>
                 </li>
@@ -70,7 +70,7 @@
            {{ Route::is('mahasiswa.viewbarang') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Peminjaman</a>
                 </li>
                 <li>
-                    <a href="{{ route('mahasiswa.informasi') }}"
+                    <a href="#"
                         class="block py-2 px-3 rounded md:border-0 md:p-0
            {{ Route::is('mahasiswa.informasi') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Informasi</a>
                 </li>

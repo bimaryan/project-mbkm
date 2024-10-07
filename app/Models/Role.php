@@ -9,7 +9,11 @@ class Role extends Model
 {
     use HasFactory;
 
-    const ADMIN = 1;
-    const DOSEN = 2;
-    const MAHASISWA = 3;
+    protected $fillable = [
+        'nama',
+    ];
+
+    public function admin() {
+        return $this->hasMany(Mahasiswa::class);
+    }
 }

@@ -13,8 +13,14 @@ class KelasSeeder extends Seeder
      */
     public function run(): void
     {
-        Kelas::create([
-            'kelas' => 'D4 RPL 3B'
-        ]);
+        $kelas = [
+            ['kelas' => 'D3 KP 1A'],
+            ['kelas' => 'D3 KP 1B'],
+            ['kelas' => 'D3 KP 1C'],
+        ];
+
+        foreach ($kelas as $kelas) {
+            Kelas::create($kelas);
+        }
     }
 }

@@ -1,7 +1,7 @@
 @extends('index')
 @section('content')
-    <div class="p-4 sm:ml-64 mt-3">
-        <div class="rounded-lg mt-14 space-y-4">
+    <div class="p-4 mt-3 sm:ml-64">
+        <div class="space-y-4 rounded-lg mt-14">
             @if (session('success'))
                 <script>
                     Swal.fire({
@@ -13,30 +13,30 @@
                 </script>
             @endif
             <div class="p-4 bg-white rounded-lg shadow-lg">
-                <div class="flex justify-between items-center">
+                <div class="flex items-center justify-between">
                     <div>
-                        <h3 class="text-2xl text-green-500 font-semibold">Data Pengguna</h3>
+                        <h3 class="text-2xl font-semibold text-green-500">Data Mahasiswa</h3>
                     </div>
                     <div>
                         <button data-modal-target="barang" data-modal-toggle="barang"
-                            class="bg-green-500 hover:bg-green-800 text-white py-2 px-3 rounded"><i
+                            class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800"><i
                                 class="fa-solid fa-plus"></i>
                         </button>
 
                         {{-- MODAL TAMBAH PENGGUNA --}}
                         <div id="barang" tabindex="-1" aria-hidden="true"
                             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                            <div class="relative p-4 w-full max-w-2xl max-h-full">
+                            <div class="relative w-full max-w-2xl max-h-full p-4">
                                 <!-- Modal content -->
                                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                     <!-- Modal header -->
                                     <div
-                                        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                        class="flex items-center justify-between p-4 border-b rounded-t md:p-5 dark:border-gray-600">
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                                             Tambah Data Pengguna
                                         </h3>
                                         <button type="button"
-                                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                            class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto dark:hover:bg-gray-600 dark:hover:text-white"
                                             data-modal-hide="barang">
                                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                 fill="none" viewBox="0 0 14 14">
@@ -48,66 +48,58 @@
                                     </div>
                                     <!-- Modal body -->
 
-                                    <form action="{{ route('admin.users.proses') }}" class="p-4 md:p-5" method="POST">
+                                    <form action="{{ route('data-mahasiswa.proses') }}" class="p-4 md:p-5" method="POST">
                                         @csrf
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                        <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
                                             <div class="mb-2">
                                                 <label for="name"
-                                                    class="block text-sm font-medium text-gray-700">Username</label>
-                                                <input type="text" name="name" id="name"
-                                                    class="mt-2 block w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                                                @error('name')
-                                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                                    class="block text-sm font-medium text-gray-700">Nama Mahasiswa</label>
+                                                <input type="text" name="nama" id="name"
+                                                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                                @error('nama')
+                                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                                 @enderror
                                             </div>
                                             <div class="mb-2">
-                                                <label for="nama_lengkap"
-                                                    class="block text-sm font-medium text-gray-700">Nama
-                                                    Lengkap</label>
-                                                <input type="text" name="nama_lengkap" id="nama_lengkap"
-                                                    class="mt-2 block w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                                                @error('nama_lengkap')
-                                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                                <label for="nim"
+                                                    class="block text-sm font-medium text-gray-700">NIM</label>
+                                                <input type="number" name="nim" id="nim"
+                                                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                                @error('nim')
+                                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="email"
+                                                    class="block text-sm font-medium text-gray-700">Email</label>
+                                                <input type="email" name="email" id="email"
+                                                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                                @error('email')
+                                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                                 @enderror
                                             </div>
                                             <div class="mb-2">
                                                 <label for="password"
                                                     class="block text-sm font-medium text-gray-700">Password</label>
                                                 <input type="password" name="password" id="password"
-                                                    class="mt-2 block w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                                 @error('password')
-                                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                                 @enderror
                                             </div>
+
                                             <div class="mb-2">
-                                                <label for="telepon"
-                                                    class="block text-sm font-medium text-gray-700">Telepon</label>
-                                                <input type="text" name="telepon" id="telepon"
-                                                    class="mt-2 block w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                                                @error('telepon')
-                                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                                                @enderror
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="role_id" class="block text-sm font-medium text-gray-700">Pilih
-                                                    Role</label>
-                                                <select name="role_id" id="role_id"
-                                                    class="mt-2 block w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                                                    <option value="">Pilih Role</option>
-                                                    <option value="{{ \App\Models\Role::DOSEN }}">Dosen</option>
-                                                    <option value="{{ \App\Models\Role::MAHASISWA }}">Mahasiswa</option>
+                                                <label for="kelas" class="block text-sm font-medium text-gray-700">Pilih
+                                                    Kelas</label>
+                                                <select name="kelas_id" id="kelas"
+                                                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                                    <option value="">- Pilih -</option>
+                                                    @foreach ($kelas as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->kelas }}</option>
+                                                    @endforeach
                                                 </select>
-                                                @error('role_id')
-                                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                                                @enderror
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="keterangan"
-                                                    class="block text-sm font-medium text-gray-700">Keterangan</label>
-                                                <textarea name="keterangan" id="keterangan"
-                                                    class="mt-2 block w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50"></textarea>
-                                                @error('keterangan')
-                                                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                                @error('kelas_id')
+                                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                                 @enderror
                                             </div>
                                         </div>
@@ -123,47 +115,45 @@
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
-                <div class="p-4 rounded-lg shadow-lg bg-white">
+                <div class="p-4 bg-white rounded-lg shadow-lg">
                     <div class="relative overflow-x-auto sm:rounded-lg">
                         <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">No</th>
                                     <th scope="col" class="px-6 py-3">Nama Lengkap</th>
-                                    <th scope="col" class="px-6 py-3">Username</th>
-                                    <th scope="col" class="px-6 py-3">Telepon</th>
-                                    <th scope="col" class="px-6 py-3">Role</th>
-                                    <th scope="col" class="px-6 py-3">Keterangan</th>
+                                    <th scope="col" class="px-6 py-3">NIM</th>
+                                    <th scope="col" class="px-6 py-3">Kelas</th>
+                                    <th scope="col" class="px-6 py-3">Email</th>
                                     <th scope="col" class="px-6 py-3 text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($user as $data)
+                                @foreach ($mahasiswa as $data)
                                     <tr
-                                        class="bg-white dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                        class="bg-white border-b dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
                                         <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                                        <td class="px-6 py-4">{{ $data->nama_lengkap }}</td>
-                                        <td class="px-6 py-4">{{ $data->name }}</td>
-                                        <td class="px-6 py-4">{{ $data->telepon }}</td>
-                                        <td class="px-6 py-4">{{ $data->role_id }}</td>
-                                        <td class="px-6 py-4">{{ $data->keterangan }}</td>
-                                        <td scope="col" class="px-6 py-4 flex justify-center items-center gap-2">
+                                        <td class="px-6 py-4">{{ $data->nama }}</td>
+                                        <td class="px-6 py-4">{{ $data->nim }}</td>
+                                        <td class="px-6 py-4">{{ $data->kelas->kelas }}</td>
+                                        <td class="px-6 py-4">{{ $data->email }}</td>
+                                        <td scope="col" class="flex items-center justify-center gap-2 px-6 py-4">
                                             <button type="button"
-                                                class="py-2 px-2 bg-yellow-400 rounded text-sm text-white flex items-center">
+                                                class="flex items-center px-2 py-2 text-sm text-white bg-yellow-400 rounded">
                                                 <i class="fa-solid fa-eye"></i>
                                             </button>
                                             <form id="delete-form-{{ $data->id }}"
-                                                action="{{ route('admin.users.delete', $data->id) }}" method="POST"
+                                                action="{{ route('data-mahasiswa.delete', $data->id) }}" method="POST"
                                                 class="inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" onclick="confirmDelete({{ $data->id }})"
-                                                    class="py-2 px-2 bg-red-500 rounded text-sm text-white flex items-center">
+                                                    class="flex items-center px-2 py-2 text-sm text-white bg-red-500 rounded">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
                                             </form>
                                             <button type="button"
-                                                class="py-2 px-2 bg-blue-500 rounded text-sm text-white flex items-center">
+                                                class="flex items-center px-2 py-2 text-sm text-white bg-blue-500 rounded">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </button>
                                         </td>
@@ -173,7 +163,7 @@
                         </table>
                     </div>
                     <div class="mt-4">
-                        {{ $user->links() }}
+                        {{ $mahasiswa->links() }}
                     </div>
                 </div>
             </div>
