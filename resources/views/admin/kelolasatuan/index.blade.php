@@ -47,7 +47,7 @@
                                         </button>
                                     </div>
                                     <!-- Modal body -->
-                                    <form action="{{ route('admin.satuan.proses') }}" class="p-4 md:p-5" method="POST">
+                                    <form action="{{ route('data-satuan.proses') }}" class="p-4 md:p-5" method="POST">
                                         @csrf
                                         <!-- Nama Satuan -->
                                         <div class="mb-2">
@@ -94,7 +94,7 @@
                                     <td scope="col" class="px-6 py-3 flex justify-center items-center gap-2">
                                         <div>
                                             <form id="delete-form-{{ $data->id }}"
-                                                action="{{ route('admin.satuan.hapus', $data->id) }}" method="POST">
+                                                action="{{ route('data-satuan.hapus', $data->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" onclick="confirmDelete({{ $data->id }})"
@@ -140,7 +140,7 @@
                                             </div>
                                             <!-- Modal body -->
                                             <div class="p-4">
-                                                <form action="{{ route('admin.satuan.edit', $data->id) }}" method="POST">
+                                                <form action="{{ route('data-satuan.edit', $data->id) }}" method="POST">
                                                     @csrf
                                                     @method('PUT')
                                                     <!-- Nama Satuan -->

@@ -25,12 +25,12 @@
                 <div class="flex items-center ms-3">
                     <div class="flex items-center gap-2">
                         <div class="hidden md:block">
-                                <div class="flex-col text-right md:flex">
-                                    <p class="text-sm">{{ Auth::user()->nama }}</p>
-                                    <p class="text-xs">
-                                        {{ Auth::user()->role->nama ? Auth::user()->role->nama : 'No Role Assigned' }}
-                                    </p>
-                                </div>
+                            <div class="flex-col text-right md:flex">
+                                <p class="text-sm">{{ Auth::user()->nama }}</p>
+                                <p class="text-xs">
+                                    {{ Auth::user()->role->nama ? Auth::user()->role->nama : 'No Role Assigned' }}
+                                </p>
+                            </div>
 
                         </div>
                         <div>
@@ -65,13 +65,13 @@
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
         <ul class="space-y-2 font-medium">
 
-                <li>
-                    <a href="{{ route('dashboard') }}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('dashboard') ? 'bg-green-500 text-white' : '' }}">
-                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-house"></i> Dashboard</span>
-                    </a>
-                </li>
-                @if (Auth::user()->role->nama === 'Admin')
+            <li>
+                <a href="{{ route('dashboard') }}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('dashboard') ? 'bg-green-500 text-white' : '' }}">
+                    <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-house"></i> Dashboard</span>
+                </a>
+            </li>
+            @if (Auth::user()->role->nama === 'Admin')
                 <li>
                     <a id="kelolausers" data-collapse-toggle="users" aria-controls="kelolausers"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/kelola-users/*') ? 'bg-green-500 text-white' : '' }}">
@@ -97,12 +97,13 @@
                         </li>
                     </ul>
                 </li>
-                @endif
-                @if (Auth::user()->role->nama === 'Staff' || Auth::user()->role->nama === 'Admin')  
+            @endif
+            @if (Auth::user()->role->nama === 'Staff' || Auth::user()->role->nama === 'Admin')
                 <li>
                     <a id="kelolaproduk" data-collapse-toggle="dropdown"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/alat-dan-bahan/*') ? 'bg-green-500 text-white' : '' }}">
-                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-folder"></i> Alat dan Bahan</span>
+                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-folder"></i> Alat dan
+                            Bahan</span>
                         <i class="fa-solid fa-chevron-down"></i>
                     </a>
 
@@ -114,13 +115,13 @@
                                 Barang</a>
                         </li>
                         <li>
-                            <a href=""
+                            <a href="{{ route('data-kategori') }}"
                                 class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/kategori') ? 'bg-gray-300' : '' }}"><i
                                     class="fa-solid fa-folder-open"></i> Data
                                 Kategori</a>
                         </li>
                         <li>
-                            <a href=""
+                            <a href="{{ route('data-satuan') }}"
                                 class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/satuan') ? 'bg-gray-300' : '' }}"><i
                                     class="fa-solid fa-folder-open"></i> Data
                                 Satuan</a>
@@ -128,13 +129,13 @@
                     </ul>
                 </li>
                 <li>
-                    <a href=""
+                    <a href="{{ route('verifikasi') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/verifikasi-peminjaman') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-square-check"></i>
                             Verifikasi Peminjaman</span>
                     </a>
                 </li>
-                @endif
+            @endif
         </ul>
     </div>
 </aside>

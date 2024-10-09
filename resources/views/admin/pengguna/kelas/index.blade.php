@@ -72,8 +72,10 @@
                 </div>
             </div>
 
-            <div id='tableContainer'>
-                @include('admin.pengguna.kelas.table', ['kelas' => $kelas])
+            <div class="p-4 bg-white rounded-lg shadow-lg">
+                <div id='tableContainer'>
+                    @include('admin.pengguna.kelas.table', ['kelas' => $kelas])
+                </div>
             </div>
 
         </div>

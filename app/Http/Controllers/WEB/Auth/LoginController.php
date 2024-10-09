@@ -32,11 +32,11 @@ class LoginController extends Controller
                 return redirect()->route('dashboard');
             } else {
                 return redirect()->back()->withErrors(['email' => 'Email atau password salah'])->withInput();
-            } 
+            }
         }
 
         if (Auth::guard('mahasiswa')->attempt(['nim' => $credentials['identifier'], 'password' => $request->password])) {
-            return redirect()->route('home');
+            return redirect()->route('mahasiswa');
         }
 
         return redirect()->back()->withErrors(['email' => 'Email atau password salah'])->withInput();

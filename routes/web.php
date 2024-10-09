@@ -42,7 +42,7 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('data-admin-dan-staff', [AdminController::class, 'adminAndStaff'])->name('data-admin-dan-staff');
         Route::post('data-admin-dan-staff/proses', [AdminController::class, 'storeAdminAndStaff'])->name('data-admin-dan-staff.proses');
         Route::delete('data-admin-dan-staff/{user}/delete', [AdminController::class, 'deleteAdminDanStaff'])->name('data-admin-dan-staff.delete');
-        Route::put('data-admin-dan-staff/{user}/edit', [AdminController::class,'editAdminDanStaff'])->name('data-admin-dan-staff.edit');
+        Route::put('data-admin-dan-staff/{user}/edit', [AdminController::class, 'editAdminDanStaff'])->name('data-admin-dan-staff.edit');
 
         // ROUTE DATA MAHASISWA
         Route::get('data-mahasiswa', [MahasiswaController::class, 'mahasiswa'])->name('data-mahasiswa');
@@ -60,16 +60,33 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::post('data-barang/proses', [ProdukController::class, 'storeBarang'])->name('data-barang.proses');
         Route::put('data-barang/{barang}/edit', [ProdukController::class, 'editBarang'])->name('data-barang.edit');
         Route::delete('data-barang/{barang}/hapus', [ProdukController::class, 'deleteBarang'])->name('data-barang.hapus');
+
+        // ROUTE BUAT TAMBAH KATEGORI
+        Route::get('data-kategori', [KategoriController::class, 'index'])->name('data-kategori');
+        Route::post('data-kategori/proses', [KategoriController::class, 'store'])->name('data-kategori.proses');
+        Route::put('data-kategori/{kategori}/edit', [KategoriController::class, 'edit'])->name('data-kategori.edit');
+        Route::delete('data-kategori/{kategori}/hapus', [KategoriController::class, 'hapus'])->name('data-kategori.hapus');
+
+        // ROUTE BUAT TAMBAH SATUAN
+        Route::get('data-satuan', [SatuanController::class, 'index'])->name('data-satuan');
+        Route::post('data-satuan/proses', [SatuanController::class, 'store'])->name('data-satuan.proses');
+        Route::delete('data-satuan/{satuan}/delete', [SatuanController::class, 'hapus'])->name('data-satuan.hapus');
+        Route::put('data-satuan/{satuan}/edit', [SatuanController::class, 'edit'])->name('data-satuan.edit');
+
+        // ROUTE VERIFIKASI PEMINJAMAN
+        Route::get('verifikasi-peminjaman', [PeminjamanController::class, 'index'])->name('verifikasi');
     });
 
-    Route::middleware(['UserAccess:Staff'])->group(function () {
-    });
+    Route::middleware(['UserAccess:Staff'])->group(function () {});
 });
 
 Route::middleware(['auth:mahasiswa'])->group(function () {
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
-    Route::get('home', [MahasiswaController::class, 'mahasiswa'])->name('home');
+    Route::get('/', [MahasiswaController::class, 'home'])->name('mahasiswa');
+    Route::get('katalog', [MahasiswaController::class, 'katalog'])->name('mahasiswa.katalog');
+    Route::get('katalog/peminjaman-barang/{name}', [MahasiswaController::class, 'viewbarang'])->name('mahasiswa.viewbarang');
+    Route::get('informasi', [MahasiswaController::class, 'informasi'])->name('mahasiswa.informasi');
 });
 
 // Route::get('/', [MahasiswaController::class, 'home'])->name('mahasiswa');
