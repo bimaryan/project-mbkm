@@ -15,7 +15,7 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
 
-        $admin = [
+        $admins = [
             [
                 'nama' => 'Admin 1',
                 'nip' => '12345678901',
@@ -34,7 +34,7 @@ class AdminSeeder extends Seeder
             ]
         ];
 
-        foreach ($admin as $admin) {
+        foreach ($admins as $admin) {
             Admin::create($admin);
         }
     }

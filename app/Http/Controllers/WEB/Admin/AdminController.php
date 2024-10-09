@@ -26,7 +26,6 @@ class AdminController extends Controller
         $role = Role::all();
 
         return view('admin.pengguna.adminandstaff.index', ['user' => $users], ['role' => $role]);
-
     }
 
     public function storeAdminAndStaff(Request $request)
@@ -46,12 +45,12 @@ class AdminController extends Controller
         // dd($request->all());
 
         Admin::create([
-            'nama'=> $request->nama,
+            'nama' => $request->nama,
             'nip' => $request->nip,
             'username' => $request->username,
-            'email'=> $request->email,
-            'password'=> Hash::make($request->password),
-            'role_id'=> $request->role_id,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role_id' => $request->role_id,
             // 'foto' => $filePath,
         ]);
 
@@ -64,30 +63,31 @@ class AdminController extends Controller
         $role = Role::all();
 
         $request->validate([
-            'nama'=> 'required',
-            'nip'=> 'required',
-            'username'=> 'required',
-            'email'=> 'required',
-            'password'=> 'required|string',
-            'role_id'=> 'required|exists:roles,id',
+            'nama' => 'required',
+            'nip' => 'required',
+            'username' => 'required',
+            'email' => 'required',
+            'password' => 'required|string',
+            'role_id' => 'required|exists:roles,id',
         ]);
 
-            $user->update([
-                'nama'=> $request->nama,
-                'nip'=> $request->nip,
-                'username'=> $request->username,
-                'email'=> $request->email,
-                'password'=> Hash::make($request->password),
-                'role_id'=> $request->role_id,
-            ]);
+        $user->update([
+            'nama' => $request->nama,
+            'nip' => $request->nip,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role_id' => $request->role_id,
+        ]);
 
 
         return redirect()->route('data-admin-dan-staff', ['role' => $role])->with('success', 'Pengguna berhasil di diperbarui!');
     }
 
-    public function deleteAdminDanStaff(Admin $user) {
+    public function deleteAdminDanStaff(Admin $user)
+    {
         // $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('data-admin-dan-staff')->with('success','Kelas berhasil di hapus!');
+        return redirect()->route('data-admin-dan-staff')->with('success', 'Kelas berhasil di hapus!');
     }
 }

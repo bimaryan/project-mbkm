@@ -23,7 +23,7 @@
                                 class="fa-solid fa-plus"></i>
                         </button>
 
-                        {{-- MODAL TAMBAH PENGGUNA --}}
+                        {{-- MODAL TAMBAH KELAS --}}
                         <div id="barang" tabindex="-1" aria-hidden="true"
                             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                             <div class="relative w-full max-w-2xl max-h-full p-4">
@@ -73,9 +73,20 @@
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
+<<<<<<< HEAD
                 <div id='tableContainer'>
                     @include('admin.pengguna.kelas.table', ['kelas' => $kelas])
                 </div>
+=======
+                
+                <div id='tableKelas'>
+                    @include('admin.pengguna.kelas.table', ['kelas' => $kelas])
+                </div>
+
+                <div id="pageignitionLinks">
+                    {{ $kelas->links() }}
+                </div>
+>>>>>>> 993ea8dae7ec56e71c44b8f8523bd201274f025a
             </div>
 
         </div>
@@ -102,25 +113,34 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function() {
-
+                // Apply filter ketika button filter di klik
+                $('#applyFilter').on('click', function(e) {
+                    e.preventDefault();
+                    loadTable();
+                });
+    
                 // Handle pagination link click event
                 $(document).on('click', '.pagination a', function(e) {
                     e.preventDefault();
                     var page = $(this).attr('href').split('page=')[1];
                     loadTable(page);
                 });
-
+    
                 function loadTable(page = 1) {
                     $.ajax({
-                        url: "{{ route('data-kelas') }}",
+                        url: "{{ route('data-mahasiswa') }}",
                         method: "GET",
                         data: {
-                            name: $('#filterKelas').val(),
-                            page: page
+                            // name: $('#filterName').val(),
+                            // kategori_id: $('#filterKategori').val(),
+                            // kondisi: $('#filterKondisi').val(),
+                            // stock: $('#filterStock').val(),
+                            // satuan_id: $('#filterSatuan').val(),
+                            // page: page
                         },
                         success: function(response) {
                             // Replace table and pagination links
-                            $('#tableContainer').html($(response).find('#tableContainer').html());
+                            $('#tableMahasiswa').html($(response).find('#tableMahasiswa').html());
                             $('#paginationLinks').html($(response).find('#paginationLinks').html());
                         }
                     });
