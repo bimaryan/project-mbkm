@@ -40,6 +40,26 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
 
     Route::middleware(['UserAccess:Admin'])->group(function () {
+        Route::prefix('pengguna')->group(function () {
+            Route::get('/data-admin-dan-staff', [AdminController::class, 'adminAndStaff'])->name('data-admin-dan-staff');
+            Route::post('/data-admin-dan-staff/proses', [AdminController::class, 'storeAdminAndStaff'])->name('data-admin-dan-staff.proses');
+            Route::delete('/data-admin-dan-staff/{user}/delete', [AdminController::class, 'deleteAdminDanStaff'])->name('data-admin-dan-staff.delete');
+            Route::put('/data-admin-dan-staff/{user}/edit', [AdminController::class, 'editAdminDanStaff'])->name('data-admin-dan-staff.edit');
+
+            // ROUTE DATA MAHASISWA
+            Route::get('/data-mahasiswa', [MahasiswaController::class, 'mahasiswa'])->name('data-mahasiswa');
+            Route::post('/data-mahasiswa/proses', [MahasiswaController::class, 'storeMahasiswa'])->name('data-mahasiswa.proses');
+            Route::put('/data-mahasiswa/{mahasiswa}/edit', [MahasiswaController::class, 'editMahasiswa'])->name('data-mahasiswa.edit');
+            Route::delete('/data-mahasiswa/{mahasiswa}/delete', [MahasiswaController::class, 'deleteMahasiswa'])->name('data-mahasiswa.delete');
+
+            // ROUTE DATA KELAS
+            Route::get('/data-kelas', [MahasiswaController::class, 'kelas'])->name('data-kelas');
+            Route::post('/data-kelas/proses', [MahasiswaController::class, 'storeKelas'])->name('data-kelas.proses');
+            Route::delete('/data-kelas/{kelas}/delete', [MahasiswaController::class, 'deleteKelas'])->name('data-kelas.delete');
+        });
+    });
+
+    Route::middleware(['UserAccess:Staff'])->group(function () {
         Route::get('data-admin-dan-staff', [AdminController::class, 'adminAndStaff'])->name('data-admin-dan-staff');
         Route::post('data-admin-dan-staff/proses', [AdminController::class, 'storeAdminAndStaff'])->name('data-admin-dan-staff.proses');
         Route::delete('data-admin-dan-staff/{user}/delete', [AdminController::class, 'deleteAdminDanStaff'])->name('data-admin-dan-staff.delete');
@@ -89,8 +109,9 @@ Route::middleware(['UserAccess:Staff'])->group(function () {
     Route::delete('data-barang/{id}/delete', [ProdukController::class, 'deleteBarang'])->name('data-barang.delete');
 });
 
-Route::get('home', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth:mahasiswa'])->group(function () {
+    Route::get('home', [HomeController::class, 'index']);
+    Route::get('home', [HomeController::class, 'home'])->name('home');
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::get('/', [MahasiswaController::class, 'home'])->name('mahasiswa');

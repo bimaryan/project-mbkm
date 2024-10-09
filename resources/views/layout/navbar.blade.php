@@ -73,30 +73,32 @@
             </li>
             @if (Auth::user()->role->nama === 'Admin')
                 <li>
-                    <a id="kelolausers" data-collapse-toggle="users" aria-controls="kelolausers"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/kelola-users/*') ? 'bg-green-500 text-white' : '' }}">
+                    <a id="pengguna" data-collapse-toggle="users" aria-controls="pengguna"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('pengguna/') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-users"></i> Pengguna</span> <i
                             class="fa-solid fa-chevron-down"></i>
                     </a>
 
-                    <ul id="users" class="hidden py-2 space-y-2" aria-labelledby="kelolausers">
+                    <ul id="users" class="hidden py-2 space-y-2" aria-labelledby="pengguna">
                         <li>
                             <a href="{{ route('data-admin-dan-staff') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-users/users') ? 'bg-gray-300' : '' }}"><i
+                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('pengguna/data-admin-dan-staff') ? 'bg-gray-300' : '' }}"><i
                                     class="fa-solid fa-user me-2"></i>Admin dan Staff</a>
                         </li>
                         <li>
                             <a href="{{ route('data-mahasiswa') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-users/users/create') ? 'bg-gray-300' : '' }}"><i
+                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('pengguna/data-mahasiswa') ? 'bg-gray-300' : '' }}"><i
                                     class="fa-solid fa-user me-2"></i>Mahasiswa</a>
                         </li>
                         <li>
                             <a href="{{ route('data-kelas') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/kelola-users/users/create') ? 'bg-gray-300' : '' }}"><i
+                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('data-kelas') ? 'bg-gray-300' : '' }}"><i
                                     class="fa-solid fa-user me-2"></i>Data Kelas</a>
                         </li>
                     </ul>
                 </li>
+                @endif
+                @if (Auth::user()->role->nama === 'Staff')  
             @endif
             @if (Auth::user()->role->nama === 'Staff' || Auth::user()->role->nama === 'Admin')
                 <li>
@@ -128,6 +130,8 @@
                         </li>
                     </ul>
                 </li>
+                @endif
+                @if (Auth::user()->role->nama === 'Admin')
                 <li>
                     <a href="{{ route('verifikasi') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/verifikasi-peminjaman') ? 'bg-green-500 text-white' : '' }}">
