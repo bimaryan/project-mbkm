@@ -19,6 +19,9 @@ class LoginController extends Controller
         $request->validate([
             'identifier' => 'required',
             'password' => 'required',
+        ], [
+            'identifier.required'=> 'Username/NIM harus diisi',
+            'password.required'=> 'Kata sandi harus diisi',
         ]);
 
         // dd($request->all());
@@ -31,7 +34,7 @@ class LoginController extends Controller
             }elseif (Auth::guard('admin')->user()->role->nama == 'Staff') {
                 return redirect()->route('dashboard');
             } else {
-                return redirect()->back()->withErrors(['email' => 'Email atau password salah'])->withInput();
+                return redirect()->back()->withErrors(['errors'])->withInput();
             } 
         }
 
@@ -39,7 +42,7 @@ class LoginController extends Controller
             return redirect()->route('home');
         }
 
-        return redirect()->back()->withErrors(['email' => 'Email atau password salah'])->withInput();
+        return redirect()->back()->withErrors(['errors'],)->withInput();
     }
 
     public function logout()

@@ -38,20 +38,20 @@
 
 <body>
 
-    @if (session('success'))
+    @if (session('errors'))
         <script>
             Swal.fire({
-                title: "Success",
-                text: "{{ session('success') }}",
-                icon: "success",
+                title: "Login Gagal",
+                text: 'Username/NIM atau Kata sandi salah!',
+                icon: "error",
                 confirmButtonColor: "#3085d6",
             });
         </script>
     @endif
 
-    <div class="flex background flex-col items-center justify-center h-screen space-y-4 p-4">
+    <div class="flex flex-col items-center justify-center h-screen p-4 space-y-4 background">
         <div class="flex justify-center">
-            <img src="{{ asset('image/kampus-merdeka.png') }}" alt="" class="w-full object-cover">
+            <img src="{{ asset('image/kampus-merdeka.png') }}" alt="" class="object-cover w-full">
         </div>
 
         <div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-lg">
@@ -62,12 +62,12 @@
 
                 <!-- Email -->
                 <div>
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-600">Username</label>
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-600">Username/NIM</label>
                     <input type="text" id="name" name="identifier"
                         class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         placeholder="2205036">
                     @error('identifier')
-                        <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -78,7 +78,7 @@
                         class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         placeholder="********">
                     @error('password')
-                        <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
 
