@@ -25,8 +25,8 @@ class AdminController extends Controller
         $users = $query->paginate(5);
         $role = Role::all();
 
-        return view('admin.pengguna.adminandstaff.index', ['user' => $users], ['role' => $role]); 
-        
+        return view('admin.pengguna.adminandstaff.index', ['user' => $users], ['role' => $role]);
+
     }
 
     public function storeAdminAndStaff(Request $request)
@@ -59,7 +59,7 @@ class AdminController extends Controller
         return redirect()->route('data-admin-dan-staff')->with('success', 'Pendaftaran berhasil!');
     }
 
-    public function editAdminDanStaff(Request $request, Admin $user) 
+    public function editAdminDanStaff(Request $request, Admin $user)
     {
         $role = Role::all();
 

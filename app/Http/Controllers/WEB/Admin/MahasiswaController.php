@@ -6,6 +6,7 @@ use App\Models\Kelas;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class MahasiswaController extends Controller
@@ -26,7 +27,7 @@ class MahasiswaController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
-        \DB::transaction(function () use ($request) {
+        DB::transaction(function () use ($request) {
             $mahasiswa = new Mahasiswa();
             $mahasiswa->nama = $request->nama;
             $mahasiswa->nim = $request->nim;
@@ -47,10 +48,10 @@ class MahasiswaController extends Controller
     }
 
     public function kelas() {
-        
+
         $kelas = Kelas::all();
         return view('admin.pengguna.kelas.index', ['kelas' => $kelas]);
-        
+
     }
 
     public function storeKelas(Request $request) {
