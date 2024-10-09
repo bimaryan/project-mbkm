@@ -13,6 +13,7 @@ use App\Http\Controllers\WEB\Admin\KategoriController;
 use App\Http\Controllers\WEB\Admin\PeminjamanController;
 use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
 use App\Http\Controllers\WEB\Admin\MahasiswaController;
+use App\Http\Controllers\WEB\Mahasiswa\HomeController;
 
 /*
 |----------------------------------------------------------------------
@@ -47,8 +48,8 @@ Route::middleware(['auth:admin'])->group(function () {
         // ROUTE DATA MAHASISWA
         Route::get('data-mahasiswa', [MahasiswaController::class, 'mahasiswa'])->name('data-mahasiswa');
         Route::post('data-mahasiswa/proses', [MahasiswaController::class, 'storeMahasiswa'])->name('data-mahasiswa.proses');
-        Route::put('data-mahasiswa/{id}/edit', [MahasiswaController::class, 'editMahasiswa'])->name('data-mahasiswa.edit');
-        Route::delete('data-mahasiswa/{id}/delete', [MahasiswaController::class, 'destroyMahasiswa'])->name('data-mahasiswa.delete');
+        Route::put('data-mahasiswa/{mahasiswa}/edit', [MahasiswaController::class, 'editMahasiswa'])->name('data-mahasiswa.edit');
+        Route::delete('data-mahasiswa/{mahasiswa}/delete', [MahasiswaController::class, 'deleteMahasiswa'])->name('data-mahasiswa.delete');
 
         // ROUTE DATA KELAS
         Route::get('data-kelas', [MahasiswaController::class, 'kelas'])->name('data-kelas');
@@ -60,12 +61,19 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::post('data-barang/proses', [ProdukController::class, 'storeBarang'])->name('data-barang.proses');
         Route::put('data-barang/{barang}/edit', [ProdukController::class, 'editBarang'])->name('data-barang.edit');
         Route::delete('data-barang/{barang}/hapus', [ProdukController::class, 'deleteBarang'])->name('data-barang.hapus');
+
     });
 
     Route::middleware(['UserAccess:Staff'])->group(function () {
+        // ROUTE DATA BARANG
+        Route::get('data-barang', [ProdukController::class, 'barang'])->name('data-barang');
+        Route::post('data-barang/proses', [ProdukController::class, 'storeBarang'])->name('data-barang.proses');
+        Route::put('data-barang/{id}/edit', [ProdukController::class, 'editBarang'])->name('data-barang.edit');
+        Route::delete('data-barang/{id}/delete', [ProdukController::class, 'deleteBarang'])->name('data-barang.delete');
     });
 });
 
+Route::get('home', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth:mahasiswa'])->group(function () {
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
