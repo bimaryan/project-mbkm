@@ -100,7 +100,7 @@ class ProdukController extends Controller
             'stock' => $request->stock
         ]);
 
-        return redirect()->route('admin.barang')->with('success', 'Barang berhasil ditambahkan!');
+        return redirect()->route('data-barang')->with('success', 'Barang berhasil ditambahkan!');
     }
 
     public function deleteBarang(Barang $barang)
@@ -111,7 +111,7 @@ class ProdukController extends Controller
 
         $barang->delete();
 
-        return redirect()->route('admin.barang')->with('success', 'Barang berhasil dihapus!');
+        return redirect()->route('data-barang')->with('success', 'Barang berhasil dihapus!');
     }
 
     public function editBarang(Request $request, Barang $barang,)
@@ -149,6 +149,6 @@ class ProdukController extends Controller
             'stock' => $request->stock,
         ]);
 
-        return redirect()->route('admin.barang')->with('success', 'Barang berhasil diperbarui!');
+        return redirect()->route('data-barang')->with('success', 'Barang berhasil diperbarui!');
     }
 }

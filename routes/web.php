@@ -55,10 +55,15 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('data-kelas', [MahasiswaController::class, 'kelas'])->name('data-kelas');
         Route::post('data-kelas/proses', [MahasiswaController::class, 'storeKelas'])->name('data-kelas.proses');
         Route::delete('data-kelas/{kelas}/delete', [MahasiswaController::class, 'deleteKelas'])->name('data-kelas.delete');
-        
-        
+
+        // ROUTE DATA BARANG
+        Route::get('data-barang', [ProdukController::class, 'barang'])->name('data-barang');
+        Route::post('data-barang/proses', [ProdukController::class, 'storeBarang'])->name('data-barang.proses');
+        Route::put('data-barang/{barang}/edit', [ProdukController::class, 'editBarang'])->name('data-barang.edit');
+        Route::delete('data-barang/{barang}/hapus', [ProdukController::class, 'deleteBarang'])->name('data-barang.hapus');
+
     });
-    
+
     Route::middleware(['UserAccess:Staff'])->group(function () {
         // ROUTE DATA BARANG
         Route::get('data-barang', [ProdukController::class, 'barang'])->name('data-barang');
@@ -72,7 +77,7 @@ Route::get('home', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth:mahasiswa'])->group(function () {
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
-
+    Route::get('home', [MahasiswaController::class, 'mahasiswa'])->name('home');
 });
 
 // Route::get('/', [MahasiswaController::class, 'home'])->name('mahasiswa');

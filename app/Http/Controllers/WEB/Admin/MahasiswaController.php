@@ -6,6 +6,7 @@ use App\Models\Kelas;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class MahasiswaController extends Controller
@@ -26,9 +27,20 @@ class MahasiswaController extends Controller
             'email' => 'required',
         ]);
 
+
         $validatedData['password'] = Hash::make('@Poli' . $validatedData['nim']);
 
         Mahasiswa::create($validatedData);
+
+        DB::transaction(function () use ($request) {
+            $mahasiswa = new Mahasiswa();
+            $mahasiswa->nama = $request->nama;
+            $mahasiswa->nim = $request->nim;
+            $mahasiswa->kelas_id = $request->kelas_id;
+            $mahasiswa->email = $request->email;
+            $mahasiswa->password = Hash::make($request->password);
+            $mahasiswa->save();
+        });
 
         return redirect()->route('data-mahasiswa')->with('success', 'Pendaftaran sudah berhasil.');
     }
@@ -71,6 +83,13 @@ class MahasiswaController extends Controller
 
 
         return view('admin.pengguna.kelas.index', ['kelas' => $kelas]);
+
+    public function kelas() {
+
+        $kelas = Kelas::all();
+        return view('admin.pengguna.kelas.index', ['kelas' => $kelas]);
+
+
     }
 
     public function storeKelas(Request $request)
