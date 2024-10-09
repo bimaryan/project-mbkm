@@ -73,6 +73,11 @@
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
+<<<<<<< HEAD
+                <div id='tableContainer'>
+                    @include('admin.pengguna.kelas.table', ['kelas' => $kelas])
+                </div>
+=======
                 
                 <div id='tableKelas'>
                     @include('admin.pengguna.kelas.table', ['kelas' => $kelas])
@@ -81,6 +86,7 @@
                 <div id="pageignitionLinks">
                     {{ $kelas->links() }}
                 </div>
+>>>>>>> 993ea8dae7ec56e71c44b8f8523bd201274f025a
             </div>
 
         </div>

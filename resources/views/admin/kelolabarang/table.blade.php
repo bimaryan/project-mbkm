@@ -64,7 +64,7 @@
                         </div>
                         <div>
                             <form id="delete-form-{{ $data->id }}"
-                                action="{{ route('admin.barang.hapus', $data->id) }}" method="POST">
+                                action="{{ route('data-barang.hapus', $data->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" onclick="confirmDelete({{ $data->id }})"
@@ -163,7 +163,7 @@
                             </div>
                             <!-- Modal body -->
                             <div class="p-4">
-                                <form action="{{ route('admin.barang.edit', $data->id) }}" method="POST">
+                                <form action="{{ route('data-barang.edit', $data->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="grid grid-cols-2 gap-2">

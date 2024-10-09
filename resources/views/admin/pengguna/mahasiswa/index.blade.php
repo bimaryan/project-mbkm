@@ -53,9 +53,15 @@
                                         @csrf
                                         <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
                                             <div class="mb-2">
+<<<<<<< HEAD
+                                                <label for="name" class="block text-sm font-medium text-gray-700">Nama
+                                                    Mahasiswa</label>
+                                                <input type="text" name="nama" id="name"
+=======
                                                 <label for="nama"
                                                     class="block text-sm font-medium text-gray-700">Nama</label>
                                                 <input type="text" name="nama" id="nama"
+>>>>>>> 993ea8dae7ec56e71c44b8f8523bd201274f025a
                                                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                                 @error('nama')
                                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -119,6 +125,55 @@
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
+<<<<<<< HEAD
+                <div class="relative overflow-x-auto sm:rounded-lg">
+                    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">No</th>
+                                <th scope="col" class="px-6 py-3">Nama Lengkap</th>
+                                <th scope="col" class="px-6 py-3">NIM</th>
+                                <th scope="col" class="px-6 py-3">Kelas</th>
+                                <th scope="col" class="px-6 py-3">Email</th>
+                                <th scope="col" class="px-6 py-3 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($mahasiswa as $data)
+                                <tr
+                                    class="bg-white border-b dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
+                                    <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                                    <td class="px-6 py-4">{{ $data->nama }}</td>
+                                    <td class="px-6 py-4">{{ $data->nim }}</td>
+                                    <td class="px-6 py-4">{{ $data->kelas->kelas }}</td>
+                                    <td class="px-6 py-4">{{ $data->email }}</td>
+                                    <td scope="col" class="flex items-center justify-center gap-2 px-6 py-4">
+                                        <button type="button"
+                                            class="flex items-center px-2 py-2 text-sm text-white bg-yellow-400 rounded">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                        <form id="delete-form-{{ $data->id }}"
+                                            action="{{ route('data-mahasiswa.delete', $data->id) }}" method="POST"
+                                            class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" onclick="confirmDelete({{ $data->id }})"
+                                                class="flex items-center px-2 py-2 text-sm text-white bg-red-500 rounded">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                        <button type="button"
+                                            class="flex items-center px-2 py-2 text-sm text-white bg-blue-500 rounded">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4">
+=======
                 <form action="">
 
                 </form>
@@ -127,6 +182,7 @@
                 </div>
 
                 <div id="pageignitionLinks">
+>>>>>>> 993ea8dae7ec56e71c44b8f8523bd201274f025a
                     {{ $mahasiswa->links() }}
                 </div>
             </div>
