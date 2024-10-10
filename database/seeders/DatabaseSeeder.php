@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(RoleSeeder::class);
-        $this->call(UsersSeeder::class);
         $this->call(KategoriSeeder::class);
         $this->call(SatuanSeeder::class);
         $this->call(RuanganSeeder::class);
@@ -30,5 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(JurusanSeeder::class);
         $this->call(BarangSeeder::class);
         $this->call(KelasSeeder::class);
+        $this->call(AdminSeeder::class);
+        $this->call(MahasiswaSeeder::class);
     }
 }

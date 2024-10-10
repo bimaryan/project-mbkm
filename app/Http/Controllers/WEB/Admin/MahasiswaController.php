@@ -21,16 +21,14 @@ class MahasiswaController extends Controller
     public function storeMahasiswa(Request $request)
     {
         $validatedData = $request->validate([
-            'nama' => 'required',
-            'nim' => 'required',
-            'kelas_id' => 'required',
-            'email' => 'required',
+            'nama' => 'required|string',
+            'nim' => 'required|string',
+            'kelas_id' => 'required|string',
+            'email' => 'required|string',
         ]);
 
 
         $validatedData['password'] = Hash::make('@Poli' . $validatedData['nim']);
-
-        Mahasiswa::create($validatedData);
 
         DB::transaction(function () use ($request) {
             $mahasiswa = new Mahasiswa();
@@ -53,7 +51,6 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'nim' => 'required',
             'email' => 'required',
-            // 'password' => 'required|string',
             'kelas_id' => 'required|exists:kelas,id',
         ]);
 
@@ -61,7 +58,6 @@ class MahasiswaController extends Controller
             'nama' => $request->nama,
             'nim' => $request->nim,
             'email' => $request->email,
-            // 'password' => Hash::make($request->password),
             'kelas_id' => $request->kelas_id,
         ]);
 
@@ -79,17 +75,7 @@ class MahasiswaController extends Controller
     {
 
         $kelas = Kelas::paginate(5);
-
-
-
         return view('admin.pengguna.kelas.index', ['kelas' => $kelas]);
-
-    public function kelas() {
-
-        $kelas = Kelas::all();
-        return view('admin.pengguna.kelas.index', ['kelas' => $kelas]);
-
-
     }
 
     public function storeKelas(Request $request)

@@ -12,10 +12,11 @@ class Mahasiswa extends Model
     use HasFactory;
 
     protected $fillable = ['nama', 'nim', 'kelas_id', 'email', 'password', 'foto'];
-    protected static function booted() {
+    protected static function booted()
+    {
         static::creating(function ($mahasiswa) {
             $mahasiswa->password = Hash::make('@Poli' . $mahasiswa->nim);
-    });
+        });
     }
 
 

@@ -64,17 +64,16 @@
     aria-label="Sidebar">
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
         <ul class="space-y-2 font-medium">
-
             <li>
                 <a href="{{ route('dashboard') }}"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('dashboard') ? 'bg-green-500 text-white' : '' }}">
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('dashboard') ? 'bg-green-500 text-white' : '' }}">
                     <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-house"></i> Dashboard</span>
                 </a>
             </li>
             @if (Auth::user()->role->nama === 'Admin')
                 <li>
                     <a id="pengguna" data-collapse-toggle="users" aria-controls="pengguna"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('pengguna/') ? 'bg-green-500 text-white' : '' }}">
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('pengguna/*') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-users"></i> Pengguna</span> <i
                             class="fa-solid fa-chevron-down"></i>
                     </a>
@@ -82,28 +81,26 @@
                     <ul id="users" class="hidden py-2 space-y-2" aria-labelledby="pengguna">
                         <li>
                             <a href="{{ route('data-admin-dan-staff') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('pengguna/data-admin-dan-staff') ? 'bg-gray-300' : '' }}"><i
+                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-admin-dan-staff') ? 'bg-gray-300' : '' }}"><i
                                     class="fa-solid fa-user me-2"></i>Admin dan Staff</a>
                         </li>
                         <li>
                             <a href="{{ route('data-mahasiswa') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('pengguna/data-mahasiswa') ? 'bg-gray-300' : '' }}"><i
+                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-mahasiswa') ? 'bg-gray-300' : '' }}"><i
                                     class="fa-solid fa-user me-2"></i>Mahasiswa</a>
                         </li>
                         <li>
                             <a href="{{ route('data-kelas') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('data-kelas') ? 'bg-gray-300' : '' }}"><i
+                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-kelas') ? 'bg-gray-300' : '' }}"><i
                                     class="fa-solid fa-user me-2"></i>Data Kelas</a>
                         </li>
                     </ul>
                 </li>
-                @endif
-                @if (Auth::user()->role->nama === 'Staff')  
             @endif
-            @if (Auth::user()->role->nama === 'Staff' || Auth::user()->role->nama === 'Admin')
+            @if (Auth::user()->role->nama === 'Staff')
                 <li>
                     <a id="kelolaproduk" data-collapse-toggle="dropdown"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/alat-dan-bahan/*') ? 'bg-green-500 text-white' : '' }}">
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('staff/*') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-folder"></i> Alat dan
                             Bahan</span>
                         <i class="fa-solid fa-chevron-down"></i>
@@ -112,29 +109,27 @@
                     <ul id="dropdown" class="hidden py-2 space-y-2" aria-labelledby="kelolaproduk">
                         <li>
                             <a href="{{ route('data-barang') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/barang') ? 'bg-gray-300' : '' }}"><i
+                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-barang') ? 'bg-gray-300' : '' }}"><i
                                     class="fa-solid fa-folder-open"></i> Data
                                 Barang</a>
                         </li>
                         <li>
                             <a href="{{ route('data-kategori') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/kategori') ? 'bg-gray-300' : '' }}"><i
+                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-kategori') ? 'bg-gray-300' : '' }}"><i
                                     class="fa-solid fa-folder-open"></i> Data
                                 Kategori</a>
                         </li>
                         <li>
                             <a href="{{ route('data-satuan') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Request::is('admin/alat-dan-bahan/satuan') ? 'bg-gray-300' : '' }}"><i
+                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-satuan') ? 'bg-gray-300' : '' }}"><i
                                     class="fa-solid fa-folder-open"></i> Data
                                 Satuan</a>
                         </li>
                     </ul>
                 </li>
-                @endif
-                @if (Auth::user()->role->nama === 'Admin')
                 <li>
                     <a href="{{ route('verifikasi') }}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('admin/verifikasi-peminjaman') ? 'bg-green-500 text-white' : '' }}">
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('verifikasi') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-square-check"></i>
                             Verifikasi Peminjaman</span>
                     </a>

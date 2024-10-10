@@ -30,7 +30,6 @@ class BarangSeeder extends Seeder
             $satuan_id = $satuan[array_rand($satuan)];
 
             $barang = Barang::create([
-                'users_id' => 1,
                 'name' => 'Barang Contoh ' . $i,
                 'gambar' => 'https://placehold.co/600x400.jpg',
                 'deskripsi' => 'Ini adalah deskripsi barang contoh ' . $i . '.',

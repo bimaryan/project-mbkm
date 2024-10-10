@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\WEB\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PasswordResetSuccess;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -40,11 +41,12 @@ class ForgotPasswordController extends Controller
             $message->subject('Reset Password');
         });
 
-        return redirect()->route('login')->with('message', 'We have e-mailed your password reset link!');
+        return redirect()->route('login')->with('success', 'Kami telah mengirimkan link untuk mereset kata sandi Anda melalui email!');
     }
 
     public function resetPassword($token)
     {
+        session(['password_reset_token' => $token]);
         return view('auth.reset-password', ['token' => $token]);
     }
 
@@ -53,31 +55,36 @@ class ForgotPasswordController extends Controller
 
         $request->validate(
             [
-                'email' => 'required',
-                'password' => 'required',
-                'token' => 'required',
+                'email' => 'required|string',
+                'token' => 'required|string',
             ],
             [
                 'email.required' => 'Email harus diisi',
-                'password.required' => 'Password harus diisi',
+                'email.email' => 'Email harus valid',
             ]
         );
+
+        $token = session('password_reset_token');
 
         $updatePassword = DB::table('password_reset_tokens')
             ->where([
                 'email' => $request->email,
-                'token' => $request->token,
+                'token' => $token,
+            ])->first();
 
-            ])
-            ->first();
-
-        if (!Hash::check($request->token, $updatePassword->token)) {
-            return back()->withInput()->with('error', 'Invalid token!');
+        if (!$updatePassword) {
+            return back()->withInput()->with('error', 'Invalid token or email!');
         }
 
-        \DB::table('password_reset_tokens')->where(['email' => $request->email])->delete();
-        Mahasiswa::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
+        $mahasiswa = Mahasiswa::where('email', $request->email)->first();
 
-        return redirect()->route('login')->with('message', 'Your password has been changed!');
+        $defaultPassword = '@Poli' . $mahasiswa->nim;
+        $mahasiswa->update(['password' => Hash::make($defaultPassword)]);
+
+        DB::table('password_reset_tokens')->where(['email' => $request->email])->delete();
+
+        Mail::to($mahasiswa->email)->send(new PasswordResetSuccess($mahasiswa, $defaultPassword));
+
+        return redirect()->route('login')->with('success', 'Password berhasil direset. Silakan login dengan NIM sebagai password.');
     }
 }

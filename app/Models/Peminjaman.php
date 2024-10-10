@@ -27,9 +27,9 @@ class Peminjaman extends Model
         'status',
     ];
 
-    public function user()
+    public function mahasiswa()
     {
-        return $this->belongsTo(User::class, 'users_id');
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
     }
 
     public function barang()
@@ -50,10 +50,5 @@ class Peminjaman extends Model
     public function room()
     {
         return $this->belongsTo(Room::class, 'rooms_id');
-    }
-
-    public function dosen()
-    {
-        return $this->belongsTo(Dosen::class, 'dosen_id');
     }
 }

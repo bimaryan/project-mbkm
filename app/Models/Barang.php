@@ -11,16 +11,11 @@ class Barang extends Model
 
     protected $table = 'barangs';
 
-    protected $fillable = ['name', 'deskripsi', 'stock', 'users_id', 'kategori_id', 'satuan_id', 'room_id', 'kondisi_id', 'gambar'];
+    protected $fillable = ['name', 'deskripsi', 'stock', 'kategori_id', 'satuan_id', 'room_id', 'kondisi_id', 'gambar'];
 
     public function kondisi()
     {
         return $this->belongsTo(Kondisi::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'users_id');
     }
 
     public function kategori()

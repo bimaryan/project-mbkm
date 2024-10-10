@@ -49,6 +49,17 @@
         </script>
     @endif
 
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: "Success",
+                text: "{{ session('success') }}",
+                icon: "success",
+                confirmButtonColor: "#3085d6",
+            });
+        </script>
+    @endif
+
     <div class="flex flex-col items-center justify-center h-screen p-4 space-y-4 background">
         <div class="flex justify-center">
             <img src="{{ asset('image/kampus-merdeka.png') }}" alt="" class="object-cover w-full">
@@ -79,6 +90,27 @@
                         placeholder="********">
                     @error('password')
                         <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    {{-- CAPTCHA --}}
+                    <label for="captcha" class="block mb-2 text-sm font-medium text-gray-600">Kode Verifikasi</label>
+                    <div class="flex gap-2 items-center">
+                        <div>
+                            <div
+                                class="px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                {{ $captcha }}
+                            </div>
+                        </div>
+                        <div>
+                            <input type="text" id="captcha" name="captcha"
+                                class="w-full px-5 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                placeholder="Masukkan kode verifikasi">
+                        </div>
+                    </div>
+                    @error('captcha')
+                        <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
                     @enderror
                 </div>
 

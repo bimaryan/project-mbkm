@@ -9,10 +9,6 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        return view('mahasiswa.index');
-    }
     public function home(Request $request)
     {
         $kategori = $request->input('kategori');

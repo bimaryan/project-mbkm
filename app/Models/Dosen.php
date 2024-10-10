@@ -11,12 +11,7 @@ class Dosen extends Model
 
     protected $table = 'dosens';
 
-    protected $fillable = ['name', 'nip', 'keterangan', 'users_id'];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'users_id');
-    }
+    protected $fillable = ['name', 'nip', 'keterangan'];
 
     public function peminjaman()
     {

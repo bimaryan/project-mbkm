@@ -16,10 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('nip');
             $table->string('keterangan');
-            $table->unsignedBigInteger('users_id');
             $table->timestamps();
-
-            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

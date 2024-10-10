@@ -75,12 +75,11 @@ class ProdukController extends Controller
             'room_id' => 'required|exists:rooms,id',
         ]);
 
-        dd($request->all());
+        // dd($request->all());
 
         $filePath = $request->file('gambar')->move('uploads/barang', time() . '_' . $request->file('gambar')->getClientOriginalName());
 
         $barang = Barang::create([
-            'users_id' => Auth::id(),
             'name' => $request->name,
             'gambar' => $filePath,
             'deskripsi' => $request->deskripsi,

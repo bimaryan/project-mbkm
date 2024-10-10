@@ -1,6 +1,6 @@
 <nav class="fixed top-0 left-0 z-10 w-full bg-white border-gray-200 shadow-lg dark:bg-gray-900">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
-        <a href="{{ route('home') }}" class="flex flex-col items-center space-x-3 rtl:space-x-reverse">
+        <a href="{{ route('mahasiswa') }}" class="flex flex-col items-center space-x-3 rtl:space-x-reverse">
             <span class="self-center text-2xl font-semibold text-green-500 md:text-1xl whitespace-nowrap">SILK</span>
             <span class="self-center hidden text-xs font-semibold text-green-500 md:block whitespace-nowrap">Sistem
                 Informasi Kesehatan</span>
@@ -10,7 +10,7 @@
                 @auth
                     <button type="button" data-dropdown-toggle="dropdown-menu"
                         class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                        {{ auth()->user()->nama_lengkap }}
+                        {{ Auth::user()->nama }}
                     </button>
                     <!-- Dropdown -->
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
@@ -54,18 +54,18 @@
             <ul
                 class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
-                    <a href="{{ route('home') }}"
+                    <a href="{{ route('mahasiswa') }}"
                         class="block py-2 px-3 rounded md:bg-transparent md:p-0
            {{ Route::is('mahasiswa') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}"
                         aria-current="page">Home</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="{{ route('mahasiswa.katalog') }}"
                         class="block py-2 px-3 rounded md:border-0 md:p-0
            {{ Route::is('mahasiswa.katalog') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Katalog</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a
                         class="block py-2 px-3 rounded md:border-0 md:p-0
            {{ Route::is('mahasiswa.viewbarang') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Peminjaman</a>
                 </li>

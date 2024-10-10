@@ -57,10 +57,10 @@
         <div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-lg">
             <h2 class="mb-6 text-3xl font-bold text-center text-green-500">Reset Kata Sandi</h2>
 
-            <form action="{{ route('reset-password-process') }}" method="POST" class="space-y-4">
+            <form action="{{ route('reset-password-process', $token) }}" method="POST" class="space-y-4">
                 @csrf
 
-                <input type="text" name="token" value="{{ $token }}">
+                <input type="text" name="token" hidden value="{{ $token }}">
 
                 <!-- Email -->
                 <div>
@@ -72,18 +72,6 @@
                         <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
                     @enderror
                 </div>
-
-                <!-- Password -->
-                <div>
-                    <label for="password" class="block mb-2 text-sm font-medium text-gray-600">Password</label>
-                    <input type="password" id="password" name="password"
-                        class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                        placeholder="Masukan Password">
-                    @error('password')
-                        <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
-                    @enderror
-                </div>
-
 
                 <!-- Login Button -->
                 <button type="submit"

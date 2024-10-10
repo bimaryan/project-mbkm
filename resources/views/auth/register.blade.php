@@ -38,6 +38,17 @@
 
 <body class="flex flex-col items-center justify-center h-screen space-y-4 background p-4">
 
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: "Success",
+                text: "{{ session('success') }}",
+                icon: "success",
+                confirmButtonColor: "#3085d6",
+            });
+        </script>
+    @endif
+
     <div class="flex justify-center">
         <img src="{{ asset('image/kampus-merdeka.png') }}" alt="" class="w-full object-cover">
     </div>
