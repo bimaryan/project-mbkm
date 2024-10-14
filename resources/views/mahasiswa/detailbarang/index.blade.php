@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://kit.fontawesome.com/f74deb4653.js" crossorigin="anonymous"></script>
     <title>SILK &mdash; Barang {{ $view->name }}</title>
 
     <style>

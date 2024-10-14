@@ -21,10 +21,10 @@
                 <div class="relative overflow-hidden border border-4 border-green-500 rounded-full">
                     @if (isset(auth()->user()->foto) && auth()->user()->foto != '')
                         <img id="profileImage" src="{{ asset(auth()->user()->foto) }}" alt="Foto Profil"
-                            class="w-64 h-64 object-cover rounded-full">
+                            class="object-cover rounded-full" style="width: 130px; height: 130px;">
                     @else
                         <!-- Tampilan default jika tidak ada gambar -->
-                        <div class="w-64 h-64 bg-gray-200 flex items-center justify-center rounded-full">
+                        <div class="bg-gray-200 flex items-center justify-center rounded-full" style="width: 130px; height: 130px;">
                             <i class="fas fa-upload text-gray-500 text-2xl"></i>
                         </div>
                     @endif
