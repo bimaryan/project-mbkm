@@ -14,6 +14,7 @@ use App\Models\Peminjaman;
 use App\Models\Room;
 use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class HomeController extends Controller
 {
@@ -102,7 +103,6 @@ class HomeController extends Controller
 
     public function peminjaman(Request $request, Barang $barang, Stock $stock)
     {
-        // untuk mahasiswa yang sudah login dan ambil id nya
         $mahasiswaId = Auth::user()->id;
 
         $currentStock = $stock->stock;
@@ -170,7 +170,7 @@ class HomeController extends Controller
         return view('mahasiswa.informasi.index');
     }
 
-    public function viewProfile(Request $request, Mahasiswa $mahasiswa)
+    public function viewProfile(Mahasiswa $mahasiswa)
     {
         return view('mahasiswa.profile.profile', ['mahasiswa' => $mahasiswa]);
     }
@@ -182,6 +182,7 @@ class HomeController extends Controller
             'email' => 'required|email',
             'telepon' => 'required|string',
             'jenis_kelamin' => 'required|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ], [
             'required.nama' => ':Nama harus diisi',
             'required.email' => ':attribute harus diisi',
@@ -189,13 +190,23 @@ class HomeController extends Controller
             'required.jenis_kelamin' => ':attribute harus diisi',
         ]);
 
+        if ($request->hasFile('foto')) {
+            if ($mahasiswa->foto && File::exists(public_path($mahasiswa->foto))) {
+                File::delete(public_path($mahasiswa->foto));
+            }
+
+            $foto = $request->file('foto')->move('foto_mahasiswa', time() . '_' . $request->file('foto')->getClientOriginalName());
+        } else {
+            $foto = $mahasiswa->foto;
+        }
+
         $mahasiswa->update([
             'nama' => $request->nama,
             'email' => $request->email,
             'telepon' => $request->telepon,
             'jenis_kelamin' => $request->jenis_kelamin,
+            'foto' => $foto
         ]);
-        // dd($mahasiswa->all());
 
         return redirect()->route('profile')->with('success', 'Profile berhasil diperbarui.');
     }
