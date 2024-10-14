@@ -13,7 +13,7 @@
                         {{ Auth::user()->nama }}
                     </button>
                     <!-- Dropdown -->
-                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
+                    <div class="z-50 hidden my-4 text-base w-44 list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
                         id="dropdown-menu">
                         <ul class="py-2 font-medium" role="none">
                             <li>

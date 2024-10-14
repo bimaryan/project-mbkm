@@ -15,8 +15,12 @@ class UserAccess
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
-        if(auth()->user()->role->nama == $role) {
+
+        if (auth()->user()->role->nama == $role) {
             return $next($request);
         }
+        
+        return abort(403);
+
     }
 }

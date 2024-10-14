@@ -8,6 +8,12 @@ use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Jurusan;
+use App\Models\Kelas;
+use App\Models\Peminjaman;
+use App\Models\Room;
+use App\Models\Stock;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -76,12 +82,87 @@ class HomeController extends Controller
     public function viewbarang($name)
     {
         $view = Barang::where('name', $name)->first();
+        $kelas = Kelas::all();
+        $jurusan = Jurusan::all();
+        $rooms = Room::all();
+        $stock = Stock::where('barang_id', $view->id)->first();
 
         if (!$view) {
             return redirect('/')->with('error', 'Data barang tidak ditemukan.');
         }
 
-        return view('mahasiswa.detailbarang.index', ['view' => $view]);
+        return view('mahasiswa.detailbarang.index', [
+            'view' => $view,
+            'kelas' => $kelas,
+            'jurusan' => $jurusan,
+            'rooms' => $rooms,
+            'stock' => $stock,
+        ]);
+    }
+
+    public function peminjaman(Request $request, Barang $barang, Stock $stock)
+    {
+        // untuk mahasiswa yang sudah login dan ambil id nya
+        $mahasiswaId = Auth::user()->id;
+
+        $currentStock = $stock->stock;
+        $jumlahPinjam = $request->input('jumlah_pinjam');
+
+        if ($currentStock < $jumlahPinjam) {
+            return redirect()->back()->with('error', 'Stok barang tidak mencukupi untuk peminjaman.');
+        }
+
+        Peminjaman::create([
+            'mahasiswa_id' => $mahasiswaId,
+            'barang_id' => $barang->id,
+            'stock_id' => $stock->id,
+            'kelas_id' => $request->input('kelas_id'),
+            'jurusan_id' => $request->input('jurusan_id'),
+            'QR' => rand(10000, 99999),
+            'matkul' => $request->input('matkul'),
+            'tgl_pinjam' => $request->input('tgl_pinjam'),
+            'tgl_kembali' => $request->input('tgl_kembali'),
+            'keterangan' => $request->input('keterangan'),
+            'spo_id' => $request->input('spo_id'),
+            'rooms_id' => $request->input('rooms_id'),
+            'diserahkan' => 'Belum',
+            'aprovals' => 'Belum',
+            'status' => 'Menunggu Persetujuan'
+        ]);
+
+        $stock->update([
+            'stock' => $currentStock - $jumlahPinjam,
+            'stock_pinjam' => $jumlahPinjam
+        ]);
+
+        return redirect()->route('mahasiswa.peminjaman-success', ['name' => $barang->name])->with('success', 'Peminjaman berhasil dibuat dan menunggu persetujuan.');
+    }
+    public function peminjaman_success($name)
+    {
+        $mahasiswaId = Auth::user()->id;
+
+        $barang = Barang::where('name', $name)->first();
+
+        // Jika barang tidak ditemukan, arahkan kembali
+        if (!$barang) {
+            return redirect()->route('mahasiswa.katalog')->with('error', 'Barang tidak ditemukan.');
+        }
+
+        // Ambil data peminjaman terbaru berdasarkan mahasiswa dan barang
+        $peminjaman = Peminjaman::where('mahasiswa_id', $mahasiswaId)
+            ->where('barang_id', $barang->id)
+            ->latest()
+            ->first();
+
+        if (!$peminjaman) {
+            return redirect()->route('mahasiswa.katalog')->with('error', 'Tidak ada data peminjaman.');
+        }
+
+        return view('mahasiswa.peminjaman_success.index', [
+            'peminjaman' => $peminjaman,
+            'qrCode' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(150)->generate($peminjaman->QR),
+            'barang' => $barang
+        ]);
     }
 
     public function informasi()

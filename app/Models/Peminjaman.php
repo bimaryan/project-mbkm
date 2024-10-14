@@ -12,12 +12,14 @@ class Peminjaman extends Model
     protected $table = 'peminjamen';
 
     protected $fillable = [
-        'users_id',
+        'mahasiswa_id',
         'barang_id',
+        'stock_id',
         'kelas_id',
+        'jurusan_id',
         'spo_id',
         'rooms_id',
-        'dosen_id',
+        'QR',
         'matkul',
         'tgl_pinjam',
         'tgl_kembali',
@@ -42,6 +44,11 @@ class Peminjaman extends Model
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class, 'jurusan_id');
+    }
+
     public function spo()
     {
         return $this->belongsTo(SpoDokumen::class, 'spo_id');
@@ -50,5 +57,10 @@ class Peminjaman extends Model
     public function room()
     {
         return $this->belongsTo(Room::class, 'rooms_id');
+    }
+
+    public function stock()
+    {
+        return $this->belongsTo(Stock::class, 'stock_id');
     }
 }

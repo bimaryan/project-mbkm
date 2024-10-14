@@ -36,6 +36,9 @@
                                     Nama Barang
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Stock
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     kelas
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -67,6 +70,46 @@
                                 </th>
                             </tr>
                         </thead>
+                        <tbody>
+                            @foreach ($peminjamans as $item)
+                                <tr>
+                                    <td scope="col" class="px-6 py-3">{{ $loop->iteration }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->mahasiswa->nama }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->barang->name }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->stock->stock_pinjam }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->kelas->kelas }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->jurusan->jurusan }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->spo->file ?? 'null' }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->room->ruangan }}</td>
+                                    <td scope="col" class="px-6 py-3">Dosen</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->matkul }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->tgl_pinjam }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->tgl_kembali }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->keterangan ?? 'null' }}</td>
+                                    <td scope="col" class="px-6 py-3">
+                                        <form action="{{ route('verifikasi.update', $item->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <div>
+                                                <select name="aprovals" id="aprovals" class="border rounded-md p-2">
+                                                    <option value="Belum"
+                                                        {{ $item->aprovals == 'Belum' ? 'selected' : '' }}>Belum</option>
+                                                    <option value="Disetujui"
+                                                        {{ $item->aprovals == 'Disetujui' ? 'selected' : '' }}>Disetujui
+                                                    </option>
+                                                    <option value="Ditolak"
+                                                        {{ $item->aprovals == 'Ditolak' ? 'selected' : '' }}>Ditolak
+                                                    </option>
+                                                </select>
+                                                <button>
+
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
