@@ -82,6 +82,8 @@ class MahasiswaController extends Controller
     {
         $request->validate([
             'kelas' => 'required|string',
+        ], [
+            'kelas.required'=> 'Kelas harus di isi',
         ]);
 
         Kelas::create([

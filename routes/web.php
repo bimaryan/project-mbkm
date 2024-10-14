@@ -90,4 +90,10 @@ Route::middleware(['auth:mahasiswa'])->group(function () {
     Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjaman'])->name('mahasiswa.peminjaman');
     Route::get('peminjaman-success/{name}', [HomeController::class, 'peminjaman_success'])->name('mahasiswa.peminjaman-success');
     Route::get('informasi', [HomeController::class, 'informasi'])->name('mahasiswa.informasi');
+
+    Route::get('profile', [HomeController::class, 'viewProfile'])->name('profile');
+    Route::put('edit-profile/{mahasiswa}', [HomeController::class, 'editProfile'])->name('editProfile');
+    
+    Route::get('ubah-kata-sandi', [HomeController::class, 'ViewUbahKataSandi'])->name('view-ubah-kata-sandi');
+    Route::put('ubah-kata-sandi/{mahasiswa}', [HomeController::class, 'ubahKataSandi'])->name('ubah-kata-sandi');
 });
