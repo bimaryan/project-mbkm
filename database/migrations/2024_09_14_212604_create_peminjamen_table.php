@@ -13,19 +13,21 @@ return new class extends Migration
     {
         Schema::create('peminjamen', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('mahasiswa_id');
-            $table->unsignedBigInteger('barang_id');
+            $table->unsignedBigInteger('mahasiswa_id'); //ambil id mahasiswa yang login
+            $table->unsignedBigInteger('barang_id'); //ambil id barang harus sesuai
+            $table->unsignedBigInteger('stock_id');
             $table->unsignedBigInteger('kelas_id');
             $table->unsignedBigInteger('jurusan_id');
             $table->unsignedBigInteger('spo_id')->nullable();
-            $table->unsignedBigInteger('rooms_id');
+            $table->unsignedBigInteger('rooms_id')->nullable();
+            $table->string('QR');
             $table->string('matkul');
             $table->date('tgl_pinjam');
             $table->date('tgl_kembali');
             $table->string('keterangan')->nullable();
             $table->enum('diserahkan', ['Sudah', 'Belum'])->nullable();
-            $table->enum('aprovals', ['Ya', 'Tidak','Belum']);
-            $table->enum('status', ['Dipinjam', 'Dikembalikan','Menunggu Persetujuan']);
+            $table->enum('aprovals', ['Ya', 'Tidak', 'Belum']);
+            $table->enum('status', ['Dipinjam', 'Dikembalikan', 'Menunggu Persetujuan']);
             $table->timestamps();
 
             $table->foreign('mahasiswa_id')->references('id')->on('mahasiswas')->onDelete('cascade');
@@ -34,6 +36,7 @@ return new class extends Migration
             $table->foreign('jurusan_id')->references('id')->on('jurusans')->onDelete('cascade');
             $table->foreign('spo_id')->references('id')->on('spo_dokumens')->onDelete('cascade');
             $table->foreign('rooms_id')->references('id')->on('rooms')->onDelete('cascade');
+            $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');
         });
     }
 

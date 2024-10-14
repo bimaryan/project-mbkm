@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('barang_id');
             $table->string('stock');
-            $table->boolean('is_stock_reduced')->default(false);
-            $table->boolean('is_stock_lost')->default(false);
+            $table->string('stock_pinjam')->nullable();
+            $table->string('stock_hilang')->nullable();
             $table->timestamps();
 
             $table->foreign('barang_id')->references('id')->on('barangs')->onDelete('cascade');

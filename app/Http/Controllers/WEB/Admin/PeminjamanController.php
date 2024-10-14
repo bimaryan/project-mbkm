@@ -10,13 +10,15 @@ class PeminjamanController extends Controller
 {
     public function index()
     {
-        return view('admin.peminjaman.index');
+        $peminjamans = Peminjaman::all();
+        return view('admin.peminjaman.index', compact('peminjamans'));
     }
 
-    public function peminjaman(Request $request, Peminjaman $peminjaman)
+    public function update(Request $request, Peminjaman $peminjaman)
     {
-        $request->validate([
-            ''
-        ]);
+        $peminjaman->aprovals = $request->input('aprovals');
+        $peminjaman->save();
+
+        return redirect()->back()->with('success', 'Status approval peminjaman berhasil diperbarui.');
     }
 }

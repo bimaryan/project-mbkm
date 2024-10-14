@@ -47,6 +47,8 @@ class BarangSeeder extends Seeder
             Stock::create([
                 'barang_id' => $barang->id,
                 'stock' => rand(50, 200),
+                'stock_pinjam' => null,
+                'stock_hilang' => null
             ]);
         }
     }

@@ -11,7 +11,7 @@ class Stock extends Model
 
     protected $table = 'stocks';
 
-    protected $fillable = ['barang_id', 'stock'];
+    protected $fillable = ['barang_id', 'stock', 'stock_pinjam', 'stock_hilang'];
 
     public function barang()
     {

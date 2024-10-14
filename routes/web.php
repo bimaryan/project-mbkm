@@ -77,6 +77,7 @@ Route::middleware(['auth:admin'])->group(function () {
 
         // ROUTE VERIFIKASI PEMINJAMAN
         Route::get('verifikasi-peminjaman', [PeminjamanController::class, 'index'])->name('verifikasi');
+        Route::get('verifikasi-peminjaman/{peminjaman}', [PeminjamanController::class, 'update'])->name('verifikasi.update');
     });
 });
 
@@ -86,5 +87,7 @@ Route::middleware(['auth:mahasiswa'])->group(function () {
     Route::get('/', [HomeController::class, 'home'])->name('mahasiswa');
     Route::get('katalog', [HomeController::class, 'katalog'])->name('mahasiswa.katalog');
     Route::get('katalog/peminjaman-barang/{name}', [HomeController::class, 'viewbarang'])->name('mahasiswa.viewbarang');
+    Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjaman'])->name('mahasiswa.peminjaman');
+    Route::get('peminjaman-success/{name}', [HomeController::class, 'peminjaman_success'])->name('mahasiswa.peminjaman-success');
     Route::get('informasi', [HomeController::class, 'informasi'])->name('mahasiswa.informasi');
 });
