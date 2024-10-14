@@ -69,7 +69,7 @@
                     </td>
                 </tr>
 
-                {{-- MODAL DETAIL ADMIN DAN STAFF --}}
+                {{-- MODAL DETAIL MAHASISWA --}}
                 <div id="detail{{ $data->id }}" tabindex="-1" aria-hidden="true"
                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div class="relative w-full max-w-2xl max-h-full p-4">
@@ -112,6 +112,12 @@
                                         </div>
                                         <div>
                                             Email : {{ $data->email }}
+                                        </div>
+                                        <div>
+                                            Nomor Telepon : {{ $data->telepon }}
+                                        </div>
+                                        <div>
+                                            Jenis Kelamin : {{ $data->jenis_kelamin }}
                                         </div>
                                     </div>
                                 </div>

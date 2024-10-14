@@ -24,7 +24,7 @@
                         </button>
 
                         {{-- MODAL TAMBAH KELAS --}}
-                        <div id="barang" tabindex="-1" aria-hidden="true"
+                        <div id="barang" tabindex="-1" aria-hidden="true" data-modal-backdrop="static"
                             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                             <div class="relative w-full max-w-2xl max-h-full p-4">
                                 <!-- Modal content -->
@@ -54,7 +54,7 @@
                                             <div class="mb-2">
                                                 <label for="kelas"
                                                     class="block text-sm font-medium text-gray-700">Kelas</label>
-                                                <input type="text" name="kelas" id="kelas"
+                                                <input type="text" name="kelas" id="kelas" placeholder="Kelas"
                                                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                                 @error('kelas')
                                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

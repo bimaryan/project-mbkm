@@ -23,11 +23,11 @@
 <body>
     @include('mahasiswa.navbar.index')
 
-    <div class="max-w-screen-xl mx-auto p-6 mt-14">
+    <div class="max-w-screen-xl p-6 mx-auto mt-14">
         <div class="mt-4">
             <p class="text-2xl font-semibold text-center text-green-500">Informasi Laboratorium</p>
-            <div class="bg-white rounded-lg shadow-lg p-4 border mt-4">
-
+            <div class="p-4 mt-4 bg-white border rounded-lg shadow-lg">
+                
             </div>
         </div>
     </div>

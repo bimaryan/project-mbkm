@@ -11,7 +11,7 @@ class Mahasiswa extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'nim', 'kelas_id', 'email', 'password', 'foto'];
+    protected $fillable = ['nama', 'nim', 'kelas_id', 'email', 'password', 'foto', 'telepon', 'jenis_kelamin']; 
     protected static function booted()
     {
         static::creating(function ($mahasiswa) {

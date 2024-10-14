@@ -87,4 +87,10 @@ Route::middleware(['auth:mahasiswa'])->group(function () {
     Route::get('katalog', [HomeController::class, 'katalog'])->name('mahasiswa.katalog');
     Route::get('katalog/peminjaman-barang/{name}', [HomeController::class, 'viewbarang'])->name('mahasiswa.viewbarang');
     Route::get('informasi', [HomeController::class, 'informasi'])->name('mahasiswa.informasi');
+
+    Route::get('profile', [HomeController::class, 'viewProfile'])->name('profile');
+    Route::put('edit-profile/{mahasiswa}', [HomeController::class, 'editProfile'])->name('editProfile');
+    
+    Route::get('ubah-kata-sandi', [HomeController::class, 'ViewUbahKataSandi'])->name('view-ubah-kata-sandi');
+    Route::put('ubah-kata-sandi/{mahasiswa}', [HomeController::class, 'ubahKataSandi'])->name('ubah-kata-sandi');
 });
