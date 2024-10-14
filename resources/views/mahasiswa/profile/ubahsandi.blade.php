@@ -29,7 +29,6 @@
                 <input type="password" id="password" name="konfirmasi_password"
                     value=""
                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                    
             </div>
 
             <div class="flex justify-end space-x-4">
