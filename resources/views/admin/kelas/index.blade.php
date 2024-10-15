@@ -50,11 +50,11 @@
 
                                     <form action="{{ route('data-kelas.proses') }}" class="p-4 md:p-5" method="POST">
                                         @csrf
-                                        <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
+                                        <div class="gap-2">
                                             <div class="mb-2">
                                                 <label for="kelas"
                                                     class="block text-sm font-medium text-gray-700">Kelas</label>
-                                                <input type="text" name="kelas" id="kelas" placeholder="Kelas"
+                                                <input type="text" name="nama_kelas" id="kelas" placeholder="Kelas"
                                                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                                 @error('kelas')
                                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -74,7 +74,7 @@
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
                 <div id='tableKelas'>
-                    @include('admin.pengguna.kelas.table', ['kelas' => $kelas])
+                    @include('admin.kelas.table', ['kelas' => $kelas])
                 </div>
 
                 <div id="pageignitionLinks">

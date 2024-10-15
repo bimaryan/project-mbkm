@@ -11,7 +11,7 @@ class Dosen extends Model
 
     protected $table = 'dosens';
 
-    protected $fillable = ['name', 'nip', 'keterangan'];
+    protected $fillable = ['nama_dosen', 'nip'];
 
     public function peminjaman()
     {

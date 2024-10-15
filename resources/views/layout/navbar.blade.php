@@ -28,7 +28,7 @@
                             <div class="flex-col text-right md:flex">
                                 <p class="text-sm">{{ Auth::user()->nama }}</p>
                                 <p class="text-xs">
-                                    {{ Auth::user()->role->nama ? Auth::user()->role->nama : 'No Role Assigned' }}
+                                    {{ Auth::user()->role->nama_role ? Auth::user()->role->nama_role : 'No Role Assigned' }}
                                 </p>
                             </div>
 
@@ -67,37 +67,51 @@
             <li>
                 <a href="{{ route('dashboard') }}"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('dashboard') ? 'bg-green-500 text-white' : '' }}">
-                    <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-house"></i> Dashboard</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-house me-2"></i>Dashboard</span>
                 </a>
             </li>
-            @if (Auth::user()->role->nama === 'Admin')
-                <li>
-                    <a id="pengguna" data-collapse-toggle="users" aria-controls="pengguna"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('pengguna/*') ? 'bg-green-500 text-white' : '' }}">
-                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-users"></i> Pengguna</span> <i
-                            class="fa-solid fa-chevron-down"></i>
-                    </a>
-
-                    <ul id="users" class="hidden py-2 space-y-2" aria-labelledby="pengguna">
-                        <li>
-                            <a href="{{ route('data-admin-dan-staff') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-admin-dan-staff') ? 'bg-gray-300' : '' }}"><i
-                                    class="fa-solid fa-user me-2"></i>Admin dan Staff</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('data-mahasiswa') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-mahasiswa') ? 'bg-gray-300' : '' }}"><i
-                                    class="fa-solid fa-user me-2"></i>Mahasiswa</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('data-kelas') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-kelas') ? 'bg-gray-300' : '' }}"><i
-                                    class="fa-solid fa-user me-2"></i>Data Kelas</a>
-                        </li>
-                    </ul>
-                </li>
+            @if (Auth::user()->role->nama_role === 'Admin')
+            <li>
+                <a id="pengguna" data-collapse-toggle="users" aria-controls="pengguna"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('pengguna/*') ? 'bg-green-500 text-white' : '' }}">
+                    <span class="flex-1 ms-3 whitespace-nowrap">
+                    <i class="fa-solid fa-users me-2"></i>Pengguna</span><i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <ul id="users" class="hidden py-2 space-y-2" aria-labelledby="pengguna">
+                    <li>
+                        <a href="{{ route('data-admin-dan-staff') }}"
+                            class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-admin-dan-staff') ? 'bg-gray-300' : '' }}">
+                            <i class="fa-solid fa-user me-2"></i>Admin dan Staff
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('data-mahasiswa') }}"
+                            class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-mahasiswa') ? 'bg-gray-300' : '' }}">
+                            <i class="fa-solid fa-user me-2"></i>Mahasiswa
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('data-dosen') }}"
+                            class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-dosen') ? 'bg-gray-300' : '' }}">
+                            <i class="fa-solid fa-user me-2"></i>Dosen
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="{{ route('data-kelas') }}"
+                    class="mt-2 flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('data-kelas') ? 'bg-green-500 text-white' : '' }}">
+                    <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-landmark me-2"></i>Kelas</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('data-mata-kuliah') }}"
+                    class="mt-2 flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('data-mata-kuliah') ? 'bg-green-500 text-white' : '' }}">
+                    <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-regular fa-file-lines me-2"></i>Mata Kuliah</span>
+                </a>
+            </li>
             @endif
-            @if (Auth::user()->role->nama === 'Staff')
+            @if (Auth::user()->role->nama_role === 'Staff')
                 <li>
                     <a id="kelolaproduk" data-collapse-toggle="dropdown"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('staff/*') ? 'bg-green-500 text-white' : '' }}">

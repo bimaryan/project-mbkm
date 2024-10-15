@@ -3,12 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Admin\AdminController;
+use App\Http\Controllers\WEB\Admin\DosenController;
 use App\Http\Controllers\WEB\Admin\ProdukController;
 use App\Http\Controllers\WEB\Admin\SatuanController;
 use App\Http\Controllers\WEB\Admin\KategoriController;
 use App\Http\Controllers\WEB\Admin\PeminjamanController;
 use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
 use App\Http\Controllers\WEB\Admin\MahasiswaController;
+use App\Http\Controllers\WEB\Admin\MataKuliahController;
 use App\Http\Controllers\WEB\Mahasiswa\HomeController;
 
 /*
@@ -36,6 +38,7 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
     Route::middleware(['UserAccess:Admin'])->group(function () {
         Route::prefix('pengguna')->group(function () {
+            // ROUTE DATA ADMIN DAN STAFF
             Route::get('/data-admin-dan-staff', [AdminController::class, 'adminAndStaff'])->name('data-admin-dan-staff');
             Route::post('/data-admin-dan-staff/proses', [AdminController::class, 'storeAdminAndStaff'])->name('data-admin-dan-staff.proses');
             Route::delete('/data-admin-dan-staff/{user}/delete', [AdminController::class, 'deleteAdminDanStaff'])->name('data-admin-dan-staff.delete');
@@ -47,11 +50,22 @@ Route::middleware(['auth:admin'])->group(function () {
             Route::put('/data-mahasiswa/{mahasiswa}/edit', [MahasiswaController::class, 'editMahasiswa'])->name('data-mahasiswa.edit');
             Route::delete('/data-mahasiswa/{mahasiswa}/delete', [MahasiswaController::class, 'deleteMahasiswa'])->name('data-mahasiswa.delete');
 
-            // ROUTE DATA KELAS
-            Route::get('/data-kelas', [MahasiswaController::class, 'kelas'])->name('data-kelas');
-            Route::post('/data-kelas/proses', [MahasiswaController::class, 'storeKelas'])->name('data-kelas.proses');
-            Route::delete('/data-kelas/{kelas}/delete', [MahasiswaController::class, 'deleteKelas'])->name('data-kelas.delete');
+            // ROUTE DATA DOSEN
+            Route::get('/data-dosen', [DosenController::class, 'dosen'])->name('data-dosen');
+            Route::post('/data-dosen/proses', [DosenController::class, 'storeDosen'])->name('data-dosen.proses');
+            Route::put('/data-dosen/{dosen}/edit', [DosenController::class, 'editDosen'])->name('data-dosen.edit');
+            Route::delete('/data-dosen/{dosen}/delete', [DosenController::class, 'deleteDosen'])->name('data-dosen.delete');
         });
+
+        // ROUTE DATA KELAS
+        Route::get('/data-kelas', [MahasiswaController::class, 'kelas'])->name('data-kelas');
+        Route::post('/data-kelas/proses', [MahasiswaController::class, 'storeKelas'])->name('data-kelas.proses');
+        Route::delete('/data-kelas/{kelas}/delete', [MahasiswaController::class, 'deleteKelas'])->name('data-kelas.delete');
+
+        // ROUTE DATA MATAKULIAH
+        Route::get('/data-mata-kuliah', [MataKuliahController::class, 'matakuliah'])->name('data-mata-kuliah');
+        Route::post('/data-mata-kuliah/proses', [MataKuliahController::class, 'storeMatakuliah'])->name('data-mata-kuliah.proses');
+        Route::delete('/data-mata-kuliah/{matakuliah}/delete', [MataKuliahController::class, 'deleteMatakuliah'])->name('data-mata-kuliah.delete');
     });
 
     Route::middleware(['UserAccess:Staff'])->group(function () {
@@ -93,7 +107,7 @@ Route::middleware(['auth:mahasiswa'])->group(function () {
 
     Route::get('profile', [HomeController::class, 'viewProfile'])->name('profile');
     Route::put('edit-profile/{mahasiswa}', [HomeController::class, 'editProfile'])->name('editProfile');
-    
+
     Route::get('ubah-kata-sandi', [HomeController::class, 'ViewUbahKataSandi'])->name('view-ubah-kata-sandi');
     Route::put('ubah-kata-sandi/{mahasiswa}', [HomeController::class, 'ubahKataSandi'])->name('ubah-kata-sandi');
 });
