@@ -54,9 +54,9 @@ class LoginController extends Controller
 
         if (Auth::guard('admin')->attempt(['username' => $credentials['identifier'], 'password' => $request->password])) {
 
-            if (Auth::guard('admin')->user()->role->nama == 'Admin') {
+            if (Auth::guard('admin')->user()->role->nama_role == 'Admin') {
                 return redirect()->route('dashboard');
-            } elseif (Auth::guard('admin')->user()->role->nama == 'Staff') {
+            } elseif (Auth::guard('admin')->user()->role->nama_role == 'Staff') {
                 return redirect()->route('dashboard');
             } else {
                 return redirect()->back()->withErrors(['errors'])->withInput();

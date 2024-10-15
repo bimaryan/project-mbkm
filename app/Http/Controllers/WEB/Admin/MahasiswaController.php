@@ -24,7 +24,6 @@ class MahasiswaController extends Controller
             'nama' => 'required|string',
             'nim' => 'required|string',
             'kelas_id' => 'required|string',
-            'email' => 'required|string',
         ]);
 
 
@@ -35,7 +34,6 @@ class MahasiswaController extends Controller
             $mahasiswa->nama = $request->nama;
             $mahasiswa->nim = $request->nim;
             $mahasiswa->kelas_id = $request->kelas_id;
-            $mahasiswa->email = $request->email;
             $mahasiswa->password = Hash::make($request->password);
             $mahasiswa->save();
         });
@@ -50,14 +48,12 @@ class MahasiswaController extends Controller
         $request->validate([
             'nama' => 'required',
             'nim' => 'required',
-            'email' => 'required',
             'kelas_id' => 'required|exists:kelas,id',
         ]);
 
         $mahasiswa->update([
             'nama' => $request->nama,
             'nim' => $request->nim,
-            'email' => $request->email,
             'kelas_id' => $request->kelas_id,
         ]);
 
@@ -75,19 +71,19 @@ class MahasiswaController extends Controller
     {
 
         $kelas = Kelas::paginate(5);
-        return view('admin.pengguna.kelas.index', ['kelas' => $kelas]);
+        return view('admin.kelas.index', ['kelas' => $kelas]);
     }
 
     public function storeKelas(Request $request)
     {
         $request->validate([
-            'kelas' => 'required|string',
+            'nama_kelas' => 'required|string',
         ], [
-            'kelas.required'=> 'Kelas harus di isi',
+            'nama_kelas.required'=> 'Kelas harus di isi',
         ]);
 
         Kelas::create([
-            'kelas' => $request->kelas,
+            'nama_kelas' => $request->nama_kelas,
         ]);
 
         return redirect()->route('data-kelas')->with('success', 'Kelas berhasil ditambahkan!');

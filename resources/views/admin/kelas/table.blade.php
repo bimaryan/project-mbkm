@@ -12,7 +12,7 @@
                 <tr
                     class="bg-white border-b dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
                     <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                    <td class="px-6 py-4">{{ $data->kelas }}</td>
+                    <td class="px-6 py-4">{{ $data->nama_kelas }}</td>
                     <td scope="col" class="flex items-center justify-center gap-2 px-6 py-4">
                         <form id="delete-form-{{ $data->id }}"
                             action="{{ route('data-kelas.delete', $data->id) }}" method="POST"

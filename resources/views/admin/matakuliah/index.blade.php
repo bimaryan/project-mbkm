@@ -15,7 +15,7 @@
             <div class="p-4 bg-white rounded-lg shadow-lg">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h3 class="text-2xl font-semibold text-green-500">Data Admin dan Staff</h3>
+                        <h3 class="text-2xl font-semibold text-green-500">Data Mata Kuliah</h3>
                     </div>
                     <div>
                         <button data-modal-target="barang" data-modal-toggle="barang"
@@ -23,7 +23,7 @@
                                 class="fa-solid fa-plus"></i>
                         </button>
 
-                        {{-- MODAL TAMBAH ADMIN DAN STAFF --}}
+                        {{-- MODAL TAMBAH MATA KULIAH --}}
                         <div id="barang" tabindex="-1" aria-hidden="true"
                             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                             <div class="relative w-full max-w-2xl max-h-full p-4">
@@ -33,7 +33,7 @@
                                     <div
                                         class="flex items-center justify-between p-4 border-b rounded-t md:p-5 dark:border-gray-600">
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                            Tambah Data Admin dan Staff
+                                            Tambah Mata Kuliah
                                         </h3>
                                         <button type="button"
                                             class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto dark:hover:bg-gray-600 dark:hover:text-white"
@@ -48,79 +48,32 @@
                                     </div>
                                     <!-- Modal body -->
 
-                                    <form action="{{ route('data-admin-dan-staff.proses') }}" class="p-4 md:p-5"
-                                        method="POST">
+                                    <form action="{{ route('data-mata-kuliah.proses') }}" class="p-4 md:p-5" method="POST">
                                         @csrf
                                         <div class="gap-2">
                                             <div class="mb-2">
-                                                <label for="nama"
-                                                    class="block text-sm font-medium text-gray-700">Nama</label>
-                                                <input type="text" name="nama" id="nama" placeholder="Masukan Nama Lengkap"
+                                                <label for="kode_mata_kuliah"
+                                                    class="block text-sm font-medium text-gray-700">kode Mata Kuliah</label>
+                                                <input type="text" name="kode_mata_kuliah" id="kode_mata_kuliah" placeholder="Masukan Kode Mata Kuliah"
                                                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                                                @error('nama')
+                                                @error('kode_mata_kuliah')
                                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                                 @enderror
                                             </div>
                                             <div class="mb-2">
-                                                <label for="nip"
-                                                    class="block text-sm font-medium text-gray-700">NIP</label>
-                                                <input type="number" name="nip" id="nip" placeholder="Masukan NIP"
+                                                <label for="mata_kuliah"
+                                                    class="block text-sm font-medium text-gray-700">Nama Mata Kuliah</label>
+                                                <input type="text" name="mata_kuliah" id="mata_kuliah" placeholder="Masukan Nama Mata Kuliah"
                                                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                                                @error('nip')
+                                                @error('mata_kuliah')
                                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                                 @enderror
                                             </div>
-                                            <div class="mb-2">
-                                                <label for="username"
-                                                    class="block text-sm font-medium text-gray-700">Username</label>
-                                                <input type="text" name="username" id="username" placeholder="Masukan Username"
-                                                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                                                @error('username')
-                                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                                @enderror
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="password"
-                                                    class="block text-sm font-medium text-gray-700">Password</label>
-                                                <input type="password" name="password" id="password" placeholder="Masukan Password"
-                                                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                                                @error('password')
-                                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                                @enderror
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="role_id" class="block text-sm font-medium text-gray-700">Pilih
-                                                    Role</label>
-                                                <select name="role_id" id="role_id"
-                                                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                                                    <option value="">- Pilih Role -</option>
-                                                    @foreach ($role as $role)
-                                                        <option value="{{ $role->id }}">{{ $role->nama_role }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('role_id')
-                                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                                @enderror
-                                            </div>
-
-
-                                            <!-- Gambar -->
-                                            {{-- <div class="mb-2">
-                                                <label for="foto"
-                                                    class="block text-sm font-medium text-gray-700">Foto</label>
-                                                <input type="file" name="foto" id="foto"
-                                                    class="block w-full px-3 mt-1 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                                @error('foto')
-                                                    <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                                                @enderror
-                                            </div> --}}
-
                                         </div>
                                         <button type="submit"
                                             class="text-white bg-green-500 mt-4 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Simpan</button>
                                     </form>
                                 </div>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -131,12 +84,12 @@
                 <form action="">
 
                 </form>
-                <div id="tableAdminDanStaff">
-                    @include('admin.pengguna.adminandstaff.table', ['users' => $user])
+                <div id="tableMatakuliah">
+                    @include('admin.matakuliah.table', ['matakuliah' => $matakuliah])
                 </div>
 
                 <div id="pageignitionLinks">
-                    {{ $user->links() }}
+                    {{ $matakuliah->links() }}
                 </div>
             </div>
         </div>
@@ -179,7 +132,7 @@
 
             function loadTable(page = 1) {
                 $.ajax({
-                    url: "{{ route('data-admin-dan-staff') }}",
+                    url: "{{ route('data-mata-kuliah') }}",
                     method: "GET",
                     data: {
                         // name: $('#filterName').val(),
@@ -191,7 +144,7 @@
                     },
                     success: function(response) {
                         // Replace table and pagination links
-                        $('#tableAdminDanStaff').html($(response).find('#tableAdminDanStaff').html());
+                        $('#tableMatakuliah').html($(response).find('#tableMatakuliah').html());
                         $('#paginationLinks').html($(response).find('#paginationLinks').html());
                     }
                 });

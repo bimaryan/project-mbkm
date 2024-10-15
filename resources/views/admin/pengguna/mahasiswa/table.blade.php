@@ -15,9 +15,6 @@
                     Kelas
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Email
-                </th>
-                <th scope="col" class="px-6 py-3">
                     Aksi
                 </th>
             </tr>
@@ -35,10 +32,7 @@
                         {{ $data->nim }}
                     </td>
                     <td scope="col" class="px-6 py-3">
-                        {{ $data->kelas->kelas }}
-                    </td>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $data->email }}
+                        {{ $data->kelas->nama_kelas }}
                     </td>
                     <td scope="col" class="flex items-center justify-center gap-2 px-6 py-3">
                         <div>
@@ -71,8 +65,8 @@
 
                 {{-- MODAL DETAIL MAHASISWA --}}
                 <div id="detail{{ $data->id }}" tabindex="-1" aria-hidden="true"
-                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                    <div class="relative w-full max-w-2xl max-h-full p-4">
+                    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-4xl max-h-full">
                         <!-- Modal content -->
                         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                             <!-- Modal header -->
@@ -101,22 +95,19 @@
                                             class="object-cover border rounded-lg">
                                     </div>
                                     <div>
-                                        <div class="mt-4">
+                                        <div>
                                             Nama Lengkap : {{ $data->nama }}
                                         </div>
-                                        <div>
-                                            NIP : {{ $data->nim }}
+                                        <div class="mt-4">
+                                            NIM : {{ $data->nim }}
                                         </div>
-                                        <div>
-                                            Kelas : {{ $data->kelas->kelas }}
+                                        <div class="mt-4">
+                                            Kelas : {{ $data->kelas->nama_kelas }}
                                         </div>
-                                        <div>
-                                            Email : {{ $data->email }}
-                                        </div>
-                                        <div>
+                                        <div class="mt-4">
                                             Nomor Telepon : {{ $data->telepon }}
                                         </div>
-                                        <div>
+                                        <div class="mt-4">
                                             Jenis Kelamin : {{ $data->jenis_kelamin }}
                                         </div>
                                     </div>
@@ -154,7 +145,7 @@
                                 <form action="{{ route('data-mahasiswa.edit', $data->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <div class="grid grid-cols-2 gap-2">
+                                    <div class="gap-2">
                                         <div class="mb-2">
                                             <label for="nama"
                                                 class="block text-sm font-medium text-gray-700">Nama</label>
@@ -174,20 +165,11 @@
                                             @enderror
                                         </div>
                                         <div class="mb-2">
-                                            <label for="email"
-                                                class="block text-sm font-medium text-gray-700">Email</label>
-                                            <input type="email" name="email" id="email" value="{{ $data->email }}"
-                                                class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                                            @error('email')
-                                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-2">
                                             <label for="kelas_id" class="block text-sm font-medium text-gray-700">Pilih
                                                 Kelas</label>
                                             <select name="kelas_id" id="kelas_id"
                                                 class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                                                    <option value="{{ $data->kelas_id }}">{{ $data->kelas->kelas }}</option>
+                                                    <option value="{{ $data->kelas_id }}">{{ $data->kelas->nama_kelas }}</option>
                                             </select>
                                             @error('kelas_id')
                                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

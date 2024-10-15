@@ -50,11 +50,11 @@
 
                                     <form action="{{ route('data-mahasiswa.proses') }}" class="p-4 md:p-5" method="POST">
                                         @csrf
-                                        <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
+                                        <div class="gap-2">
                                             <div class="mb-2">
                                                 <label for="nama"
                                                     class="block text-sm font-medium text-gray-700">Nama</label>
-                                                <input type="text" name="nama" id="nama"
+                                                <input type="text" name="nama" id="nama" placeholder="Masukan Nama Lengkap"
                                                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                                 @error('nama')
                                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -63,7 +63,7 @@
                                             <div class="mb-2">
                                                 <label for="nim"
                                                     class="block text-sm font-medium text-gray-700">NIM</label>
-                                                <input type="number" name="nim" id="nim"
+                                                <input type="number" name="nim" id="nim" placeholder="Masukan NIM"
                                                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                                 @error('nip')
                                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -71,22 +71,13 @@
                                             </div>
 
                                             <div class="mb-2">
-                                                <label for="email"
-                                                    class="block text-sm font-medium text-gray-700">Email</label>
-                                                <input type="email" name="email" id="email"
-                                                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                                                @error('email')
-                                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                                @enderror
-                                            </div>
-                                            <div class="mb-2">
                                                 <label for="kelas_id" class="block text-sm font-medium text-gray-700">Pilih
                                                     Kelas</label>
                                                 <select name="kelas_id" id="kelas_id"
                                                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                                     <option value="">- Pilih Kelas -</option>
                                                     @foreach ($kelas as $kelas)
-                                                        <option value="{{ $kelas->id }}">{{ $kelas->kelas }}</option>
+                                                        <option value="{{ $kelas->id }}">{{ $kelas->nama_kelas }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('kelas_id')

@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class MataKuliah extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nama_role',
-    ];
+    protected $table = 'mata_kuliahs';
 
-    public function admin() {
-        return $this->hasMany(Mahasiswa::class);
-    }
+    protected $fillable = [
+        'kode_mata_kuliah',
+        'mata_kuliah',
+    ];
 }
