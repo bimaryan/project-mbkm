@@ -80,12 +80,10 @@ class HomeController extends Controller
         ]);
     }
 
-    public function viewbarang($name)
+    public function viewbarang($nama_barang)
     {
-        $view = Barang::where('name', $name)->first();
+        $view = Barang::where('nama_barang', $nama_barang)->first();
         $kelas = Kelas::all();
-        $jurusan = Jurusan::all();
-        $rooms = Room::all();
         $stock = Stock::where('barang_id', $view->id)->first();
 
         if (!$view) {
@@ -95,8 +93,6 @@ class HomeController extends Controller
         return view('mahasiswa.detailbarang.index', [
             'view' => $view,
             'kelas' => $kelas,
-            'jurusan' => $jurusan,
-            'rooms' => $rooms,
             'stock' => $stock,
         ]);
     }

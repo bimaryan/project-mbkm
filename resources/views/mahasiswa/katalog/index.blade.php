@@ -46,9 +46,9 @@
 <body>
     @include('mahasiswa.navbar.index')
 
-    <div class="max-w-screen-xl mx-auto p-6 mt-14">
-        <form method="GET" action="{{ route('mahasiswa.katalog') }}"
-            class="flex justify-center items-center gap-2 mb-4 mt-6">
+    <div class="max-w-screen-xl p-6 mx-auto mt-14">
+        <form method="GET" action="{{ route('katalog') }}"
+            class="flex items-center justify-center gap-2 mt-6 mb-4">
             {{-- Tombol Semua Kategori --}}
             <button type="submit" name="kategori" value="Semua"
                 class="px-3 py-2 rounded-lg border shadow-xl {{ request('kategori') == 'Semua' ? 'bg-green-800 text-white' : 'border-green-500 hover:bg-green-800 hover:text-white' }}">
@@ -66,15 +66,15 @@
 
         {{-- Bagian Kartu Barang --}}
         @if ($barangKosong)
-            <p class="text-center text-gray-500 mt-6">Tidak ada barang yang tersedia untuk kategori ini.</p>
+            <p class="mt-6 text-center text-gray-500">Tidak ada barang yang tersedia untuk kategori ini.</p>
         @else
-            <div id="card-section" class="grid grid-cols-1 md:grid-cols-3 gap-2 animate-card">
+            <div id="card-section" class="grid grid-cols-1 gap-2 md:grid-cols-3 animate-card">
                 @foreach ($barangs as $data)
-                    <a href="{{ route('mahasiswa.viewbarang', ['name' => $data->name]) }}"
-                        class="w-full rounded-lg border border-green-500 max-w-m shadow-lg p-3">
+                    <a href="{{ route('viewbarang', ['nama_barang' => $data->nama_barang]) }}"
+                        class="w-full p-3 border border-green-500 rounded-lg shadow-lg max-w-m">
                         <div class="flex justify-center w-full">
-                            <img src="{{ url($data->gambar) }}" class="object-cover zoom-image"
-                                alt="{{ $data->name }}" />
+                            <img src="{{ url($data->foto) }}" class="object-cover zoom-image"
+                                alt="{{ $data->nama_barang }}" />
                         </div>
                         <div class="mt-1">
                             <span

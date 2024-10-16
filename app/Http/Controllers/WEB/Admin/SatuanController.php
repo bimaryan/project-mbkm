@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 
 class SatuanController extends Controller
 {
-    public function index()
+    public function satuan()
     {
-        $satuan = Satuan::all();
-        return view('admin.kelolasatuan.index', compact('satuan'));
+        $satuan = Satuan::paginate(5);
+        return view('admin.satuan.index',['satuan'=> $satuan]);
     }
 
-    public function store(Request $request)
+    public function storeSatuan(Request $request)
     {
         $request->validate([
             'satuan' => 'required|string'
@@ -24,17 +24,17 @@ class SatuanController extends Controller
             'satuan' => $request->satuan
         ]);
 
-        return redirect()->route('admin.satuan')->with('success', 'Satuan berhasil ditambahkan!');
+        return redirect()->route('data-satuan')->with('success', 'Satuan berhasil ditambahkan!');
     }
 
-    public function hapus(Request $request, Satuan $satuan)
+    public function deleteSatuan(Request $request, Satuan $satuan)
     {
         $satuan->delete();
 
-        return redirect()->route('admin.satuan')->with('success', 'Satuan berhasil dihapus!');
+        return redirect()->route('data-satuan')->with('success', 'Satuan berhasil dihapus!');
     }
 
-    public function edit(Request $request, Satuan $satuan)
+    public function editSatuan(Request $request, Satuan $satuan)
     {
         $request->validate([
             'satuan' => 'required|string'
@@ -44,6 +44,6 @@ class SatuanController extends Controller
             'satuan' => $request->satuan,
         ]);
 
-        return redirect()->route('admin.satuan')->with('success', 'Satuan berhasil diperbarui!');
+        return redirect()->route('data-satuan')->with('success', 'Satuan berhasil diperbarui!');
     }
 }

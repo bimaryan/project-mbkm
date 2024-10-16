@@ -13,8 +13,6 @@ class Kondisi extends Model
 
     protected $fillable = ['kondisi'];
 
-    public function barang()
-    {
-        return $this->belongsTo(Barang::class);
-    }
+
+    
 }

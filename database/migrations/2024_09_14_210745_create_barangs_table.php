@@ -13,18 +13,15 @@ return new class extends Migration
     {
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('gambar')->nullable();
-            $table->string('deskripsi')->nullable();
+            $table->string('nama_barang');
+            $table->string('foto')->nullable();
             $table->unsignedBigInteger('kategori_id');
             $table->unsignedBigInteger('satuan_id');
-            $table->unsignedBigInteger('room_id');
             $table->unsignedBigInteger('kondisi_id');
             $table->timestamps();
 
             $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('cascade');
             $table->foreign('satuan_id')->references('id')->on('satuans')->onDelete('cascade');
-            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->foreign('kondisi_id')->references('id')->on('kondisis')->onDelete('cascade');
         });
     }

@@ -90,12 +90,19 @@
                             <div class="p-4">
                                 <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
                                     <!-- Image -->
-                                    <div class="flex justify-center mb-3">
-                                        <img src="" alt="gambar"
-                                            class="object-cover border rounded-lg">
+                                    <div class="flex justify-center">
+                                        @if (isset(auth()->user()->foto) && auth()->user()->foto != '')
+                                            <img id="profileImage" src="{{ $data->foto }}" alt="Foto Profil"
+                                                class="object-cover rounded-full" style="width: 130px; height: 130px;">
+                                        @else
+                                            <!-- Tampilan default jika tidak ada gambar -->
+                                            <div class="flex items-center justify-center bg-gray-200 rounded-full" style="width: 130px; height: 130px;">
+                                                <i class="text-2xl text-gray-500 fas fa-upload"></i>
+                                            </div>
+                                        @endif
                                     </div>
                                     <div>
-                                        <div>
+                                        <div >
                                             Nama Lengkap : {{ $data->nama }}
                                         </div>
                                         <div class="mt-4">
