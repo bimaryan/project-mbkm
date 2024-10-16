@@ -8,18 +8,15 @@ use Illuminate\Http\Request;
 
 class KategoriController extends Controller
 {
-    public function index()
+    public function kategori()
     {
-        $data = Kategori::all();
-        return view('admin.kelolakategori.index', ['data' => $data]);
+        $kategori = Kategori::paginate(5);
+        return view('admin.kategori.index', ['kategori' => $kategori]);
     }
 
-    public function create()
-    {
-        return view('admin.kelolakategori.create');
-    }
+    
 
-    public function store(Request $request)
+    public function storeKategori(Request $request)
     {
         $request->validate([
             'kategori' => 'required|string',
@@ -29,10 +26,10 @@ class KategoriController extends Controller
             'kategori' => $request->kategori,
         ]);
 
-        return redirect()->route('admin.kategori')->with('success', 'Kategori berhasil ditambahkan');
+        return redirect()->route('data-kategori')->with('success', 'Kategori berhasil ditambahkan');
     }
 
-    public function edit(Request $request, Kategori $kategori)
+    public function editKategori(Request $request, Kategori $kategori)
     {
         $request->validate([
             'kategori' => 'required|string',
@@ -42,14 +39,14 @@ class KategoriController extends Controller
             'kategori' => $request->kategori
         ]);
 
-        return redirect()->route('admin.kategori')->with('success', 'Kategori updated successfully.');
+        return redirect()->route('data-kategori')->with('success', 'Kategori updated successfully.');
     }
 
 
-    public function hapus(Kategori $kategori)
+    public function deleteKategori(Kategori $kategori)
     {
         $kategori->delete();
 
-        return redirect()->route('admin.kategori')->with('success', 'Kategori deleted successfully.');
+        return redirect()->route('data-kategori')->with('success', 'Kategori deleted successfully.');
     }
 }

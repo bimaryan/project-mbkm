@@ -32,33 +32,33 @@
     </style>
 
     <div class="p-6 mx-auto">
-        <div class="flex justify-end items-center p-6 h-screen">
-            <div class="max-w-md animate-slide space-y-5">
-                <h2 class="text-8xl font-medium text-green-500 text-center">SILK</h2>
-                <p class="text-lg text-center text-white font-semibold">
+        <div class="flex items-center justify-end h-screen p-6">
+            <div class="max-w-md space-y-5 animate-slide">
+                <h2 class="font-medium text-center text-green-500 text-8xl">SILK</h2>
+                <p class="text-lg font-semibold text-center text-white">
                     Sistem Laboratorium Kesehatan adalah sebuah sistem berbasis teknologi yang dirancang untuk
                     mempermudah proses peminjaman, pengembalian, serta pengelolaan inventaris laboratorium secara
                     digital.
                 </p>
-                <div class="flex justify-center items-center">
+                <div class="flex items-center justify-center">
                     <a href="#filter-section"
-                        class="px-4 py-3 rounded-xl border border-green-500 border-1 bg-gray-100 text-green-500 text-m font-semibold hover:bg-green-800 hover:text-white">Pinjam
+                        class="px-4 py-3 font-semibold text-green-500 bg-gray-100 border border-green-500 rounded-xl border-1 text-m hover:bg-green-800 hover:text-white">Pinjam
                         Sekarang!</a>
                 </div>
             </div>
         </div>
 
         <div class="max-w-screen-xl mx-auto" id="filter-section">
-            <div class="bg-white rounded-xl w-full space-y-5 p-6">
-                <p class="text-green-500 text-3xl text-center font-semibold">Alat dan Bahan Laboratorium</p>
-                <p class="text-gray-500 text-m text-center">Laboratorium Kesehatan Politeknik Negeri Indramayu memiliki
+            <div class="w-full p-6 space-y-5 bg-white rounded-xl">
+                <p class="text-3xl font-semibold text-center text-green-500">Alat dan Bahan Laboratorium</p>
+                <p class="text-center text-gray-500 text-m">Laboratorium Kesehatan Politeknik Negeri Indramayu memiliki
                     lebih dari 1500 alat laboratorium yang dapat dipinjam untuk mahasiswa. Ketersediaan alat
                     laboratorium
                     diperbarui secara akurat dan
                     real-time untuk menghindari tumpang tindih pemesanan.</p>
 
                 {{-- Form Filter --}}
-                <form method="GET" action="{{ route('mahasiswa') }}" class="flex justify-center items-center gap-2 mb-4">
+                <form method="GET" action="{{ route('mahasiswa') }}" class="flex items-center justify-center gap-2 mb-4">
                     {{-- Tombol Semua Kategori --}}
                     <button type="submit" name="kategori" value="Semua"
                         class="px-3 py-2 rounded-lg border shadow-xl {{ request('kategori') == 'Semua' ? 'bg-green-800 text-white' : 'border-green-500 hover:bg-green-800 hover:text-white' }}">
@@ -76,15 +76,15 @@
 
                 {{-- Bagian Kartu Barang --}}
                 @if ($barangKosong)
-                    <p class="text-center text-gray-500 mt-6">Tidak ada barang yang tersedia untuk kategori ini.</p>
+                    <p class="mt-6 text-center text-gray-500">Tidak ada barang yang tersedia untuk kategori ini.</p>
                 @else
-                    <div id="card-section" class="grid grid-cols-1 md:grid-cols-3 gap-2 animate-card">
+                    <div id="card-section" class="grid grid-cols-1 gap-2 md:grid-cols-3 animate-card">
                         @foreach ($barangs as $data)
-                            <a href="{{ route('mahasiswa.viewbarang', ['name' => $data->name]) }}"
-                                class="w-full max-w-m p-3 rounded-lg border border-green-500 shadow-lg">
+                            <a href=""
+                                class="w-full p-3 border border-green-500 rounded-lg shadow-lg max-w-m">
                                 <div class="flex justify-center w-full">
-                                    <img src="{{ url($data->gambar) }}" class="object-cover zoom-image"
-                                        alt="{{ $data->name }}" />
+                                    <img src="{{ url($data->foto) }}" class="object-cover zoom-image"
+                                        alt="{{ $data->nama_barang }}" />
                                 </div>
                                 <div class="mt-1">
                                     <span

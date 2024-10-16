@@ -13,8 +13,5 @@ class Room extends Model
 
     protected $fillable = ['ruangan', 'lemari', 'rak'];
 
-    public function barang()
-    {
-        return $this->hasMany(Barang::class, 'room_id');
-    }
+
 }

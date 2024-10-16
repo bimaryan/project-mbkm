@@ -54,10 +54,14 @@
                                         <div class="grid grid-cols-2 gap-2">
                                             <!-- Nama Barang -->
                                             <div class="mb-2">
-                                                <label for="name" class="block text-sm font-medium text-gray-700">Nama
+                                                <label for="nama_barang"
+                                                    class="block text-sm font-medium text-gray-700">Nama
                                                     Barang</label>
-                                                <input type="text" name="name" id="name"
+                                                <input type="text" name="nama_barang" id="nama_barang"
                                                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                                @error('nama_barang')
+                                                    <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                                                @enderror
                                             </div>
 
                                             <!-- Stock -->
@@ -66,6 +70,9 @@
                                                     Barang</label>
                                                 <input type="text" name="stock" id="stock"
                                                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                                @error('stock')
+                                                    <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                                                @enderror
                                             </div>
 
                                             <!-- Kategori -->
@@ -75,6 +82,7 @@
                                                 <select name="kategori_id" id="kategori_id"
                                                     class="block w-full px-3 py-2 mt-1 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                                     <!-- Assuming you load categories from the database -->
+                                                    <option value="">- Pilih -</option>
                                                     @foreach ($kategoris as $kategori)
                                                         <option value="{{ $kategori->id }}">{{ $kategori->kategori }}
                                                         </option>
@@ -87,70 +95,36 @@
 
                                             <!-- Satuan -->
                                             <div class="mb-2">
-                                                <div class="grid grid-cols-2 gap-2">
-                                                    <div>
-                                                        <label for="persentase"
-                                                            class="block text-sm font-medium text-gray-700">Persentase</label>
-                                                        <input type="number" name="persentase" id="persentase"
-                                                            class="block w-full px-3 py-2 mt-1 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                                        </input>
-                                                    </div>
-                                                    <div>
-                                                        <label for="satuan_id"
-                                                            class="block text-sm font-medium text-gray-700">Satuan</label>
-                                                        <select name="satuan_id" id="satuan_id"
-                                                            class="block w-full px-3 py-2 mt-1 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                                            <!-- Assuming you load satuans from the database -->
-                                                            @foreach ($satuans as $satuan)
-                                                                <option value="{{ $satuan->id }}">{{ $satuan->satuan }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                <label for="satuan_id"
+                                                    class="block text-sm font-medium text-gray-700">Satuan</label>
+                                                <select name="satuan_id" id="satuan_id"
+                                                    class="block w-full px-3 py-2 mt-1 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                    <!-- Assuming you load satuans from the database -->
+                                                    <option value="">- Pilih -</option>
+                                                    @foreach ($satuans as $satuan)
+                                                        <option value="{{ $satuan->id }}">{{ $satuan->satuan }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
                                                 @error('satuan_id')
                                                     <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                                                 @enderror
                                             </div>
 
-                                            <!-- Room -->
-                                            <div class="mb-2">
-                                                <label for="room_id"
-                                                    class="block text-sm font-medium text-gray-700">Ruangan</label>
-                                                <select name="room_id" id="room_id"
-                                                    class="block w-full px-3 py-2 mt-1 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                                    <!-- Assuming you load rooms from the database -->
-                                                    @foreach ($rooms as $room)
-                                                        <option value="{{ $room->id }}">{{ $room->ruangan }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('room_id')
-                                                    <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                                                @enderror
-                                            </div>
 
                                             <!-- Gambar -->
                                             <div class="mb-2">
-                                                <label for="gambar"
+                                                <label for="foto"
                                                     class="block text-sm font-medium text-gray-700">Gambar</label>
-                                                <input type="file" name="gambar" id="gambar"
+                                                <input type="file" name="foto" id="foto"
                                                     class="block w-full px-3 mt-1 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                                @error('gambar')
+                                                @error('foto')
                                                     <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                                                 @enderror
                                             </div>
                                         </div>
 
-                                        <!-- Deskripsi -->
-                                        <div class="mb-2">
-                                            <label for="deskripsi"
-                                                class="block text-sm font-medium text-gray-700">Deskripsi</label>
-                                            <textarea name="deskripsi" id="deskripsi" rows="4"
-                                                class="block w-full px-3 py-2 mt-1 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"></textarea>
-                                            @error('deskripsi')
-                                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                                            @enderror
-                                        </div>
                                         <button type="submit"
                                             class="text-white bg-green-500 mt-4 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Simpan</button>
                                     </form>
@@ -162,7 +136,8 @@
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
-                <form action="{{ route('data-barang') }}" method="GET" class="flex flex-col items-center gap-2 mt-2 mb-4 md:flex-row">
+                <form action="{{ route('data-barang') }}" method="GET"
+                    class="flex flex-col items-center gap-2 mt-2 mb-4 md:flex-row">
                     <!-- Filter Nama Barang -->
                     <input type="text" name="name" placeholder="Nama Barang" value="{{ request('name') }}"
                         class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
@@ -210,8 +185,8 @@
                         class="w-full px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-800">Filter</button>
                 </form>
 
-                <div id="tableContainer">
-                    @include('admin.kelolabarang.table', ['barangs' => $barangs])
+                <div id="tableBarang">
+                    @include('admin.barang.table', ['barangs' => $barangs])
                 </div>
 
                 <div id="paginationLinks">
@@ -271,7 +246,7 @@
                     },
                     success: function(response) {
                         // Replace table and pagination links
-                        $('#tableContainer').html($(response).find('#tableContainer').html());
+                        $('#tableBarang').html($(response).find('#tableBarang').html());
                         $('#paginationLinks').html($(response).find('#paginationLinks').html());
                     }
                 });
