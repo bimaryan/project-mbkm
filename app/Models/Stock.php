@@ -17,4 +17,9 @@ class Stock extends Model
     {
         return $this->belongsTo(Barang::class);
     }
+
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'stock_id');
+    }
 }

@@ -100,6 +100,10 @@
                         @endforeach
                     </div>
                 @endif
+
+                <div class="text-center">
+                    <a href="{{ route('mahasiswa.katalog') }}" class="text-green-500 font-medium text-m">Lihat Semua</a>
+                </div>
             </div>
         </div>
     </div>

@@ -15,6 +15,7 @@ use App\Models\Room;
 use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class HomeController extends Controller
 {
@@ -135,39 +136,17 @@ class HomeController extends Controller
             'stock_pinjam' => $jumlahPinjam
         ]);
 
-        return redirect()->route('mahasiswa.peminjaman-success', ['name' => $barang->name])->with('success', 'Peminjaman berhasil dibuat dan menunggu persetujuan.');
+        return redirect()->route('mahasiswa.informasi')->with('success', 'Peminjaman berhasil dibuat dan menunggu persetujuan.');
     }
-    public function peminjaman_success($name)
-    {
-        $mahasiswaId = Auth::user()->id;
-
-        $barang = Barang::where('name', $name)->first();
-
-        // Jika barang tidak ditemukan, arahkan kembali
-        if (!$barang) {
-            return redirect()->route('mahasiswa.katalog')->with('error', 'Barang tidak ditemukan.');
-        }
-
-        // Ambil data peminjaman terbaru berdasarkan mahasiswa dan barang
-        $peminjaman = Peminjaman::where('mahasiswa_id', $mahasiswaId)
-            ->where('barang_id', $barang->id)
-            ->latest()
-            ->first();
-
-        if (!$peminjaman) {
-            return redirect()->route('mahasiswa.katalog')->with('error', 'Tidak ada data peminjaman.');
-        }
-
-        return view('mahasiswa.peminjaman_success.index', [
-            'peminjaman' => $peminjaman,
-            'qrCode' => \SimpleSoftwareIO\QrCode\Facades\QrCode::size(150)->generate($peminjaman->QR),
-            'barang' => $barang
-        ]);
-    }
-
     public function informasi()
     {
-        return view('mahasiswa.informasi.index');
+        $peminjaman = Peminjaman::with('mahasiswa', 'barang', 'stock')->get();
+
+        foreach ($peminjaman as $data) {
+            $data->QR = QrCode::size(150)->generate($data->id); // Sesuaikan data yang ingin kamu encode dalam QR code
+        }
+
+        return view('mahasiswa.informasi.index', compact('peminjaman'));
     }
 
     public function viewProfile(Mahasiswa $mahasiswa)
@@ -180,8 +159,8 @@ class HomeController extends Controller
         $request->validate([
             'nama' => 'required|string',
             'email' => 'required|email',
-            'telepon' => 'required|string',
-            'jenis_kelamin' => 'required|string',
+            'telepon' => 'nullable|string',
+            'jenis_kelamin' => 'nullable|string',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ], [
             'required.nama' => ':Nama harus diisi',

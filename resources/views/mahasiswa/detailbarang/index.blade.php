@@ -66,7 +66,7 @@
                             class="mt-1 block w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                             <option value="">Pilih Kelas</option>
                             @foreach ($kelas as $kls)
-                                <option value="{{ $kls->id }}">{{ $kls->kelas }}</option>
+                                <option value="{{ $kls->id }}">{{ $kls->nama_kelas }}</option>
                             @endforeach
                         </select>
                     </div>

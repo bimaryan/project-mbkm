@@ -14,9 +14,9 @@ class KelasSeeder extends Seeder
     public function run(): void
     {
         $kelas = [
-            ['kelas' => 'D3 KP 1A'],
-            ['kelas' => 'D3 KP 1B'],
-            ['kelas' => 'D3 KP 1C'],
+            ['nama_kelas' => 'D3 KP 1A'],
+            ['nama_kelas' => 'D3 KP 1B'],
+            ['nama_kelas' => 'D3 KP 1C'],
         ];
 
         foreach ($kelas as $kelas) {
