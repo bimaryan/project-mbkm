@@ -64,7 +64,7 @@ class LoginController extends Controller
         }
 
         if (Auth::guard('mahasiswa')->attempt(['nim' => $credentials['identifier'], 'password' => $request->password])) {
-            return redirect()->route('mahasiswa');
+            return redirect()->route('home');
         }
 
         return redirect()->back()->withErrors(['errors'],)->withInput();

@@ -14,6 +14,6 @@ class Role extends Model
     ];
 
     public function admin() {
-        return $this->hasMany(Mahasiswa::class);
+        return $this->hasMany(Admin::class);
     }
 }

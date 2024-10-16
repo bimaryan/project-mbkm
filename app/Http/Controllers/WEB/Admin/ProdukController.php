@@ -7,12 +7,9 @@ use App\Models\Barang;
 use App\Models\Kategori;
 use App\Models\Kondisi;
 use App\Models\Persentase;
-use App\Models\Room;
 use App\Models\Satuan;
 use App\Models\Stock;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\DataTables;
 
 class ProdukController extends Controller
 {
@@ -20,8 +17,8 @@ class ProdukController extends Controller
     {
         $query = Barang::query();
 
-        if ($request->has('name') && $request->name != '') {
-            $query->where('name', 'LIKE', '%' . $request->name . '%');
+        if ($request->has('nama_barang') && $request->name != '') {
+            $query->where('nama_barang', 'LIKE', '%' . $request->name . '%');
         }
 
         if ($request->has('kategori_id') && $request->kategori_id != '') {
@@ -57,41 +54,39 @@ class ProdukController extends Controller
         $kategoris = Kategori::all();
         $kondisis = Kondisi::all();
         $satuans = Satuan::all();
-        $rooms = Room::all();
         $stocks = Stock::all();
 
-        return view('admin.kelolabarang.index', compact('barangs', 'kategoris', 'kondisis', 'satuans', 'rooms', 'stocks'));
+        return view('admin.barang.index', compact('barangs', 'kategoris', 'kondisis', 'satuans', 'stocks'));
     }
 
     public function storeBarang(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'deskripsi' => 'nullable|string|max:1000',
+            'nama_barang' => 'required|string|max:255',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'stock' => 'required|integer|min:1',
             'kategori_id' => 'required|exists:kategoris,id',
             'satuan_id' => 'required|exists:satuans,id',
-            'room_id' => 'required|exists:rooms,id',
+        ], [
+            'nama_barang.required'=> 'Nama barang harus diisi',
+            'stock.required'=> 'Stok harus diisi',
+            'stock.min'=> 'Stok minimal 1',
         ]);
 
+        
+        $filePath = $request->file('foto')->move('uploads/barang', time() . '_' . $request->file('foto')->getClientOriginalName());
         // dd($request->all());
-
-        $filePath = $request->file('gambar')->move('uploads/barang', time() . '_' . $request->file('gambar')->getClientOriginalName());
-
+        
         $barang = Barang::create([
-            'name' => $request->name,
-            'gambar' => $filePath,
-            'deskripsi' => $request->deskripsi,
+            'nama_barang' => $request->nama_barang,
+            'foto' => $filePath,
             'kategori_id' => $request->kategori_id,
             'satuan_id' => $request->satuan_id,
-            'room_id' => $request->room_id,
             'kondisi_id' => 4,
         ]);
 
         Persentase::create([
             'satuans_id' => $request->satuan_id,
-            'persentase' => $request->persentase
         ]);
 
         Stock::create([
@@ -104,8 +99,8 @@ class ProdukController extends Controller
 
     public function deleteBarang(Barang $barang)
     {
-        if ($barang->gambar && file_exists(public_path($barang->gambar))) {
-            unlink(public_path($barang->gambar));
+        if ($barang->foto && file_exists(public_path($barang->foto))) {
+            unlink(public_path($barang->foto));
         }
 
         $barang->delete();
@@ -116,32 +111,28 @@ class ProdukController extends Controller
     public function editBarang(Request $request, Barang $barang,)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'deskripsi' => 'nullable|string|max:1000',
-            'stock' => 'required|integer|min:1',
+            'nama_barang' => 'required|string|max:255',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'stock' => 'required|integer',
             'kategori_id' => 'required|exists:kategoris,id',
             'satuan_id' => 'required|exists:satuans,id',
-            'room_id' => 'required|exists:rooms,id',
         ]);
+        // dd($request->all());
 
-        if ($request->hasFile('gambar')) {
+        if ($request->hasFile('foto')) {
             // Hapus gambar lama jika ada
-            if ($barang->gambar && file_exists(public_path($barang->gambar))) {
-                unlink(public_path($barang->gambar));
+            if ($barang->foto && file_exists(public_path($barang->foto))) {
+                unlink(public_path($barang->foto));
             }
 
             // Simpan gambar baru
-            $filePath = $request->file('gambar')->move('uploads/barang', time() . '_' . $request->file('gambar')->getClientOriginalName());
+            $filePath = $request->file('foto')->move('uploads/barang', time() . '_' . $request->file('foto')->getClientOriginalName());
             $barang->gambar = $filePath;
         }
-
         $barang->update([
-            'name' => $request->name,
-            'deskripsi' => $request->deskripsi,
+            'nama_barang' => $request->nama_barang,
             'kategori_id' => $request->kategori_id,
             'satuan_id' => $request->satuan_id,
-            'room_id' => $request->room_id,
         ]);
 
         $barang->stock->update([

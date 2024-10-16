@@ -11,7 +11,7 @@ class Barang extends Model
 
     protected $table = 'barangs';
 
-    protected $fillable = ['name', 'deskripsi', 'stock', 'kategori_id', 'satuan_id', 'room_id', 'kondisi_id', 'gambar'];
+    protected $fillable = ['nama_barang', 'kategori_id', 'satuan_id',  'kondisi_id', 'foto'];
 
     public function kondisi()
     {
@@ -28,10 +28,7 @@ class Barang extends Model
         return $this->belongsTo(Satuan::class);
     }
 
-    public function room()
-    {
-        return $this->belongsTo(Room::class);
-    }
+
 
     public function stock()
     {

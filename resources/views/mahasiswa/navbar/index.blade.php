@@ -13,7 +13,7 @@
                         {{ Auth::user()->nama }}
                     </button>
                     <!-- Dropdown -->
-                    <div class="z-50 hidden my-4 text-base w-44 list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
+                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
                         id="dropdown-menu">
                         <ul class="py-2 font-medium" role="none">
                             <li>
@@ -60,14 +60,14 @@
                         aria-current="page">Home</a>
                 </li>
                 <li>
-                    <a href="{{ route('mahasiswa.katalog') }}"
+                    <a href="{{ route('katalog') }}"
                         class="block py-2 px-3 rounded md:border-0 md:p-0
-           {{ Route::is('mahasiswa.katalog') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Katalog</a>
+           {{ Route::is('katalog') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Katalog</a>
                 </li>
                 <li>
-                    <a
+                    <a href=""
                         class="block py-2 px-3 rounded md:border-0 md:p-0
-           {{ Route::is('mahasiswa.viewbarang') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Peminjaman</a>
+           {{ Route::is('viewbarang') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Peminjaman</a>
                 </li>
                 <li>
                     <a href="#"
