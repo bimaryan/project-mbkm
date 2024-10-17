@@ -25,7 +25,7 @@ class MahasiswaSeeder extends Seeder
         Mahasiswa::create([
             'nama' => 'Bima Ryan Alfarizi',
             'nim' => '2205036',
-            'email' => 'bimagaminh@gmail.com',
+            'email' => 'crazygamedev212@gmail.com',
             'password' => Hash::make('mahasiswa'),
             'kelas_id' => 2,
         ]);
