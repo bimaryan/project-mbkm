@@ -101,6 +101,12 @@
                     </div>
 
                     <div class="mb-4">
+                        <label for="waktu_pinjam" class="block text-lg font-medium text-gray-700">Waktu Peminjaman</label>
+                        <input type="time" name="waktu_pinjam" id="waktu_pinjam"
+                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                    </div>
+
+                    <div class="mb-4">
                         <label for="waktu_kembali" class="block text-lg font-medium text-gray-700">Waktu Pengembalian</label>
                         <input type="time" name="waktu_kembali" id="waktu_kembali"
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">

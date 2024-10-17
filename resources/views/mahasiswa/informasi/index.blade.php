@@ -43,7 +43,7 @@
     @endif
 
     <div class="max-w-screen-xl mx-auto p-6 mt-14">
-        <div class="flex items-center mt-6">
+        <div class="flex justify-center items-center mt-6">
             <div>
                 <p class="text-2xl text-green-500 font-semibold">
                     Informasi Peminjaman
@@ -76,7 +76,7 @@
                         <th scope="col" class="px-6 py-3">Nama Mahasiswa</th>
                         <th scope="col" class="px-6 py-3">Nama Barang</th>
                         <th scope="col" class="px-6 py-3">Jumlah Barang</th>
-                        <th scope="col" class="px-6 py-3">Waktu Kembali Tersisa</th>
+                        <th scope="col" class="px-6 py-3">Sisa Waktu</th>
                         <th scope="col" class="px-6 py-3">Status</th>
                         <th scope="col" class="px-6 py-3">Aksi</th>
                     </tr>
@@ -104,7 +104,7 @@
                                     {{ $data->stock_pinjam }}
                                 </td>
                                 <td scope="col" class="px-6 py-3">
-                                    {{ $data->selisih_jam }} Jam
+                                    <span id="time-remaining-{{ $data->id }}" class="text-red-500"></span>
                                 </td>
                                 <td scope="col" class="px-6 py-3">
                                     {{ $data->status }}
@@ -120,12 +120,39 @@
                                     <div>
                                         <button type="button" data-modal-target="kembali{{ $data->id }}"
                                             data-modal-toggle="kembali{{ $data->id }}"
-                                            class="py-2 px-2 bg-yellow-400 rounded text-sm text-white flex items-center">
+                                            class="py-2 px-2 bg-blue-500 rounded text-sm text-white flex items-center">
                                             <i class="fa-solid fa-box-open"></i>
                                         </button>
                                     </div>
                                 </td>
                             </tr>
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const waktuPinjam = {{ $data->waktu_pinjam_unix }} * 1000; // Convert to milliseconds
+                                    const waktuKembali = {{ $data->waktu_kembali_unix }} * 1000;
+
+                                    function updateTimeRemaining() {
+                                        const now = new Date().getTime();
+                                        let distance = waktuKembali - now;
+
+                                        if (distance < 0) {
+                                            document.getElementById('time-remaining-{{ $data->id }}').innerHTML =
+                                                "Waktu Kembali Sudah Lewat";
+                                            return;
+                                        }
+
+                                        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                                        document.getElementById('time-remaining-{{ $data->id }}').innerHTML =
+                                            `${hours} Jam ${minutes} Menit ${seconds} Detik`;
+                                    }
+
+                                    setInterval(updateTimeRemaining, 1000);
+                                });
+                            </script>
 
                             <div id="kembali{{ $data->id }}" tabindex="-1" aria-hidden="true"
                                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -273,10 +300,12 @@
                                                         {{ \Carbon\Carbon::parse($data->tgl_pinjam)->format('d M Y') }}
                                                     </p>
                                                     <p class="text-sm text-gray-500 dark:text-gray-400">
-                                                        {{ \Carbon\Carbon::parse($data->created_at)->format('H:i') }}
+                                                        {{ \Carbon\Carbon::parse($data->waktu_pinjam)->format('H:i') }}
+                                                        WIB
                                                     </p>
                                                     <p class="text-sm text-gray-500 dark:text-gray-400">
                                                         {{ \Carbon\Carbon::parse($data->waktu_kembali)->format('H:i') }}
+                                                        WIB
                                                     </p>
                                                     <p class="text-sm text-gray-500 dark:text-gray-400">
                                                         {{ $data->keterangan ?? 'Tidak ada keterangan' }}
@@ -301,9 +330,7 @@
         </div>
     </div>
 
-    <div class="fixed bottom-0 left-0 w-full">
-        @include('mahasiswa.footer.index')
-    </div>
+    @include('mahasiswa.footer.index')
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </body>

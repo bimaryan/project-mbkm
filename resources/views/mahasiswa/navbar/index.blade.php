@@ -1,9 +1,11 @@
 <nav class="fixed top-0 left-0 z-10 w-full bg-white border-gray-200 shadow-lg dark:bg-gray-900">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
         <a href="{{ route('mahasiswa') }}" class="flex flex-col items-center space-x-3 rtl:space-x-reverse">
-            <span class="self-center text-2xl font-semibold text-green-500 md:text-1xl whitespace-nowrap">SILK</span>
+            <img src="{{ asset('logo/silk.png') }}" class="h-14 hidden md:block" alt="{{ asset('logo/silk.png') }}" />
+            <img src="{{ asset('logo/polindra.png') }}" class="h-10 md:hidden" alt="{{ asset('logo/polindra.png') }}" />
+            {{-- <span class="self-center text-2xl font-semibold text-green-500 md:text-1xl whitespace-nowrap">SILK</span>
             <span class="self-center hidden text-xs font-semibold text-green-500 md:block whitespace-nowrap">Sistem
-                Informasi Kesehatan</span>
+                Informasi Kesehatan</span> --}}
         </a>
         <div class="flex items-center space-x-1 md:order-2 md:space-x-0 rtl:space-x-reverse">
             @if (Route::has('login'))

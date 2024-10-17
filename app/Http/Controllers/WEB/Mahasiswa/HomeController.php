@@ -60,7 +60,7 @@ class HomeController extends Controller
             if (in_array($kategori, $validCategories)) {
                 $barangs = Barang::whereHas('kategori', function ($query) use ($kategori) {
                     $query->where('kategori', $kategori);
-                })->paginate(6);
+                })->paginate(6)->appends(['kategori' => $kategori]);
             } else {
                 $barangs = collect();
             }
@@ -77,7 +77,8 @@ class HomeController extends Controller
         return view('mahasiswa.katalog.index', [
             'barangs' => $barangs,
             'kategoris' => $kategoris,
-            'barangKosong' => $barangKosong
+            'barangKosong' => $barangKosong,
+            'kategoriTerpilih' => $kategori
         ]);
     }
 
@@ -123,6 +124,7 @@ class HomeController extends Controller
             'stock_pinjam' => $request->input('jumlah_pinjam'),
             'QR' => rand(10000, 99999),
             'tgl_pinjam' => $request->input('tgl_pinjam'),
+            'waktu_pinjam' => $request->input('waktu_pinjam'),
             'waktu_kembali' => $request->input('waktu_kembali'),
             'keterangan' => $request->input('keterangan'),
             'spo_id' => $request->input('spo_id'),
@@ -143,7 +145,8 @@ class HomeController extends Controller
 
         foreach ($peminjaman as $data) {
             $data->QR = QrCode::size(150)->generate($data->id);
-            $data->selisih_jam = \Carbon\Carbon::parse($data->created_at)->diffInHours($data->waktu_kembali);
+            $data->waktu_pinjam_unix = \Carbon\Carbon::parse($data->waktu_pinjam)->timestamp;
+            $data->waktu_kembali_unix = \Carbon\Carbon::parse($data->waktu_kembali)->timestamp;
         }
 
         return view('mahasiswa.informasi.index', compact('peminjaman'));

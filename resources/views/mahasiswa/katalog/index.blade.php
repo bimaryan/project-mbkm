@@ -47,6 +47,14 @@
     @include('mahasiswa.navbar.index')
 
     <div class="max-w-screen-xl p-6 mx-auto mt-14">
+        <div class="flex justify-center items-center mt-6">
+            <div>
+                <p class="text-2xl text-green-500 font-semibold">
+                    Katalog Alat dan Bahan
+                </p>
+            </div>
+        </div>
+
         <form method="GET" action="{{ route('katalog') }}" class="flex items-center justify-center gap-2 mt-6 mb-4">
             {{-- Tombol Semua Kategori --}}
             <button type="submit" name="kategori" value="Semua"
@@ -90,7 +98,7 @@
             </div>
         @endif
         <div class="mt-4">
-            {{ $barangs->links() }}
+            {{ $barangs->appends(request()->except('page'))->links() }}
         </div>
     </div>
 

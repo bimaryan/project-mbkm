@@ -1,4 +1,4 @@
-<nav class="fixed top-0 z-50 w-full bg-gray-100 shadow dark:text-white dark:bg-gray-900">
+<nav class="fixed top-0 z-50 w-full bg-gray-50 shadow dark:text-white dark:bg-gray-900">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-start gap-2 rtl:justify-end">
@@ -14,11 +14,10 @@
                     </svg>
                 </button>
                 <a class="flex flex-col items-center space-x-3 rtl:space-x-reverse">
-                    <span
-                        class="self-center text-2xl font-semibold text-green-500 md:text-1xl whitespace-nowrap">SILK</span>
-                    <span
-                        class="self-center hidden text-xs font-semibold text-green-500 md:block whitespace-nowrap">Sistem
-                        Informasi Kesehatan</span>
+                    <img src="{{ asset('logo/silk.png') }}" class="h-14 hidden md:block"
+                        alt="{{ asset('logo/silk.png') }}" />
+                    <img src="{{ asset('logo/polindra.png') }}" class="h-10 md:hidden"
+                        alt="{{ asset('logo/polindra.png') }}" />
                 </a>
             </div>
             <div class="flex items-center">
@@ -83,7 +82,7 @@
 <aside id="logo-sidebar"
     class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
     aria-label="Sidebar">
-    <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+    <div class="h-full px-3 pb-4 mt-3 overflow-y-auto bg-white dark:bg-gray-800">
         <ul class="space-y-2 font-medium">
             <li>
                 <a href="{{ route('dashboard') }}"
