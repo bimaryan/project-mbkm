@@ -34,9 +34,10 @@ Route::get('reset-password/{token}', [ForgotPasswordController::class, 'resetPas
 Route::post('reset-password-process/{token}', [ForgotPasswordController::class, 'resetPasswordProcess'])->name('reset-password-process');
 
 Route::middleware(['auth:admin'])->group(function () {
-    Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
     Route::middleware(['UserAccess:Admin'])->group(function () {
+        Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+
         Route::prefix('pengguna')->group(function () {
             // ROUTE DATA ADMIN DAN STAFF
             Route::get('/data-admin-dan-staff', [AdminController::class, 'adminAndStaff'])->name('data-admin-dan-staff');
