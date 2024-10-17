@@ -123,7 +123,7 @@ class HomeController extends Controller
             'stock_pinjam' => $request->input('jumlah_pinjam'),
             'QR' => rand(10000, 99999),
             'tgl_pinjam' => $request->input('tgl_pinjam'),
-            'tgl_kembali' => $request->input('tgl_kembali'),
+            'waktu_kembali' => $request->input('waktu_kembali'),
             'keterangan' => $request->input('keterangan'),
             'spo_id' => $request->input('spo_id'),
             'aprovals' => 'Belum',
@@ -143,7 +143,7 @@ class HomeController extends Controller
 
         foreach ($peminjaman as $data) {
             $data->QR = QrCode::size(150)->generate($data->id);
-            $data->selisih_hari = \Carbon\Carbon::parse($data->tgl_pinjam)->diffInDays($data->tgl_kembali);
+            $data->selisih_jam = \Carbon\Carbon::parse($data->created_at)->diffInHours($data->waktu_kembali);
         }
 
         return view('mahasiswa.informasi.index', compact('peminjaman'));

@@ -101,8 +101,8 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="tgl_kembali" class="block text-lg font-medium text-gray-700">Tanggal Kembali</label>
-                        <input type="date" name="tgl_kembali" id="tgl_kembali"
+                        <label for="waktu_kembali" class="block text-lg font-medium text-gray-700">Waktu Pengembalian</label>
+                        <input type="time" name="waktu_kembali" id="waktu_kembali"
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                     </div>
 

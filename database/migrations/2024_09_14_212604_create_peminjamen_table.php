@@ -22,8 +22,9 @@ return new class extends Migration
             $table->string('stock_pinjam');
             $table->string('QR');
             $table->date('tgl_pinjam');
-            $table->date('tgl_kembali');
+            $table->time('waktu_kembali');
             $table->string('keterangan')->nullable();
+            $table->enum('status_pengembalian', ['Belum', 'Diserahkan'])->default('Belum');
             $table->enum('aprovals', ['Ya', 'Tidak', 'Belum']);
             $table->enum('status', ['Dipinjam', 'Dikembalikan', 'Menunggu Persetujuan']);
             $table->timestamps();

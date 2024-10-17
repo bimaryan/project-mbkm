@@ -21,7 +21,7 @@ class Peminjaman extends Model
         'stock_pinjam',
         'QR',
         'tgl_pinjam',
-        'tgl_kembali',
+        'waktu_kembali',
         'keterangan',
         'aprovals',
         'status',

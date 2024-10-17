@@ -79,12 +79,12 @@
                                     <td scope="col" class="px-6 py-3">{{ $loop->iteration }}</td>
                                     <td scope="col" class="px-6 py-3">{{ $item->mahasiswa->nim }}</td>
                                     <td scope="col" class="px-6 py-3">{{ $item->mahasiswa->nama }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->kelas->nama_kelas }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->mahasiswa->kelas->nama_kelas }}</td>
                                     <td scope="col" class="px-6 py-3">{{ $item->matkul->mata_kuliah }}</td>
                                     <td scope="col" class="px-6 py-3">Dosen</td>
                                     <td scope="col" class="px-6 py-3">{{ $item->room->ruangan }}</td>
                                     <td scope="col" class="px-6 py-3">{{ $item->barang->nama_barang }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->stock->stock_pinjam }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->stock_pinjam }}</td>
                                     <td scope="col" class="px-6 py-3">{{ $item->spo->file ?? 'Tidak ada file' }}</td>
                                     <td scope="col" class="px-6 py-3">
                                         {{ \Carbon\Carbon::parse($item->tgl_pinjam)->format('d M Y') }}</td>
@@ -103,8 +103,8 @@
                                                 <select name="aprovals" id="aprovals" class="border rounded-md p-2">
                                                     <option value="Belum"
                                                         {{ $item->aprovals == 'Belum' ? 'selected' : '' }}>Belum</option>
-                                                    <option value="Ya"
-                                                        {{ $item->aprovals == 'Ya' ? 'selected' : '' }}>Ya
+                                                    <option value="Ya" {{ $item->aprovals == 'Ya' ? 'selected' : '' }}>
+                                                        Ya
                                                     </option>
                                                     <option value="Tidak"
                                                         {{ $item->aprovals == 'Tidak' ? 'selected' : '' }}>Tidak
@@ -112,7 +112,8 @@
                                                 </select>
                                             </div>
                                             <div>
-                                                <button type="submit" class="bg-green-500 px-4 py-3 rounded-lg text-white font-medium">
+                                                <button type="submit"
+                                                    class="bg-green-500 px-4 py-3 rounded-lg text-white font-medium">
                                                     Submit
                                                 </button>
                                             </div>
