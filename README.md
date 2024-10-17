@@ -29,3 +29,20 @@ Penggunaan aplikasi ini memberikan berbagai manfaat, di antaranya:
 4.	Pengelola laboratorium dapat mengetahui seacar real-time bahan dan alat apa yang tersedia, rusak, atau dalam proses peminjaman.
 5.	Mahasiswa dan dosen dapat meminjam alat sesuai jadwal yang tersedia tanpa adanya benturan waktu.
 6.	Sistem yang terdokumentasi dengan baik mengurangi kemungkinan kehilangan atau kerusakan alat tanpa catatan.
+
+## Cara Setup Project ini
+
+1. Pertama git clone terlebih dahulu
+<code>https://github.com/bimaryan/project-mbkm.git</code>
+
+2. Ketika sudah git clone lalu buka project nya dan install composer nya serta key <code>.env</code> nya
+<code>composer install</code>
+<code>php artisan key::generate</code>
+
+3. setelah itu anda migrate database nya
+<code>php artisan migrate --seed</code>
+
+4. Selanjutnya anda bisa jalankan project nya
+<code>php artisan serve</code>
+
+Selamat Mencoba :)
