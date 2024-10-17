@@ -54,9 +54,9 @@ class LoginController extends Controller
 
         if (Auth::guard('admin')->attempt(['username' => $credentials['identifier'], 'password' => $request->password])) {
 
-            if (Auth::guard('admin')->user()->role->nama_role == 'Admin') {
+            if (Auth::guard('admin')->user()->role_id = '1') {
                 return redirect()->route('dashboard');
-            } elseif (Auth::guard('admin')->user()->role->nama_role == 'Staff') {
+            } elseif (Auth::guard('admin')->user()->role_id == '2') {
                 return redirect()->route('dashboard');
             } else {
                 return redirect()->back()->withErrors(['errors'])->withInput();
@@ -72,6 +72,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
+        session()->flush();
         return redirect()->route('login');
     }
 }

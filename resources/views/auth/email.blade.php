@@ -53,6 +53,7 @@
 <body>
 
     <div class="card">
+        <img src="{{ asset('logo/polindra.png') }}" alt="" class="object-cover w-full h-24">
         <h1>Lupa Kata Sandi</h1>
         <p>Klik link di bawah ini untuk mereset kata sandi Anda:</p>
         <a href="{{ route('reset-password', ['token' => $token]) }}">Reset Password</a>

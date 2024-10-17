@@ -22,7 +22,7 @@ class UserAccess
 
         $user = Auth::user();
 
-        if ($user->role->nama_role != $role) {
+        if ($user->role_id != $role) {
             abort(403);
         }
 

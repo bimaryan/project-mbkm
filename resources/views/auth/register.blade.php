@@ -50,7 +50,7 @@
     @endif
 
     <div class="flex justify-center">
-        <img src="{{ asset('image/kampus-merdeka.png') }}" alt="" class="w-full object-cover">
+        <img src="{{ asset('logo/polindra.png') }}" alt="" class="object-cover w-full h-24">
     </div>
 
     <div class="w-full max-w-sm p-6 bg-white shadow-lg rounded-lg">
