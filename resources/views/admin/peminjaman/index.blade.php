@@ -30,7 +30,22 @@
                                     No
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Nim
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Mahasiswa
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    kelas
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Mata Kuliah
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Dosen
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Ruangan
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Nama Barang
@@ -39,22 +54,7 @@
                                     Stock
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    kelas
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Jurusan
-                                </th>
-                                <th scope="col" class="px-6 py-3">
                                     SPO Dokumen
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Ruangan
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Dosen
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Mata Kuliah
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Tanggal Pinjam
@@ -66,7 +66,10 @@
                                     Keterangan
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    aprovals
+                                    Status
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Aprovals
                                 </th>
                             </tr>
                         </thead>
@@ -74,35 +77,43 @@
                             @foreach ($peminjamans as $item)
                                 <tr>
                                     <td scope="col" class="px-6 py-3">{{ $loop->iteration }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->mahasiswa->nim }}</td>
                                     <td scope="col" class="px-6 py-3">{{ $item->mahasiswa->nama }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->barang->name }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->stock->stock_pinjam }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->kelas->kelas }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->jurusan->jurusan }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->spo->file ?? 'null' }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->room->ruangan }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->kelas->nama_kelas }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->matkul->mata_kuliah }}</td>
                                     <td scope="col" class="px-6 py-3">Dosen</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->matkul }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->tgl_pinjam }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->tgl_kembali }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->keterangan ?? 'null' }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->room->ruangan }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->barang->nama_barang }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->stock->stock_pinjam }}</td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->spo->file ?? 'Tidak ada file' }}</td>
                                     <td scope="col" class="px-6 py-3">
-                                        <form action="{{ route('verifikasi.update', $item->id) }}" method="POST">
+                                        {{ \Carbon\Carbon::parse($item->tgl_pinjam)->format('d M Y') }}</td>
+                                    <td scope="col" class="px-6 py-3">
+                                        {{ \Carbon\Carbon::parse($item->tgl_kembali)->format('d M Y') }}</td>
+                                    <td scope="col" class="px-6 py-3">
+                                        {{ $item->keterangan ?? 'Tidak ada keterangan' }}
+                                    </td>
+                                    <td scope="col" class="px-6 py-3">{{ $item->status }}</td>
+                                    <td scope="col" class="px-6 py-3">
+                                        <form action="{{ route('verifikasi.update', $item->id) }}" method="POST"
+                                            class="flex items-center gap-1">
                                             @csrf
                                             @method('PUT')
                                             <div>
                                                 <select name="aprovals" id="aprovals" class="border rounded-md p-2">
                                                     <option value="Belum"
                                                         {{ $item->aprovals == 'Belum' ? 'selected' : '' }}>Belum</option>
-                                                    <option value="Disetujui"
-                                                        {{ $item->aprovals == 'Disetujui' ? 'selected' : '' }}>Disetujui
+                                                    <option value="Ya"
+                                                        {{ $item->aprovals == 'Ya' ? 'selected' : '' }}>Ya
                                                     </option>
-                                                    <option value="Ditolak"
-                                                        {{ $item->aprovals == 'Ditolak' ? 'selected' : '' }}>Ditolak
+                                                    <option value="Tidak"
+                                                        {{ $item->aprovals == 'Tidak' ? 'selected' : '' }}>Tidak
                                                     </option>
                                                 </select>
-                                                <button>
-
+                                            </div>
+                                            <div>
+                                                <button type="submit" class="bg-green-500 px-4 py-3 rounded-lg text-white font-medium">
+                                                    Submit
                                                 </button>
                                             </div>
                                         </form>

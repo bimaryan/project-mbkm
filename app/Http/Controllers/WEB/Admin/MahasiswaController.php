@@ -79,7 +79,7 @@ class MahasiswaController extends Controller
         $request->validate([
             'nama_kelas' => 'required|string',
         ], [
-            'nama_kelas.required'=> 'Kelas harus di isi',
+            'nama_kelas.required' => 'Kelas harus di isi',
         ]);
 
         Kelas::create([
@@ -87,6 +87,19 @@ class MahasiswaController extends Controller
         ]);
 
         return redirect()->route('data-kelas')->with('success', 'Kelas berhasil ditambahkan!');
+    }
+
+    public function editkelas(Kelas $kelas, Request $request)
+    {
+        $request->validate([
+            'nama_kelas' => 'required|string',
+        ]);
+
+        $kelas->update([
+            'nama_kelas' => $request->nama_kelas,
+        ]);
+
+        return redirect()->route('data-kelas')->with('success', 'Kelas berhasil diperbarui!');
     }
 
     public function deleteKelas(Kelas $kelas)

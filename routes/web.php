@@ -60,11 +60,13 @@ Route::middleware(['auth:admin'])->group(function () {
         // ROUTE DATA KELAS
         Route::get('/data-kelas', [MahasiswaController::class, 'kelas'])->name('data-kelas');
         Route::post('/data-kelas/proses', [MahasiswaController::class, 'storeKelas'])->name('data-kelas.proses');
+        Route::put('/data-kelas/{kelas}/edit', [MahasiswaController::class, 'editKelas'])->name('data-kelas.edit');
         Route::delete('/data-kelas/{kelas}/hapus', [MahasiswaController::class, 'deleteKelas'])->name('data-kelas.delete');
 
         // ROUTE DATA MATAKULIAH
         Route::get('/data-mata-kuliah', [MataKuliahController::class, 'matakuliah'])->name('data-mata-kuliah');
         Route::post('/data-mata-kuliah/proses', [MataKuliahController::class, 'storeMatakuliah'])->name('data-mata-kuliah.proses');
+        Route::put('/data-mata-kuliah/{mataKuliah}/edit', [MataKuliahController::class, 'editMatakuliah'])->name('data-mata-kuliah.edit');
         Route::delete('/data-mata-kuliah/{matakuliah}/hapus', [MataKuliahController::class, 'deleteMatakuliah'])->name('data-mata-kuliah.delete');
     });
 
@@ -91,7 +93,7 @@ Route::middleware(['auth:admin'])->group(function () {
 
         // ROUTE VERIFIKASI PEMINJAMAN
         Route::get('verifikasi-peminjaman', [PeminjamanController::class, 'index'])->name('verifikasi');
-        Route::get('verifikasi-peminjaman/{peminjaman}', [PeminjamanController::class, 'update'])->name('verifikasi.update');
+        Route::put('verifikasi-peminjaman/{peminjaman}', [PeminjamanController::class, 'update'])->name('verifikasi.update');
     });
 });
 

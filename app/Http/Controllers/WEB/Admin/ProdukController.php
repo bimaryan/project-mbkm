@@ -17,8 +17,8 @@ class ProdukController extends Controller
     {
         $query = Barang::query();
 
-        if ($request->has('nama_barang') && $request->name != '') {
-            $query->where('nama_barang', 'LIKE', '%' . $request->name . '%');
+        if ($request->has('nama_barang') && $request->nama_barang != '') {
+            $query->where('nama_barang', 'LIKE', '%' . $request->nama_barang . '%');
         }
 
         if ($request->has('kategori_id') && $request->kategori_id != '') {
@@ -27,12 +27,12 @@ class ProdukController extends Controller
 
         if ($request->has('kondisi') && $request->kondisi != '') {
             $query->whereHas('stock', function ($q) use ($request) {
-                if ($request->kondisi == 'habis') {
+                if ($request->kondisi == 'Habis') {
                     $q->where('stock', 0);
-                } elseif ($request->kondisi == 'terpakai') {
-                    $q->where('is_stock_reduced', true);
-                } elseif ($request->kondisi == 'hilang') {
-                    $q->where('is_stock_lost', true);
+                } elseif ($request->kondisi == 'Terpakai') {
+                    $q->where('stock_pinjam');
+                } elseif ($request->kondisi == 'Hilang') {
+                    $q->where('stock_hilang');
                 } else {
                     $q->where('stock', '>', 0);
                 }
@@ -68,25 +68,20 @@ class ProdukController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'satuan_id' => 'required|exists:satuans,id',
         ], [
-            'nama_barang.required'=> 'Nama barang harus diisi',
-            'stock.required'=> 'Stok harus diisi',
-            'stock.min'=> 'Stok minimal 1',
+            'nama_barang.required' => 'Nama barang harus diisi',
+            'stock.required' => 'Stok harus diisi',
+            'stock.min' => 'Stok minimal 1',
         ]);
 
-        
+
         $filePath = $request->file('foto')->move('uploads/barang', time() . '_' . $request->file('foto')->getClientOriginalName());
-        // dd($request->all());
-        
+
         $barang = Barang::create([
             'nama_barang' => $request->nama_barang,
             'foto' => $filePath,
             'kategori_id' => $request->kategori_id,
             'satuan_id' => $request->satuan_id,
             'kondisi_id' => 4,
-        ]);
-
-        Persentase::create([
-            'satuans_id' => $request->satuan_id,
         ]);
 
         Stock::create([
@@ -117,7 +112,6 @@ class ProdukController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'satuan_id' => 'required|exists:satuans,id',
         ]);
-        // dd($request->all());
 
         if ($request->hasFile('foto')) {
             // Hapus gambar lama jika ada
@@ -125,7 +119,6 @@ class ProdukController extends Controller
                 unlink(public_path($barang->foto));
             }
 
-            // Simpan gambar baru
             $filePath = $request->file('foto')->move('uploads/barang', time() . '_' . $request->file('foto')->getClientOriginalName());
             $barang->gambar = $filePath;
         }

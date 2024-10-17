@@ -49,39 +49,42 @@
         <div class="grid grid-cols-1 gap-3 mt-5 md:grid-cols-2">
             <div class="space-y-3">
                 <div class="flex justify-center w-full">
-                    <img src="{{ asset($view->gambar) }}" alt="{{ asset($view->gambar) }}"
+                    <img src="{{ asset($view->foto) }}" alt="{{ asset($view->foto) }}"
                         class="object-cover border border-green-500 rounded-lg shadow-lg image">
                 </div>
-                <p class="text-2xl font-semibold">{{ $view->name }}</p>
-                <p class="text-gray-500 text-m">{{ $view->deskripsi }}</p>
+                <p class="text-2xl font-semibold">{{ $view->nama_barang }}</p>
             </div>
             <div>
                 <form action="{{ route('mahasiswa.peminjaman', ['barang' => $view->id, 'stock' => $stock->id]) }}"
                     method="POST">
                     @csrf
-                    <input type="hidden" name="barang_id" value="{{ $view->id }}">
                     <div class="mb-4">
                         <label for="kelas" class="block text-lg font-medium text-gray-700">Kelas</label>
-                        <select name="kelas_id" id="kelas"
+                        <input type="text" name="kelas" id="kelas"
+                            value="{{ Auth::user()->kelas->nama_kelas }}" disabled
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                            <option value="">Pilih Kelas</option>
-                            @foreach ($kelas as $kls)
-                                <option value="{{ $kls->id }}">{{ $kls->nama_kelas }}</option>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="matkul" class="block text-lg font-medium text-gray-700">Mata Kuliah</label>
+                        <select name="matkul_id" id="matkul"
+                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                            <option value="">Pilih Mata Kuliah</option>
+                            @foreach ($matkul as $matkuls)
+                                <option value="{{ $matkuls->id }}">{{ $matkuls->mata_kuliah }}</option>
                             @endforeach
                         </select>
                     </div>
 
-                    
-                    
                     <div class="mb-4">
-                        <label for="jurusan" class="block text-lg font-medium text-gray-700">Jurusan</label>
-                        <input type="text" name="jurusan" id="jurusan" placeholder="Jurusan"
+                        <label for="rooms" class="block text-lg font-medium text-gray-700">Ruangan</label>
+                        <select name="rooms_id" id="rooms_id"
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                    </div>
-                    <div class="mb-4">
-                        <label for="matkul" class="block text-lg font-medium text-gray-700">Mata Kuliah</label>
-                        <input type="text" name="matkul" id="matkul" placeholder="Masukkan Mata Kuliah"
-                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                            <option value="">Pilih Ruangan</option>
+                            @foreach ($room as $rooms)
+                                <option value="{{ $rooms->id }}">{{ $rooms->ruangan }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="mb-4">
@@ -90,8 +93,6 @@
                             placeholder="Masukkan Jumlah Barang yang di pinjam"
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                     </div>
-
-                    
 
                     <div class="mb-4">
                         <label for="tgl_pinjam" class="block text-lg font-medium text-gray-700">Tanggal Pinjam</label>
@@ -104,7 +105,6 @@
                         <input type="date" name="tgl_kembali" id="tgl_kembali"
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                     </div>
-
 
                     <div class="mt-4">
                         <button type="submit"

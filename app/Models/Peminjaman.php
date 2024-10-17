@@ -15,16 +15,14 @@ class Peminjaman extends Model
         'mahasiswa_id',
         'barang_id',
         'stock_id',
-        'kelas_id',
-        'jurusan_id',
         'spo_id',
         'rooms_id',
+        'matkul_id',
+        'stock_pinjam',
         'QR',
-        'matkul',
         'tgl_pinjam',
         'tgl_kembali',
         'keterangan',
-        'diserahkan',
         'aprovals',
         'status',
     ];
@@ -44,11 +42,6 @@ class Peminjaman extends Model
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 
-    public function jurusan()
-    {
-        return $this->belongsTo(Jurusan::class, 'jurusan_id');
-    }
-
     public function spo()
     {
         return $this->belongsTo(SpoDokumen::class, 'spo_id');
@@ -62,5 +55,10 @@ class Peminjaman extends Model
     public function stock()
     {
         return $this->belongsTo(Stock::class, 'stock_id');
+    }
+
+    public function matkul()
+    {
+        return $this->belongsTo(MataKuliah::class, 'matkul_id');
     }
 }

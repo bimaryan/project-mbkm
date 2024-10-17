@@ -15,4 +15,9 @@ class MataKuliah extends Model
         'kode_mata_kuliah',
         'mata_kuliah',
     ];
+
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'matkul_id');
+    }
 }

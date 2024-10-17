@@ -28,8 +28,6 @@ class Barang extends Model
         return $this->belongsTo(Satuan::class);
     }
 
-
-
     public function stock()
     {
         return $this->hasOne(Stock::class, 'barang_id', 'id');
