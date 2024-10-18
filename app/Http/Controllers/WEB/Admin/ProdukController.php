@@ -117,22 +117,24 @@ class ProdukController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'satuan_id' => 'required|exists:satuans,id',
         ]);
-        // dd($request->all());
-
+        
         if ($request->hasFile('foto')) {
             // Hapus gambar lama jika ada
             if ($barang->foto && file_exists(public_path($barang->foto))) {
                 unlink(public_path($barang->foto));
             }
-
+            
             // Simpan gambar baru
             $filePath = $request->file('foto')->move('uploads/barang', time() . '_' . $request->file('foto')->getClientOriginalName());
-            $barang->gambar = $filePath;
+            $barang->foto = $filePath;
         }
+        // dd($barang->all());
+        
         $barang->update([
             'nama_barang' => $request->nama_barang,
             'kategori_id' => $request->kategori_id,
             'satuan_id' => $request->satuan_id,
+            'foto' => $request->hasFile('foto') ? $filePath : $barang->foto,
         ]);
 
         $barang->stock->update([

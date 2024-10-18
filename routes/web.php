@@ -24,7 +24,7 @@ use App\Http\Controllers\WEB\Mahasiswa\HomeController;
 |
 */
 
-Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('login-process', [LoginController::class, 'login'])->name('login-process');
 
 Route::get('forgot-password', [ForgotPasswordController::class, 'index'])->name('forgot-password');
@@ -98,7 +98,7 @@ Route::middleware(['auth:admin'])->group(function () {
 Route::middleware(['auth:mahasiswa'])->group(function () {
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
-    Route::get('home', [HomeController::class, 'home'])->name('mahasiswa');
+    Route::get('home', [HomeController::class, 'home'])->name('home');
     Route::get('katalog', [HomeController::class, 'katalog'])->name('katalog');
     Route::get('katalog/peminjaman-barang/{nama_barang}', [HomeController::class, 'viewbarang'])->name('viewbarang');
     Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjaman'])->name('mahasiswa.peminjaman');

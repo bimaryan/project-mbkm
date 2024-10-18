@@ -119,9 +119,6 @@
                                                     class="block text-sm font-medium text-gray-700">Gambar</label>
                                                 <input type="file" name="foto" id="foto"
                                                     class="block w-full px-3 mt-1 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                                @error('foto')
-                                                    <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                                                @enderror
                                             </div>
                                         </div>
 
@@ -139,7 +136,7 @@
                 <form action="{{ route('data-barang') }}" method="GET"
                     class="flex flex-col items-center gap-2 mt-2 mb-4 md:flex-row">
                     <!-- Filter Nama Barang -->
-                    <input type="text" name="name" placeholder="Nama Barang" value="{{ request('name') }}"
+                    <input type="text" name="nama_barang" placeholder="Nama Barang" value="{{ request('nama_barang') }}"
                         class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
 
                     <!-- Filter Kategori -->

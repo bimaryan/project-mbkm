@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'staff' => [
+            'driver' => 'session',
+            'provider' => 'staffs',
+        ],
         'mahasiswa' => [
             'driver' => 'session',
             'provider' => 'mahasiswas',
@@ -78,6 +82,10 @@ return [
             'model' => App\Models\Admin::class,
         ],
 
+        'staffs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Staff::class,
+        ],
         'mahasiswas' => [
             'driver' => 'eloquent',
             'model' => App\Models\Mahasiswa::class,

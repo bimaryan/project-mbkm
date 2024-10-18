@@ -1,6 +1,6 @@
 <nav class="fixed top-0 left-0 z-10 w-full bg-white border-gray-200 shadow-lg dark:bg-gray-900">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
-        <a href="{{ route('mahasiswa') }}" class="flex flex-col items-center space-x-3 rtl:space-x-reverse">
+        <a href="{{ route('home') }}" class="flex flex-col items-center space-x-3 rtl:space-x-reverse">
             <span class="self-center text-2xl font-semibold text-green-500 md:text-1xl whitespace-nowrap">SILK</span>
             <span class="self-center hidden text-xs font-semibold text-green-500 md:block whitespace-nowrap">Sistem
                 Informasi Kesehatan</span>
@@ -20,14 +20,14 @@
                                 <a href="{{ route('profile') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white {{ Route::is('profile') ? 'bg-gray-200' : '' }}"
                                     role="menuitem">
-                                    <i class="fa-solid fa-user"></i> Profil
+                                    <i class="fa-solid fa-user me-3"></i>Profil
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">
-                                    <i class="fa-solid fa-right-from-bracket"></i> Keluar
+                                    <i class="fa-solid fa-right-from-bracket me-3"></i>Keluar
                                 </a>
                             </li>
                         </ul>
@@ -54,9 +54,9 @@
             <ul
                 class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                 <li>
-                    <a href="{{ route('mahasiswa') }}"
+                    <a href="{{ route('home') }}"
                         class="block py-2 px-3 rounded md:bg-transparent md:p-0
-           {{ Route::is('mahasiswa') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}"
+           {{ Route::is('home') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}"
                         aria-current="page">Home</a>
                 </li>
                 <li>

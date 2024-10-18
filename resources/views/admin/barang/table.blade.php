@@ -108,25 +108,50 @@
                             </div>
                             <!-- Modal body -->
                             <div class="p-4">
-                                <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
-                                    <!-- Image -->
-                                    <div class="flex justify-center mb-3">
+                                <!-- Image -->
+                                <div class="flex flex-col items-center gap-5 p-4 md:flex-row">
+                                    <div class="relative overflow-hidden border border-4 border-green-500 rounded-full">
                                         <img src="{{ asset($data->foto) }}" alt="{{ $data->foto }}"
-                                            class="object-cover border rounded-lg">
+                                        class="object-cover rounded-full" style="width: 130px; height: 130px;">
                                     </div>
-                                    <div>
-                                        <div class="text-lg font-semibold">{{ $data->nama_barang }}</div>
-                                        <div>
-                                            Kategori: {{ $data->kategori->kategori }}
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div class="space-y-2">
+                                            <p
+                                                class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
+                                                <span>Nama Barang</span>
+                                                <span>:</span>
+                                            </p>
+                                            <p
+                                                class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
+                                                <span>Kategori</span>
+                                                <span>:</span>
+                                            </p>
+                                            <p
+                                                class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
+                                                <span>Satuan</span>
+                                                <span>:</span>
+                                            </p>
+                                            <p
+                                                class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
+                                                <span>Stok</span>
+                                                <span>:</span>
+                                            </p>
+
                                         </div>
-                                        <div>
-                                            Satuan: {{ $data->satuan->satuan }}
-                                        </div>
-                                        <div>
-                                            Kondisi: {{ $data->kondisi->kondisi }}
-                                        </div>
-                                        <div>
-                                            Stock: {{ $data->stock->stock }}
+                                        <div class="space-y-2">
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                {{ $data->nama_barang }}
+                                            </p>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                {{ $data->kategori->kategori }}
+                                            </p>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                {{ $data->satuan->satuan }}
+                                            </p>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                {{ $data->stock->stock }}
+                                            </p>
+
                                         </div>
                                     </div>
                                 </div>

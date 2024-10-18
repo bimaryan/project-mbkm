@@ -24,15 +24,15 @@
                             class="object-cover rounded-full" style="width: 130px; height: 130px;">
                     @else
                         <!-- Tampilan default jika tidak ada gambar -->
-                        <div class="bg-gray-200 flex items-center justify-center rounded-full" style="width: 130px; height: 130px;">
-                            <i class="fas fa-upload text-gray-500 text-2xl"></i>
+                        <div class="flex items-center justify-center bg-gray-200 rounded-full" style="width: 130px; height: 130px;">
+                            <i class="text-2xl text-gray-500 fas fa-upload"></i>
                         </div>
                     @endif
 
                     <!-- Ikon Upload FontAwesome di tengah untuk kondisi hover -->
                     <div
-                        class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
-                        <i class="fas fa-upload text-white text-1xl"></i>
+                        class="absolute inset-0 flex items-center justify-center transition-opacity duration-300 bg-black bg-opacity-50 opacity-0 hover:opacity-100">
+                        <i class="text-white fas fa-upload text-1xl"></i>
                     </div>
 
                     <input type="file" id="uploadImage" name="foto" accept="image/*"

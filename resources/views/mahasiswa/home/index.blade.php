@@ -58,7 +58,7 @@
                     real-time untuk menghindari tumpang tindih pemesanan.</p>
 
                 {{-- Form Filter --}}
-                <form method="GET" action="{{ route('mahasiswa') }}" class="flex items-center justify-center gap-2 mb-4">
+                <form method="GET" action="{{ route('home') }}" class="flex items-center justify-center gap-2 mb-4">
                     {{-- Tombol Semua Kategori --}}
                     <button type="submit" name="kategori" value="Semua"
                         class="px-3 py-2 rounded-lg border shadow-xl {{ request('kategori') == 'Semua' ? 'bg-green-800 text-white' : 'border-green-500 hover:bg-green-800 hover:text-white' }}">
@@ -102,7 +102,7 @@
                 @endif
 
                 <div class="text-center">
-                    <a href="{{ route('mahasiswa.katalog') }}" class="text-green-500 font-medium text-m">Lihat Semua</a>
+                    <a href="{{ route('katalog') }}" class="font-medium text-green-500 text-m">Lihat Semua</a>
                 </div>
             </div>
         </div>
