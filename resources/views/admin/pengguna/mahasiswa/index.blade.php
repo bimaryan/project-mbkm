@@ -74,7 +74,7 @@
                                                 <label for="kelas_id" class="block text-sm font-medium text-gray-700">Pilih
                                                     Kelas</label>
                                                 <select name="kelas_id" id="kelas_id"
-                                                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                                class="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                                                     <option value="">- Pilih Kelas -</option>
                                                     @foreach ($kelas as $kelas)
                                                         <option value="{{ $kelas->id }}">{{ $kelas->nama_kelas }}</option>
@@ -175,6 +175,13 @@
                     }
                 });
             }
+        });
+        $(document).ready(function() {
+            $('#data-mahasiswa').DataTable({
+                paging: false,
+                scrollCollapse: true,
+                scrollY: '300px'
+            });
         });
     </script>
 @endsection

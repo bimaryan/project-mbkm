@@ -114,7 +114,7 @@
             @if (Auth::user()->role->nama_role === 'Staff')
                 <li>
                     <a id="kelolaproduk" data-collapse-toggle="dropdown"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('staff/*') ? 'bg-green-500 text-white' : '' }}">
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('data-alat-dan-bahan/*') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-folder"></i> Alat dan
                             Bahan</span>
                         <i class="fa-solid fa-chevron-down"></i>

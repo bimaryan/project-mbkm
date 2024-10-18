@@ -80,7 +80,7 @@
                                                 <label for="kategori_id"
                                                     class="block text-sm font-medium text-gray-700">Kategori</label>
                                                 <select name="kategori_id" id="kategori_id"
-                                                    class="block w-full px-3 py-2 mt-1 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                class="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                                                     <!-- Assuming you load categories from the database -->
                                                     <option value="">- Pilih -</option>
                                                     @foreach ($kategoris as $kategori)
@@ -98,9 +98,9 @@
                                                 <label for="satuan_id"
                                                     class="block text-sm font-medium text-gray-700">Satuan</label>
                                                 <select name="satuan_id" id="satuan_id"
-                                                    class="block w-full px-3 py-2 mt-1 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                                class="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                                                     <!-- Assuming you load satuans from the database -->
-                                                    <option value="">- Pilih -</option>
+                                                    <option value="">- Pilih Satuan -</option>
                                                     @foreach ($satuans as $satuan)
                                                         <option value="{{ $satuan->id }}">{{ $satuan->satuan }}
                                                         </option>
@@ -133,54 +133,6 @@
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
-                <form action="{{ route('data-barang') }}" method="GET"
-                    class="flex flex-col items-center gap-2 mt-2 mb-4 md:flex-row">
-                    <!-- Filter Nama Barang -->
-                    <input type="text" name="nama_barang" placeholder="Nama Barang" value="{{ request('nama_barang') }}"
-                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-
-                    <!-- Filter Kategori -->
-                    <select name="kategori_id"
-                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                        <option value="">Pilih Kategori</option>
-                        @foreach ($kategoris as $kategori)
-                            <option value="{{ $kategori->id }}"
-                                {{ request('kategori_id') == $kategori->id ? 'selected' : '' }}>
-                                {{ $kategori->kategori }}
-                            </option>
-                        @endforeach
-                    </select>
-
-                    <!-- Filter Kondisi -->
-                    <select name="kondisi"
-                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                        <option value="">Pilih Kondisi</option>
-                        <option value="baik" {{ request('kondisi') == 'baik' ? 'selected' : '' }}>Baik</option>
-                        <option value="terpakai" {{ request('kondisi') == 'terpakai' ? 'selected' : '' }}>Terpakai
-                        </option>
-                        <option value="hilang" {{ request('kondisi') == 'hilang' ? 'selected' : '' }}>Hilang</option>
-                        <option value="habis" {{ request('kondisi') == 'habis' ? 'selected' : '' }}>Habis</option>
-                    </select>
-
-                    <!-- Filter Stock -->
-                    <input type="number" name="stock" placeholder="Minimal Stock" value="{{ request('stock') }}"
-                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-
-                    <!-- Filter Satuan -->
-                    <select name="satuan_id"
-                        class="w-full border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                        <option value="">Pilih Satuan</option>
-                        @foreach ($satuans as $satuan)
-                            <option value="{{ $satuan->id }}"
-                                {{ request('satuan_id') == $satuan->id ? 'selected' : '' }}>
-                                {{ $satuan->satuan }}
-                            </option>
-                        @endforeach
-                    </select>
-
-                    <button type="submit"
-                        class="w-full px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-800">Filter</button>
-                </form>
 
                 <div id="tableBarang">
                     @include('admin.barang.table', ['barangs' => $barangs])
@@ -248,6 +200,13 @@
                     }
                 });
             }
+        });
+        $(document).ready(function() {
+            $('#data-barang').DataTable({
+                paging: false,
+                scrollCollapse: true,
+                scrollY: '300px'
+            });
         });
     </script>
 @endsection

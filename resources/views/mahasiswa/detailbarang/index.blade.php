@@ -49,11 +49,10 @@
         <div class="grid grid-cols-1 gap-3 mt-5 md:grid-cols-2">
             <div class="space-y-3">
                 <div class="flex justify-center w-full">
-                    <img src="{{ asset($view->gambar) }}" alt="{{ asset($view->gambar) }}"
+                    <img src="{{ asset($view->foto) }}" alt="{{ asset($view->foto) }}"
                         class="object-cover border border-green-500 rounded-lg shadow-lg image">
                 </div>
-                <p class="text-2xl font-semibold">{{ $view->name }}</p>
-                <p class="text-gray-500 text-m">{{ $view->deskripsi }}</p>
+                <p class="text-2xl font-semibold">{{ $view->nama_barang }}</p>
             </div>
             <div>
                 <form action="{{ route('mahasiswa.peminjaman', ['barang' => $view->id, 'stock' => $stock->id]) }}"

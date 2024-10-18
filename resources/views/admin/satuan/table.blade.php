@@ -1,10 +1,7 @@
 <div class="relative overflow-x-auto sm:rounded-lg">
-    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+    <table class="w-full text-sm text-center text-gray-500 display dark:text-gray-400" style="100%" id="data-satuan">
+        <thead class="uppercase text-cen-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">
-                    No
-                </th>
                 <th scope="col" class="px-6 py-3">
                     Nama Satuan
                 </th>
@@ -16,9 +13,6 @@
         <tbody>
             @foreach ($satuan as $data)
                 <tr>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $loop->iteration }}
-                    </td>
                     <td scope="col" class="px-6 py-3">
                         {{ $data->satuan }}
                     </td>

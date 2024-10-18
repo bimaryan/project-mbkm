@@ -69,7 +69,7 @@ Route::middleware(['auth:admin'])->group(function () {
     });
 
     Route::middleware(['UserAccess:Staff'])->group(function () {
-        Route::prefix('staff/')->group(function () {
+        Route::prefix('data-alat-dan-bahan/')->group(function () {
             // ROUTE DATA BARANG
             Route::get('data-barang', [ProdukController::class, 'barang'])->name('data-barang');
             Route::post('data-barang/proses', [ProdukController::class, 'storeBarang'])->name('data-barang.proses');

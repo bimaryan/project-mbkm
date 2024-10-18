@@ -1,8 +1,9 @@
 <div class="relative overflow-x-auto sm:rounded-lg">
-    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+    <table class="w-full text-sm text-gray-500 dark:text-gray-400 display" style="100%" id="data-mahasiswa">
+        <thead class="uppercase text-cen-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">
+                {{-- <th scope="col" class="px-6 py-3"> --}}
+                <th scope="col" class="px-6 py-3 ">
                     No
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -13,6 +14,9 @@
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Kelas
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Email
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Aksi
@@ -33,6 +37,13 @@
                     </td>
                     <td scope="col" class="px-6 py-3">
                         {{ $data->kelas->nama_kelas }}
+                    </td>
+                    <td scope="col" class="px-6 py-3">
+                        @if ($data->email)
+                            {{ $data->email }}
+                        @else
+                            -
+                        @endif
                     </td>
                     <td scope="col" class="flex items-center justify-center gap-2 px-6 py-3">
                         <div>

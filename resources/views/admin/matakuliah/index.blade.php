@@ -150,5 +150,12 @@
                 });
             }
         });
+        $(document).ready(function() {
+            $('#data-mata-kuliah').DataTable({
+                paging: false,
+                scrollCollapse: true,
+                scrollY: '300px'
+            });
+        });
     </script>
 @endsection

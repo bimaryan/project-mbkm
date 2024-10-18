@@ -80,7 +80,7 @@
                 @else
                     <div id="card-section" class="grid grid-cols-1 gap-2 md:grid-cols-3 animate-card">
                         @foreach ($barangs as $data)
-                            <a href=""
+                            <a href="{{ route('viewbarang', $data->id) }}"
                                 class="w-full p-3 border border-green-500 rounded-lg shadow-lg max-w-m">
                                 <div class="flex justify-center w-full">
                                     <img src="{{ url($data->foto) }}" class="object-cover zoom-image"
@@ -93,8 +93,7 @@
                                     </span>
                                 </div>
                                 <div class="mt-1">
-                                    <p class="font-normal">{{ Str::limit($data->name, 50) }}</p>
-                                    <p class="text-sm font-normal text-gray-600">{{ Str::limit($data->deskripsi, 50) }}</p>
+                                    <p class="font-normal">{{ Str::limit($data->nama_barang, 50) }}</p>
                                 </div>
                             </a>
                         @endforeach

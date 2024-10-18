@@ -1,6 +1,6 @@
 <div class="relative overflow-x-auto sm:rounded-lg">
-    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+    <table class="w-full text-sm text-gray-500 dark:text-gray-400 display" style="100%" id="data-barang">
+        <thead class="uppercase text-cen-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     No
@@ -37,7 +37,7 @@
                     <td scope="col" class="px-6 py-3">
                         {{ $data->kategori->kategori }}
                     </td>
-                    <td scope="col" class="px-6 py-3">
+                    <td scope="col" class="px-6 py-3 text-center">
                         @if ($data->stock->stock == 0)
                             <p class="p-1 text-white bg-red-500 rounded-lg">Habis</p>
                         @elseif ($data->stock->stock > 0 && $data->is_stock_reduced)
@@ -107,12 +107,11 @@
                                 </button>
                             </div>
                             <!-- Modal body -->
-                            <div class="p-4">
-                                <!-- Image -->
+                            <div class="p-2">
                                 <div class="flex flex-col items-center gap-5 p-4 md:flex-row">
-                                    <div class="relative overflow-hidden border border-4 border-green-500 rounded-full">
+                                    <div class="relative overflow-hidden border border-green-500">
                                         <img src="{{ asset($data->foto) }}" alt="{{ $data->foto }}"
-                                        class="object-cover rounded-full" style="width: 130px; height: 130px;">
+                                            class="object-cover" style="width: 150px; height: 150px;">
                                     </div>
                                     <div class="grid grid-cols-2 gap-2">
                                         <div class="space-y-2">
@@ -128,7 +127,7 @@
                                             </p>
                                             <p
                                                 class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
-                                                <span>Satuan</span>
+                                                <span>Kondisi</span>
                                                 <span>:</span>
                                             </p>
                                             <p
@@ -136,7 +135,11 @@
                                                 <span>Stok</span>
                                                 <span>:</span>
                                             </p>
-
+                                            <p
+                                                class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
+                                                <span>Satuan</span>
+                                                <span>:</span>
+                                            </p>
                                         </div>
                                         <div class="space-y-2">
                                             <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -146,12 +149,14 @@
                                                 {{ $data->kategori->kategori }}
                                             </p>
                                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                                {{ $data->satuan->satuan }}
+                                                {{ $data->kondisi->kondisi }}
                                             </p>
                                             <p class="text-sm text-gray-500 dark:text-gray-400">
                                                 {{ $data->stock->stock }}
                                             </p>
-
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                {{ $data->satuan->satuan }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
