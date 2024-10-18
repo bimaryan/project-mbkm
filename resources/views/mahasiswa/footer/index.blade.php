@@ -2,7 +2,8 @@
     <div class="mx-auto w-full p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
-                <a href="https://flowbite.com/" class="flex items-center">
+                <a href="{{ route('mahasiswa') }}" class="flex items-center">
+                    <img src="{{ asset('logo/polindra.png') }}" class="h-8 me-3" alt="{{ asset('logo/polindra.png') }}" />
                     <span class="self-center text-2xl font-semibold whitespace-nowrap text-green-500">SILK</span>
                 </a>
             </div>

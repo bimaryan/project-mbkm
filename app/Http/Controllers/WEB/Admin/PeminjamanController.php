@@ -17,6 +17,7 @@ class PeminjamanController extends Controller
     public function update(Request $request, Peminjaman $peminjaman)
     {
         $peminjaman->aprovals = $request->input('aprovals');
+        $peminjaman->status = 'Dipinjam';
         $peminjaman->save();
 
         return redirect()->back()->with('success', 'Status approval peminjaman berhasil diperbarui.');

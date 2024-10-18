@@ -51,7 +51,7 @@
 
     <div class="flex background flex-col items-center justify-center h-screen space-y-4 p-4">
         <div class="flex justify-center">
-            <img src="{{ asset('image/kampus-merdeka.png') }}" alt="" class="w-full object-cover">
+            <img src="{{ asset('logo/polindra.png') }}" alt="" class="object-cover w-full h-24">
         </div>
 
         <div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-lg">

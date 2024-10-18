@@ -58,29 +58,33 @@
                 <form action="{{ route('mahasiswa.peminjaman', ['barang' => $view->id, 'stock' => $stock->id]) }}"
                     method="POST">
                     @csrf
-                    <input type="hidden" name="barang_id" value="{{ $view->id }}">
                     <div class="mb-4">
                         <label for="kelas" class="block text-lg font-medium text-gray-700">Kelas</label>
-                        <select name="kelas_id" id="kelas"
+                        <input type="text" name="kelas" id="kelas"
+                            value="{{ Auth::user()->kelas->nama_kelas }}" disabled
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                            <option value="">Pilih Kelas</option>
-                            @foreach ($kelas as $kls)
-                                <option value="{{ $kls->id }}">{{ $kls->nama_kelas }}</option>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="matkul" class="block text-lg font-medium text-gray-700">Mata Kuliah</label>
+                        <select name="matkul_id" id="matkul"
+                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                            <option value="">Pilih Mata Kuliah</option>
+                            @foreach ($matkul as $matkuls)
+                                <option value="{{ $matkuls->id }}">{{ $matkuls->mata_kuliah }}</option>
                             @endforeach
                         </select>
                     </div>
 
-                    
-                    
                     <div class="mb-4">
-                        <label for="jurusan" class="block text-lg font-medium text-gray-700">Jurusan</label>
-                        <input type="text" name="jurusan" id="jurusan" placeholder="Jurusan"
+                        <label for="rooms" class="block text-lg font-medium text-gray-700">Ruangan</label>
+                        <select name="rooms_id" id="rooms_id"
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                    </div>
-                    <div class="mb-4">
-                        <label for="matkul" class="block text-lg font-medium text-gray-700">Mata Kuliah</label>
-                        <input type="text" name="matkul" id="matkul" placeholder="Masukkan Mata Kuliah"
-                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                            <option value="">Pilih Ruangan</option>
+                            @foreach ($room as $rooms)
+                                <option value="{{ $rooms->id }}">{{ $rooms->ruangan }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="mb-4">
@@ -90,8 +94,6 @@
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                     </div>
 
-                    
-
                     <div class="mb-4">
                         <label for="tgl_pinjam" class="block text-lg font-medium text-gray-700">Tanggal Pinjam</label>
                         <input type="date" name="tgl_pinjam" id="tgl_pinjam"
@@ -99,11 +101,16 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="tgl_kembali" class="block text-lg font-medium text-gray-700">Tanggal Kembali</label>
-                        <input type="date" name="tgl_kembali" id="tgl_kembali"
+                        <label for="waktu_pinjam" class="block text-lg font-medium text-gray-700">Waktu Peminjaman</label>
+                        <input type="time" name="waktu_pinjam" id="waktu_pinjam"
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                     </div>
 
+                    <div class="mb-4">
+                        <label for="waktu_kembali" class="block text-lg font-medium text-gray-700">Waktu Pengembalian</label>
+                        <input type="time" name="waktu_kembali" id="waktu_kembali"
+                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                    </div>
 
                     <div class="mt-4">
                         <button type="submit"

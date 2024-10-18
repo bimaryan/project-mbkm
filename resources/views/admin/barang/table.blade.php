@@ -254,13 +254,12 @@
                                         @enderror
                                     </div>
                                     <!-- Gambar -->
-                                    <div class="mb-3">
+                                    <div class="mb-2">
                                         <label for="foto"
                                             class="block text-sm font-medium text-gray-700">Gambar</label>
                                         <input type="file" name="foto" id="foto"
                                             value="{{ $data->foto }}"
                                             class="block w-full px-3 mt-1 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-
                                     </div>
 
                                     <button type="submit"

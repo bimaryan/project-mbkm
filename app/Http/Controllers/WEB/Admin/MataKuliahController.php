@@ -16,18 +16,35 @@ class MataKuliahController extends Controller
 
     public function storeMatakuliah(Request $request) {
         $request->validate([
-            'kode_mata_kuliah' => 'required|string',
             'mata_kuliah' => 'required|string',
         ]);
 
         DB::transaction(function () use ($request) {
+            $totalMataKuliah = MataKuliah::count() + 1;
+
+            $kodeMataKuliah = str_pad($totalMataKuliah, 3, '0', STR_PAD_LEFT);
+
+
             $matakuliah = new MataKuliah();
-            $matakuliah->kode_mata_kuliah = $request->kode_mata_kuliah;
+            $matakuliah->kode_mata_kuliah = $kodeMataKuliah;
             $matakuliah->mata_kuliah = $request->mata_kuliah;
             $matakuliah->save();
         });
 
         return redirect()->route('data-mata-kuliah')->with('success', 'Mata kuliah berhasil ditambahkan!');
+    }
+
+    public function editMatakuliah(MataKuliah $mataKuliah, Request $request)
+    {
+        $request->validate([
+            'mata_kuliah' => 'required|string',
+        ]);
+
+        $mataKuliah->update([
+            'mata_kuliah' => $request->mata_kuliah,
+        ]);
+
+        return redirect()->route('data-mata-kuliah')->with('success', 'Mata kuliah berhasil diperbarui!');
     }
 
     public function deleteMatakuliah(MataKuliah $matakuliah) {

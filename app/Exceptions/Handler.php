@@ -49,8 +49,20 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-        if ($exception instanceof HttpException && $exception->getStatusCode() == 403) {
-            return response()->view('errors.403', [], 403);
+        if ($exception instanceof HttpException) {
+            if ($exception->getStatusCode() == 403) {
+                return response()->view('errors.403', [], 403);
+            } elseif ($exception->getStatusCode() == 404) {
+                return response()->view('errors.404', [], 404);
+            } elseif ($exception->getStatusCode() == 419) {
+                return response()->view('errors.419', [], 419);
+            } elseif ($exception->getStatusCode() == 429) {
+                return response()->view('errors.429', [], 429);
+            } elseif ($exception->getStatusCode() == 500) {
+                return response()->view('errors.500', [], 500);
+            }
+        } elseif ($exception instanceof \Illuminate\Database\QueryException) {
+            return response()->view('errors.database', [], 500);
         }
 
         return parent::render($request, $exception);

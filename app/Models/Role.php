@@ -13,6 +13,10 @@ class Role extends Model
         'nama_role',
     ];
 
+    const ADMIN = 1;
+
+    const STAFF = 2;
+
     public function admin() {
         return $this->hasMany(Admin::class);
     }

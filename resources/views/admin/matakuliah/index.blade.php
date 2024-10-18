@@ -52,18 +52,10 @@
                                         @csrf
                                         <div class="gap-2">
                                             <div class="mb-2">
-                                                <label for="kode_mata_kuliah"
-                                                    class="block text-sm font-medium text-gray-700">kode Mata Kuliah</label>
-                                                <input type="text" name="kode_mata_kuliah" id="kode_mata_kuliah" placeholder="Masukan Kode Mata Kuliah"
-                                                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                                                @error('kode_mata_kuliah')
-                                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                                                @enderror
-                                            </div>
-                                            <div class="mb-2">
                                                 <label for="mata_kuliah"
                                                     class="block text-sm font-medium text-gray-700">Nama Mata Kuliah</label>
-                                                <input type="text" name="mata_kuliah" id="mata_kuliah" placeholder="Masukan Nama Mata Kuliah"
+                                                <input type="text" name="mata_kuliah" id="mata_kuliah"
+                                                    placeholder="Masukan Nama Mata Kuliah"
                                                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                                 @error('mata_kuliah')
                                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -81,9 +73,6 @@
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
-                <form action="">
-
-                </form>
                 <div id="tableMatakuliah">
                     @include('admin.matakuliah.table', ['matakuliah' => $matakuliah])
                 </div>
