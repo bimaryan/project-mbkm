@@ -131,5 +131,12 @@
                 });
             }
         });
+        $(document).ready(function() {
+            $('#data-satuan').DataTable({
+                paging: false,
+                scrollCollapse: true,
+                scrollY: '300px'
+            });
+        });
     </script>
 @endsection
