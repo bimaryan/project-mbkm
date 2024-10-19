@@ -4,17 +4,24 @@ namespace App\Http\Controllers\WEB\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kategori;
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
 {
     public function kategori()
     {
+        $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])
+            ->where('status', '!=', 'Dikembalikan')
+            ->latest()
+            ->take(5)
+            ->get();
+
         $kategori = Kategori::paginate(5);
-        return view('admin.kategori.index', ['kategori' => $kategori]);
+        return view('admin.kategori.index', ['kategori' => $kategori, 'notifikasiPeminjaman' => $notifikasiPeminjaman]);
     }
 
-    
+
 
     public function storeKategori(Request $request)
     {

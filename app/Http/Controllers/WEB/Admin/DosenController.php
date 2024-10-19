@@ -4,24 +4,33 @@ namespace App\Http\Controllers\WEB\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dosen;
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DosenController extends Controller
 {
-    public function dosen() {
+    public function dosen()
+    {
+        $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])
+            ->where('status', '!=', 'Dikembalikan')
+            ->latest()
+            ->take(5)
+            ->get();
+
         $dosen = Dosen::paginate(5);
 
-        return view('admin.pengguna.dosen.index', compact('dosen'));
+        return view('admin.pengguna.dosen.index', compact('dosen', 'notifikasiPeminjaman'));
     }
 
-    public function storeDosen(Request $request) {
+    public function storeDosen(Request $request)
+    {
         $request->validate([
             'nama_dosen' => 'required',
             'nip' => 'required',
-        ],[
-            'nama_dosen.required'=> 'Nama harus di isi',
-            'nip.required'=> 'NIP harus di isi',
+        ], [
+            'nama_dosen.required' => 'Nama harus di isi',
+            'nip.required' => 'NIP harus di isi',
         ]);
 
         DB::transaction(function () use ($request) {
@@ -55,5 +64,4 @@ class DosenController extends Controller
         $dosen->delete();
         return redirect()->route('data-dosen')->with('success', 'Mahasiswa berhasil di hapus!');
     }
-
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\Kategori;
 use App\Models\Kondisi;
+use App\Models\Peminjaman;
 use App\Models\Persentase;
 use App\Models\Satuan;
 use App\Models\Stock;
@@ -15,6 +16,12 @@ class ProdukController extends Controller
 {
     public function barang(Request $request)
     {
+        $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])
+            ->where('status', '!=', 'Dikembalikan')
+            ->latest()
+            ->take(5)
+            ->get();
+
         $query = Barang::query();
 
         if ($request->has('nama_barang') && $request->name != '') {
@@ -56,7 +63,7 @@ class ProdukController extends Controller
         $satuans = Satuan::all();
         $stocks = Stock::all();
 
-        return view('admin.barang.index', compact('barangs', 'kategoris', 'kondisis', 'satuans', 'stocks'));
+        return view('admin.barang.index', compact('barangs', 'kategoris', 'kondisis', 'satuans', 'stocks', 'notifikasiPeminjaman'));
     }
 
     public function storeBarang(Request $request)
@@ -68,15 +75,15 @@ class ProdukController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'satuan_id' => 'required|exists:satuans,id',
         ], [
-            'nama_barang.required'=> 'Nama barang harus diisi',
-            'stock.required'=> 'Stok harus diisi',
-            'stock.min'=> 'Stok minimal 1',
+            'nama_barang.required' => 'Nama barang harus diisi',
+            'stock.required' => 'Stok harus diisi',
+            'stock.min' => 'Stok minimal 1',
         ]);
 
-        
+
         $filePath = $request->file('foto')->move('uploads/barang', time() . '_' . $request->file('foto')->getClientOriginalName());
         // dd($request->all());
-        
+
         $barang = Barang::create([
             'nama_barang' => $request->nama_barang,
             'foto' => $filePath,
@@ -117,19 +124,19 @@ class ProdukController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'satuan_id' => 'required|exists:satuans,id',
         ]);
-        
+
         if ($request->hasFile('foto')) {
             // Hapus gambar lama jika ada
             if ($barang->foto && file_exists(public_path($barang->foto))) {
                 unlink(public_path($barang->foto));
             }
-            
+
             // Simpan gambar baru
             $filePath = $request->file('foto')->move('uploads/barang', time() . '_' . $request->file('foto')->getClientOriginalName());
             $barang->foto = $filePath;
         }
         // dd($barang->all());
-        
+
         $barang->update([
             'nama_barang' => $request->nama_barang,
             'kategori_id' => $request->kategori_id,

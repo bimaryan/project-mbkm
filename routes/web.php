@@ -93,7 +93,7 @@ Route::middleware(['auth:admin'])->group(function () {
 
         // ROUTE VERIFIKASI PEMINJAMAN
         Route::get('verifikasi-peminjaman', [PeminjamanController::class, 'index'])->name('verifikasi');
-        Route::get('verifikasi-peminjaman/{peminjaman}', [PeminjamanController::class, 'update'])->name('verifikasi.update');
+        Route::put('verifikasi-peminjaman/{peminjaman}', [PeminjamanController::class, 'update'])->name('verifikasi.update');
     });
 });
 

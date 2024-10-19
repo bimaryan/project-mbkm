@@ -13,7 +13,7 @@
                         </path>
                     </svg>
                 </button>
-                <a class="flex flex-col items-center space-x-3 rtl:space-x-reverse">
+                <a class="flex flex-col items-center">
                     <img src="{{ asset('logo/silk.png') }}" class="w-24 hidden md:block"
                         alt="{{ asset('logo/silk.png') }}" />
                     <img src="{{ asset('logo/polindra.png') }}" class="w-10 md:hidden"
@@ -30,18 +30,40 @@
                                 <span class="sr-only">Notifications</span>
                                 <div
                                     class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                                    20</div>
+                                    {{ $notifikasiPeminjaman->count() }}
+                                </div>
                             </button>
 
                             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
                                 id="dropdown-notifikasi">
-                                <ul class="py-1" role="none">
-                                    <li>
-                                        <p class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                            role="menuitem">
-                                            Notifikasi Peminjaman
-                                        </p>
-                                    </li>
+                                <ul role="none">
+                                    @if ($notifikasiPeminjaman->isEmpty())
+                                        <li>
+                                            <p class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                role="menuitem">
+                                                Tidak ada notifikasi peminjaman.
+                                            </p>
+                                        </li>
+                                    @else
+                                        @foreach ($notifikasiPeminjaman as $peminjaman)
+                                            <li>
+                                                <p class="block text-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                    role="menuitem">
+                                                <div class="p-3 border-b text-xs">
+                                                    <p>
+                                                        {{ $peminjaman->mahasiswa->nama }}
+                                                    </p>
+                                                    <p>
+                                                        {{ Str::limit($peminjaman->barang->nama_barang, 20) }}
+                                                    </p>
+                                                    <p>
+                                                        {{ $peminjaman->status }}
+                                                    </p>
+                                                </div>
+                                                </p>
+                                            </li>
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div>
                         </div>

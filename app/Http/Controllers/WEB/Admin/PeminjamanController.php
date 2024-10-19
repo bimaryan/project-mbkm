@@ -10,8 +10,14 @@ class PeminjamanController extends Controller
 {
     public function index()
     {
+        $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])
+            ->where('status', '!=', 'Dikembalikan')
+            ->latest()
+            ->take(5)
+            ->get();
+
         $peminjamans = Peminjaman::all();
-        return view('admin.peminjaman.index', compact('peminjamans'));
+        return view('admin.peminjaman.index', compact('peminjamans', 'notifikasiPeminjaman'));
     }
 
     public function update(Request $request, Peminjaman $peminjaman)

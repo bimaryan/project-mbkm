@@ -28,17 +28,29 @@ class AdminController extends Controller
 
         $totalDikembalikan = Peminjaman::where('status', 'Dikembalikan')->count();
 
-        return view('admin.dashboard.index', compact('totalPeminjaman', 'totalMahasiswa', 'totalAlat', 'totalBahan', 'persentasePeminjaman', 'totalDikembalikan', 'peminjamanTerakhir30Hari'));
+        $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])
+            ->where('status', '!=', 'Dikembalikan')
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('admin.dashboard.index', compact('totalPeminjaman', 'totalMahasiswa', 'totalAlat', 'totalBahan', 'persentasePeminjaman', 'totalDikembalikan', 'peminjamanTerakhir30Hari', 'notifikasiPeminjaman'));
     }
 
     public function adminAndStaff(Request $request)
     {
+        $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])
+            ->where('status', '!=', 'Dikembalikan')
+            ->latest()
+            ->take(5)
+            ->get();
+
         $query = Admin::query();
 
         $users = $query->paginate(5);
         $role = Role::all();
 
-        return view('admin.pengguna.adminandstaff.index', ['user' => $users], ['role' => $role]);
+        return view('admin.pengguna.adminandstaff.index', ['user' => $users, 'notifikasiPeminjaman' => $notifikasiPeminjaman], ['role' => $role]);
     }
 
     public function storeAdminAndStaff(Request $request)

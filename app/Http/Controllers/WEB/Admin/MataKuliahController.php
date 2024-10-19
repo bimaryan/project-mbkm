@@ -4,17 +4,26 @@ namespace App\Http\Controllers\WEB\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\MataKuliah;
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class MataKuliahController extends Controller
 {
-    public function matakuliah() {
+    public function matakuliah()
+    {
+        $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])
+            ->where('status', '!=', 'Dikembalikan')
+            ->latest()
+            ->take(5)
+            ->get();
+
         $matakuliah = MataKuliah::paginate(5);
-        return view('admin.matakuliah.index', ['matakuliah' => $matakuliah]);
+        return view('admin.matakuliah.index', ['matakuliah' => $matakuliah, 'notifikasiPeminjaman' => $notifikasiPeminjaman]);
     }
 
-    public function storeMatakuliah(Request $request) {
+    public function storeMatakuliah(Request $request)
+    {
         $request->validate([
             'mata_kuliah' => 'required|string',
         ]);
@@ -47,7 +56,8 @@ class MataKuliahController extends Controller
         return redirect()->route('data-mata-kuliah')->with('success', 'Mata kuliah berhasil diperbarui!');
     }
 
-    public function deleteMatakuliah(MataKuliah $matakuliah) {
+    public function deleteMatakuliah(MataKuliah $matakuliah)
+    {
         $matakuliah->delete();
         return redirect()->route('data-mata-kuliah')->with('success', 'Mata kuliah berhasil di hapus!');
     }

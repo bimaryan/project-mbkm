@@ -6,6 +6,7 @@ use App\Models\Kelas;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Peminjaman;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,9 +14,15 @@ class MahasiswaController extends Controller
 {
     public function mahasiswa()
     {
+        $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])
+            ->where('status', '!=', 'Dikembalikan')
+            ->latest()
+            ->take(5)
+            ->get();
+
         $mahasiswa = Mahasiswa::paginate(5);
         $kelas = Kelas::all();
-        return view('admin.pengguna.mahasiswa.index', ['mahasiswa' => $mahasiswa], ['kelas' => $kelas]);
+        return view('admin.pengguna.mahasiswa.index', ['mahasiswa' => $mahasiswa, 'notifikasiPeminjaman' => $notifikasiPeminjaman], ['kelas' => $kelas]);
     }
 
     public function storeMahasiswa(Request $request)
@@ -80,9 +87,14 @@ class MahasiswaController extends Controller
 
     public function kelas()
     {
+        $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])
+            ->where('status', '!=', 'Dikembalikan')
+            ->latest()
+            ->take(5)
+            ->get();
 
         $kelas = Kelas::paginate(5);
-        return view('admin.kelas.index', ['kelas' => $kelas]);
+        return view('admin.kelas.index', ['kelas' => $kelas], ['notifikasiPeminjaman' => $notifikasiPeminjaman]);
     }
 
     public function storeKelas(Request $request)
