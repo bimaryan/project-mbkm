@@ -163,5 +163,13 @@
                 });
             }
         });
+
+        $(document).ready(function() {
+            $('#data-dosen').DataTable({
+                paging: false,
+                scrollCollapse: true,
+                scrollY: '300px'
+            });
+        });
     </script>
 @endsection

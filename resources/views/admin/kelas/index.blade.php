@@ -139,5 +139,12 @@
                     });
                 }
             });
+            $(document).ready(function() {
+            $('#data-kelas').DataTable({
+                paging: false,
+                scrollCollapse: true,
+                scrollY: '300px'
+            });
+        });
         </script>
     @endsection

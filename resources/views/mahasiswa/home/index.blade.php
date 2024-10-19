@@ -58,7 +58,7 @@
                     real-time untuk menghindari tumpang tindih pemesanan.</p>
 
                 {{-- Form Filter --}}
-                <form method="GET" action="{{ route('mahasiswa') }}" class="flex items-center justify-center gap-2 mb-4">
+                <form method="GET" action="{{ route('home') }}" class="flex items-center justify-center gap-2 mb-4">
                     {{-- Tombol Semua Kategori --}}
                     <button type="submit" name="kategori" value="Semua"
                         class="px-3 py-2 rounded-lg border shadow-xl {{ request('kategori') == 'Semua' ? 'bg-green-800 text-white' : 'border-green-500 hover:bg-green-800 hover:text-white' }}">
@@ -80,10 +80,10 @@
                 @else
                     <div id="card-section" class="grid grid-cols-1 gap-2 md:grid-cols-3 animate-card">
                         @foreach ($barangs as $data)
-                            <a href="{{ route('viewbarang', ['nama_barang' => $data->nama_barang]) }}"
+                            <a href="{{ route('viewbarang', $data->id) }}"
                                 class="w-full p-3 border border-green-500 rounded-lg shadow-lg max-w-m">
                                 <div class="flex justify-center w-full">
-                                    <img src="{{ asset($data->foto) }}" class="object-cover zoom-image"
+                                    <img src="{{ url($data->foto) }}" class="object-cover zoom-image"
                                         alt="{{ $data->nama_barang }}" />
                                 </div>
                                 <div class="mt-1">
@@ -94,7 +94,6 @@
                                 </div>
                                 <div class="mt-1">
                                     <p class="font-normal">{{ Str::limit($data->nama_barang, 50) }}</p>
-                                    <p class="text-sm font-normal text-gray-600">{{ Str::limit($data->deskripsi, 50) }}</p>
                                 </div>
                             </a>
                         @endforeach
@@ -102,7 +101,7 @@
                 @endif
 
                 <div class="text-center">
-                    <a href="{{ route('katalog') }}" class="text-green-500 font-medium text-m">Lihat Semua</a>
+                    <a href="{{ route('katalog') }}" class="font-medium text-green-500 text-m">Lihat Semua</a>
                 </div>
             </div>
         </div>

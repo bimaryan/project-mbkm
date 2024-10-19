@@ -130,6 +130,13 @@
                 });
             }
         });
+        $(document).ready(function() {
+            $('#data-kategori').DataTable({
+                paging: false,
+                scrollCollapse: true,
+                scrollY: '300px'
+            });
+        });
     </script>
     
 @endsection

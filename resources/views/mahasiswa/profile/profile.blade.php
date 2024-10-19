@@ -24,15 +24,15 @@
                             class="object-cover rounded-full" style="width: 130px; height: 130px;">
                     @else
                         <!-- Tampilan default jika tidak ada gambar -->
-                        <div class="bg-gray-200 flex items-center justify-center rounded-full" style="width: 130px; height: 130px;">
-                            <i class="fas fa-upload text-gray-500 text-2xl"></i>
+                        <div class="flex items-center justify-center bg-gray-200 rounded-full" style="width: 130px; height: 130px;">
+                            <i class="text-2xl text-gray-500 fas fa-upload"></i>
                         </div>
                     @endif
 
                     <!-- Ikon Upload FontAwesome di tengah untuk kondisi hover -->
                     <div
-                        class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
-                        <i class="fas fa-upload text-white text-1xl"></i>
+                        class="absolute inset-0 flex items-center justify-center transition-opacity duration-300 bg-black bg-opacity-50 opacity-0 hover:opacity-100">
+                        <i class="text-white fas fa-upload text-1xl"></i>
                     </div>
 
                     <input type="file" id="uploadImage" name="foto" accept="image/*"
@@ -61,15 +61,15 @@
             <div class="mb-6">
                 <span class="block mb-4 text-sm font-medium text-gray-700">Jenis Kelamin</span>
                 <div class="flex items-center mb-4">
-                    <input id="laki-laki" type="radio" value="laki-laki" name="jenis_kelamin"
-                        {{ auth()->user()->jenis_kelamin == 'laki-laki' ? 'checked' : '' }}
+                    <input id="laki-laki" type="radio" value="Laki-laki" name="jenis_kelamin"
+                        {{ auth()->user()->jenis_kelamin == 'Laki-laki' ? 'checked' : '' }}
                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="laki-laki"
                         class="text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">Laki-laki</label>
                 </div>
                 <div class="flex items-center mb-4">
-                    <input id="perempuan" type="radio" value="perempuan" name="jenis_kelamin"
-                        {{ auth()->user()->jenis_kelamin == 'perempuan' ? 'checked' : '' }}
+                    <input id="perempuan" type="radio" value="Perempuan" name="jenis_kelamin"
+                        {{ auth()->user()->jenis_kelamin == 'Perempuan' ? 'checked' : '' }}
                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="perempuan"
                         class="text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">Perempuan</label>

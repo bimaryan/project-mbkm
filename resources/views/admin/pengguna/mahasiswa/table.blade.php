@@ -1,8 +1,9 @@
 <div class="relative overflow-x-auto sm:rounded-lg">
-    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+    <table class="w-full text-sm text-gray-500 dark:text-gray-400 display" style="100%" id="data-mahasiswa">
+        <thead class="uppercase text-cen-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">
+                {{-- <th scope="col" class="px-6 py-3"> --}}
+                <th scope="col" class="px-6 py-3 ">
                     No
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -13,6 +14,9 @@
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Kelas
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Email
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Aksi
@@ -33,6 +37,13 @@
                     </td>
                     <td scope="col" class="px-6 py-3">
                         {{ $data->kelas->nama_kelas }}
+                    </td>
+                    <td scope="col" class="px-6 py-3">
+                        @if ($data->email)
+                            {{ $data->email }}
+                        @else
+                            -
+                        @endif
                     </td>
                     <td scope="col" class="flex items-center justify-center gap-2 px-6 py-3">
                         <div>
@@ -65,8 +76,8 @@
 
                 {{-- MODAL DETAIL MAHASISWA --}}
                 <div id="detail{{ $data->id }}" tabindex="-1" aria-hidden="true"
-                    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-4xl max-h-full">
+                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative w-full max-w-2xl max-h-full p-4">
                         <!-- Modal content -->
                         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                             <!-- Modal header -->
@@ -87,35 +98,64 @@
                                 </button>
                             </div>
                             <!-- Modal body -->
-                            <div class="p-4">
-                                <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
-                                    <!-- Image -->
-                                    <div class="flex justify-center">
-                                        @if (isset(auth()->user()->foto) && auth()->user()->foto != '')
-                                            <img id="profileImage" src="{{ $data->foto }}" alt="Foto Profil"
-                                                class="object-cover rounded-full" style="width: 130px; height: 130px;">
-                                        @else
-                                            <!-- Tampilan default jika tidak ada gambar -->
-                                            <div class="flex items-center justify-center bg-gray-200 rounded-full" style="width: 130px; height: 130px;">
-                                                <i class="text-2xl text-gray-500 fas fa-upload"></i>
-                                            </div>
-                                        @endif
+                            <div class="p-2">
+                                <div class="flex flex-col items-center gap-5 p-4 md:flex-row">
+                                    <div class="relative overflow-hidden border border-green-500">
+                                        <img src="{{ asset($data->foto) }}" alt="{{ $data->foto }}"
+                                            class="object-cover" style="width: 150px; height: 150px;">
                                     </div>
-                                    <div>
-                                        <div >
-                                            Nama Lengkap : {{ $data->nama }}
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div class="space-y-2">
+                                            <p
+                                                class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
+                                                <span>NIM</span>
+                                                <span>:</span>
+                                            </p>
+                                            <p
+                                                class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
+                                                <span>Nama</span>
+                                                <span>:</span>
+                                            </p>
+                                            <p
+                                                class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
+                                                <span>Kelas</span>
+                                                <span>:</span>
+                                            </p>
+                                            <p
+                                                class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
+                                                <span>Email</span>
+                                                <span>:</span>
+                                            </p>
+                                            <p
+                                                class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
+                                                <span>Nomor Telepon</span>
+                                                <span>:</span>
+                                            </p>
+                                            <p
+                                                class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
+                                                <span>Jenis Kelamin</span>
+                                                <span>:</span>
+                                            </p>
                                         </div>
-                                        <div class="mt-4">
-                                            NIM : {{ $data->nim }}
-                                        </div>
-                                        <div class="mt-4">
-                                            Kelas : {{ $data->kelas->nama_kelas }}
-                                        </div>
-                                        <div class="mt-4">
-                                            Nomor Telepon : {{ $data->telepon }}
-                                        </div>
-                                        <div class="mt-4">
-                                            Jenis Kelamin : {{ $data->jenis_kelamin }}
+                                        <div class="space-y-2">
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                {{ $data->nim }}
+                                            </p>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                {{ $data->nama }}
+                                            </p>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                {{ $data->kelas->nama_kelas }}
+                                            </p>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                {{ $data->email }}
+                                            </p>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                {{ $data->telepon }}
+                                            </p>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                {{ $data->jenis_kelamin }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -156,7 +196,8 @@
                                         <div class="mb-2">
                                             <label for="nama"
                                                 class="block text-sm font-medium text-gray-700">Nama</label>
-                                            <input type="text" name="nama" id="nama" value="{{ $data->nama }}"
+                                            <input type="text" name="nama" id="nama"
+                                                value="{{ $data->nama }}"
                                                 class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                             @error('nama')
                                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -165,26 +206,29 @@
                                         <div class="mb-2">
                                             <label for="nim"
                                                 class="block text-sm font-medium text-gray-700">NIM</label>
-                                            <input type="number" name="nim" id="nim" value="{{ $data->nim }}"
+                                            <input type="number" name="nim" id="nim"
+                                                value="{{ $data->nim }}"
                                                 class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                             @error('nim')
                                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                             @enderror
                                         </div>
                                         <div class="mb-2">
-                                            <label for="kelas_id" class="block text-sm font-medium text-gray-700">Pilih
+                                            <label for="kelas_id"
+                                                class="block text-sm font-medium text-gray-700">Pilih
                                                 Kelas</label>
                                             <select name="kelas_id" id="kelas_id"
                                                 class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
-                                                    <option value="{{ $data->kelas_id }}">{{ $data->kelas->nama_kelas }}</option>
+                                                <option value="{{ $data->kelas_id }}">{{ $data->kelas->nama_kelas }}
+                                                </option>
                                             </select>
                                             @error('kelas_id')
                                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                             @enderror
                                         </div>
 
-                                    <button type="submit"
-                                        class="text-white bg-green-500 mt-4 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Simpan</button>
+                                        <button type="submit"
+                                            class="text-white bg-green-500 mt-4 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Simpan</button>
                                 </form>
                             </div>
                         </div>

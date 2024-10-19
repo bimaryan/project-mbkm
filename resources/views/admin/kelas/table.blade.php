@@ -1,8 +1,8 @@
 <div class="relative overflow-x-auto sm:rounded-lg">
-    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+    <table class="w-full text-sm text-center text-gray-500 display dark:text-gray-400" style="100%" id="data-kelas">
+        <thead class="uppercase text-cen-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">No</th>
+                {{-- <th scope="col" class="px-6 py-3">No</th> --}}
                 <th scope="col" class="px-6 py-3">Kelas</th>
                 <th scope="col" class="px-6 py-3 text-center">Aksi</th>
             </tr>
@@ -11,7 +11,7 @@
             @foreach ($kelas as $data)
                 <tr
                     class="bg-white border-b dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
-                    <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                    {{-- <td class="px-6 py-4">{{ $loop->iteration }}</td> --}}
                     <td class="px-6 py-4">{{ $data->nama_kelas }}</td>
                     <td scope="col" class="flex items-center justify-center gap-2 px-6 py-4">
                         <div>
