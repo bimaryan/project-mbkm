@@ -61,11 +61,13 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('/data-kelas', [MahasiswaController::class, 'kelas'])->name('data-kelas');
         Route::post('/data-kelas/proses', [MahasiswaController::class, 'storeKelas'])->name('data-kelas.proses');
         Route::delete('/data-kelas/{kelas}/hapus', [MahasiswaController::class, 'deleteKelas'])->name('data-kelas.delete');
+        Route::put('/data-kelas/{kelas}/edit', [MahasiswaController::class, 'editKelas'])->name('data-kelas.edit');
 
         // ROUTE DATA MATAKULIAH
         Route::get('/data-mata-kuliah', [MataKuliahController::class, 'matakuliah'])->name('data-mata-kuliah');
         Route::post('/data-mata-kuliah/proses', [MataKuliahController::class, 'storeMatakuliah'])->name('data-mata-kuliah.proses');
         Route::delete('/data-mata-kuliah/{matakuliah}/hapus', [MataKuliahController::class, 'deleteMatakuliah'])->name('data-mata-kuliah.delete');
+        Route::put('/data-mata-kuliah/{matakuliah}/edit', [MataKuliahController::class, 'editMatakuliah'])->name('data-mata-kuliah.edit');
     });
 
     Route::middleware(['UserAccess:Staff'])->group(function () {
@@ -103,6 +105,7 @@ Route::middleware(['auth:mahasiswa'])->group(function () {
     Route::get('katalog/peminjaman-barang/{nama_barang}', [HomeController::class, 'viewbarang'])->name('viewbarang');
     Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjaman'])->name('mahasiswa.peminjaman');
     Route::get('informasi', [HomeController::class, 'informasi'])->name('mahasiswa.informasi');
+    Route::put('informasi/{peminjaman}', [HomeController::class, 'kembali'])->name('mahasiswa.kembali');
 
     Route::get('profile', [HomeController::class, 'viewProfile'])->name('profile');
     Route::put('edit-profile/{mahasiswa}', [HomeController::class, 'editProfile'])->name('editProfile');

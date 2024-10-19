@@ -120,6 +120,7 @@
                                     <div>
                                         <button type="button" data-modal-target="kembali{{ $data->id }}"
                                             data-modal-toggle="kembali{{ $data->id }}"
+                                            id="kembali{{ $data->id }}"
                                             class="py-2 px-2 bg-blue-500 rounded text-sm text-white flex items-center">
                                             <i class="fa-solid fa-box-open"></i>
                                         </button>
@@ -129,7 +130,7 @@
 
                             <script>
                                 document.addEventListener('DOMContentLoaded', function() {
-                                    const waktuPinjam = {{ $data->waktu_pinjam_unix }} * 1000; // Convert to milliseconds
+                                    const waktuPinjam = {{ $data->waktu_pinjam_unix }} * 1000;
                                     const waktuKembali = {{ $data->waktu_kembali_unix }} * 1000;
 
                                     function updateTimeRemaining() {
@@ -178,13 +179,14 @@
                                         </div>
 
                                         <div class="p-4">
-                                            <form action="" method="POST">
+                                            <form action="{{ route('mahasiswa.kembali', $data->id) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('PUT')
                                                 <div>
                                                     <label for="status"
                                                         class="block text-sm font-medium text-gray-700">Pengembalian</label>
-                                                    <select name="status_id" id="status"
+                                                    <select name="status" id="status"
                                                         class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                                         <option value="Dikembalikan">Dikembalikan</option>
                                                         <option value="Habis">Habis</option>
@@ -333,6 +335,33 @@
     @include('mahasiswa.footer.index')
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+    {{-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const waitTime = 1 * 60 * 1000;
+            const button = document.getElementById('kembali{{ $data->id }}');
+            const itemId = '{{ $data->id }}';
+            const storageKey = 'startTime_' + itemId;
+
+            let startTime = localStorage.getItem(storageKey);
+
+            if (!startTime) {
+                startTime = Date.now();
+                localStorage.setItem(storageKey, startTime);
+            }
+
+            const remainingTime = waitTime - (Date.now() - startTime);
+
+            if (remainingTime <= 0) {
+                button.removeAttribute('disabled');
+            } else {
+                setTimeout(function() {
+                    button.removeAttribute('disabled');
+                }, remainingTime);
+            }
+        });
+    </script> --}}
+
 </body>
 
 </html>

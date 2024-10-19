@@ -14,9 +14,9 @@
                     </svg>
                 </button>
                 <a class="flex flex-col items-center space-x-3 rtl:space-x-reverse">
-                    <img src="{{ asset('logo/silk.png') }}" class="h-14 hidden md:block"
+                    <img src="{{ asset('logo/silk.png') }}" class="w-24 hidden md:block"
                         alt="{{ asset('logo/silk.png') }}" />
-                    <img src="{{ asset('logo/polindra.png') }}" class="h-10 md:hidden"
+                    <img src="{{ asset('logo/polindra.png') }}" class="w-10 md:hidden"
                         alt="{{ asset('logo/polindra.png') }}" />
                 </a>
             </div>

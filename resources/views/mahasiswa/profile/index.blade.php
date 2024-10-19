@@ -63,7 +63,6 @@
                                             class="block text-gray-600 {{ Route::is('view-ubah-kata-sandi') ? 'text-green-500' : '' }}">Ubah
                                             Kata Sandi</a>
                                     </li>
-
                                 </ul>
                             </div>
                         </div>

@@ -46,10 +46,21 @@ class MahasiswaController extends Controller
         $kelas = Kelas::all();
 
         $request->validate([
-            'nama' => 'required',
-            'nim' => 'required',
+            'foto' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'nama' => 'required|string',
+            'nim' => 'required|string',
             'kelas_id' => 'required|exists:kelas,id',
         ]);
+
+        if ($request->hasFile('foto')) {
+            if ($mahasiswa->foto && file_exists(public_path($mahasiswa->foto))) {
+                unlink(public_path($mahasiswa->foto));
+            }
+
+            $filepath = $request->file('foto')->move('foto_mahasiswa', time() . '_' . $request->file('foto')->getClientOriginalName());
+
+            $mahasiswa->foto = $filepath;
+        }
 
         $mahasiswa->update([
             'nama' => $request->nama,

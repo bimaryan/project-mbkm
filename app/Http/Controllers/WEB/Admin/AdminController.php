@@ -4,8 +4,10 @@ namespace App\Http\Controllers\WEB\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Barang;
 use App\Models\Kelas;
 use App\Models\Mahasiswa;
+use App\Models\Peminjaman;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,7 +17,18 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard.index');
+        $totalPeminjaman = Peminjaman::count();
+        $totalMahasiswa = Mahasiswa::count();
+        $totalAlat = Barang::where('kategori_id', 1)->count();
+        $totalBahan = Barang::where('kategori_id', 2)->count();
+
+        $peminjamanTerakhir30Hari = Peminjaman::where('tgl_pinjam', '>=', now()->subDays(30))->count();
+
+        $persentasePeminjaman = ($totalPeminjaman > 0) ? ($peminjamanTerakhir30Hari / $totalPeminjaman) * 100 : 0;
+
+        $totalDikembalikan = Peminjaman::where('status', 'Dikembalikan')->count();
+
+        return view('admin.dashboard.index', compact('totalPeminjaman', 'totalMahasiswa', 'totalAlat', 'totalBahan', 'persentasePeminjaman', 'totalDikembalikan', 'peminjamanTerakhir30Hari'));
     }
 
     public function adminAndStaff(Request $request)
