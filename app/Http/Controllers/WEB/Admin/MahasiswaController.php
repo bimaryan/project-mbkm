@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\WEB\Admin;
 
+use App\Imports\MahasiswaImport;
 use App\Models\Kelas;
 use App\Models\Mahasiswa;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Peminjaman;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Imports\KelasImport;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\MultipleSheetsImport;
 
 class MahasiswaController extends Controller
 {
@@ -130,4 +134,12 @@ class MahasiswaController extends Controller
         $kelas->delete();
         return redirect()->route('data-kelas')->with('success', 'Kelas berhasil di hapus!');
     }
+
+    public function importKelas(Request $request) {
+
+        Excel::import(new KelasImport(), $request->file('file'));
+
+        return redirect()->route('data-kelas')->with('success', 'Mahasiswa berhasil di import!');
+    }
 }
+

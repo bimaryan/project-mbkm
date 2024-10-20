@@ -18,6 +18,16 @@
                         <h3 class="text-2xl font-semibold text-green-500">Data Kelas</h3>
                     </div>
                     <div>
+                        <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800">
+                                <label for="file_input"><i class="fa-solid fa-file-import"></i></label>
+                                <div class="flex items-center space-x-2">
+                                    <input type="file" class="form-control" id="file_input" name="file" hidden>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
                         <button data-modal-target="barang" data-modal-toggle="barang"
                             class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800"><i
                                 class="fa-solid fa-plus"></i>

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('telepon')->nullable();
             $table->string('jenis_kelamin')->nullable();
             $table->string('foto')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
 
             $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');

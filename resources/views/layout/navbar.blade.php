@@ -1,4 +1,4 @@
-<nav class="fixed top-0 z-50 w-full bg-gray-50 shadow dark:text-white dark:bg-gray-900">
+<nav class="fixed top-0 z-50 w-full shadow bg-gray-50 dark:text-white dark:bg-gray-900">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-start gap-2 rtl:justify-end">
@@ -14,7 +14,7 @@
                     </svg>
                 </button>
                 <a class="flex flex-col items-center">
-                    <img src="{{ asset('logo/silk.png') }}" class="w-24 hidden md:block"
+                    <img src="{{ asset('logo/silk-transparant.png') }}" class="hidden w-24 md:block"
                         alt="{{ asset('logo/silk.png') }}" />
                     <img src="{{ asset('logo/polindra.png') }}" class="w-10 md:hidden"
                         alt="{{ asset('logo/polindra.png') }}" />
@@ -49,7 +49,7 @@
                                             <li>
                                                 <p class="block text-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                                     role="menuitem">
-                                                <div class="p-3 border-b text-xs">
+                                                <div class="p-3 text-xs border-b">
                                                     <p>
                                                         {{ $peminjaman->mahasiswa->nama }}
                                                     </p>
