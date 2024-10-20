@@ -61,9 +61,11 @@ class Handler extends ExceptionHandler
             } elseif ($exception->getStatusCode() == 500) {
                 return response()->view('errors.500', [], 500);
             }
-        } elseif ($exception instanceof \Illuminate\Database\QueryException) {
-            return response()->view('errors.database', [], 500);
         }
+
+        // elseif ($exception instanceof \Illuminate\Database\QueryException) {
+        //     return response()->view('errors.database', [], 500);
+        // }
 
         return parent::render($request, $exception);
     }

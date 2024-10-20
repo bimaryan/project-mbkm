@@ -135,11 +135,18 @@ class MahasiswaController extends Controller
         return redirect()->route('data-kelas')->with('success', 'Kelas berhasil di hapus!');
     }
 
-    public function importKelas(Request $request) {
+    public function importKelas(Request $request)
+    {
 
         Excel::import(new KelasImport(), $request->file('file'));
 
-        return redirect()->route('data-kelas')->with('success', 'Mahasiswa berhasil di import!');
+        return redirect()->route('data-kelas')->with('success', 'Kelas berhasil di import!');
+    }
+
+    public function importMahasiswa(Request $request)
+    {
+        Excel::import(new MahasiswaImport(), $request->file('file'));
+
+        return redirect()->route('data-mahasiswa')->with('success', 'Mahasiswa berhasil di import!');
     }
 }
-

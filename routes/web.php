@@ -50,7 +50,8 @@ Route::middleware(['auth:admin'])->group(function () {
             Route::put('/data-mahasiswa/{mahasiswa}/edit', [MahasiswaController::class, 'editMahasiswa'])->name('data-mahasiswa.edit');
             Route::delete('/data-mahasiswa/{mahasiswa}/hapus', [MahasiswaController::class, 'deleteMahasiswa'])->name('data-mahasiswa.delete');
 
-            Route::post('import-kelas', [MahasiswaController::class, 'importKelas'])->name('import');
+            Route::post('import-kelas', [MahasiswaController::class, 'importKelas'])->name('import.kelas');
+            Route::post('import-mahasiswa', [MahasiswaController::class, 'importMahasiswa'])->name('import.mahasiswa');
 
             // ROUTE DATA DOSEN
             Route::get('/data-dosen', [DosenController::class, 'dosen'])->name('data-dosen');
