@@ -18,10 +18,13 @@
                         <h3 class="text-2xl font-semibold text-green-500">Data Mahasiswa</h3>
                     </div>
                     <div>
-                        <button data-modal-target="barang" data-modal-toggle="barang"
-                            class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800"><i
-                                class="fa-solid fa-plus"></i>
-                        </button>
+                        <div class="flex items-center space-x-2">
+                            
+                            <button data-modal-target="barang" data-modal-toggle="barang"
+                                class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
 
                         {{-- MODAL TAMBAH MAHASISWA --}}
                         <div id="barang" tabindex="-1" aria-hidden="true"
@@ -54,7 +57,8 @@
                                             <div class="mb-2">
                                                 <label for="nama"
                                                     class="block text-sm font-medium text-gray-700">Nama</label>
-                                                <input type="text" name="nama" id="nama" placeholder="Masukan Nama Lengkap"
+                                                <input type="text" name="nama" id="nama"
+                                                    placeholder="Masukan Nama Lengkap"
                                                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                                 @error('nama')
                                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -63,7 +67,8 @@
                                             <div class="mb-2">
                                                 <label for="nim"
                                                     class="block text-sm font-medium text-gray-700">NIM</label>
-                                                <input type="number" name="nim" id="nim" placeholder="Masukan NIM"
+                                                <input type="number" name="nim" id="nim"
+                                                    placeholder="Masukan NIM"
                                                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                                 @error('nip')
                                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -74,10 +79,11 @@
                                                 <label for="kelas_id" class="block text-sm font-medium text-gray-700">Pilih
                                                     Kelas</label>
                                                 <select name="kelas_id" id="kelas_id"
-                                                class="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                                                    class="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                                                     <option value="">- Pilih Kelas -</option>
                                                     @foreach ($kelas as $kelas)
-                                                        <option value="{{ $kelas->id }}">{{ $kelas->nama_kelas }}</option>
+                                                        <option value="{{ $kelas->id }}">{{ $kelas->nama_kelas }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                                 @error('kelas_id')
@@ -109,7 +115,7 @@
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
-                
+
                 <div id="tableMahasiswa">
                     @include('admin.pengguna.mahasiswa.table', ['mahasiswa' => $mahasiswa])
                 </div>

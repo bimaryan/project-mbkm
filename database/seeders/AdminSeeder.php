@@ -18,7 +18,7 @@ class AdminSeeder extends Seeder
         $admins = [
             [
                 'nama' => 'Admin 1',
-                'nip' => '12345678901',
+                'nip' => '1231234123123',
                 'username' => 'admin',
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('admin'),
@@ -26,7 +26,7 @@ class AdminSeeder extends Seeder
             ],
             [
                 'nama' => 'Staff 1',
-                'nip' => '1234567890111',
+                'nip' => '09871239812',
                 'username' => 'staff',
                 'email' => 'staff@gmail.com',
                 'password' => Hash::make('staff'),
