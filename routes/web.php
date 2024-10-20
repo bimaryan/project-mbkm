@@ -107,9 +107,11 @@ Route::middleware(['auth:mahasiswa'])->group(function () {
     Route::get('informasi', [HomeController::class, 'informasi'])->name('mahasiswa.informasi');
     Route::put('informasi/{peminjaman}', [HomeController::class, 'kembali'])->name('mahasiswa.kembali');
 
-    Route::get('profile', [HomeController::class, 'viewProfile'])->name('profile');
-    Route::put('edit-profile/{mahasiswa}', [HomeController::class, 'editProfile'])->name('editProfile');
+    Route::prefix('profile/')->group(function () {
+        Route::get('', [HomeController::class, 'viewProfile'])->name('profile');
+        Route::put('edit-profile/{mahasiswa}', [HomeController::class, 'editProfile'])->name('editProfile');
 
-    Route::get('ubah-kata-sandi', [HomeController::class, 'ViewUbahKataSandi'])->name('view-ubah-kata-sandi');
-    Route::put('ubah-kata-sandi/{mahasiswa}', [HomeController::class, 'ubahKataSandi'])->name('ubah-kata-sandi');
+        Route::get('ubah-kata-sandi', [HomeController::class, 'ViewUbahKataSandi'])->name('view-ubah-kata-sandi');
+        Route::put('ubah-kata-sandi/{mahasiswa}', [HomeController::class, 'ubahKataSandi'])->name('ubah-kata-sandi');
+    });
 });

@@ -29,7 +29,6 @@
             </div>
 
             <div class="flex justify-end space-x-4">
-                <button type="button" class="text-red-600">Batal</button>
                 <button type="submit" class="px-4 py-2 text-white bg-green-500 rounded-md">Simpan</button>
             </div>
         </form>
