@@ -195,7 +195,7 @@
                                                 class="block text-sm font-medium text-gray-700">Pilih
                                                 Role</label>
                                             <select name="role_id" id="role_id"
-                                                class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                                class="block w-full p-2 mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                                                 <option value="{{ $data->role_id }}">{{ $data->role->nama_role }}
                                                 </option>
                                             </select>
