@@ -15,34 +15,38 @@
             <div class="p-4 bg-white rounded-lg shadow-lg">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h3 class="text-2xl font-semibold text-green-500">Mata Kuliah</h3>
+                        <h3 class="text-2xl font-semibold text-green-500">Ruang Laboratorium</h3>
                     </div>
                     <div>
-                        <button class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800"
-                            data-modal-target="import-matkul" data-modal-toggle="import-matkul"><i
-                                class="fa-solid fa-file-import"></i>
-                        </button>
-                        {{-- MODAL IMPORT DATA --}}
-                        @include('admin.matakuliah.modal.import')
-                        
-                        <button data-modal-target="tambah-matakuliah" data-modal-toggle="tambah-matakuliah"
-                            class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800"><i
-                                class="fa-solid fa-plus"></i>
-                        </button>
-                        {{-- MODAL TAMBAH MATA KULIAH --}}
-                        @include('admin.matakuliah.modal.tambah')
+                        <div class="flex items-center space-x-2">
+                            <button class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800"
+                                data-modal-target="import-mahasiswa" data-modal-toggle="import-mahasiswa"><i
+                                    class="fa-solid fa-file-import"></i>
+                            </button>
+
+                            @include('admin.ruangan.modal.import')
+
+                            <button data-modal-target="tambah-ruangan" data-modal-toggle="tambah-ruangan"
+                                class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+
+                        {{-- MODAL TAMBAH MAHASISWA --}}
+                        @include('admin.ruangan.modal.tambah')
                     </div>
                 </div>
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
-                <div id="tableMatakuliah">
-                    @include('admin.matakuliah.table', ['matakuliah' => $matakuliah])
+
+                <div id="tableRuangan">
+                    @include('admin.ruangan.table', ['ruangan' => $ruangan])
                 </div>
 
-                <div id="pageignitionLinks">
-                    {{ $matakuliah->links() }}
-                </div>
+                {{-- <div id="pageignitionLinks">
+                    {{ $ruangan->links() }}
+                </div> --}}
             </div>
         </div>
     </div>
@@ -84,7 +88,7 @@
 
             function loadTable(page = 1) {
                 $.ajax({
-                    url: "{{ route('data-mata-kuliah') }}",
+                    url: "{{ route('data-ruangan') }}",
                     method: "GET",
                     data: {
                         // name: $('#filterName').val(),
@@ -96,17 +100,17 @@
                     },
                     success: function(response) {
                         // Replace table and pagination links
-                        $('#tableMatakuliah').html($(response).find('#tableMatakuliah').html());
+                        $('#tableRuangan').html($(response).find('#tableRuangan').html());
                         $('#paginationLinks').html($(response).find('#paginationLinks').html());
                     }
                 });
             }
         });
         $(document).ready(function() {
-            $('#data-mata-kuliah').DataTable({
+            $('#data-mahasiswa').DataTable({
                 paging: false,
                 scrollCollapse: true,
-                scrollY: '300px'
+                scrollY: '300px',
             });
         });
     </script>

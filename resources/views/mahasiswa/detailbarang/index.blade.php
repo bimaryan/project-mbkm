@@ -75,6 +75,16 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="mb-4">
+                        <label for="dosen" class="block text-lg font-medium text-gray-700">Dosen</label>
+                        <select name="dosen_id" id="dosen"
+                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                            <option value="">Pilih Dosen</option>
+                            @foreach ($matkul as $matkuls)
+                                <option value="{{ $matkuls->id }}">{{ $matkuls->mata_kuliah }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class="mb-4">
                         <label for="rooms" class="block text-lg font-medium text-gray-700">Ruangan</label>

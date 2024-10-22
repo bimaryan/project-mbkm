@@ -6,16 +6,7 @@
                     No
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Nama Lengkap
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    NIM
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Kelas
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Email
+                    Ruangan
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Aksi
@@ -23,26 +14,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($mahasiswa as $data)
+            @foreach ($ruangan as $data)
                 <tr>
                     <td scope="col" class="px-6 py-3">
                         {{ $loop->iteration }}
                     </td>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $data->nama }}
-                    </td>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $data->nim }}
-                    </td>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $data->kelas->nama_kelas ?? '-' }}
-                    </td>
-                    <td scope="col" class="px-6 py-3">
-                        @if ($data->email)
-                            {{ $data->email }}
-                        @else
-                            -
-                        @endif
+                    <td scope="col" class="px-6 py-3"></td>
+                        {{ $data->ruangan }}
                     </td>
                     <td scope="col" class="flex items-center justify-center gap-2 px-6 py-3">
                         <div>
@@ -74,10 +52,10 @@
                 </tr>
 
                 {{-- MODAL DETAIL MAHASISWA --}}
-                @include('admin.pengguna.mahasiswa.modal.detail')
+                {{-- @include('admin.pengguna.mahasiswa.modal.detail') --}}
 
                 {{-- MODAL EDIT MAHASISWA --}}
-                @include('admin.pengguna.mahasiswa.modal.edit')
+                {{-- @include('admin.pengguna.mahasiswa.modal.edit') --}}
             @endforeach
         </tbody>
     </table>

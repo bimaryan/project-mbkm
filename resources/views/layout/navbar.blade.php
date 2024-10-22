@@ -23,7 +23,7 @@
             <div class="flex items-center">
                 <div class="flex items-center ms-3">
                     <div class="flex items-center gap-4">
-                        <div>
+                        {{-- <div>
                             <button type="button" class="relative inline-flex items-center text-2xl"
                                 data-dropdown-toggle="dropdown-notifikasi">
                                 <i class="fa-regular fa-bell"></i>
@@ -66,7 +66,7 @@
                                     @endif
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="hidden md:block">
                             <div class="flex-col text-right md:flex">
                                 <p class="text-sm">{{ Auth::user()->nama }}</p>
@@ -109,7 +109,7 @@
             <li>
                 <a href="{{ route('dashboard') }}"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('dashboard') ? 'bg-green-500 text-white' : '' }}">
-                    <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-house me-2"></i>Dashboard</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-table-columns me-2"></i>Dashboard</span>
                 </a>
             </li>
             @if (Auth::user()->role->nama_role === 'Admin')
@@ -160,7 +160,7 @@
                 <li>
                     <a id="kelolaproduk" data-collapse-toggle="dropdown"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('data-alat-dan-bahan/*') ? 'bg-green-500 text-white' : '' }}">
-                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-folder"></i> Alat dan
+                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-folder me-2"></i>Alat dan
                             Bahan</span>
                         <i class="fa-solid fa-chevron-down"></i>
                     </a>
@@ -187,10 +187,15 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="{{ route('data-ruangan') }}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('data-ruangan') ? 'bg-green-500 text-white' : '' }}">
+                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-house me-2"></i>Ruang Laboratorium</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('verifikasi') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('verifikasi') ? 'bg-green-500 text-white' : '' }}">
-                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-square-check"></i>
-                            Verifikasi Peminjaman</span>
+                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-square-check me-2"></i>Verifikasi Peminjaman</span>
                     </a>
                 </li>
             @endif

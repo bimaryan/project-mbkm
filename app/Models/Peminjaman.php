@@ -18,6 +18,7 @@ class Peminjaman extends Model
         'spo_id',
         'rooms_id',
         'matkul_id',
+        'dosen_id',
         'stock_pinjam',
         'QR',
         'tgl_pinjam',
@@ -61,5 +62,9 @@ class Peminjaman extends Model
     public function matkul()
     {
         return $this->belongsTo(MataKuliah::class, 'matkul_id');
+    }
+    public function dosen()
+    {
+        return $this->belongsTo(Dosen::class, 'dosen_id');
     }
 }

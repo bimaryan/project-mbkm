@@ -20,10 +20,8 @@ class MahasiswaImport implements ToCollection
 
         foreach ($collection as $row) {
             if ($i > 1) {
-                $data['nama'] = !empty($row[0]) ? $row[0] : null;
-                $data['nim'] = !empty($row[1]) ? $row[1] : null;
-                $data['kelas_id'] = !empty($row[2]) ? $row[2] : 1;
-                $data['email'] = !empty($row[3]) ? $row[3] : null;
+                $data['nama'] = !empty($row[1]) ? $row[1] : null;
+                $data['nim'] = !empty($row[2]) ? $row[2] : null;
                 $data['password'] = !empty($data['nim']) ? Hash::make('@Poli' . $data['nim']) : null;
 
                 Mahasiswa::create($data);
