@@ -14,88 +14,88 @@ class RuanganSeeder extends Seeder
     public function run(): void
     {
         Room::create([
-            'ruangan' => 'Decontamination Room',
+            'nama_ruangan' => 'Decontamination Room',
         ]);
         Room::create([
-            'ruangan' => 'Steril Room',
+            'nama_ruangan' => 'Steril Room',
         ]);
         Room::create([
-            'ruangan' => 'Radiologi',
+            'nama_ruangan' => 'Radiologi',
         ]);
         Room::create([
-            'ruangan' => 'Basic Biomedical Science',
+            'nama_ruangan' => 'Basic Biomedical Science',
         ]);
         Room::create([
-            'ruangan' => 'Pediatric Nursing',
+            'nama_ruangan' => 'Pediatric Nursing',
         ]);
         Room::create([
-            'ruangan' => 'General Nursing',
+            'nama_ruangan' => 'General Nursing',
         ]);
         Room::create([
-            'ruangan' => 'ICU',
+            'nama_ruangan' => 'ICU',
         ]);
         Room::create([
-            'ruangan' => 'VIP',
+            'nama_ruangan' => 'VIP',
         ]);
         Room::create([
-            'ruangan' => 'NICU',
+            'nama_ruangan' => 'NICU',
         ]);
         Room::create([
-            'ruangan' => 'Maternitas',
+            'nama_ruangan' => 'Maternitas',
         ]);
         Room::create([
-            'ruangan' => 'PERINATOLOGI',
+            'nama_ruangan' => 'PERINATOLOGI',
         ]);
         Room::create([
-            'ruangan' => 'Medical Surgical Nursing 2',
+            'nama_ruangan' => 'Medical Surgical Nursing 2',
         ]);
         Room::create([
-            'ruangan' => 'Hemodialisa',
+            'nama_ruangan' => 'Hemodialisa',
         ]);
         Room::create([
-            'ruangan' => 'Ruang Alat 1',
+            'nama_ruangan' => 'Ruang Alat 1',
         ]);
         Room::create([
-            'ruangan' => 'Ruang Alat 2',
+            'nama_ruangan' => 'Ruang Alat 2',
         ]);
         Room::create([
-            'ruangan' => 'Ruang Alat 2',
+            'nama_ruangan' => 'Ruang Alat 2',
         ]);
         Room::create([
-            'ruangan' => 'Selasar Lab',
+            'nama_ruangan' => 'Selasar Lab',
         ]);
         Room::create([
-            'ruangan' => 'Selasar KBK',
+            'nama_ruangan' => 'Selasar KBK',
         ]);
         Room::create([
-            'ruangan' => 'Klinik 1',
+            'nama_ruangan' => 'Klinik 1',
         ]);
         Room::create([
-            'ruangan' => 'Klinik 2',
+            'nama_ruangan' => 'Klinik 2',
         ]);
         Room::create([
-            'ruangan' => 'KOMUNITAS',
+            'nama_ruangan' => 'KOMUNITAS',
         ]);
         Room::create([
-            'ruangan' => 'JIWA',
+            'nama_ruangan' => 'JIWA',
         ]);
         Room::create([
-            'ruangan' => 'CSSD',
+            'nama_ruangan' => 'CSSD',
         ]);
         Room::create([
-            'ruangan' => 'Sterilization Room',
+            'nama_ruangan' => 'Sterilization Room',
         ]);
         Room::create([
-            'ruangan' => 'Tool Setting Room',
+            'nama_ruangan' => 'Tool Setting Room',
         ]);
         Room::create([
-            'ruangan' => 'Operation Room',
+            'nama_ruangan' => 'Operation Room',
         ]);
         Room::create([
-            'ruangan' => 'Emergency Room',
+            'nama_ruangan' => 'Emergency Room',
         ]);
         Room::create([
-            'ruangan' => 'Nurse Station',
+            'nama_ruangan' => 'Nurse Station',
         ]);
     }
 }

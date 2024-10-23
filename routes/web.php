@@ -99,6 +99,9 @@ Route::middleware(['auth:admin'])->group(function () {
 
         // ROUTE DATA RUANGAN
         Route::get('data-ruangan', [StaffController::class, 'ruangan'])->name('data-ruangan');
+        Route::post('data-ruangan/proses', [StaffController::class, 'storeRuangan'])->name('data-ruangan.proses');
+        Route::delete('data-ruangan/{ruangan}/hapus', [StaffController::class, 'deleteRuangan'])->name('data-ruangan.hapus');
+        Route::put('data-ruangan/{ruangan}/edit', [StaffController::class, 'editRuangan'])->name('data-ruangan.edit');
 
         // ROUTE VERIFIKASI PEMINJAMAN
         Route::get('verifikasi-peminjaman', [PeminjamanController::class, 'index'])->name('verifikasi');

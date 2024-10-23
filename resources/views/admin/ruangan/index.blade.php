@@ -44,9 +44,9 @@
                     @include('admin.ruangan.table', ['ruangan' => $ruangan])
                 </div>
 
-                {{-- <div id="pageignitionLinks">
+                <div id="pageignitionLinks">
                     {{ $ruangan->links() }}
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>

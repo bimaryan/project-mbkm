@@ -18,13 +18,13 @@
                         <h3 class="text-2xl font-semibold text-green-500">Data Dosen</h3>
                     </div>
                     <div>
-                        <button data-modal-target="barang" data-modal-toggle="barang"
+                        <button data-modal-target="dosen" data-modal-toggle="dosen"
                             class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800"><i
                                 class="fa-solid fa-plus"></i>
                         </button>
 
                         {{-- MODAL TAMBAH DOSEN --}}
-                        <div id="barang" tabindex="-1" aria-hidden="true"
+                        <div id="dosen" tabindex="-1" aria-hidden="true"
                             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                             <div class="relative w-full max-w-2xl max-h-full p-4">
                                 <!-- Modal content -->
