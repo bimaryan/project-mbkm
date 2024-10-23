@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\WEB\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\RuanganImport;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StaffController extends Controller
 {
@@ -45,5 +47,11 @@ class StaffController extends Controller
         $ruangan->delete();
 
         return redirect()->back()->with('success', 'Ruangan berhasil dihapus!');
+    }
+
+    public function importRuangan(Request $request)
+    {
+        Excel::import(new RuanganImport(), $request->file('file'));
+        return redirect()->back()->with('success', 'Ruangan berhasil diimport!');
     }
 }

@@ -20,7 +20,7 @@
                     <div>
                         <div class="flex items-center space-x-2">
                             <button class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800"
-                                data-modal-target="import-mahasiswa" data-modal-toggle="import-mahasiswa"><i
+                                data-modal-target="import-ruangan" data-modal-toggle="import-ruangan"><i
                                     class="fa-solid fa-file-import"></i>
                             </button>
 
