@@ -121,6 +121,7 @@ class HomeController extends Controller
             'stock_id' => $stock->id,
             'rooms_id' => $request->input('rooms_id'),
             'matkul_id' => $request->input('matkul_id'),
+            'dosen_id'=> $request->input('dosen_id'),
             'stock_pinjam' => $request->input('jumlah_pinjam'),
             'QR' => rand(10000, 99999),
             'tgl_pinjam' => $request->input('tgl_pinjam'),
@@ -177,7 +178,8 @@ class HomeController extends Controller
 
     public function viewProfile(Mahasiswa $mahasiswa)
     {
-        return view('mahasiswa.profile.profile', ['mahasiswa' => $mahasiswa]);
+        $kelas = Kelas::all();
+        return view('mahasiswa.profile.profile', ['mahasiswa' => $mahasiswa], ['kelas'=> $kelas]);
     }
 
     public function editProfile(Request $request, Mahasiswa $mahasiswa)
@@ -186,6 +188,7 @@ class HomeController extends Controller
             'nama' => 'required|string',
             'email' => 'required|email',
             'telepon' => 'nullable|string',
+            'kelas_id' => 'required|exists:kelas,id',
             'jenis_kelamin' => 'nullable|string',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ], [
@@ -209,11 +212,14 @@ class HomeController extends Controller
             'nama' => $request->nama,
             'email' => $request->email,
             'telepon' => $request->telepon,
+            'kelas_id' => $request->kelas_id,
             'jenis_kelamin' => $request->jenis_kelamin,
             'foto' => $foto
         ]);
 
-        return redirect()->route('profile')->with('success', 'Profile berhasil diperbarui.');
+        $data = Kelas::all();
+
+        return redirect()->route('profile', ['data' => $data])->with('success', 'Profile berhasil diperbarui.');
     }
 
     public function viewUbahKataSandi(Request $request, Mahasiswa $mahasiswa)

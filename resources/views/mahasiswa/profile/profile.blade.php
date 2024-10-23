@@ -47,6 +47,24 @@
                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
             </div>
             <div class="mb-4">
+                <label for="kelas_id" class="block text-sm font-medium text-gray-700">Kelas</label>
+                <select name="kelas_id" id="kelas_id"
+                    class="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                    @if (!$kelas->isEmpty())
+                        @foreach ($kelas as $kelas)
+                            <option value="{{ $kelas->id }}"
+                                {{ $kelas->id == auth()->user()->kelas_id ? 'selected' : '' }}>
+                                {{ $kelas->nama_kelas }}
+                            </option>
+                        @endforeach
+                        
+                    @endif
+                </select>
+                @error('role_id')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <input type="email" id="email" name="email" value="{{ auth()->user()->email }}"
                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">

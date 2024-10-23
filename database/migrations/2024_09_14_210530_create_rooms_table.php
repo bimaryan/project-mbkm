@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('ruangan')->nullable();
-            $table->string('lemari')->nullable();
-            $table->string('rak')->nullable();
+            $table->string('nama_ruangan')->nullable();
             $table->timestamps();
         });
     }

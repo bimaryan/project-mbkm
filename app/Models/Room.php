@@ -11,7 +11,7 @@ class Room extends Model
 
     protected $table = 'rooms';
 
-    protected $fillable = ['ruangan', 'lemari', 'rak'];
+    protected $fillable = ['nama_ruangan'];
 
 
 }

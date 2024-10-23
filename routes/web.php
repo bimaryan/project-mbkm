@@ -11,6 +11,7 @@ use App\Http\Controllers\WEB\Admin\PeminjamanController;
 use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
 use App\Http\Controllers\WEB\Admin\MahasiswaController;
 use App\Http\Controllers\WEB\Admin\MataKuliahController;
+use App\Http\Controllers\WEB\Admin\StaffController;
 use App\Http\Controllers\WEB\Mahasiswa\HomeController;
 
 /*
@@ -52,6 +53,8 @@ Route::middleware(['auth:admin'])->group(function () {
 
             Route::post('import-kelas', [MahasiswaController::class, 'importKelas'])->name('import.kelas');
             Route::post('import-mahasiswa', [MahasiswaController::class, 'importMahasiswa'])->name('import.mahasiswa');
+            Route::post('/import-matakuliah', [MataKuliahController::class, 'importMatkul'])->name('import.matakuliah');
+
 
             // ROUTE DATA DOSEN
             Route::get('/data-dosen', [DosenController::class, 'dosen'])->name('data-dosen');
@@ -93,6 +96,9 @@ Route::middleware(['auth:admin'])->group(function () {
             Route::delete('data-satuan/{satuan}/hapus', [SatuanController::class, 'deleteSatuan'])->name('data-satuan.hapus');
             Route::put('data-satuan/{satuan}/edit', [SatuanController::class, 'editSatuan'])->name('data-satuan.edit');
         });
+
+        // ROUTE DATA RUANGAN
+        Route::get('data-ruangan', [StaffController::class, 'ruangan'])->name('data-ruangan');
 
         // ROUTE VERIFIKASI PEMINJAMAN
         Route::get('verifikasi-peminjaman', [PeminjamanController::class, 'index'])->name('verifikasi');

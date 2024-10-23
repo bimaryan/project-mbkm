@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\WEB\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\MataKuliah;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Imports\MatkulImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MataKuliahController extends Controller
 {
@@ -25,20 +27,13 @@ class MataKuliahController extends Controller
     public function storeMatakuliah(Request $request)
     {
         $request->validate([
+            'kode_mata_kuliah'=> 'required|string',
             'mata_kuliah' => 'required|string',
         ]);
 
-        DB::transaction(function () use ($request) {
-            $totalMataKuliah = MataKuliah::count() + 1;
+        $matakuliah = MataKuliah::create($request->all());
 
-            $kodeMataKuliah = str_pad($totalMataKuliah, 3, '0', STR_PAD_LEFT);
-
-
-            $matakuliah = new MataKuliah();
-            $matakuliah->kode_mata_kuliah = $kodeMataKuliah;
-            $matakuliah->mata_kuliah = $request->mata_kuliah;
-            $matakuliah->save();
-        });
+        $matakuliah->save();
 
         return redirect()->route('data-mata-kuliah')->with('success', 'Mata kuliah berhasil ditambahkan!');
     }
@@ -46,6 +41,7 @@ class MataKuliahController extends Controller
     public function editMatakuliah(MataKuliah $mataKuliah, Request $request)
     {
         $request->validate([
+
             'mata_kuliah' => 'required|string',
         ]);
 
@@ -60,5 +56,11 @@ class MataKuliahController extends Controller
     {
         $matakuliah->delete();
         return redirect()->route('data-mata-kuliah')->with('success', 'Mata kuliah berhasil di hapus!');
+    }
+
+    public function importMatkul(Request $request) {
+        Excel::import(new MatkulImport(), $request->file('file'));
+
+        return redirect()->route('data-mata-kuliah')->with('success', 'Kelas berhasil di import!');
     }
 }

@@ -34,7 +34,7 @@ class MahasiswaController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|string',
             'nim' => 'required|string',
-            'kelas_id' => 'required|string',
+            // 'kelas_id' => 'required|string',
         ]);
 
 
@@ -44,7 +44,7 @@ class MahasiswaController extends Controller
             $mahasiswa = new Mahasiswa();
             $mahasiswa->nama = $request->nama;
             $mahasiswa->nim = $request->nim;
-            $mahasiswa->kelas_id = $request->kelas_id;
+            // $mahasiswa->kelas_id = $request->kelas_id;
             $mahasiswa->password = Hash::make($request->password);
             $mahasiswa->save();
         });
@@ -60,7 +60,7 @@ class MahasiswaController extends Controller
             'foto' => 'required|image|mimes:png,jpg,jpeg|max:2048',
             'nama' => 'required|string',
             'nim' => 'required|string',
-            'kelas_id' => 'required|exists:kelas,id',
+            // 'kelas_id' => 'required|exists:kelas,id',
         ]);
 
         if ($request->hasFile('foto')) {
@@ -76,7 +76,7 @@ class MahasiswaController extends Controller
         $mahasiswa->update([
             'nama' => $request->nama,
             'nim' => $request->nim,
-            'kelas_id' => $request->kelas_id,
+            // 'kelas_id' => $request->kelas_id,
         ]);
 
 
