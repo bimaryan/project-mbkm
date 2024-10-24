@@ -2,31 +2,28 @@
 
 namespace App\Imports;
 
+use App\Models\Kelas;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class MahasiswaImport implements ToCollection
+class MahasiswaImport implements ToModel, WithHeadingRow
 {
-    /**
-     * Handle the collection of data from the Excel file.
-     *
-     * @param Collection $collection
-     */
-    public function collection(Collection $collection)
+    
+    public function model(array $row)
     {
-        $i = 1;
+        $kelas = Kelas::firstOrCreate([
+            'nama_kelas' => $row['kelas'],
+        ]);
 
-        foreach ($collection as $row) {
-            if ($i > 1) {
-                $data['nama'] = !empty($row[1]) ? $row[1] : null;
-                $data['nim'] = !empty($row[2]) ? $row[2] : null;
-                $data['password'] = !empty($data['nim']) ? Hash::make('@Poli' . $data['nim']) : null;
-
-                Mahasiswa::create($data);
-            }
-            $i++;
-        }
+        return new Mahasiswa([
+            'nama' => $row['nama'],
+            'nim' => $row['nim'],
+            'kelas_id' => $kelas->id,
+            'password' => Hash::make('@Poli' . $row['nim']),
+        ]);
     }
 }

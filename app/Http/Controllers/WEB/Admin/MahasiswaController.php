@@ -26,7 +26,7 @@ class MahasiswaController extends Controller
 
         $mahasiswa = Mahasiswa::paginate(5);
         $kelas = Kelas::all();
-        return view('admin.pengguna.mahasiswa.index', ['mahasiswa' => $mahasiswa, 'notifikasiPeminjaman' => $notifikasiPeminjaman], ['kelas' => $kelas]);
+        return view('pageAdmin.pengguna.mahasiswa.index', ['mahasiswa' => $mahasiswa, 'notifikasiPeminjaman' => $notifikasiPeminjaman], ['kelas' => $kelas]);
     }
 
     public function storeMahasiswa(Request $request)
@@ -98,7 +98,7 @@ class MahasiswaController extends Controller
             ->get();
 
         $kelas = Kelas::paginate(5);
-        return view('admin.kelas.index', ['kelas' => $kelas], ['notifikasiPeminjaman' => $notifikasiPeminjaman]);
+        return view('pageAdmin.kelas.index', ['kelas' => $kelas], ['notifikasiPeminjaman' => $notifikasiPeminjaman]);
     }
 
     public function storeKelas(Request $request)

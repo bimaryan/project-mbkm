@@ -5,23 +5,20 @@ namespace App\Imports;
 use App\Models\MataKuliah;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class MatkulImport implements ToCollection
+class MatkulImport implements ToCollection, WithHeadingRow
 {
     /**
      * @param Collection $collection
      */
     public function collection(Collection $collection)
     {
-        $i = 1;
-
         foreach ($collection as $row) {
-            if ($i > 1) {
-                $data['kode_mata_kuliah'] = !empty($row[1]) ? $row[1] : '';
-                $data['mata_kuliah'] = !empty($row[2]) ? $row[2] : '';
-                MataKuliah::create($data);
-            }
-            $i++;
+            MataKuliah::create([
+                "kode_mata_kuliah"=> $row["kd_matkul"],
+                "mata_kuliah"=> $row["matkul"],
+            ]);
         }
     }
 }

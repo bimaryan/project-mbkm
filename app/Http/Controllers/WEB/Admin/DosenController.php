@@ -2,14 +2,27 @@
 
 namespace App\Http\Controllers\WEB\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Dosen;
 use App\Models\Peminjaman;
+use App\Imports\DosenImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DosenController extends Controller
 {
+
+    public function importDosen(Request $request) {
+        $request->validate([
+            "file"=> "required|mimes:xlsx,xls,csv",
+        ]);
+
+        Excel::import(new DosenImport, $request->file('file'));
+        return redirect()->back()->with('success','Dosen berhasil di import');
+    }
+
+
     public function dosen()
     {
         $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])
@@ -20,7 +33,7 @@ class DosenController extends Controller
 
         $dosen = Dosen::paginate(5);
 
-        return view('admin.pengguna.dosen.index', compact('dosen', 'notifikasiPeminjaman'));
+        return view('pageAdmin.pengguna.dosen.index', compact('dosen', 'notifikasiPeminjaman'));
     }
 
     public function storeDosen(Request $request)

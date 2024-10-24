@@ -21,7 +21,7 @@ class MataKuliahController extends Controller
             ->get();
 
         $matakuliah = MataKuliah::paginate(5);
-        return view('admin.matakuliah.index', ['matakuliah' => $matakuliah, 'notifikasiPeminjaman' => $notifikasiPeminjaman]);
+        return view('pageAdmin.matakuliah.index', ['matakuliah' => $matakuliah, 'notifikasiPeminjaman' => $notifikasiPeminjaman]);
     }
 
     public function storeMatakuliah(Request $request)

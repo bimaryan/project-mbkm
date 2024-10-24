@@ -1,18 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WEB\DashboardController;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Admin\AdminController;
 use App\Http\Controllers\WEB\Admin\DosenController;
-use App\Http\Controllers\WEB\Admin\ProdukController;
-use App\Http\Controllers\WEB\Admin\SatuanController;
-use App\Http\Controllers\WEB\Admin\KategoriController;
-use App\Http\Controllers\WEB\Admin\PeminjamanController;
-use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
+use App\Http\Controllers\WEB\Staff\RuanganController;
+use App\Http\Controllers\WEB\Staff\ProdukController;
+use App\Http\Controllers\WEB\Staff\SatuanController;
+use App\Http\Controllers\WEB\Staff\KategoriController;
+use App\Http\Controllers\WEB\Mahasiswa\HomeController;
 use App\Http\Controllers\WEB\Admin\MahasiswaController;
 use App\Http\Controllers\WEB\Admin\MataKuliahController;
-use App\Http\Controllers\WEB\Admin\StaffController;
-use App\Http\Controllers\WEB\Mahasiswa\HomeController;
+use App\Http\Controllers\WEB\Staff\PeminjamanController;
+use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
 
 /*
 |----------------------------------------------------------------------
@@ -35,8 +36,9 @@ Route::get('reset-password/{token}', [ForgotPasswordController::class, 'resetPas
 Route::post('reset-password-process/{token}', [ForgotPasswordController::class, 'resetPasswordProcess'])->name('reset-password-process');
 
 Route::middleware(['auth:admin'])->group(function () {
-    Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+    
     Route::middleware(['UserAccess:Admin'])->group(function () {
         Route::prefix('pengguna')->group(function () {
             // ROUTE DATA ADMIN DAN STAFF
@@ -61,6 +63,7 @@ Route::middleware(['auth:admin'])->group(function () {
             Route::post('/data-dosen/proses', [DosenController::class, 'storeDosen'])->name('data-dosen.proses');
             Route::put('/data-dosen/{dosen}/edit', [DosenController::class, 'editDosen'])->name('data-dosen.edit');
             Route::delete('/data-dosen/{dosen}/hapus', [DosenController::class, 'deleteDosen'])->name('data-dosen.delete');
+            Route::post('/import-dosen', [DosenController::class,'importDosen'])->name('import.dosen');
         });
 
         // ROUTE DATA KELAS
@@ -95,14 +98,15 @@ Route::middleware(['auth:admin'])->group(function () {
             Route::post('data-satuan/proses', [SatuanController::class, 'storeSatuan'])->name('data-satuan.proses');
             Route::delete('data-satuan/{satuan}/hapus', [SatuanController::class, 'deleteSatuan'])->name('data-satuan.hapus');
             Route::put('data-satuan/{satuan}/edit', [SatuanController::class, 'editSatuan'])->name('data-satuan.edit');
+            Route::post('data-satuan/import', [SatuanController::class, 'importSatuan'])->name('data-satuan.import');
         });
 
         // ROUTE DATA RUANGAN
-        Route::get('data-ruangan', [StaffController::class, 'ruangan'])->name('data-ruangan');
-        Route::post('data-ruangan/proses', [StaffController::class, 'storeRuangan'])->name('data-ruangan.proses');
-        Route::delete('data-ruangan/{ruangan}/hapus', [StaffController::class, 'deleteRuangan'])->name('data-ruangan.hapus');
-        Route::put('data-ruangan/{ruangan}/edit', [StaffController::class, 'editRuangan'])->name('data-ruangan.edit');
-        Route::post('data-satuan/import', [StaffController::class, 'importRuangan'])->name('data-satuan.import');
+        Route::get('data-ruangan', [RuanganController::class, 'ruangan'])->name('data-ruangan');
+        Route::post('data-ruangan/proses', [RuanganController::class, 'storeRuangan'])->name('data-ruangan.proses');
+        Route::delete('data-ruangan/{ruangan}/hapus', [RuanganController::class, 'deleteRuangan'])->name('data-ruangan.hapus');
+        Route::put('data-ruangan/{ruangan}/edit', [RuanganController::class, 'editRuangan'])->name('data-ruangan.edit');
+        Route::post('data-satuan/import', [RuanganController::class, 'importRuangan'])->name('data-satuan.import');
 
         // ROUTE VERIFIKASI PEMINJAMAN
         Route::get('verifikasi-peminjaman', [PeminjamanController::class, 'index'])->name('verifikasi');
