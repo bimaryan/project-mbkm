@@ -6,10 +6,6 @@
             <img src="{{ asset('logo/polindra.png') }}" class="w-10 md:hidden" alt="{{ asset('logo/polindra.png') }}" />
         </a>
         <div class="flex items-center space-x-1 md:order-2 md:space-x-0 rtl:space-x-reverse">
-            <button id="fullscreen-btn" type="button"
-                class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-900 rounded-lg cursor-pointer dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                <i id="fullscreen-icon" class="fa-solid fa-maximize"></i>
-            </button>
             @if (Route::has('login'))
                 @auth
                     <button type="button" data-dropdown-toggle="dropdown-menu"
