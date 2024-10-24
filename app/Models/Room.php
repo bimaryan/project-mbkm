@@ -13,5 +13,8 @@ class Room extends Model
 
     protected $fillable = ['nama_ruangan'];
 
-
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'rooms_id');
+    }
 }
