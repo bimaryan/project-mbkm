@@ -15,37 +15,37 @@
             <div class="p-4 bg-white rounded-lg shadow-lg">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h3 class="text-2xl font-semibold text-green-500">Mahasiswa</h3>
+                        <h3 class="text-2xl font-semibold text-green-500">Data Dosen</h3>
                     </div>
                     <div>
-                        <div class="flex items-center space-x-2">
-                            <button class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800"
-                                data-modal-target="import-mahasiswa" data-modal-toggle="import-mahasiswa"><i
-                                    class="fa-solid fa-file-import"></i>
-                            </button>
+                        {{-- START : MODAL IMPORT DOSEN --}}
+                        <button data-modal-target="import-dosen" data-modal-toggle="import-dosen"
+                            class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800"><i
+                                class="fa-solid fa-upload"></i>
+                        </button>
+                        @include('pageAdmin.pengguna.dosen.modal.import')
+                        {{-- END : MODAL IMPORT DOSEN --}}
 
-                            @include('admin.pengguna.mahasiswa.modal.import')
-
-                            <button data-modal-target="barang" data-modal-toggle="barang"
-                                class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-
-                        {{-- MODAL TAMBAH MAHASISWA --}}
-                        @include('admin.pengguna.mahasiswa.modal.tambah')
+                        <button data-modal-target="tambah-dosen" data-modal-toggle="tambah-dosen"
+                            class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800"><i
+                                class="fa-solid fa-plus"></i>
+                        </button>
+                        {{-- MODAL TAMBAH DOSEN --}}
+                        @include('pageAdmin.pengguna.dosen.modal.tambah')
                     </div>
                 </div>
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
+                <form action="">
 
-                <div id="tableMahasiswa">
-                    @include('admin.pengguna.mahasiswa.table', ['mahasiswa' => $mahasiswa])
+                </form>
+                <div id="tableDosen">
+                    @include('pageAdmin.pengguna.dosen.table', ['dosen' => $dosen])
                 </div>
 
                 <div id="pageignitionLinks">
-                    {{ $mahasiswa->links() }}
+                    {{ $dosen->links() }}
                 </div>
             </div>
         </div>
@@ -88,29 +88,22 @@
 
             function loadTable(page = 1) {
                 $.ajax({
-                    url: "{{ route('data-mahasiswa') }}",
+                    url: "{{ route('data-dosen') }}",
                     method: "GET",
-                    data: {
-                        // name: $('#filterName').val(),
-                        // kategori_id: $('#filterKategori').val(),
-                        // kondisi: $('#filterKondisi').val(),
-                        // stock: $('#filterStock').val(),
-                        // satuan_id: $('#filterSatuan').val(),
-                        // page: page
-                    },
                     success: function(response) {
                         // Replace table and pagination links
-                        $('#tableMahasiswa').html($(response).find('#tableMahasiswa').html());
+                        $('#tableDosen').html($(response).find('#tableDosen').html());
                         $('#paginationLinks').html($(response).find('#paginationLinks').html());
                     }
                 });
             }
         });
+
         $(document).ready(function() {
-            $('#data-mahasiswa').DataTable({
+            $('#data-dosen').DataTable({
                 paging: false,
                 scrollCollapse: true,
-                scrollY: '300px',
+                scrollY: '300px'
             });
         });
     </script>

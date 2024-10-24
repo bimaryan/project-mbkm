@@ -1,18 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WEB\DashboardController;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Admin\AdminController;
 use App\Http\Controllers\WEB\Admin\DosenController;
+use App\Http\Controllers\WEB\Admin\StaffController;
 use App\Http\Controllers\WEB\Admin\ProdukController;
 use App\Http\Controllers\WEB\Admin\SatuanController;
 use App\Http\Controllers\WEB\Admin\KategoriController;
-use App\Http\Controllers\WEB\Admin\PeminjamanController;
-use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
+use App\Http\Controllers\WEB\Mahasiswa\HomeController;
 use App\Http\Controllers\WEB\Admin\MahasiswaController;
 use App\Http\Controllers\WEB\Admin\MataKuliahController;
-use App\Http\Controllers\WEB\Admin\StaffController;
-use App\Http\Controllers\WEB\Mahasiswa\HomeController;
+use App\Http\Controllers\WEB\Admin\PeminjamanController;
+use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
 
 /*
 |----------------------------------------------------------------------
@@ -35,8 +36,9 @@ Route::get('reset-password/{token}', [ForgotPasswordController::class, 'resetPas
 Route::post('reset-password-process/{token}', [ForgotPasswordController::class, 'resetPasswordProcess'])->name('reset-password-process');
 
 Route::middleware(['auth:admin'])->group(function () {
-    Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+    
     Route::middleware(['UserAccess:Admin'])->group(function () {
         Route::prefix('pengguna')->group(function () {
             // ROUTE DATA ADMIN DAN STAFF
@@ -61,6 +63,7 @@ Route::middleware(['auth:admin'])->group(function () {
             Route::post('/data-dosen/proses', [DosenController::class, 'storeDosen'])->name('data-dosen.proses');
             Route::put('/data-dosen/{dosen}/edit', [DosenController::class, 'editDosen'])->name('data-dosen.edit');
             Route::delete('/data-dosen/{dosen}/hapus', [DosenController::class, 'deleteDosen'])->name('data-dosen.delete');
+            Route::post('/import-dosen', [DosenController::class,'importDosen'])->name('import.dosen');
         });
 
         // ROUTE DATA KELAS

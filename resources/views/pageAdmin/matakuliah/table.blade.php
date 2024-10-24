@@ -44,7 +44,7 @@
                     </td>
                 </tr>
 
-                @include('admin.matakuliah.modal.edit')
+                @include('pageAdmin.matakuliah.modal.edit')
             @endforeach
         </tbody>
     </table>

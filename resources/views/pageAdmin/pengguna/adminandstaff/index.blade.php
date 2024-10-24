@@ -15,33 +15,30 @@
             <div class="p-4 bg-white rounded-lg shadow-lg">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h3 class="text-2xl font-semibold text-green-500">Mata Kuliah</h3>
+                        <h3 class="text-2xl font-semibold text-green-500">Admin dan Staff</h3>
                     </div>
                     <div>
-                        <button class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800"
-                            data-modal-target="import-matkul" data-modal-toggle="import-matkul"><i
-                                class="fa-solid fa-file-import"></i>
-                        </button>
-                        {{-- MODAL IMPORT DATA --}}
-                        @include('admin.matakuliah.modal.import')
-                        
-                        <button data-modal-target="tambah-matakuliah" data-modal-toggle="tambah-matakuliah"
+                        <button data-modal-target="tambah-admin-dan-staff" data-modal-toggle="tambah-admin-dan-staff"
                             class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800"><i
                                 class="fa-solid fa-plus"></i>
                         </button>
-                        {{-- MODAL TAMBAH MATA KULIAH --}}
-                        @include('admin.matakuliah.modal.tambah')
+
+                        {{-- MODAL TAMBAH ADMIN DAN STAFF --}}
+                        @include('pageAdmin.pengguna.adminandstaff.modal.tambah')
                     </div>
                 </div>
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
-                <div id="tableMatakuliah">
-                    @include('admin.matakuliah.table', ['matakuliah' => $matakuliah])
+                <form action="">
+
+                </form>
+                <div id="tableAdminDanStaff">
+                    @include('pageAdmin.pengguna.adminandstaff.table', ['users' => $user])
                 </div>
 
                 <div id="pageignitionLinks">
-                    {{ $matakuliah->links() }}
+                    {{ $user->links() }}
                 </div>
             </div>
         </div>
@@ -84,7 +81,7 @@
 
             function loadTable(page = 1) {
                 $.ajax({
-                    url: "{{ route('data-mata-kuliah') }}",
+                    url: "{{ route('data-admin-dan-staff') }}",
                     method: "GET",
                     data: {
                         // name: $('#filterName').val(),
@@ -96,18 +93,20 @@
                     },
                     success: function(response) {
                         // Replace table and pagination links
-                        $('#tableMatakuliah').html($(response).find('#tableMatakuliah').html());
+                        $('#tableAdminDanStaff').html($(response).find('#tableAdminDanStaff').html());
                         $('#paginationLinks').html($(response).find('#paginationLinks').html());
                     }
                 });
             }
         });
+        
         $(document).ready(function() {
-            $('#data-mata-kuliah').DataTable({
+            $('#data-admin-dan-staff').DataTable({
                 paging: false,
                 scrollCollapse: true,
                 scrollY: '300px'
             });
         });
     </script>
+    
 @endsection

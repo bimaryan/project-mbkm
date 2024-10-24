@@ -15,27 +15,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    public function index()
-    {
-        $totalPeminjaman = Peminjaman::count();
-        $totalMahasiswa = Mahasiswa::count();
-        $totalAlat = Barang::where('kategori_id', 1)->count();
-        $totalBahan = Barang::where('kategori_id', 2)->count();
-
-        $peminjamanTerakhir30Hari = Peminjaman::where('tgl_pinjam', '>=', now()->subDays(30))->count();
-
-        $persentasePeminjaman = ($totalPeminjaman > 0) ? ($peminjamanTerakhir30Hari / $totalPeminjaman) * 100 : 0;
-
-        $totalDikembalikan = Peminjaman::where('status', 'Dikembalikan')->count();
-
-        $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])
-            ->where('status', '!=', 'Dikembalikan')
-            ->latest()
-            ->take(5)
-            ->get();
-
-        return view('admin.dashboard.index', compact('totalPeminjaman', 'totalMahasiswa', 'totalAlat', 'totalBahan', 'persentasePeminjaman', 'totalDikembalikan', 'peminjamanTerakhir30Hari', 'notifikasiPeminjaman'));
-    }
+    
 
     public function adminAndStaff(Request $request)
     {
@@ -50,7 +30,7 @@ class AdminController extends Controller
         $users = $query->paginate(5);
         $role = Role::all();
 
-        return view('admin.pengguna.adminandstaff.index', ['user' => $users, 'notifikasiPeminjaman' => $notifikasiPeminjaman], ['role' => $role]);
+        return view('pageAdmin.pengguna.adminandstaff.index', ['user' => $users, 'notifikasiPeminjaman' => $notifikasiPeminjaman], ['role' => $role]);
     }
 
     public function storeAdminAndStaff(Request $request)

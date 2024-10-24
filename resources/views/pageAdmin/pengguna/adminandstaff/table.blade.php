@@ -1,21 +1,21 @@
 <div class="relative overflow-x-auto sm:rounded-lg">
-    <table class="w-full text-sm text-gray-500 dark:text-gray-400 display" style="100%" id="data-mahasiswa">
+    <table class="w-full text-sm text-gray-500 display dark:text-gray-400" style="100%" id="data-admin-dan-staff">
         <thead class="uppercase text-cen-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3 ">
+                <th scope="col" class="px-6 py-3">
                     No
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Nama Lengkap
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    NIM
+                    NIP
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Kelas
+                    Username
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Email
+                    Role
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Aksi
@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($mahasiswa as $data)
+            @foreach ($users as $data)
                 <tr>
                     <td scope="col" class="px-6 py-3">
                         {{ $loop->iteration }}
@@ -32,17 +32,13 @@
                         {{ $data->nama }}
                     </td>
                     <td scope="col" class="px-6 py-3">
-                        {{ $data->nim }}
+                        {{ $data->nip }}
                     </td>
                     <td scope="col" class="px-6 py-3">
-                        {{ $data->kelas->nama_kelas ?? '-' }}
+                        {{ $data->username }}
                     </td>
                     <td scope="col" class="px-6 py-3">
-                        @if ($data->email)
-                            {{ $data->email }}
-                        @else
-                            -
-                        @endif
+                        {{ $data->role->nama_role }}
                     </td>
                     <td scope="col" class="flex items-center justify-center gap-2 px-6 py-3">
                         <div>
@@ -54,7 +50,7 @@
                         </div>
                         <div>
                             <form id="delete-form-{{ $data->id }}"
-                                action="{{ route('data-mahasiswa.delete', $data->id) }}" method="POST">
+                                action="{{ route('data-admin-dan-staff.delete', $data->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" onclick="confirmDelete({{ $data->id }})"
@@ -73,11 +69,11 @@
                     </td>
                 </tr>
 
-                {{-- MODAL DETAIL MAHASISWA --}}
-                @include('admin.pengguna.mahasiswa.modal.detail')
+                {{-- MODAL DETAIL ADMIN DAN STAFF --}}
+                @include('pageAdmin.pengguna.adminandstaff.modal.detail')
 
-                {{-- MODAL EDIT MAHASISWA --}}
-                @include('admin.pengguna.mahasiswa.modal.edit')
+                {{-- MODAL EDIT BARANG --}}
+                @include('pageAdmin.pengguna.adminandstaff.modal.edit')
             @endforeach
         </tbody>
     </table>
