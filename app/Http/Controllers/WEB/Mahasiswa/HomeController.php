@@ -7,6 +7,7 @@ use App\Models\Kategori;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Dosen;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Kelas;
 use App\Models\MataKuliah;
@@ -86,6 +87,7 @@ class HomeController extends Controller
     {
         $view = Barang::where('nama_barang', $nama_barang)->first();
         $kelas = Kelas::all();
+        $dosen = Dosen::all();
         $matkul = MataKuliah::all();
         $stock = Stock::where('barang_id', $view->id)->first();
         $room = Room::all();
@@ -99,7 +101,8 @@ class HomeController extends Controller
             'kelas' => $kelas,
             'stock' => $stock,
             'matkul' => $matkul,
-            'room' => $room
+            'room' => $room,
+            'dosen' => $dosen
         ]);
     }
 
@@ -107,15 +110,7 @@ class HomeController extends Controller
     {
         $mahasiswaId = Auth::user()->id;
 
-        $currentStock = $stock->stock;
-        $jumlahPinjam = $request->input('jumlah_pinjam');
-
-        if ($currentStock < $jumlahPinjam) {
-            return redirect()->back()->with('error', 'Stok barang tidak mencukupi untuk peminjaman.');
-        }
-
         Peminjaman::create([
-
             'mahasiswa_id' => $mahasiswaId,
             'barang_id' => $barang->id,
             'stock_id' => $stock->id,
@@ -131,10 +126,6 @@ class HomeController extends Controller
             'spo_id' => $request->input('spo_id'),
             'aprovals' => 'Belum',
             'status' => 'Menunggu Persetujuan'
-        ]);
-
-        $stock->update([
-            'stock' => $currentStock - $jumlahPinjam,
         ]);
 
         return redirect()->route('mahasiswa.informasi')->with('success', 'Peminjaman berhasil dibuat dan menunggu persetujuan.');

@@ -7,64 +7,72 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
                 <div>
-                    <div class="bg-white p-4 rounded-lg shadow-lg">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-lg font-semibold">Peminjaman</p>
-                                <p class="text-xl font-semibold">{{ $totalPeminjaman }}</p>
-                            </div>
-                            <div>
-                                <div class="text-3xl font-semibold text-blue-500">
-                                    <i class="fa-solid fa-boxes-stacked"></i>
+                    <a href="{{ route('verifikasi') }}">
+                        <div class="bg-white p-4 rounded-lg shadow-lg">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-lg font-semibold">Peminjaman</p>
+                                    <p class="text-xl font-semibold">{{ $totalPeminjaman }}</p>
+                                </div>
+                                <div>
+                                    <div class="text-3xl font-semibold text-blue-500">
+                                        <i class="fa-solid fa-boxes-stacked"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div>
-                    <div class="bg-white p-4 rounded-lg shadow-lg">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-lg font-semibold">Mahasiswa</p>
-                                <p class="text-xl font-semibold">{{ $totalMahasiswa }}</p>
-                            </div>
-                            <div>
-                                <div class="text-3xl font-semibold text-green-500">
-                                    <i class="fa-solid fa-users"></i>
+                    <a href="{{ route('data-mahasiswa') }}">
+                        <div class="bg-white p-4 rounded-lg shadow-lg">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-lg font-semibold">Mahasiswa</p>
+                                    <p class="text-xl font-semibold">{{ $totalMahasiswa }}</p>
+                                </div>
+                                <div>
+                                    <div class="text-3xl font-semibold text-green-500">
+                                        <i class="fa-solid fa-users"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div>
-                    <div class="bg-white p-4 rounded-lg shadow-lg">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-lg font-semibold">Alat</p>
-                                <p class="text-xl font-semibold">{{ $totalAlat }}</p>
-                            </div>
-                            <div>
-                                <div class="text-3xl font-semibold text-yellow-500">
-                                    <i class="fa-solid fa-microscope"></i>
+                    <a href="{{ route('data-barang') }}">
+                        <div class="bg-white p-4 rounded-lg shadow-lg">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-lg font-semibold">Alat</p>
+                                    <p class="text-xl font-semibold">{{ $totalAlat }}</p>
+                                </div>
+                                <div>
+                                    <div class="text-3xl font-semibold text-yellow-500">
+                                        <i class="fa-solid fa-microscope"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div>
-                    <div class="bg-white p-4 rounded-lg shadow-lg">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-lg font-semibold">Bahan</p>
-                                <p class="text-xl font-semibold">{{ $totalBahan }}</p>
-                            </div>
-                            <div>
-                                <div class="text-3xl font-semibold text-red-500">
-                                    <i class="fa-solid fa-pump-medical"></i>
+                    <a href="{{ route('data-barang') }}">
+                        <div class="bg-white p-4 rounded-lg shadow-lg">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-lg font-semibold">Bahan</p>
+                                    <p class="text-xl font-semibold">{{ $totalBahan }}</p>
+                                </div>
+                                <div>
+                                    <div class="text-3xl font-semibold text-red-500">
+                                        <i class="fa-solid fa-pump-medical"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
 
