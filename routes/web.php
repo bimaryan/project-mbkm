@@ -98,6 +98,7 @@ Route::middleware(['auth:admin'])->group(function () {
             Route::post('data-satuan/proses', [SatuanController::class, 'storeSatuan'])->name('data-satuan.proses');
             Route::delete('data-satuan/{satuan}/hapus', [SatuanController::class, 'deleteSatuan'])->name('data-satuan.hapus');
             Route::put('data-satuan/{satuan}/edit', [SatuanController::class, 'editSatuan'])->name('data-satuan.edit');
+            Route::post('data-satuan/import', [SatuanController::class, 'importSatuan'])->name('data-satuan.import');
         });
 
         // ROUTE DATA RUANGAN

@@ -3,12 +3,26 @@
 namespace App\Http\Controllers\WEB\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Imports\SatuanImport;
 use App\Models\Peminjaman;
 use App\Models\Satuan;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SatuanController extends Controller
 {
+    public function importSatuan(Request $request) {
+        $request->validate([
+           'file' => 'required|mimes:xlsx,xls,csv',
+        ], [
+            'file'=> 'File harus berupa .xlsx, .xls, .csv',
+        ]);
+
+        Excel::import(new SatuanImport(), $request->file('file'));
+
+        return redirect()->route('data-satuan')->with('success', 'Mahasiswa berhasil di import!');
+    }
+
     public function satuan()
     {
         $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])
