@@ -5,14 +5,14 @@ use App\Http\Controllers\WEB\DashboardController;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Admin\AdminController;
 use App\Http\Controllers\WEB\Admin\DosenController;
-use App\Http\Controllers\WEB\Admin\StaffController;
-use App\Http\Controllers\WEB\Admin\ProdukController;
-use App\Http\Controllers\WEB\Admin\SatuanController;
-use App\Http\Controllers\WEB\Admin\KategoriController;
+use App\Http\Controllers\WEB\Staff\RuanganController;
+use App\Http\Controllers\WEB\Staff\ProdukController;
+use App\Http\Controllers\WEB\Staff\SatuanController;
+use App\Http\Controllers\WEB\Staff\KategoriController;
 use App\Http\Controllers\WEB\Mahasiswa\HomeController;
 use App\Http\Controllers\WEB\Admin\MahasiswaController;
 use App\Http\Controllers\WEB\Admin\MataKuliahController;
-use App\Http\Controllers\WEB\Admin\PeminjamanController;
+use App\Http\Controllers\WEB\Staff\PeminjamanController;
 use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
 
 /*
@@ -101,11 +101,11 @@ Route::middleware(['auth:admin'])->group(function () {
         });
 
         // ROUTE DATA RUANGAN
-        Route::get('data-ruangan', [StaffController::class, 'ruangan'])->name('data-ruangan');
-        Route::post('data-ruangan/proses', [StaffController::class, 'storeRuangan'])->name('data-ruangan.proses');
-        Route::delete('data-ruangan/{ruangan}/hapus', [StaffController::class, 'deleteRuangan'])->name('data-ruangan.hapus');
-        Route::put('data-ruangan/{ruangan}/edit', [StaffController::class, 'editRuangan'])->name('data-ruangan.edit');
-        Route::post('data-satuan/import', [StaffController::class, 'importRuangan'])->name('data-satuan.import');
+        Route::get('data-ruangan', [RuanganController::class, 'ruangan'])->name('data-ruangan');
+        Route::post('data-ruangan/proses', [RuanganController::class, 'storeRuangan'])->name('data-ruangan.proses');
+        Route::delete('data-ruangan/{ruangan}/hapus', [RuanganController::class, 'deleteRuangan'])->name('data-ruangan.hapus');
+        Route::put('data-ruangan/{ruangan}/edit', [RuanganController::class, 'editRuangan'])->name('data-ruangan.edit');
+        Route::post('data-satuan/import', [RuanganController::class, 'importRuangan'])->name('data-satuan.import');
 
         // ROUTE VERIFIKASI PEMINJAMAN
         Route::get('verifikasi-peminjaman', [PeminjamanController::class, 'index'])->name('verifikasi');

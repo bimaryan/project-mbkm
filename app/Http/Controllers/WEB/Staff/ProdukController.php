@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\WEB\Admin;
+namespace App\Http\Controllers\WEB\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
@@ -63,7 +63,7 @@ class ProdukController extends Controller
         $satuans = Satuan::all();
         $stocks = Stock::all();
 
-        return view('admin.barang.index', compact('barangs', 'kategoris', 'kondisis', 'satuans', 'stocks', 'notifikasiPeminjaman'));
+        return view('pageStaff.barang.index', compact('barangs', 'kategoris', 'kondisis', 'satuans', 'stocks', 'notifikasiPeminjaman'));
     }
 
     public function storeBarang(Request $request)

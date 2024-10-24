@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\WEB\Admin;
+namespace App\Http\Controllers\WEB\Staff;
 
-use App\Http\Controllers\Controller;
-use App\Imports\RuanganImport;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use App\Imports\RuanganImport;
+use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 
-class StaffController extends Controller
+class RuanganController extends Controller
 {
     public function ruangan()
     {
         $ruangan = Room::paginate(5);
-        return view("admin.ruangan.index", ["ruangan" => $ruangan]);
+        return view("pageStaff.ruangan.index", ["ruangan" => $ruangan]);
     }
 
     public function storeRuangan(Request $request)

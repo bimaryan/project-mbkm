@@ -68,7 +68,7 @@
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
                 <div id="tableSatuan">
-                    @include('admin.satuan.table', ['satuan' => $satuan])
+                    @include('pageStaff.satuan.table', ['satuan' => $satuan])
                 </div>
                 <div id="pageignitionLinks">
                     {{ $satuan->links() }}

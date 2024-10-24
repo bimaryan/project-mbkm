@@ -45,7 +45,7 @@
                 </tr>
 
                 {{-- MODAL EDIT RUANGAN --}}
-                @include('admin.ruangan.modal.edit')
+                @include('pageStaff.ruangan.modal.edit')
             @endforeach
         </tbody>
     </table>

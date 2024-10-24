@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\WEB\Admin;
+namespace App\Http\Controllers\WEB\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kategori;
@@ -18,7 +18,7 @@ class KategoriController extends Controller
             ->get();
 
         $kategori = Kategori::paginate(5);
-        return view('admin.kategori.index', ['kategori' => $kategori, 'notifikasiPeminjaman' => $notifikasiPeminjaman]);
+        return view('pageStaff.kategori.index', ['kategori' => $kategori, 'notifikasiPeminjaman' => $notifikasiPeminjaman]);
     }
 
 

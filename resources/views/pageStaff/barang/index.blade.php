@@ -135,7 +135,7 @@
             <div class="p-4 bg-white rounded-lg shadow-lg">
 
                 <div id="tableBarang">
-                    @include('admin.barang.table', ['barangs' => $barangs])
+                    @include('pageStaff.barang.table', ['barangs' => $barangs])
                 </div>
 
                 <div id="paginationLinks">

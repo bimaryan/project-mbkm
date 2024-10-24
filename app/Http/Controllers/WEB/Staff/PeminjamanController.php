@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\WEB\Admin;
+namespace App\Http\Controllers\WEB\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Peminjaman;
@@ -17,7 +17,7 @@ class PeminjamanController extends Controller
             ->get();
 
         $peminjamans = Peminjaman::all();
-        return view('admin.peminjaman.index', compact('peminjamans', 'notifikasiPeminjaman'));
+        return view('pageStaff.peminjaman.index', compact('peminjamans', 'notifikasiPeminjaman'));
     }
 
     public function update(Request $request, Peminjaman $peminjaman)

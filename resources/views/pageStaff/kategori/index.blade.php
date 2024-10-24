@@ -67,7 +67,7 @@
             
             <div class="p-4 bg-white rounded-lg shadow-lg">
                 <div id="tableKategori">
-                    @include('admin.kategori.table', ['kategori' => $kategori])
+                    @include('pageStaff.kategori.table', ['kategori' => $kategori])
                 </div>
 
                 <div id="pageignitionLinks">

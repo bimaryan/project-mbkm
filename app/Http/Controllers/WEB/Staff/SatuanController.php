@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\WEB\Admin;
+namespace App\Http\Controllers\WEB\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Peminjaman;
@@ -18,7 +18,7 @@ class SatuanController extends Controller
             ->get();
 
         $satuan = Satuan::paginate(5);
-        return view('admin.satuan.index', ['satuan' => $satuan], ['notifikasiPeminjaman' => $notifikasiPeminjaman]);
+        return view('pageStaff.satuan.index', ['satuan' => $satuan], ['notifikasiPeminjaman' => $notifikasiPeminjaman]);
     }
 
     public function storeSatuan(Request $request)

@@ -24,7 +24,7 @@
                                     class="fa-solid fa-file-import"></i>
                             </button>
 
-                            @include('admin.ruangan.modal.import')
+                            @include('pageStaff.ruangan.modal.import')
 
                             <button data-modal-target="tambah-ruangan" data-modal-toggle="tambah-ruangan"
                                 class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800">
@@ -33,7 +33,7 @@
                         </div>
 
                         {{-- MODAL TAMBAH MAHASISWA --}}
-                        @include('admin.ruangan.modal.tambah')
+                        @include('pageStaff.ruangan.modal.tambah')
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
             <div class="p-4 bg-white rounded-lg shadow-lg">
 
                 <div id="tableRuangan">
-                    @include('admin.ruangan.table', ['ruangan' => $ruangan])
+                    @include('pageStaff.ruangan.table', ['ruangan' => $ruangan])
                 </div>
 
                 <div id="pageignitionLinks">
