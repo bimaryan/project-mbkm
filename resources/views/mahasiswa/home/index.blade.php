@@ -165,3 +165,43 @@
         });
     </script>
 @endsection
+@section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let elem = document.documentElement;
+            let fullscreenBtn = document.getElementById('fullscreen-btn');
+            let icon = document.getElementById('fullscreen-icon');
+
+            // Periksa status dari localStorage saat halaman dimuat
+            if (localStorage.getItem('isFullScreen') === 'true') {
+                elem.requestFullscreen();
+                icon.classList.remove('fa-maximize');
+                icon.classList.add('fa-minimize');
+            }
+
+            fullscreenBtn.addEventListener('click', function() {
+                if (!document.fullscreenElement) {
+                    // Masuk ke mode full screen
+                    elem.requestFullscreen().then(() => {
+                        localStorage.setItem('isFullScreen',
+                            'true'); // Simpan status ke localStorage
+                        icon.classList.remove('fa-maximize');
+                        icon.classList.add('fa-minimize');
+                    }).catch((err) => {
+                        console.error(`Error trying to enable full-screen mode: ${err.message}`);
+                    });
+                } else {
+                    // Keluar dari mode full screen
+                    document.exitFullscreen().then(() => {
+                        localStorage.setItem('isFullScreen',
+                            'false'); // Simpan status ke localStorage
+                        icon.classList.remove('fa-minimize');
+                        icon.classList.add('fa-maximize');
+                    }).catch((err) => {
+                        console.error(`Error trying to exit full-screen mode: ${err.message}`);
+                    });
+                }
+            });
+        });
+    </script>
+@endsection

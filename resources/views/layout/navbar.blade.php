@@ -23,7 +23,7 @@
             <div class="flex items-center">
                 <div class="flex items-center ms-3">
                     <div class="flex items-center gap-4">
-                        {{-- <div>
+                        <div>
                             <button type="button" class="relative inline-flex items-center text-2xl"
                                 data-dropdown-toggle="dropdown-notifikasi">
                                 <i class="fa-regular fa-bell"></i>
@@ -66,7 +66,7 @@
                                     @endif
                                 </ul>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="hidden md:block">
                             <div class="flex-col text-right md:flex">
                                 <p class="text-sm">{{ Auth::user()->nama }}</p>
