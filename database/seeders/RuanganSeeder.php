@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Room;
+use App\Models\Ruangan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,88 +14,88 @@ class RuanganSeeder extends Seeder
      */
     public function run(): void
     {
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Decontamination Room',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Steril Room',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Radiologi',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Basic Biomedical Science',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Pediatric Nursing',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'General Nursing',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'ICU',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'VIP',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'NICU',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Maternitas',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'PERINATOLOGI',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Medical Surgical Nursing 2',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Hemodialisa',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Ruang Alat 1',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Ruang Alat 2',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Ruang Alat 2',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Selasar Lab',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Selasar KBK',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Klinik 1',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Klinik 2',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'KOMUNITAS',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'JIWA',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'CSSD',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Sterilization Room',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Tool Setting Room',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Operation Room',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Emergency Room',
         ]);
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => 'Nurse Station',
         ]);
     }

@@ -20,6 +20,8 @@ class PeminjamanController extends Controller
             $peminjamans = Peminjaman::all();
         $peminjamans = Peminjaman::paginate(5);
         return view('pageStaff.peminjaman.index', ['peminjamans' => $peminjamans], ['notifikasiPeminjaman' => $notifikasiPeminjaman]);
+        $peminjamans = Peminjaman::paginate(5);
+        return view('pageStaff.peminjaman.index', compact('peminjamans', 'notifikasiPeminjaman'));
     }
 
     public function update(Request $request, Peminjaman $peminjaman)

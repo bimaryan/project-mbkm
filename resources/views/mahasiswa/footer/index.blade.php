@@ -13,13 +13,13 @@
                 <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Tautan</h2>
                 <ul class="font-medium text-gray-500 dark:text-gray-400">
                     <li class="mb-4">
-                        <a href="#" class="hover:underline">Home</a>
+                        <a href="{{ route('home') }}" class="hover:underline">Home</a>
                     </li>
                     <li class="mb-4">
-                        <a href="#" class="hover:underline">Katalog</a>
+                        <a href="{{ route('katalog') }}" class="hover:underline">Katalog</a>
                     </li>
                     <li class="mb-4">
-                        <a href="#" class="hover:underline">Informasi</a>
+                        <a href="{{ route('mahasiswa.informasi') }}" class="hover:underline">Informasi</a>
                     </li>
                 </ul>
             </div>

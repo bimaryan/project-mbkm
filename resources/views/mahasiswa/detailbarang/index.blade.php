@@ -48,11 +48,25 @@
 
         <div class="grid grid-cols-1 gap-3 mt-5 md:grid-cols-2">
             <div class="space-y-3">
+                <p class="text-2xl font-semibold">{{ $view->nama_barang }}</p>
                 <div class="flex justify-center w-full">
                     <img src="{{ asset($view->foto) }}" alt="{{ asset($view->foto) }}"
                         class="object-cover border border-green-500 rounded-lg shadow-lg image">
                 </div>
-                <p class="text-2xl font-semibold">{{ $view->nama_barang }}</p>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span
+                            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{{ $view->kategori->kategori }}</span>
+                        <span
+                            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{{ $view->satuan->satuan }}</span>
+                        <span
+                            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">{{ $view->kondisi->kondisi }}</span>
+                    </div>
+                    <div>
+                        <span
+                            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">Sisa {{ $view->stock->stock }}</span>
+                    </div>
+                </div>
             </div>
             <div>
                 <form action="{{ route('mahasiswa.peminjaman', ['barang' => $view->id, 'stock' => $stock->id]) }}"
@@ -60,9 +74,9 @@
                     @csrf
                     <div class="mb-4">
                         <label for="kelas" class="block text-lg font-medium text-gray-700">Kelas</label>
-                        <input type="text" name="kelas" id="kelas"
-                            value="{{ Auth::user()->kelas->nama_kelas }}" disabled
+                        <p type="text" name="kelas" id="kelas"
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                            {{ Auth::user()->kelas->nama_kelas }}</p>
                     </div>
 
                     <div class="mb-4">
@@ -88,7 +102,7 @@
 
                     <div class="mb-4">
                         <label for="rooms" class="block text-lg font-medium text-gray-700">Ruangan</label>
-                        <select name="rooms_id" id="rooms_id"
+                        <select name="ruangan_id" id="ruangan_id"
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                             <option value="">Pilih Ruangan</option>
                             @foreach ($ruangan as $ruangan)
@@ -110,16 +124,26 @@
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                     </div>
 
-                    <div class="mb-4">
-                        <label for="waktu_pinjam" class="block text-lg font-medium text-gray-700">Waktu Peminjaman</label>
-                        <input type="time" name="waktu_pinjam" id="waktu_pinjam"
-                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                    <div class="flex flex-row items-center gap-2 mb-4 w-full">
+                        <div class="w-full">
+                            <label for="waktu_pinjam" class="block text-lg font-medium text-gray-700">Waktu
+                                Peminjaman</label>
+                            <input type="time" name="waktu_pinjam" id="waktu_pinjam"
+                                class="w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                        </div>
+
+                        <div class="w-full">
+                            <label for="waktu_kembali" class="block text-lg font-medium text-gray-700">Waktu
+                                Pengembalian</label>
+                            <input type="time" name="waktu_kembali" id="waktu_kembali"
+                                class="w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                        </div>
                     </div>
 
                     <div class="mb-4">
-                        <label for="waktu_kembali" class="block text-lg font-medium text-gray-700">Waktu Pengembalian</label>
-                        <input type="time" name="waktu_kembali" id="waktu_kembali"
-                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                        <label for="tgl_pinjam" class="block text-lg font-medium text-gray-700">Keterangan</label>
+                        <textarea type="text" name="keterangan" id="keterangan" rows="5"
+                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50"></textarea>
                     </div>
 
                     <div class="mt-4">

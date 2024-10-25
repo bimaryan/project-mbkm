@@ -84,7 +84,6 @@ class ProdukController extends Controller
 
 
         $filePath = $request->file('foto')->move('uploads/barang', time() . '_' . $request->file('foto')->getClientOriginalName());
-        // dd($request->all());
 
         $barang = Barang::create([
             'nama_barang' => $request->nama_barang,
@@ -128,27 +127,31 @@ class ProdukController extends Controller
         ]);
 
         // Jika ada file foto yang diupload
-    if ($request->hasFile('foto')) {
-        // Menghapus foto lama jika ada
-        if ($barang->foto && file_exists(public_path('uploads/' . $barang->foto))) {
-            unlink(public_path('uploads/' . $barang->foto));
+        if ($request->hasFile('foto')) {
+            // Menghapus foto lama jika ada
+            if ($barang->foto && file_exists(public_path('uploads/barang' . $barang->foto))) {
+                unlink(public_path('uploads/' . $barang->foto));
+            }
+
+            // Simpan foto baru
+            $fotoPath = $request->file('foto')->move('uploads/barang', time() . '_' . $request->file('foto')->getClientOriginalName());
+            $barang->foto = $fotoPath;
         }
 
-        // Simpan foto baru
-        $fotoPath = $request->file('foto')->store('uploads', 'public');
-        $barang->foto = $fotoPath;
+        // Update data barang
+        $barang->update([
+            'nama_barang' => $request->input('nama_barang'),
+            'kategori_id' => $request->input('kategori_id'),
+            'satuan_id' => $request->input('satuan_id'),
+        ]);
+
+        $stock = $barang->stock()->firstOrCreate(['barang_id' => $barang->id]);
+        $stock->update([
+            'stock' => $request->input('stock'),
+        ]);
+
+        return redirect()->route('data-barang')->with('success', 'Barang berhasil diperbarui!');
     }
-
-    // Update data barang
-    $barang->update([
-        'nama_barang' => $request->input('nama_barang'),
-        'kategori_id' => $request->input('kategori_id'),
-        'satuan_id' => $request->input('satuan_id'),
-    ]);
-
-    return redirect()->route('data-barang')->with('success', 'Barang berhasil diperbarui!');
-    }
-
 
     public function importBarang(Request $request)
     {

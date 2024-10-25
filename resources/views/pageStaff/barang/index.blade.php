@@ -22,9 +22,9 @@
                             class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800">
                             <i class="fa-solid fa-upload"></i>
                         </button>
-                        {{-- MODAL TAMBAH BARANG --}}
+                        {{-- MODAL IMPORT BARANG --}}
                         @include('pageStaff.barang.modal.import')
-                        
+
                         <button data-modal-target="tambah-barang" data-modal-toggle="tambah-barang"
                             class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800">
                             <i class="fa-solid fa-plus"></i>

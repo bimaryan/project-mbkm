@@ -62,7 +62,7 @@
             </svg>
             <span class="sr-only">Info</span>
             <div>
-                <span class="font-medium">Pemberitahuan!</span> Silahkan datang ke lab terpadu untuk mengambil barang
+                <span class="font-medium">Pemberitahuan!</span> Silahkan datang ke lab terpadu untuk mengambil atau mengembalikan barang
                 yang di pinjam, sertakan bukti peminjaman.
             </div>
         </div>
@@ -193,6 +193,11 @@
                                                     </p>
                                                     <p
                                                         class="text-sm text-gray-900 dark:text-white font-medium flex justify-between">
+                                                        <span>Nama Ruangan</span>
+                                                        <span>:</span>
+                                                    </p>
+                                                    <p
+                                                        class="text-sm text-gray-900 dark:text-white font-medium flex justify-between">
                                                         <span>Nama Barang</span>
                                                         <span>:</span>
                                                     </p>
@@ -236,6 +241,9 @@
                                                     </p>
                                                     <p class="text-sm text-gray-500 dark:text-gray-400">
                                                         {{ Auth::user()->kelas->nama_kelas }}
+                                                    </p>
+                                                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                        {{ $data->ruangan->nama_ruangan ?? 'null' }}
                                                     </p>
                                                     <p class="text-sm text-gray-500 dark:text-gray-400">
                                                         {{ $data->barang->nama_barang }}

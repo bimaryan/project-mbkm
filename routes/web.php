@@ -14,6 +14,7 @@ use App\Http\Controllers\WEB\Admin\MahasiswaController;
 use App\Http\Controllers\WEB\Admin\MataKuliahController;
 use App\Http\Controllers\WEB\Staff\PeminjamanController;
 use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
+use App\Http\Controllers\WEB\Staff\LaporanController;
 
 /*
 |----------------------------------------------------------------------
@@ -38,7 +39,7 @@ Route::post('reset-password-process/{token}', [ForgotPasswordController::class, 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
-    
+
     Route::middleware(['UserAccess:Admin'])->group(function () {
         Route::prefix('pengguna')->group(function () {
             // ROUTE DATA ADMIN DAN STAFF
@@ -63,7 +64,7 @@ Route::middleware(['auth:admin'])->group(function () {
             Route::post('/data-dosen/proses', [DosenController::class, 'storeDosen'])->name('data-dosen.proses');
             Route::put('/data-dosen/{dosen}/edit', [DosenController::class, 'editDosen'])->name('data-dosen.edit');
             Route::delete('/data-dosen/{dosen}/hapus', [DosenController::class, 'deleteDosen'])->name('data-dosen.delete');
-            Route::post('/import-dosen', [DosenController::class,'importDosen'])->name('import.dosen');
+            Route::post('/import-dosen', [DosenController::class, 'importDosen'])->name('import.dosen');
         });
 
         // ROUTE DATA KELAS
@@ -114,6 +115,10 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::get('verifikasi-peminjaman', [PeminjamanController::class, 'index'])->name('verifikasi');
         Route::put('verifikasi-peminjaman/{peminjaman}/pinjam', [PeminjamanController::class, 'update'])->name('verifikasi.update');
         Route::put('verifikasi-peminjaman/{peminjaman}/kembali', [PeminjamanController::class, 'kembali'])->name('verifikasi.kembali');
+
+        // ROUTE LAPORAN PEMINJAMAN
+        Route::get('laporan-peminjaman', [LaporanController::class, 'index'])->name('laporan');
+        Route::get('export-laporan', [LaporanController::class, 'exportLaporan'])->name('laporan.export');
     });
 });
 
