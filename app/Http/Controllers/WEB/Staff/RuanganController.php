@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\WEB\Staff;
 
-use App\Models\Room;
 use Illuminate\Http\Request;
 use App\Imports\RuanganImport;
 use App\Http\Controllers\Controller;
+use App\Models\Ruangan;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RuanganController extends Controller
 {
     public function ruangan()
     {
-        $ruangan = Room::paginate(5);
+        $ruangan = Ruangan::paginate(5);
         return view("pageStaff.ruangan.index", ["ruangan" => $ruangan]);
     }
 
@@ -22,14 +22,14 @@ class RuanganController extends Controller
             'nama_ruangan' => 'required|string'
         ]);
 
-        Room::create([
+        Ruangan::create([
             'nama_ruangan' => $request->nama_ruangan
         ]);
 
         return redirect()->back()->with('success', 'Ruangan berhasil ditambahkan!');
     }
 
-    public function editRuangan(Request $request, Room $ruangan)
+    public function editRuangan(Request $request, Ruangan $ruangan)
     {
         $request->validate([
             'nama_ruangan' => 'required|string'
@@ -42,7 +42,7 @@ class RuanganController extends Controller
         return redirect()->back()->with('success', 'Ruangan berhasil diperbarui!');
     }
 
-    public function deleteRuangan(Room $ruangan)
+    public function deleteRuangan(Ruangan $ruangan)
     {
         $ruangan->delete();
 
@@ -51,7 +51,13 @@ class RuanganController extends Controller
 
     public function importRuangan(Request $request)
     {
+        $request->validate([
+            'file'=> 'required|mimes:xlsx,xls,csv',
+        ], [
+            'file.mimes'=> 'File harus berupa .xlsx, .xls, .csv',
+        ]);
+
         Excel::import(new RuanganImport(), $request->file('file'));
-        return redirect()->back()->with('success', 'Ruangan berhasil diimport!');
+        return redirect()->route('data-ruangan')->with('success', 'Ruangan berhasil diimport!');
     }
 }

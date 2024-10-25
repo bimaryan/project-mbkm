@@ -18,11 +18,17 @@
                         <h3 class="text-2xl font-semibold text-green-500">Data Kategori</h3>
                     </div>
                     <div>
+                        <button data-modal-target="import-kategori" data-modal-toggle="import-kategori"
+                            class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800">
+                            <i class="fa-solid fa-upload"></i>
+                        </button>
+                        {{-- MODAL TAMBAH KATEGORI --}}
+                        @include('pageStaff.kategori.modal.import')
+                        
                         <button data-modal-target="tambah-kategori" data-modal-toggle="tambah-kategori"
                             class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800">
                             <i class="fa-solid fa-plus"></i>
                         </button>
-
                         {{-- MODAL TAMBAH KATEGORI --}}
                         @include('pageStaff.kategori.modal.tambah')
                     </div>

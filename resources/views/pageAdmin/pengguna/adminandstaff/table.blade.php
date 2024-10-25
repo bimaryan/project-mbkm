@@ -9,13 +9,10 @@
                     Nama Lengkap
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    NIP
+                    NIP/NIDN
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Username
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Role
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Aksi
@@ -36,9 +33,6 @@
                     </td>
                     <td scope="col" class="px-6 py-3">
                         {{ $data->username }}
-                    </td>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $data->role->nama_role }}
                     </td>
                     <td scope="col" class="flex items-center justify-center gap-2 px-6 py-3">
                         <div>

@@ -18,11 +18,17 @@
                         <h3 class="text-2xl font-semibold text-green-500">Data Barang</h3>
                     </div>
                     <div>
+                        <button data-modal-target="import-barang" data-modal-toggle="import-barang"
+                            class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800">
+                            <i class="fa-solid fa-upload"></i>
+                        </button>
+                        {{-- MODAL TAMBAH BARANG --}}
+                        @include('pageStaff.barang.modal.import')
+                        
                         <button data-modal-target="tambah-barang" data-modal-toggle="tambah-barang"
                             class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800">
                             <i class="fa-solid fa-plus"></i>
                         </button>
-
                         {{-- MODAL TAMBAH BARANG --}}
                         @include('pageStaff.barang.modal.tambah')
                     </div>

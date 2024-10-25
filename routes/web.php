@@ -86,12 +86,14 @@ Route::middleware(['auth:admin'])->group(function () {
             Route::post('data-barang/proses', [ProdukController::class, 'storeBarang'])->name('data-barang.proses');
             Route::put('data-barang/{barang}/edit', [ProdukController::class, 'editBarang'])->name('data-barang.edit');
             Route::delete('data-barang/{barang}/hapus', [ProdukController::class, 'deleteBarang'])->name('data-barang.hapus');
+            Route::post('data-barang/import', [ProdukController::class, 'importBarang'])->name('data-barang.import');
 
             // ROUTE DATA KATEGORI
             Route::get('data-kategori', [KategoriController::class, 'kategori'])->name('data-kategori');
             Route::post('data-kategori/proses', [KategoriController::class, 'storeKategori'])->name('data-kategori.proses');
             Route::put('data-kategori/{kategori}/edit', [KategoriController::class, 'editKategori'])->name('data-kategori.edit');
             Route::delete('data-kategori/{kategori}/hapus', [KategoriController::class, 'deleteKategori'])->name('data-kategori.hapus');
+            Route::post('data-kategori/import', [KategoriController::class, 'importKategori'])->name('data-kategori.import');
 
             // ROUTE DATA SATUAN
             Route::get('data-satuan', [SatuanController::class, 'satuan'])->name('data-satuan');
@@ -106,7 +108,7 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::post('data-ruangan/proses', [RuanganController::class, 'storeRuangan'])->name('data-ruangan.proses');
         Route::delete('data-ruangan/{ruangan}/hapus', [RuanganController::class, 'deleteRuangan'])->name('data-ruangan.hapus');
         Route::put('data-ruangan/{ruangan}/edit', [RuanganController::class, 'editRuangan'])->name('data-ruangan.edit');
-        Route::post('data-satuan/import', [RuanganController::class, 'importRuangan'])->name('data-satuan.import');
+        Route::post('data-ruangan/import', [RuanganController::class, 'importRuangan'])->name('data-ruangan.import');
 
         // ROUTE VERIFIKASI PEMINJAMAN
         Route::get('verifikasi-peminjaman', [PeminjamanController::class, 'index'])->name('verifikasi');

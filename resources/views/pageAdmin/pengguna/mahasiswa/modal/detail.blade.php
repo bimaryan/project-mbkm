@@ -62,22 +62,22 @@
                         </div>
                         <div class="space-y-2">
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->nim }}
+                                {{ $data->nim ?? '-' }}
                             </p>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->nama }}
+                                {{ $data->nama ?? '-' }}
                             </p>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
                                 {{ $data->kelas->nama_kelas ?? '-' }}
                             </p>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->email }}
+                                {{ $data->email ?? '-' }}
                             </p>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->telepon }}
+                                {{ $data->telepon ?? '-' }}
                             </p>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->jenis_kelamin }}
+                                {{ $data->jenis_kelamin ?? '-' }}
                             </p>
                         </div>
                     </div>

@@ -83,8 +83,11 @@
                             <a href="{{ route('viewbarang', ['nama_barang' => $data->nama_barang]) }}"
                                 class="w-full p-3 border border-green-500 rounded-lg shadow-lg max-w-m">
                                 <div class="flex justify-center w-full">
-                                    <img src="{{ url($data->foto) }}" class="object-cover zoom-image"
-                                        alt="{{ $data->nama_barang }}" />
+
+                                    <img src="{{ $data->foto ? url($data->foto) : url('uploads/barang/barang-default.jpeg') }}"
+                                        class="object-cover zoom-image"
+                                        alt="{{ $data->nama_barang ?? 'Default Barang' }} " />
+
                                 </div>
                                 <div class="mt-1">
                                     <span

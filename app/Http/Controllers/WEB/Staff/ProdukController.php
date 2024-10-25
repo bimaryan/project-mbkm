@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\WEB\Staff;
 
-use App\Http\Controllers\Controller;
+use App\Models\Stock;
 use App\Models\Barang;
-use App\Models\Kategori;
+use App\Models\Satuan;
 use App\Models\Kondisi;
+use App\Models\Kategori;
 use App\Models\Peminjaman;
 use App\Models\Persentase;
-use App\Models\Satuan;
-use App\Models\Stock;
 use Illuminate\Http\Request;
+use App\Imports\BarangImport;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProdukController extends Controller
 {
@@ -115,39 +117,48 @@ class ProdukController extends Controller
         return redirect()->route('data-barang')->with('success', 'Barang berhasil dihapus!');
     }
 
-    public function editBarang(Request $request, Barang $barang,)
+    public function editBarang(Request $request, Barang $barang)
     {
+        // Validasi input
         $request->validate([
             'nama_barang' => 'required|string|max:255',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'stock' => 'required|integer',
             'kategori_id' => 'required|exists:kategoris,id',
             'satuan_id' => 'required|exists:satuans,id',
         ]);
 
-        if ($request->hasFile('foto')) {
-            // Hapus gambar lama jika ada
-            if ($barang->foto && file_exists(public_path($barang->foto))) {
-                unlink(public_path($barang->foto));
-            }
-
-            // Simpan gambar baru
-            $filePath = $request->file('foto')->move('uploads/barang', time() . '_' . $request->file('foto')->getClientOriginalName());
-            $barang->foto = $filePath;
+        // Jika ada file foto yang diupload
+    if ($request->hasFile('foto')) {
+        // Menghapus foto lama jika ada
+        if ($barang->foto && file_exists(public_path('uploads/' . $barang->foto))) {
+            unlink(public_path('uploads/' . $barang->foto));
         }
-        // dd($barang->all());
 
-        $barang->update([
-            'nama_barang' => $request->nama_barang,
-            'kategori_id' => $request->kategori_id,
-            'satuan_id' => $request->satuan_id,
-            'foto' => $request->hasFile('foto') ? $filePath : $barang->foto,
+        // Simpan foto baru
+        $fotoPath = $request->file('foto')->store('uploads', 'public');
+        $barang->foto = $fotoPath;
+    }
+
+    // Update data barang
+    $barang->update([
+        'nama_barang' => $request->input('nama_barang'),
+        'kategori_id' => $request->input('kategori_id'),
+        'satuan_id' => $request->input('satuan_id'),
+    ]);
+
+    return redirect()->route('data-barang')->with('success', 'Barang berhasil diperbarui!');
+    }
+
+
+    public function importBarang(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xls,xlsx'
+        ], [
+            'file.mimes' => 'File harus berupa .xls, .xlsx'
         ]);
 
-        $barang->stock->update([
-            'stock' => $request->stock,
-        ]);
-
-        return redirect()->route('data-barang')->with('success', 'Barang berhasil diperbarui!');
+        Excel::import(new BarangImport, $request->file('file'));
+        return redirect()->route('data-barang')->with('success', 'Barang Berhasil di import');
     }
 }
