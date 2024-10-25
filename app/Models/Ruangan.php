@@ -15,6 +15,6 @@ class Ruangan extends Model
 
     public function peminjaman()
     {
-        return $this->hasMany(Peminjaman::class, 'rooms_id');
+        return $this->hasMany(Peminjaman::class, 'ruangan_id');
     }
 }

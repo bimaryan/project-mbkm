@@ -13,6 +13,7 @@ use App\Models\Kelas;
 use App\Models\MataKuliah;
 use App\Models\Peminjaman;
 use App\Models\Room;
+use App\Models\Ruangan;
 use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -90,7 +91,7 @@ class HomeController extends Controller
         $dosen = Dosen::all();
         $matkul = MataKuliah::all();
         $stock = Stock::where('barang_id', $view->id)->first();
-        $room = Room::all();
+        $room = Ruangan::all();
 
         if (!$view) {
             return redirect('/')->with('error', 'Data barang tidak ditemukan.');
@@ -114,9 +115,9 @@ class HomeController extends Controller
             'mahasiswa_id' => $mahasiswaId,
             'barang_id' => $barang->id,
             'stock_id' => $stock->id,
-            'rooms_id' => $request->input('rooms_id'),
+            'ruangan_id' => $request->input('ruangan_id'),
             'matkul_id' => $request->input('matkul_id'),
-            'dosen_id'=> $request->input('dosen_id'),
+            'dosen_id' => $request->input('dosen_id'),
             'stock_pinjam' => $request->input('jumlah_pinjam'),
             'QR' => rand(10000, 99999),
             'tgl_pinjam' => $request->input('tgl_pinjam'),
@@ -133,7 +134,7 @@ class HomeController extends Controller
 
     public function informasi()
     {
-        $peminjaman = Peminjaman::with('mahasiswa', 'barang', 'stock')->paginate('5');
+        $peminjaman = Peminjaman::with('mahasiswa', 'barang', 'stock', 'ruangan')->paginate('5');
 
         foreach ($peminjaman as $data) {
             $data->QR = QrCode::size(150)->generate($data->id);
@@ -170,7 +171,7 @@ class HomeController extends Controller
     public function viewProfile(Mahasiswa $mahasiswa)
     {
         $kelas = Kelas::all();
-        return view('mahasiswa.profile.profile', ['mahasiswa' => $mahasiswa], ['kelas'=> $kelas]);
+        return view('mahasiswa.profile.profile', ['mahasiswa' => $mahasiswa], ['kelas' => $kelas]);
     }
 
     public function editProfile(Request $request, Mahasiswa $mahasiswa)

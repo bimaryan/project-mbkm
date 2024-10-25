@@ -17,7 +17,7 @@ class PeminjamanController extends Controller
             ->take(5)
             ->get();
 
-        $peminjamans = Peminjaman::all();
+        $peminjamans = Peminjaman::paginate(5);
         return view('pageStaff.peminjaman.index', compact('peminjamans', 'notifikasiPeminjaman'));
     }
 
@@ -63,7 +63,6 @@ class PeminjamanController extends Controller
                 $stock->update([
                     'stock' => $stock->stock + $jumlahStockDipinjam,
                 ]);
-
             } else {
                 return redirect()->back()->with('error', 'Stock tidak ditemukan!');
             }

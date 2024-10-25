@@ -5,6 +5,7 @@ namespace App\Http\Controllers\WEB\Staff;
 use Illuminate\Http\Request;
 use App\Imports\RuanganImport;
 use App\Http\Controllers\Controller;
+use App\Models\Peminjaman;
 use App\Models\Ruangan;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -12,8 +13,14 @@ class RuanganController extends Controller
 {
     public function ruangan()
     {
+        $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])
+            ->where('status', '!=', 'Dikembalikan')
+            ->latest()
+            ->take(5)
+            ->get();
+
         $ruangan = Ruangan::paginate(5);
-        return view("pageStaff.ruangan.index", ["ruangan" => $ruangan]);
+        return view("pageStaff.ruangan.index", ["ruangan" => $ruangan, 'notifikasiPeminjaman' => $notifikasiPeminjaman]);
     }
 
     public function storeRuangan(Request $request)
@@ -52,9 +59,9 @@ class RuanganController extends Controller
     public function importRuangan(Request $request)
     {
         $request->validate([
-            'file'=> 'required|mimes:xlsx,xls,csv',
+            'file' => 'required|mimes:xlsx,xls,csv',
         ], [
-            'file.mimes'=> 'File harus berupa .xlsx, .xls, .csv',
+            'file.mimes' => 'File harus berupa .xlsx, .xls, .csv',
         ]);
 
         Excel::import(new RuanganImport(), $request->file('file'));
