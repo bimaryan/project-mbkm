@@ -1,7 +1,7 @@
 @extends('index')
 @section('content')
-    <div class="p-4 sm:ml-64 mt-3">
-        <div class="rounded-lg mt-14 space-y-4">
+    <div class="p-4 mt-3 sm:ml-64">
+        <div class="space-y-4 rounded-lg mt-14">
             @if (session('success'))
                 <script>
                     Swal.fire({
@@ -25,142 +25,67 @@
         @endif
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
-                <div class="flex justify-between items-center">
+                <div class="flex items-center justify-between">
                     <div>
-                        <h3 class="text-2xl text-green-500 font-semibold">Verifikasi Peminjaman</h3>
+                        <h3 class="text-2xl font-semibold text-green-500">Verifikasi Peminjaman</h3>
                     </div>
                 </div>
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
-                <div class="relative overflow-x-auto sm:rounded-lg">
-                    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    No
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Nim
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Mahasiswa
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    kelas
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Mata Kuliah
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Dosen
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Ruangan
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Nama Barang
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Stock
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    SPO Dokumen
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Tanggal Pinjam
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Tanggal Kembali
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Keterangan
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Status
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Aprovals
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Status Pengembalian
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($peminjamans as $item)
-                                <tr>
-                                    <td scope="col" class="px-6 py-3">{{ $loop->iteration }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->mahasiswa->nim }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->mahasiswa->nama }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->mahasiswa->kelas->nama_kelas }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->matkul->mata_kuliah }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->dosen->nama_dosen }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->room->nama_ruangan }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->barang->nama_barang }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->stock_pinjam }}</td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->spo->file ?? 'Tidak ada file' }}</td>
-                                    <td scope="col" class="px-6 py-3">
-                                        {{ \Carbon\Carbon::parse($item->tgl_pinjam)->format('d M Y') }}</td>
-                                    <td scope="col" class="px-6 py-3">
-                                        {{ \Carbon\Carbon::parse($item->tgl_kembali)->format('d M Y') }}</td>
-                                    <td scope="col" class="px-6 py-3">
-                                        {{ $item->keterangan ?? 'Tidak ada keterangan' }}
-                                    </td>
-                                    <td scope="col" class="px-6 py-3">{{ $item->status }}</td>
-                                    <td scope="col" class="px-6 py-3">
-                                        <form action="{{ route('verifikasi.update', $item->id) }}" method="POST"
-                                            class="flex items-center gap-1">
-                                            @csrf
-                                            @method('PUT')
-                                            <div>
-                                                <select name="aprovals" id="aprovals" class="border rounded-md p-2">
-                                                    <option value="Belum"
-                                                        {{ $item->aprovals == 'Belum' ? 'selected' : '' }}>Belum</option>
-                                                    <option value="Ya" {{ $item->aprovals == 'Ya' ? 'selected' : '' }}>
-                                                        Ya
-                                                    </option>
-                                                    <option value="Tidak"
-                                                        {{ $item->aprovals == 'Tidak' ? 'selected' : '' }}>Tidak
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <button type="submit"
-                                                    class="bg-green-500 px-4 py-3 rounded-lg text-white font-medium">
-                                                    Submit
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td scope="col" class="px-6 py-3">
-                                        <form action="{{ route('verifikasi.kembali', $item->id) }}" method="POST"
-                                            class="flex items-center gap-1">
-                                            @csrf
-                                            @method('PUT')
-                                            <div>
-                                                <select name="status_pengembalian" id="status_pengembalian" class="border rounded-md p-2">
-                                                    <option value="Belum"
-                                                        {{ $item->status_pengembalian == 'Belum' ? 'selected' : '' }}>Belum</option>
-                                                    <option value="Diserahkan" {{ $item->status_pengembalian == 'Diserahkan' ? 'selected' : '' }}>
-                                                        Diserahkan
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div>
-                                                <button type="submit"
-                                                    class="bg-green-500 px-4 py-3 rounded-lg text-white font-medium">
-                                                    Submit
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+
+                <div id="tablePeminjaman">
+                    @include('pageStaff.peminjaman.table', ['peminjamans' => $peminjamans])
+                </div>
+
+                <div id="pageignitionLinks">
+                    {{ $peminjamans->links() }}
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Apply filter ketika button filter di klik
+            $('#applyFilter').on('click', function(e) {
+                e.preventDefault();
+                loadTable();
+            });
+
+            // Handle pagination link click event
+            $(document).on('click', '.pagination a', function(e) {
+                e.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                loadTable(page);
+            });
+
+            function loadTable(page = 1) {
+                $.ajax({
+                    url: "{{ route('verifikasi') }}",
+                    method: "GET",
+                    data: {
+                        // name: $('#filterName').val(),
+                        // kategori_id: $('#filterKategori').val(),
+                        // kondisi: $('#filterKondisi').val(),
+                        // stock: $('#filterStock').val(),
+                        // satuan_id: $('#filterSatuan').val(),
+                        // page: page
+                    },
+                    success: function(response) {
+                        // Replace table and pagination links
+                        $('#tablePeminjaman').html($(response).find('#tablePeminjaman').html());
+                        $('#paginationLinks').html($(response).find('#paginationLinks').html());
+                    }
+                });
+            }
+        });
+        $(document).ready(function() {
+            $('#data-peminjaman').DataTable({
+                paging: false,
+                scrollCollapse: true,
+                scrollY: '300px',
+            });
+        });
+    </script>
 @endsection

@@ -13,6 +13,7 @@ use App\Models\Kelas;
 use App\Models\MataKuliah;
 use App\Models\Peminjaman;
 use App\Models\Room;
+use App\Models\Ruangan;
 use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -90,7 +91,7 @@ class HomeController extends Controller
         $dosen = Dosen::all();
         $matkul = MataKuliah::all();
         $stock = Stock::where('barang_id', $view->id)->first();
-        $room = Room::all();
+        $ruangan = Ruangan::all();
 
         if (!$view) {
             return redirect('/')->with('error', 'Data barang tidak ditemukan.');
@@ -101,7 +102,7 @@ class HomeController extends Controller
             'kelas' => $kelas,
             'stock' => $stock,
             'matkul' => $matkul,
-            'room' => $room,
+            'ruangan' => $ruangan,
             'dosen' => $dosen
         ]);
     }

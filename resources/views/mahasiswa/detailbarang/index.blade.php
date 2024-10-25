@@ -91,8 +91,8 @@
                         <select name="rooms_id" id="rooms_id"
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                             <option value="">Pilih Ruangan</option>
-                            @foreach ($room as $rooms)
-                                <option value="{{ $rooms->id }}">{{ $rooms->nama_ruangan }}</option>
+                            @foreach ($ruangan as $ruangan)
+                                <option value="{{ $ruangan->id }}">{{ $ruangan->nama_ruangan }}</option>
                             @endforeach
                         </select>
                     </div>
