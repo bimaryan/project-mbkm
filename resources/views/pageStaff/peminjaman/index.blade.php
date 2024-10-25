@@ -1,7 +1,7 @@
 @extends('index')
 @section('content')
-    <div class="p-4 sm:ml-64 mt-3">
-        <div class="rounded-lg mt-14 space-y-4">
+    <div class="p-4 mt-3 sm:ml-64">
+        <div class="space-y-4 rounded-lg mt-14">
             @if (session('success'))
                 <script>
                     Swal.fire({
@@ -25,14 +25,21 @@
             @endif
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
-                <div class="flex justify-between items-center">
+                <div class="flex items-center justify-between">
                     <div>
-                        <h3 class="text-2xl text-green-500 font-semibold">Verifikasi Peminjaman</h3>
+                        <h3 class="text-2xl font-semibold text-green-500">Verifikasi Peminjaman</h3>
                     </div>
                 </div>
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
+
+                <div id="tablePeminjaman">
+                    @include('pageStaff.peminjaman.table', ['peminjamans' => $peminjamans])
+                </div>
+
+                <div id="pageignitionLinks">
+                    {{ $peminjamans->links() }}
                 <div class="relative overflow-x-auto sm:rounded-lg">
                     <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
@@ -207,4 +214,48 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Apply filter ketika button filter di klik
+            $('#applyFilter').on('click', function(e) {
+                e.preventDefault();
+                loadTable();
+            });
+
+            // Handle pagination link click event
+            $(document).on('click', '.pagination a', function(e) {
+                e.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                loadTable(page);
+            });
+
+            function loadTable(page = 1) {
+                $.ajax({
+                    url: "{{ route('verifikasi') }}",
+                    method: "GET",
+                    data: {
+                        // name: $('#filterName').val(),
+                        // kategori_id: $('#filterKategori').val(),
+                        // kondisi: $('#filterKondisi').val(),
+                        // stock: $('#filterStock').val(),
+                        // satuan_id: $('#filterSatuan').val(),
+                        // page: page
+                    },
+                    success: function(response) {
+                        // Replace table and pagination links
+                        $('#tablePeminjaman').html($(response).find('#tablePeminjaman').html());
+                        $('#paginationLinks').html($(response).find('#paginationLinks').html());
+                    }
+                });
+            }
+        });
+        $(document).ready(function() {
+            $('#data-peminjaman').DataTable({
+                paging: false,
+                scrollCollapse: true,
+                scrollY: '300px',
+            });
+        });
+    </script>
 @endsection

@@ -91,6 +91,7 @@ class HomeController extends Controller
         $dosen = Dosen::all();
         $matkul = MataKuliah::all();
         $stock = Stock::where('barang_id', $view->id)->first();
+        $ruangan = Ruangan::all();
         $room = Ruangan::all();
 
         if (!$view) {
@@ -102,7 +103,7 @@ class HomeController extends Controller
             'kelas' => $kelas,
             'stock' => $stock,
             'matkul' => $matkul,
-            'room' => $room,
+            'ruangan' => $ruangan,
             'dosen' => $dosen
         ]);
     }
