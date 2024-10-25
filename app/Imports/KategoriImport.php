@@ -2,12 +2,12 @@
 
 namespace App\Imports;
 
-use App\Models\Satuan;
+use App\Models\Kategori;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class SatuanImport implements ToCollection, WithHeadingRow
+class KategoriImport implements ToCollection, WithHeadingRow
 {
     /**
     * @param Collection $collection
@@ -15,8 +15,8 @@ class SatuanImport implements ToCollection, WithHeadingRow
     public function collection(Collection $collection)
     {
         foreach ($collection as $row) {
-            Satuan::create([
-               'satuan' => $row['satuan'],
+            Kategori::create([
+                "kategori"=> $row['kategori'],
             ]);
         }
     }

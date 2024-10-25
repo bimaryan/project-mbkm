@@ -21,7 +21,7 @@
             </div>
             <!-- Modal body -->
             <div class="p-4 md:p-5">
-                <form action="{{ route('import.kelas') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('data-satuan.import') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <label for="file" class="block text-sm font-medium text-gray-700">Import</label>

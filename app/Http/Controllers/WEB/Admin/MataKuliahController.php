@@ -29,6 +29,9 @@ class MataKuliahController extends Controller
         $request->validate([
             'kode_mata_kuliah'=> 'required|string',
             'mata_kuliah' => 'required|string',
+        ], [
+            'kode_mata_kuliah.required'=> 'Kode mata kuliah harus diisi',
+            'mata_kuliah.required'=> 'Mata kuliah harus diisi',
         ]);
 
         $matakuliah = MataKuliah::create($request->all());
@@ -38,15 +41,18 @@ class MataKuliahController extends Controller
         return redirect()->route('data-mata-kuliah')->with('success', 'Mata kuliah berhasil ditambahkan!');
     }
 
-    public function editMatakuliah(MataKuliah $mataKuliah, Request $request)
+    public function editMatakuliah(MataKuliah $matakuliah, Request $request)
     {
         $request->validate([
-
-            'mata_kuliah' => 'required|string',
+            'kode_mata_kuliah' => 'required',
+            'mata_kuliah' => 'required',
         ]);
+        
 
-        $mataKuliah->update([
-            'mata_kuliah' => $request->mata_kuliah,
+        // dd($request->all());
+        $matakuliah->update([
+            'kode_mata_kuliah'=> $request->kode_mata_kuliah,
+            'mata_kuliah' => $request->mata_kuliah
         ]);
 
         return redirect()->route('data-mata-kuliah')->with('success', 'Mata kuliah berhasil diperbarui!');

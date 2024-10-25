@@ -23,15 +23,15 @@
             <!-- Modal body -->
             <div class="p-2">
                 <div class="flex flex-col items-center gap-5 p-4 md:flex-row">
-                    <div class="relative overflow-hidden border border-green-500">
+                    <div class="relative overflow-hidden border border-green-500 rounded-lg">
                         <img src="{{ asset($data->foto) }}" alt="{{ $data->foto }}"
                             class="object-cover" style="width: 150px; height: 150px;">
                     </div>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="relative grid grid-cols-2 gap-2 overflow-x-auto">
                         <div class="space-y-2">
                             <p
                                 class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
-                                <span>Nama Barang</span>
+                                <span>Nama barang</span>
                                 <span>:</span>
                             </p>
                             <p
@@ -41,35 +41,35 @@
                             </p>
                             <p
                                 class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
-                                <span>Kondisi</span>
-                                <span>:</span>
-                            </p>
-                            <p
-                                class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
                                 <span>Stok</span>
                                 <span>:</span>
                             </p>
                             <p
                                 class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
-                                <span>Satuan</span>
+                                <span>satuan</span>
+                                <span>:</span>
+                            </p>
+                            <p
+                                class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
+                                <span>Kondisi</span>
                                 <span>:</span>
                             </p>
                         </div>
                         <div class="space-y-2">
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->nama_barang }}
+                                {{ $data->nama_barang ?? '-' }}
                             </p>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->kategori->kategori }}
+                                {{ $data->kategori->kategori ?? '-' }}
                             </p>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->kondisi->kondisi }}
+                                {{ $data->stock->stock ?? '-' }}
                             </p>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->stock->stock }}
+                                {{ $data->satuan->satuan ?? '-' }}
                             </p>
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->satuan->satuan }}
+                                {{ $data->kondisi->kondisi ?? '-' }}
                             </p>
                         </div>
                     </div>

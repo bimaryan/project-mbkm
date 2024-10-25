@@ -22,14 +22,14 @@
             <!-- Modal body -->
 
             <div class="p-4">
-                <form action="{{ route('data-satuan.import') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('data-ruangan.import') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="gap-2">
                         <div class="mb-2">
                             <label for="nama_ruangan" class="block text-sm font-medium text-gray-700">Nama
                                 Ruangan</label>
                             <input type="file" name="file" id="file"
-                                class="block w-full border mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                                class="block w-full mt-2 border border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                             @error('file')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror

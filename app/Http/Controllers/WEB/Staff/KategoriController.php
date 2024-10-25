@@ -2,13 +2,32 @@
 
 namespace App\Http\Controllers\WEB\Staff;
 
-use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
+use App\Imports\KategoriImport;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KategoriController extends Controller
 {
+
+    public function importKategori(Request $request)
+    {
+        $request->validate(
+            [
+                'file' => 'required|mimes:xlsx,xls,csv',
+            ],
+            [
+                'file.mimes' => 'File harus berupa .xlsx, .xls, .csv',
+            ]
+        );
+
+        Excel::import(new KategoriImport(), $request->file('file'));
+
+        return redirect()->route('data-kategori')->with('success','Kategori berhasil di import');
+    }
+
     public function kategori()
     {
         $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])

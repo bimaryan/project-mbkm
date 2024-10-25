@@ -15,7 +15,7 @@ class SatuanController extends Controller
         $request->validate([
            'file' => 'required|mimes:xlsx,xls,csv',
         ], [
-            'file'=> 'File harus berupa .xlsx, .xls, .csv',
+            'file.mimes'=> 'File harus berupa .xlsx, .xls, .csv',
         ]);
 
         Excel::import(new SatuanImport(), $request->file('file'));
