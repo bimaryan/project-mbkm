@@ -25,6 +25,7 @@ class Peminjaman extends Model
         'waktu_pinjam',
         'waktu_kembali',
         'keterangan',
+        'status_pengembalian',
         'aprovals',
         'status',
     ];

@@ -84,8 +84,8 @@
                                 @method('PUT')
                                 <div>
                                     <select name="status_pengembalian" id="status_pengembalian" class="p-1 border rounded-md">
-                                        <option value="Belum" {{ $item->status_pengembalian == 'Belum' ? 'selected' : '' }}>Habis</option>
-                                        <option value="Diserahkan" {{ $item->status_pengembalian == 'Diserahkan' ? 'selected' : '' }}>Dikembalikan</option>
+                                        <option value="Belum" {{ $item->status_pengembalian == 'Belum' ? 'selected' : '' }}>Belum</option>
+                                        <option value="Diserahkan" {{ $item->status_pengembalian == 'Diserahkan' ? 'selected' : '' }}>Diserahkan</option>
                                     </select>
                                 </div>
                                 <div>

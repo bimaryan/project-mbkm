@@ -5,8 +5,9 @@ namespace App\Exports;
 use App\Models\Peminjaman;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class LaporanExport implements FromCollection, WithHeadings
+class LaporanExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
     /**
      * Return collection of data for export.
