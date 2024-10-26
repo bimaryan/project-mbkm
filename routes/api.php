@@ -17,21 +17,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('auth/login', [LoginController::class, 'login']);
 
-Route::middleware(['auth:mahasiswa'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('logout', [LoginController::class, 'logout']);
 
     Route::get('home', [HomeController::class, 'home']);
     Route::get('katalog', [HomeController::class, 'katalog'])->name('katalog');
-    // Route::get('katalog/peminjaman-barang/{nama_barang}', [HomeController::class, 'viewbarang'])->name('viewbarang');
+    Route::get('katalog/peminjaman-barang/{nama_barang}', [HomeController::class, 'viewbarang'])->name('viewbarang');
     Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjaman']);
-    // Route::get('informasi', [HomeController::class, 'informasi'])->name('mahasiswa.informasi');
-    // Route::put('informasi/{peminjaman}', [HomeController::class, 'kembali'])->name('mahasiswa.kembali');
+    Route::get('informasi', [HomeController::class, 'informasi'])->name('mahasiswa.informasi');
+    Route::put('informasi/{peminjaman}', [HomeController::class, 'kembali'])->name('mahasiswa.kembali');
 
-    // Route::prefix('profile/')->group(function () {
-    //     Route::get('', [HomeController::class, 'viewProfile'])->name('profile');
-    //     Route::put('edit-profile/{mahasiswa}', [HomeController::class, 'editProfile'])->name('editProfile');
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [HomeController::class, 'viewProfile'])->name('profile');
+        Route::put('edit-profile/{mahasiswa}', [HomeController::class, 'editProfile'])->name('editProfile');
 
-    //     Route::get('ubah-kata-sandi', [HomeController::class, 'ViewUbahKataSandi'])->name('view-ubah-kata-sandi');
-    //     Route::put('ubah-kata-sandi/{mahasiswa}', [HomeController::class, 'ubahKataSandi'])->name('ubah-kata-sandi');
-    // });
+        Route::get('ubah-kata-sandi', [HomeController::class, 'ViewUbahKataSandi'])->name('view-ubah-kata-sandi');
+        Route::put('ubah-kata-sandi/{mahasiswa}', [HomeController::class, 'ubahKataSandi'])->name('ubah-kata-sandi');
+    });
 });
