@@ -6,12 +6,32 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 // use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Model;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Mahasiswa extends Model
 {
-    use HasFactory;
+    use HasFactory, HasApiTokens, Notifiable;
 
-    protected $fillable = ['nama', 'nim', 'kelas_id', 'email', 'password', 'foto', 'telepon', 'jenis_kelamin'];
+    protected $fillable = [
+        'nama',
+        'nim',
+        'kelas_id',
+        'email',
+        'password',
+        'foto',
+        'telepon',
+        'jenis_kelamin'
+    ];
+
+    protected $hidden = [
+        'password',
+    ];
+
+    protected $casts = [
+        'password' => 'hashed',
+    ];
+
     protected static function booted()
     {
         static::creating(function ($mahasiswa) {

@@ -227,8 +227,6 @@ class HomeController extends Controller
             'konfirmasi_password' => 'required|string',
         ]);
 
-        // dd($request->all());
-
         // Update password pengguna
         $mahasiswa->password = Hash::make($request->password);
         $mahasiswa->save();

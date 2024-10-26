@@ -31,19 +31,5 @@ class AuthServiceProvider extends ServiceProvider
                 return $user->getAkses->id == Role::ADMIN;
             }
         });
-        Gate::define("dosen", function ($user) {
-            if (empty($user->getAkses)) {
-                return redirect("/login");
-            } else {
-                return $user->getAkses->id == Role::DOSEN;
-            }
-        });
-        Gate::define("mahasiswa", function ($user) {
-            if (empty($user->getAkses)) {
-                return redirect("/login");
-            } else {
-                return $user->getAkses->id == Role::MAHASISWA;
-            }
-        });
     }
 }

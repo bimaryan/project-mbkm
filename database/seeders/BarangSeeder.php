@@ -24,7 +24,7 @@ class BarangSeeder extends Seeder
         $satuanLiter = DB::table('satuans')->where('satuan', 'Liter')->value('id');
         $satuan = [$satuanUnit, $satuanPcs, $satuanLembar, $satuanLiter];
 
-        for ($i = 1; $i <= 1000; $i++) {
+        for ($i = 1; $i <= 100; $i++) {
             $kategori_id = ($i % 2 == 0) ? $kategoriBahan : $kategoriAlat;
 
             $satuan_id = $satuan[array_rand($satuan)];

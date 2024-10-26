@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    
-
     public function adminAndStaff(Request $request)
     {
         $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])

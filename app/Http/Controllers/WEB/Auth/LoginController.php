@@ -48,7 +48,6 @@ class LoginController extends Controller
             return redirect()->back()->withErrors(['captcha' => 'CAPTCHA tidak valid.'])->withInput();
         }
 
-        // dd($request->all());
         $credentials = $request->only('identifier', 'password');
 
         if (Auth::guard('admin')->attempt(['username' => $credentials['identifier'], 'password' => $request->password])) {
@@ -68,6 +67,7 @@ class LoginController extends Controller
 
         return redirect()->back()->withErrors(['errors'],)->withInput();
     }
+    
     public function logout()
     {
         Auth::logout();

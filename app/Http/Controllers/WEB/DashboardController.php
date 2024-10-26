@@ -5,7 +5,6 @@ namespace App\Http\Controllers\WEB;
 use App\Models\Barang;
 use App\Models\Mahasiswa;
 use App\Models\Peminjaman;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
