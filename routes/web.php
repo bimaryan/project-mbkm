@@ -57,6 +57,7 @@ Route::middleware(['auth:admin'])->group(function () {
             Route::post('import-kelas', [MahasiswaController::class, 'importKelas'])->name('import.kelas');
             Route::post('import-mahasiswa', [MahasiswaController::class, 'importMahasiswa'])->name('import.mahasiswa');
             Route::post('/import-matakuliah', [MataKuliahController::class, 'importMatkul'])->name('import.matakuliah');
+            Route::get('/export-mahasiswa', [MahasiswaController::class, 'exportMahasiswa'])->name('export.mahasiswa');
 
 
             // ROUTE DATA DOSEN

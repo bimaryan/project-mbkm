@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\WEB\Admin;
 
+use App\Exports\MahasiswaExport;
 use App\Imports\MahasiswaImport;
 use App\Models\Kelas;
 use App\Models\Mahasiswa;
@@ -148,5 +149,10 @@ class MahasiswaController extends Controller
         Excel::import(new MahasiswaImport(), $request->file('file'));
 
         return redirect()->route('data-mahasiswa')->with('success', 'Mahasiswa berhasil di import!');
+    }
+
+    public function exportMahasiswa()
+    {
+        return Excel::download(new MahasiswaExport, 'data_mahasiswa.xlsx');
     }
 }
