@@ -35,7 +35,7 @@ class LoginController extends Controller
     {
         $request->validate([
             'identifier' => 'required',
-            'password' => 'required',
+            'password' => 'required|min:6',
             'captcha' => 'required|same:captcha',
         ], [
             'identifier.required' => 'Username/NIM harus diisi',

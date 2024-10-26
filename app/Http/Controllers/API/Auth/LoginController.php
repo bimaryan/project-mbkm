@@ -16,7 +16,7 @@ class LoginController extends Controller
         // Validate the incoming request
         $request->validate([
             'identifier' => 'required',
-            'password' => 'required',
+            'password' => 'required|min:6',
         ], [
             'identifier.required' => 'Username/NIM harus diisi',
             'password.required' => 'Kata sandi harus diisi',

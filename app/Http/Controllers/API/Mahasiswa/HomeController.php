@@ -18,6 +18,7 @@ use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Http\JsonResponse;
 
 class HomeController extends Controller
 {
@@ -143,16 +144,20 @@ class HomeController extends Controller
             $data->waktu_kembali_unix = \Carbon\Carbon::parse($data->waktu_kembali)->timestamp;
         }
 
-        return view('mahasiswa.informasi.index', compact('peminjaman'));
+        return response()->json(['peminjaman' => $peminjaman]);
     }
 
-    public function viewProfile(Mahasiswa $mahasiswa)
+    public function viewProfile(): JsonResponse
     {
+        $mahasiswa = Auth::user();
         $kelas = Kelas::all();
-        return view('mahasiswa.profile.profile', ['mahasiswa' => $mahasiswa], ['kelas' => $kelas]);
+        return response()->json([
+            'mahasiswa' => $mahasiswa,
+            'kelas' => $kelas
+        ]);
     }
 
-    public function editProfile(Request $request, Mahasiswa $mahasiswa)
+    public function editProfile(Request $request, Mahasiswa $mahasiswa): JsonResponse
     {
         $request->validate([
             'nama' => 'required|string',
@@ -187,27 +192,32 @@ class HomeController extends Controller
             'foto' => $foto
         ]);
 
-        $data = Kelas::all();
-
-        return redirect()->route('profile', ['data' => $data])->with('success', 'Profile berhasil diperbarui.');
+        return response()->json([
+            'message' => 'Profile berhasil diperbarui.',
+            'mahasiswa' => $mahasiswa,
+        ]);
     }
 
-    public function viewUbahKataSandi(Request $request, Mahasiswa $mahasiswa)
+    public function viewUbahKataSandi(): JsonResponse
     {
-        return view('mahasiswa.profile.ubahsandi', ['mahasiswa' => $mahasiswa]);
+        $mahasiswa = Auth::user();
+        return response()->json(['mahasiswa' => $mahasiswa]);
     }
 
-    public function ubahKataSandi(Request $request, Mahasiswa $mahasiswa)
+    public function ubahKataSandi(Request $request, Mahasiswa $mahasiswa): JsonResponse
     {
         $request->validate([
             'password' => 'required|string',
             'konfirmasi_password' => 'required|string',
         ]);
 
-        // Update password pengguna
+        if ($request->password !== $request->konfirmasi_password) {
+            return response()->json(['error' => 'Kata sandi dan konfirmasi kata sandi tidak cocok.'], 422);
+        }
+
         $mahasiswa->password = Hash::make($request->password);
         $mahasiswa->save();
 
-        return redirect()->route('profile')->with('success', 'Kata sandi berhasil diperbarui.');
+        return response()->json(['message' => 'Kata sandi berhasil diperbarui.']);
     }
 }

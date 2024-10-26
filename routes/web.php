@@ -131,7 +131,6 @@ Route::middleware(['auth:mahasiswa'])->group(function () {
     Route::get('katalog/peminjaman-barang/{nama_barang}', [HomeController::class, 'viewbarang'])->name('viewbarang');
     Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjaman'])->name('mahasiswa.peminjaman');
     Route::get('informasi', [HomeController::class, 'informasi'])->name('mahasiswa.informasi');
-    Route::put('informasi/{peminjaman}', [HomeController::class, 'kembali'])->name('mahasiswa.kembali');
 
     Route::prefix('profile/')->group(function () {
         Route::get('', [HomeController::class, 'viewProfile'])->name('profile');

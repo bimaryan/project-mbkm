@@ -146,29 +146,6 @@ class HomeController extends Controller
         return view('mahasiswa.informasi.index', compact('peminjaman'));
     }
 
-    // public function kembali(Request $request, Peminjaman $peminjaman)
-    // {
-    //     $jumlahStockDipinjam = $peminjaman->stock_pinjam;
-
-    //     $status = $request->input('status');
-
-    //     if ($status === 'Dikembalikan') {
-    //         $stock = Stock::find($peminjaman->stock_id);
-    //         if ($stock) {
-    //             $stock->update([
-    //                 'stock' => $stock->stock + $jumlahStockDipinjam,
-    //             ]);
-    //         }
-    //     }
-
-    //     $peminjaman->update([
-    //         'status' => $status,
-    //         'status_pengembalian' => 'Belum',
-    //     ]);
-
-    //     return redirect()->back()->with('success', 'Peminjaman berhasil diperbarui!');
-    // }
-
     public function viewProfile(Mahasiswa $mahasiswa)
     {
         $kelas = Kelas::all();

@@ -21,7 +21,7 @@ class AdminSeeder extends Seeder
                 'nip' => '1231234123123',
                 'username' => 'admin',
                 'email' => 'admin@gmail.com',
-                'password' => Hash::make('admin'),
+                'password' => Hash::make('password'),
                 'role_id' => 1,
             ],
             [
@@ -29,7 +29,7 @@ class AdminSeeder extends Seeder
                 'nip' => '09871239812',
                 'username' => 'staff',
                 'email' => 'staff@gmail.com',
-                'password' => Hash::make('staff'),
+                'password' => Hash::make('password'),
                 'role_id' => 2,
             ]
         ];
