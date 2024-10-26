@@ -38,6 +38,7 @@ Route::post('reset-password-process/{token}', [ForgotPasswordController::class, 
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('laporan-peminjaman', [LaporanController::class, 'index'])->name('laporan');
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::middleware(['UserAccess:Admin'])->group(function () {
@@ -118,7 +119,6 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::put('verifikasi-peminjaman/{peminjaman}/kembali', [PeminjamanController::class, 'kembali'])->name('verifikasi.kembali');
 
         // ROUTE LAPORAN PEMINJAMAN
-        Route::get('laporan-peminjaman', [LaporanController::class, 'index'])->name('laporan');
         Route::get('export-laporan', [LaporanController::class, 'exportLaporan'])->name('laporan.export');
     });
 });

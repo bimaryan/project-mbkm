@@ -1,14 +1,6 @@
 <?php
 
-use App\Http\Controllers\WEB\Admin\AdminController;
-use App\Http\Controllers\WEB\Admin\KategoriController;
-use App\Http\Controllers\WEB\Admin\ProdukController;
-use App\Http\Controllers\WEB\Admin\SatuanController;
-use App\Http\Controllers\WEB\Auth\LoginController;
-use App\Http\Controllers\WEB\Auth\RegisterController;
-use App\Http\Controllers\WEB\Dosen\DosenController;
-use App\Http\Controllers\WEB\Mahasiswa\MahasiswaController;
-use App\Http\Controllers\WEB\Staff\StaffController;
+use App\Http\Controllers\API\Auth\LoginController;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,8 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('login', [LoginController::class, 'store'])->name('login');
-Route::get('register', [RegisterController::class, 'store'])->name('register');
+Route::get('login-liat', [LoginController::class, 'index']);
+Route::post('login', [LoginController::class, 'login']);
 
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('logout', [LoginController::class, 'logout'])->name('logout');

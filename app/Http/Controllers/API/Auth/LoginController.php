@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\WEB\Auth;
+namespace App\Http\Controllers\API\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Mahasiswa;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -14,16 +16,16 @@ class LoginController extends Controller
     {
         $captcha = $this->generateCaptcha(6);
         Session::put('captcha', $captcha);
-        return view("auth.login", ['captcha' => $captcha]);
-    }
 
+        $user = Mahasiswa::all();
+        return response()->json(['captcha' => $captcha, 'user' => $user]);
+    }
 
     private function generateCaptcha($length)
     {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         $captcha = '';
 
-        // Menghasilkan CAPTCHA
         for ($i = 0; $i < $length; $i++) {
             $captcha .= $characters[rand(0, strlen($characters) - 1)];
         }
@@ -45,33 +47,40 @@ class LoginController extends Controller
         ]);
 
         if ($request->captcha != Session::get('captcha')) {
-            return redirect()->back()->withErrors(['captcha' => 'CAPTCHA tidak valid.'])->withInput();
+            return response()->json(['error' => 'CAPTCHA tidak valid.'], 422);
         }
 
-        // dd($request->all());
         $credentials = $request->only('identifier', 'password');
 
         if (Auth::guard('admin')->attempt(['username' => $credentials['identifier'], 'password' => $request->password])) {
+            $user = Auth::guard('admin')->user();
 
-            if (Auth::guard('admin')->user()->role_id = '1') {
-                return redirect()->route('dashboard');
-            } elseif (Auth::guard('admin')->user()->role_id == '2') {
-                return redirect()->route('dashboard');
-            } else {
-                return redirect()->back()->withErrors(['errors'])->withInput();
+            if ($user->role_id == '1' || $user->role_id == '2') {
+                return response()->json([
+                    'message' => 'Login berhasil',
+                    'role' => $user->role_id == '1' ? 'Admin' : 'User',
+                    'user' => $user
+                ]);
             }
+            return response()->json(['error' => 'Role tidak ditemukan.'], 403);
         }
 
         if (Auth::guard('mahasiswa')->attempt(['nim' => $credentials['identifier'], 'password' => $request->password])) {
-            return redirect()->route('home');
+            $user = Auth::guard('mahasiswa')->user();
+            return response()->json([
+                'message' => 'Login berhasil',
+                'role' => 'Mahasiswa',
+                'user' => $user
+            ]);
         }
 
-        return redirect()->back()->withErrors(['errors'],)->withInput();
+        return response()->json(['error' => 'Login gagal, periksa kredensial Anda.'], 401);
     }
+
     public function logout()
     {
         Auth::logout();
-        session()->flush();
-        return redirect()->route('login');
+        Session::flush();
+        return response()->json(['message' => 'Logout berhasil.']);
     }
 }

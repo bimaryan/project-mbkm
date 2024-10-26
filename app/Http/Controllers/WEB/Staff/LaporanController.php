@@ -10,17 +10,32 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $bulan = $request->input('bulan');
+        $tahun = $request->input('tahun');
+
         $notifikasiPeminjaman = Peminjaman::with(['mahasiswa', 'barang'])
             ->where('status', '!=', 'Dikembalikan')
             ->latest()
             ->take(5)
             ->get();
 
-        $peminjamans = Peminjaman::paginate(5);
+        $peminjamans = Peminjaman::with(['mahasiswa', 'barang'])
+            ->when($bulan, function ($query, $bulan) {
+                return $query->whereMonth('tgl_pinjam', $bulan);
+            })
+            ->when($tahun, function ($query, $tahun) {
+                return $query->whereYear('tgl_pinjam', $tahun);
+            })
+            ->paginate(5);
 
-        return view('pageStaff.laporan.index', ['notifikasiPeminjaman' => $notifikasiPeminjaman, 'peminjamans' => $peminjamans]);
+        return view('pageStaff.laporan.index', [
+            'notifikasiPeminjaman' => $notifikasiPeminjaman,
+            'peminjamans' => $peminjamans,
+            'bulan' => $bulan,
+            'tahun' => $tahun,
+        ]);
     }
 
     public function exportLaporan()

@@ -156,6 +156,13 @@
                             Kuliah</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('laporan') }}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('laporan') ? 'bg-green-500 text-white' : '' }}">
+                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-chart-simple"></i> Laporan
+                            Peminjaman</span>
+                    </a>
+                </li>
             @endif
             @if (Auth::user()->role->nama_role === 'Staff')
                 <li>
