@@ -16,16 +16,6 @@ use App\Http\Controllers\WEB\Staff\PeminjamanController;
 use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
 use App\Http\Controllers\WEB\Staff\LaporanController;
 
-/*
-|----------------------------------------------------------------------
-| Web Routes
-|----------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('login-process', [LoginController::class, 'login'])->name('login-process');
