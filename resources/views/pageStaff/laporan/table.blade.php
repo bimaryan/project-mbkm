@@ -30,7 +30,7 @@
         </div>
     </form>
 
-    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
+    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400" id="data-laporan">
         <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
