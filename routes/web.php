@@ -17,7 +17,8 @@ use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
 use App\Http\Controllers\WEB\Staff\LaporanController;
 
 
-Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('login-process', [LoginController::class, 'login'])->name('login-process');
 
 Route::get('forgot-password', [ForgotPasswordController::class, 'index'])->name('forgot-password');
