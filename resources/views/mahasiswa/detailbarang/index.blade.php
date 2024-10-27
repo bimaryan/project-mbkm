@@ -64,7 +64,8 @@
                     </div>
                     <div>
                         <span
-                            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">Sisa {{ $view->stock->stock }}</span>
+                            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400">Sisa
+                            {{ $view->stock->stock }}</span>
                     </div>
                 </div>
             </div>
@@ -120,7 +121,8 @@
 
                     <div class="mb-4">
                         <label for="tgl_pinjam" class="block text-lg font-medium text-gray-700">Tanggal Pinjam</label>
-                        <input type="date" name="tgl_pinjam" id="tgl_pinjam"
+                        <input type="date" datepicker datepicker-buttons datepicker-autoselect-today
+                            name="tgl_pinjam" id="tgl_pinjam" placeholder="Pilih tanggal pinjam"
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                     </div>
 
