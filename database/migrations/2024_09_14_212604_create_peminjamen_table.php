@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('dosen_id');
             $table->string('stock_pinjam');
             $table->string('QR');
-            $table->date('tgl_pinjam');
+            $table->string('tgl_pinjam');
             $table->time('waktu_pinjam');
             $table->time('waktu_kembali');
             $table->string('keterangan')->nullable();

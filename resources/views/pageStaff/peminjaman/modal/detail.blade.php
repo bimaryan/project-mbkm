@@ -84,7 +84,7 @@
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->mahasiswa->kelas->nama_kelas }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->matkul->mata_kuliah }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->dosen->nama_dosen }}</p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->nama_ruangan ?? '-' }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->ruangan->nama_ruangan ?? '-' }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->barang->nama_barang }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->stock_pinjam }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->spo->file ?? 'Tidak ada file' }}</p>

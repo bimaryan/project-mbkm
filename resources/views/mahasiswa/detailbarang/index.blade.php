@@ -121,7 +121,7 @@
 
                     <div class="mb-4">
                         <label for="tgl_pinjam" class="block text-lg font-medium text-gray-700">Tanggal Pinjam</label>
-                        <input type="date" datepicker datepicker-buttons datepicker-autoselect-today
+                        <input type="text" datepicker datepicker-buttons datepicker-autoselect-today
                             name="tgl_pinjam" id="tgl_pinjam" placeholder="Pilih tanggal pinjam"
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                     </div>
