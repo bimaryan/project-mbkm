@@ -22,10 +22,8 @@ class LoginController extends Controller
             'password.required' => 'Kata sandi harus diisi',
         ]);
 
-        // Credentials for the mahasiswa guard
         $credentials = $request->only('identifier', 'password');
 
-        // Attempt to log in the user using the 'mahasiswa' guard
         if (Auth::guard('mahasiswa')->attempt(['nim' => $credentials['identifier'], 'password' => $credentials['password']])) {
             $user = Auth::guard('mahasiswa')->user();
             $token = $user->createToken('auth_token')->plainTextToken;

@@ -41,16 +41,22 @@ class HomeController extends Controller
             })->take(6)->get();
         }
 
-        $kategoris = Kategori::whereIn('kategori', $validCategories)->get();
-        $barangKosong = $barangs->isEmpty();
+        $response = [
+            'barangs' => $barangs->map(function ($barang) {
+                return [
+                    'nama_barang' => $barang->nama_barang,
+                    'stok' => $barang->stock->stock,
+                    'kategori' => $barang->kategori->kategori,
+                    'foto' => $barang->foto,
+                ];
+            }),
+            'kategoris' => $validCategories,
+            'barangKosong' => $barangs->isEmpty(),
+        ];
 
-        return response()->json([
-            'barangs' => $barangs,
-            'kategoris' => $kategoris,
-            'barangKosong' => $barangKosong
-        ]);
+        return response()->json($response);
     }
-
+    
     public function katalog(Request $request)
     {
         $kategori = $request->input('kategori');
