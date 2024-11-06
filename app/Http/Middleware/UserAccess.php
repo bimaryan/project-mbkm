@@ -23,9 +23,9 @@ class UserAccess
         $user = Auth::user();
 
         if ($user->role->nama_role != $role) {
-            return $next($request);
+            abort(403);
         }
-        
-        // abort(403);
+
+        return $next($request);
     }
 }

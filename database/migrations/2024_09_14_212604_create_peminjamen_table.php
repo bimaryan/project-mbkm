@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('mahasiswa_id');
             $table->unsignedBigInteger('barang_id');
-            $table->unsignedBigInteger('stock_id');
             $table->unsignedBigInteger('spo_id')->nullable();
             $table->unsignedBigInteger('ruangan_id')->nullable();
             $table->unsignedBigInteger('matkul_id');
@@ -35,7 +34,6 @@ return new class extends Migration
             $table->foreign('barang_id')->references('id')->on('barangs')->onDelete('cascade');
             $table->foreign('matkul_id')->references('id')->on('mata_kuliahs')->onDelete('cascade');
             $table->foreign('dosen_id')->references('id')->on('dosens')->onDelete('cascade');
-            $table->foreign('spo_id')->references('id')->on('spo_dokumens')->onDelete('cascade');
             $table->foreign('ruangan_id')->references('id')->on('ruangans')->onDelete('cascade');
             $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');
         });

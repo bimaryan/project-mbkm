@@ -125,7 +125,6 @@ class HomeController extends Controller
             'waktu_pinjam' => $request->input('waktu_pinjam'),
             'waktu_kembali' => $request->input('waktu_kembali'),
             'keterangan' => $request->input('keterangan'),
-            'spo_id' => $request->input('spo_id'),
             'aprovals' => 'Belum',
             'status' => 'Menunggu Persetujuan'
         ]);

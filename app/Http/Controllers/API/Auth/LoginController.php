@@ -30,7 +30,7 @@ class LoginController extends Controller
 
             return response()->json([
                 'message' => 'Berhasil masuk sebagai mahasiswa',
-                'user' => $user,
+                'user' => $user->id,
                 'token' => $token,
             ]);
         }

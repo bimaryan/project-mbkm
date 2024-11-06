@@ -57,10 +57,6 @@
                             <span>:</span>
                         </p>
                         <p class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
-                            <span>SPO Dokumen</span>
-                            <span>:</span>
-                        </p>
-                        <p class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
                             <span>Tanggal Peminjaman</span>
                             <span>:</span>
                         </p>
@@ -87,7 +83,6 @@
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->ruangan->nama_ruangan ?? '-' }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->barang->nama_barang }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->stock_pinjam }}</p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->spo->file ?? 'Tidak ada file' }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->tgl_pinjam }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->waktu_pinjam }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->waktu_kembali }}</p>

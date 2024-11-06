@@ -15,7 +15,6 @@ class Peminjaman extends Model
         'mahasiswa_id',
         'barang_id',
         'stock_id',
-        'spo_id',
         'ruangan_id',
         'matkul_id',
         'dosen_id',
@@ -43,11 +42,6 @@ class Peminjaman extends Model
     public function kelas()
     {
         return $this->belongsTo(Kelas::class, 'kelas_id');
-    }
-
-    public function spo()
-    {
-        return $this->belongsTo(SpoDokumen::class, 'spo_id');
     }
 
     public function ruangan()

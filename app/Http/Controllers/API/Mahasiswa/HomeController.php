@@ -60,20 +60,29 @@ class HomeController extends Controller
     public function katalog(Request $request)
     {
         $kategori = $request->input('kategori');
+        $search = $request->input('search'); // New search input
         $validCategories = ['Alat', 'Bahan'];
 
         if ($kategori && $kategori !== 'Semua') {
             if (in_array($kategori, $validCategories)) {
                 $barangs = Barang::whereHas('kategori', function ($query) use ($kategori) {
                     $query->where('kategori', $kategori);
-                })->paginate(6)->appends(['kategori' => $kategori]);
+                })
+                    ->when($search, function ($query) use ($search) {
+                        $query->where('nama_barang', 'LIKE', "%{$search}%");
+                    })
+                    ->get();
             } else {
                 $barangs = collect();
             }
         } else {
             $barangs = Barang::whereHas('kategori', function ($query) use ($validCategories) {
                 $query->whereIn('kategori', $validCategories);
-            })->paginate(6);
+            })
+                ->when($search, function ($query) use ($search) {
+                    $query->where('nama_barang', 'LIKE', "%{$search}%");
+                })
+                ->get();
         }
 
         $response = [
@@ -96,27 +105,23 @@ class HomeController extends Controller
 
     public function viewbarang($nama_barang)
     {
-        $view = Barang::where('nama_barang', $nama_barang)->first();
-        $kelas = Kelas::all();
-        $dosen = Dosen::all();
-        $matkul = MataKuliah::all();
-        $stock = Stock::where('barang_id', $view->id)->first();
-        $ruangan = Ruangan::all();
-        $room = Ruangan::all();
+        $view = Barang::with(['kategori', 'satuan', 'kondisi', 'stock'])
+            ->where('nama_barang', $nama_barang)
+            ->first();
 
         if (!$view) {
-            return redirect('/')->with('error', 'Data barang tidak ditemukan.');
+            return response()->json(['error' => 'Data barang tidak ditemukan.'], 404);
         }
 
         return response()->json([
             'view' => $view,
-            'kelas' => $kelas,
-            'stock' => $stock,
-            'matkul' => $matkul,
-            'ruangan' => $ruangan,
-            'dosen' => $dosen,
+            'kelas' => Kelas::all(),
+            'dosen' => Dosen::all(),
+            'matkul' => MataKuliah::all(),
+            'ruangan' => Ruangan::all(),
         ]);
     }
+
 
     public function peminjaman(Request $request, Barang $barang, Stock $stock)
     {
@@ -135,7 +140,6 @@ class HomeController extends Controller
             'waktu_pinjam' => $request->input('waktu_pinjam'),
             'waktu_kembali' => $request->input('waktu_kembali'),
             'keterangan' => $request->input('keterangan'),
-            'spo_id' => $request->input('spo_id'),
             'aprovals' => 'Belum',
             'status' => 'Menunggu Persetujuan'
         ]);

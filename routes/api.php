@@ -20,7 +20,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/', [HomeController::class, 'viewProfile'])->name('profile');
         Route::put('edit-profile/{mahasiswa}', [HomeController::class, 'editProfile'])->name('editProfile');
 
-        Route::get('ubah-kata-sandi', [HomeController::class, 'ViewUbahKataSandi'])->name('view-ubah-kata-sandi');
         Route::put('ubah-kata-sandi/{mahasiswa}', [HomeController::class, 'ubahKataSandi'])->name('ubah-kata-sandi');
     });
 });
