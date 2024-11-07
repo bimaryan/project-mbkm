@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('mahasiswa_id');
             $table->unsignedBigInteger('barang_id');
-            $table->unsignedBigInteger('spo_id')->nullable();
+            $table->unsignedBigInteger('stock_id');
             $table->unsignedBigInteger('ruangan_id')->nullable();
             $table->unsignedBigInteger('matkul_id');
             $table->unsignedBigInteger('dosen_id');
