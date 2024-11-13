@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use App\Imports\BarangImport;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
-use Yajra\DataTables\Facades\DataTables;
 
 class ProdukController extends Controller
 {
@@ -27,44 +26,58 @@ class ProdukController extends Controller
 
         $query = Barang::query();
 
-        if ($request->has('nama_barang') && $request->name != '') {
-            $query->where('nama_barang', 'LIKE', '%' . $request->name . '%');
+        // Apply filters as needed
+        if ($request->has('nama_barang') && $request->nama_barang != '') {
+            $query->where('nama_barang', 'LIKE', '%' . $request->nama_barang . '%');
         }
 
         if ($request->has('kategori_id') && $request->kategori_id != '') {
-            $query->where('kategori_id', $request->kategori_id);
-        }
-
-        if ($request->has('kondisi') && $request->kondisi != '') {
-            $query->whereHas('stock', function ($q) use ($request) {
-                if ($request->kondisi == 'habis') {
-                    $q->where('stock', 0);
-                } elseif ($request->kondisi == 'terpakai') {
-                    $q->where('is_stock_reduced', true);
-                } elseif ($request->kondisi == 'hilang') {
-                    $q->where('is_stock_lost', true);
-                } else {
-                    $q->where('stock', '>', 0);
-                }
+            $query->whereHas('kategori', function ($q) use ($request) {
+                $q->where('nama', 'LIKE', '%' . $request->kategori_id . '%');
             });
         }
 
-        if ($request->has('stock') && $request->stock != '') {
-            $query->whereHas('stock', function ($q) use ($request) {
-                $q->where('stock', '>=', $request->stock);
+        if ($request->has('kondisi') && $request->kondisi != '') {
+            $query->whereHas('kondisi', function ($q) use ($request) {
+                $q->where('nama', 'LIKE', '%' . $request->kondisi . '%');
             });
         }
 
         if ($request->has('satuan_id') && $request->satuan_id != '') {
-            $query->where('satuan_id', $request->satuan_id);
+            $query->whereHas('satuan', function ($q) use ($request) {
+                $q->where('nama', 'LIKE', '%' . $request->satuan_id . '%');
+            });
         }
 
-        $barangs = $query->paginate(5);
+        // Fetch data with relations
+        if ($request->ajax()) {
+            $data = $query->with(['kategori', 'kondisi', 'satuan', 'stock'])->get(); // Include relations
+
+            return datatables()->of($data)
+                ->addColumn('kategori', function ($row) {
+                    return $row->kategori->kategori;
+                })
+                ->addColumn('kondisi', function ($row) {
+                    return $row->kondisi->kondisi;
+                })
+                ->addColumn('satuan', function ($row) {
+                    return $row->satuan->satuan;
+                })
+                ->addColumn('stock', function ($row) {
+                    return $row->stock->pluck('stock')->implode(', ');
+                })
+                ->addColumn('action', function ($data) {
+
+                    return view('pageStaff.barang.action-buttons', compact('data'))->render();
+                })
+                ->make(true);
+        }
 
         $kategoris = Kategori::all();
         $kondisis = Kondisi::all();
         $satuans = Satuan::all();
         $stocks = Stock::all();
+        $barangs = $query->paginate(5);
 
         return view('pageStaff.barang.index', compact('barangs', 'kategoris', 'kondisis', 'satuans', 'stocks', 'notifikasiPeminjaman'));
     }

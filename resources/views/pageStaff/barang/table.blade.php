@@ -83,10 +83,8 @@
                     </td>
                 </tr>
 
-                {{-- MODAL DETAIL BARANG --}}
                 @include('pageStaff.barang.modal.detail')
 
-                {{-- MODAL EDIT BARANG --}}
                 @include('pageStaff.barang.modal.edit')
             @endforeach
         </tbody>

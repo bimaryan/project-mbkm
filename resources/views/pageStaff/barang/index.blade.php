@@ -44,13 +44,39 @@
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
+                <div id="data-barang-container">
+                    <div class="relative overflow-x-auto sm:rounded-lg">
+                        <table class="w-full text-sm text-gray-500 dark:text-gray-400 display" id="data-barang">
+                            <thead class="uppercase text-cen-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        No
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Nama Barang
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Kategori
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Kondisi
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Stock
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Satuan
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Aksi
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                <div id="tableBarang">
-                    @include('pageStaff.barang.table', ['barangs' => $barangs])
-                </div>
-
-                <div id="paginationLinks">
-                    {{ $barangs->links() }}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,48 +101,58 @@
         }
     </script>
 
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Apply filter ketika button filter di klik
+            const table = $('#data-barang').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('data-barang') }}",
+                    data: function(d) {
+                        d.nama_barang = $('#filterName').val();
+                        d.kategori_id = $('#filterKategori').val();
+                        d.kondisi = $('#filterKondisi').val();
+                        d.satuan_id = $('#filterSatuan').val();
+                    }
+                },
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'nama_barang',
+                        name: 'nama_barang'
+                    },
+                    {
+                        data: 'kategori',
+                        name: 'kategori'
+                    },
+                    {
+                        data: 'kondisi',
+                        name: 'kondisi'
+                    },
+                    {
+                        data: 'stock',
+                        name: 'stock'
+                    },
+                    {
+                        data: 'satuan',
+                        name: 'satuan'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false,
+                    }
+                ]
+            });
+
             $('#applyFilter').on('click', function(e) {
                 e.preventDefault();
-                loadTable();
-            });
-
-            // Handle pagination link click event
-            $(document).on('click', '.pagination a', function(e) {
-                e.preventDefault();
-                var page = $(this).attr('href').split('page=')[1];
-                loadTable(page);
-            });
-
-            function loadTable(page = 1) {
-                $.ajax({
-                    url: "{{ route('data-barang') }}",
-                    method: "GET",
-                    data: {
-                        name: $('#filterName').val(),
-                        kategori_id: $('#filterKategori').val(),
-                        kondisi: $('#filterKondisi').val(),
-                        stock: $('#filterStock').val(),
-                        satuan_id: $('#filterSatuan').val(),
-                        page: page
-                    },
-                    success: function(response) {
-                        // Replace table and pagination links
-                        $('#tableBarang').html($(response).find('#tableBarang').html());
-                        $('#paginationLinks').html($(response).find('#paginationLinks').html());
-                    }
-                });
-            }
-        });
-        $(document).ready(function() {
-            $('#data-barang').DataTable({
-                paging: false,
-                scrollCollapse: true,
-                scrollY: '300px'
+                table.ajax.reload();
             });
         });
     </script>

@@ -92,30 +92,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Apply filter ketika button filter di klik
-            $('#applyFilter').on('click', function(e) {
-                e.preventDefault();
-                loadTable();
-            });
-
-            // Handle pagination link click event
-            $(document).on('click', '.pagination a', function(e) {
-                e.preventDefault();
-                var page = $(this).attr('href').split('page=')[1];
-                loadTable(page);
-            });
-
+            // Load all results and paginate locally
             function loadTable(page = 1) {
                 $.ajax({
                     url: "{{ route('data-mahasiswa') }}",
                     method: "GET",
                     data: {
-                        // name: $('#filterName').val(),
-                        // kategori_id: $('#filterKategori').val(),
-                        // kondisi: $('#filterKondisi').val(),
-                        // stock: $('#filterStock').val(),
-                        // satuan_id: $('#filterSatuan').val(),
-                        // page: page
+                        nama_barang: $('#filterName').val(),
+                        kategori_id: $('#filterKategori').val(),
+                        kondisi: $('#filterKondisi').val(),
+                        stock: $('#filterStock').val(),
+                        satuan_id: $('#filterSatuan').val(),
+                        page: page
                     },
                     success: function(response) {
                         // Replace table and pagination links
@@ -124,13 +112,22 @@
                     }
                 });
             }
-        });
-        $(document).ready(function() {
-            $('#data-mahasiswa').DataTable({
-                paging: false,
-                scrollCollapse: true,
-                scrollY: '300px',
+
+            // Apply filters and load results
+            $('#applyFilter').on('click', function(e) {
+                e.preventDefault();
+                loadTable();
             });
+
+            // Handle pagination click event
+            $(document).on('click', '.pagination a', function(e) {
+                e.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                loadTable(page);
+            });
+
+            // Initial load
+            loadTable();
         });
     </script>
 @endsection
