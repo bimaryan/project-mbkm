@@ -7,7 +7,7 @@
             <div
                 class="flex items-center justify-between p-4 border-b rounded-t md:p-5 dark:border-gray-600">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Detail Mahasiswa
+                    Detail Admin dan Staff
                 </h3>
                 <button type="button"
                     class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto dark:hover:bg-gray-600 dark:hover:text-white"
@@ -23,10 +23,6 @@
             <!-- Modal body -->
             <div class="p-2">
                 <div class="flex flex-col items-center gap-5 p-4 md:flex-row">
-                    <div class="relative overflow-hidden border border-green-500 rounded-lg">
-                        <img src="{{ asset($data->foto) }}" alt="{{ $data->foto }}"
-                            class="object-cover" style="width: 150px; height: 150px;">
-                    </div>
                     <div class="relative grid grid-cols-2 gap-2 overflow-x-auto">
                         <div class="space-y-2">
                             <p

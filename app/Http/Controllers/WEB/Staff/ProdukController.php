@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Imports\BarangImport;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProdukController extends Controller
 {

@@ -19,7 +19,7 @@
                     </div>
                     <div>
                         <button data-modal-target="tambah-admin-dan-staff" data-modal-toggle="tambah-admin-dan-staff"
-                            class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800"><i
+                            class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800"><i
                                 class="fa-solid fa-plus"></i>
                         </button>
 
@@ -99,7 +99,7 @@
                 });
             }
         });
-        
+
         $(document).ready(function() {
             $('#data-admin-dan-staff').DataTable({
                 paging: false,
@@ -108,5 +108,5 @@
             });
         });
     </script>
-    
+
 @endsection
