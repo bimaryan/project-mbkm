@@ -108,7 +108,7 @@
         <ul class="space-y-2 font-medium">
             <li>
                 <a href="{{ route('dashboard') }}"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('dashboard') ? 'bg-green-500 text-white' : '' }}">
+                    class="flex items-center p-2  rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('dashboard') ? 'bg-green-500 text-white' : '' }}">
                     <span class="flex-1 ms-3 whitespace-nowrap"><i
                             class="fa-solid fa-table-columns me-2"></i>Dashboard</span>
                 </a>
@@ -116,7 +116,7 @@
             @if (Auth::user()->role->nama_role === 'Admin')
                 <li>
                     <a id="pengguna" data-collapse-toggle="users" aria-controls="pengguna"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('pengguna/*') ? 'bg-green-500 text-white' : '' }}">
+                        class="flex items-center p-2  rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('pengguna/*') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap">
                             <i class="fa-solid fa-users me-2"></i>Pengguna</span><i
                             class="fa-solid fa-chevron-down"></i>
@@ -124,19 +124,19 @@
                     <ul id="users" class="hidden py-2 space-y-2" aria-labelledby="pengguna">
                         <li>
                             <a href="{{ route('data-admin-dan-staff') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-admin-dan-staff') ? 'bg-gray-300' : '' }}">
+                                class="flex gap-1 items-center w-full p-2  transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-admin-dan-staff') ? 'bg-gray-300' : '' }}">
                                 <i class="fa-solid fa-user me-2"></i>Admin dan Staff
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('data-mahasiswa') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-mahasiswa') ? 'bg-gray-300' : '' }}">
+                                class="flex gap-1 items-center w-full p-2  transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-mahasiswa') ? 'bg-gray-300' : '' }}">
                                 <i class="fa-solid fa-user me-2"></i>Mahasiswa
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('data-dosen') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-dosen') ? 'bg-gray-300' : '' }}">
+                                class="flex gap-1 items-center w-full p-2  transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-dosen') ? 'bg-gray-300' : '' }}">
                                 <i class="fa-solid fa-user me-2"></i>Dosen
                             </a>
                         </li>
@@ -144,30 +144,36 @@
                 </li>
                 <li>
                     <a href="{{ route('data-kelas') }}"
-                        class="mt-2 flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('data-kelas') ? 'bg-green-500 text-white' : '' }}">
+                        class="mt-2 flex items-center p-2  rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('data-kelas') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i
                                 class="fa-solid fa-landmark me-2"></i>Kelas</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('data-mata-kuliah') }}"
-                        class="mt-2 flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('data-mata-kuliah') ? 'bg-green-500 text-white' : '' }}">
+                        class="mt-2 flex items-center p-2  rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('data-mata-kuliah') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-regular fa-file-lines me-2"></i>Mata
                             Kuliah</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('laporan') }}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('laporan') ? 'bg-green-500 text-white' : '' }}">
+                        class="flex items-center p-2  rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('laporan') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-chart-simple"></i> Laporan
                             Peminjaman</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('settings/link-api') }}"
+                        class="flex items-center p-2  rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ request::is('settings/link-api') ? 'bg-green-500 text-white' : '' }}">
+                        <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-link"></i> Link API</span>
                     </a>
                 </li>
             @endif
             @if (Auth::user()->role->nama_role === 'Staff')
                 <li>
                     <a id="kelolaproduk" data-collapse-toggle="dropdown"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('data-alat-dan-bahan/*') ? 'bg-green-500 text-white' : '' }}">
+                        class="flex items-center p-2  rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Request::is('data-alat-dan-bahan/*') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-folder me-2"></i>Alat dan
                             Bahan</span>
                         <i class="fa-solid fa-chevron-down"></i>
@@ -176,19 +182,19 @@
                     <ul id="dropdown" class="hidden py-2 space-y-2" aria-labelledby="kelolaproduk">
                         <li>
                             <a href="{{ route('data-barang') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-barang') ? 'bg-gray-300' : '' }}"><i
+                                class="flex gap-1 items-center w-full p-2  transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-barang') ? 'bg-gray-300' : '' }}"><i
                                     class="fa-solid fa-folder-open"></i> Data
                                 Barang</a>
                         </li>
                         <li>
                             <a href="{{ route('data-kategori') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-kategori') ? 'bg-gray-300' : '' }}"><i
+                                class="flex gap-1 items-center w-full p-2  transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-kategori') ? 'bg-gray-300' : '' }}"><i
                                     class="fa-solid fa-folder-open"></i> Data
                                 Kategori</a>
                         </li>
                         <li>
                             <a href="{{ route('data-satuan') }}"
-                                class="flex gap-1 items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-satuan') ? 'bg-gray-300' : '' }}"><i
+                                class="flex gap-1 items-center w-full p-2  transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 {{ Route::is('data-satuan') ? 'bg-gray-300' : '' }}"><i
                                     class="fa-solid fa-folder-open"></i> Data
                                 Satuan</a>
                         </li>
@@ -196,21 +202,21 @@
                 </li>
                 <li>
                     <a href="{{ route('data-ruangan') }}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('data-ruangan') ? 'bg-green-500 text-white' : '' }}">
+                        class="flex items-center p-2  rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('data-ruangan') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-house me-2"></i>Ruang
                             Laboratorium</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('verifikasi') }}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('verifikasi') ? 'bg-green-500 text-white' : '' }}">
+                        class="flex items-center p-2  rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('verifikasi') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i
                                 class="fa-solid fa-square-check me-2"></i>Verifikasi Peminjaman</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('laporan') }}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('laporan') ? 'bg-green-500 text-white' : '' }}">
+                        class="flex items-center p-2  rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('laporan') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-chart-simple"></i> Laporan
                             Peminjaman</span>
                     </a>
