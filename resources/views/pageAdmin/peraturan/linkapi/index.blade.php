@@ -100,5 +100,38 @@
                 });
             });
         </script>
+        <script>
+            $(document).ready(function() {
+                var token = "{{ session('api_token') }}";
+
+                @foreach ($linkapi as $data)
+                    checkApiStatus('{{ $data->link_api }}', {{ $data->id }}, token);
+                @endforeach
+
+                function checkApiStatus(url, id, token) {
+                    fetch(url, {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': 'Bearer ' + token
+                            },
+                            timeout: 5000
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                document.getElementById('status-' + id).innerHTML =
+                                    '<span class="text-green-500">Active</span>';
+                            } else {
+                                document.getElementById('status-' + id).innerHTML =
+                                    '<span class="text-red-500">Inactive</span>';
+                            }
+                        })
+                        .catch(error => {
+                            document.getElementById('status-' + id).innerHTML =
+                                '<span class="text-red-500">Inactive</span>';
+                        });
+                }
+            });
+        </script>
     </div>
 @endsection

@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [LoginController::class, 'login']);
 
+Route::get('home', [HomeController::class, 'home']);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('logout', [LoginController::class, 'logout']);
 
-    Route::get('home', [HomeController::class, 'home']);
     Route::get('katalog', [HomeController::class, 'katalog'])->name('katalog');
     Route::get('katalog/peminjaman-barang/{nama_barang}', [HomeController::class, 'viewbarang'])->name('viewbarang');
     Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjaman']);
