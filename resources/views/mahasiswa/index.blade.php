@@ -25,7 +25,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            background-image: url('{{ asset('image/iteralab.png') }}');
+            background-image: url('{{ asset('image/gedungGSC.jpg') }}');
             background-size: cover;
             background-position: center;
         }
