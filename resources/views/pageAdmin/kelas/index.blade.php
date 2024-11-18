@@ -19,13 +19,20 @@
                     </div>
                     <div>
                         <button class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800"
-                            data-modal-target="import-kelas" data-modal-toggle="import-kelas"><i
-                                class="fa-solid fa-file-import"></i>
+                            data-modal-target="import-kelas" data-modal-toggle="import-kelas" data-tooltip-target="import"
+                            data-tooltip-placement="left"><i class="fa-solid fa-file-arrow-up"></i>
                         </button>
+
+                        <div id="import" role="tooltip"
+                            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Import
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+
                         @include('pageAdmin.kelas.modal.import')
 
                         <button data-modal-target="tambah-kelas" data-modal-toggle="tambah-kelas"
-                            class="px-3 py-2 text-white bg-green-500 rounded hover:bg-green-800"><i
+                            class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800"><i
                                 class="fa-solid fa-plus"></i>
                         </button>
 
