@@ -24,7 +24,7 @@
             </select>
 
             <!-- Tombol Submit -->
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">
+            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md">
                 Filter
             </button>
         </div>
@@ -64,35 +64,37 @@
         </thead>
         <tbody>
             @foreach ($peminjamans as $data)
-                <tr>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $loop->iteration }}
-                    </td>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $data->mahasiswa->nama }}
-                    </td>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $data->barang->nama_barang }}
-                    </td>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $data->stock_pinjam }}
-                    </td>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $data->tgl_pinjam }}
-                    </td>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $data->waktu_pinjam }}
-                    </td>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $data->waktu_pinjam }}
-                    </td>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $data->barang->kondisi->kondisi }}
-                    </td>
-                    <td scope="col" class="px-6 py-3">
-                        {{ $data->status }}
-                    </td>
-                </tr>
+                @if ($data->status_pengembalian == 'Diserahkan')
+                    <tr>
+                        <td scope="col" class="px-6 py-3">
+                            {{ $loop->iteration }}
+                        </td>
+                        <td scope="col" class="px-6 py-3">
+                            {{ $data->mahasiswa->nama }}
+                        </td>
+                        <td scope="col" class="px-6 py-3">
+                            {{ $data->barang->nama_barang }}
+                        </td>
+                        <td scope="col" class="px-6 py-3">
+                            {{ $data->stock_pinjam }}
+                        </td>
+                        <td scope="col" class="px-6 py-3">
+                            {{ $data->tgl_pinjam }}
+                        </td>
+                        <td scope="col" class="px-6 py-3">
+                            {{ $data->waktu_pinjam }}
+                        </td>
+                        <td scope="col" class="px-6 py-3">
+                            {{ $data->waktu_pinjam }}
+                        </td>
+                        <td scope="col" class="px-6 py-3">
+                            {{ $data->barang->kondisi->kondisi }}
+                        </td>
+                        <td scope="col" class="px-6 py-3">
+                            {{ $data->status }}
+                        </td>
+                    </tr>
+                @endif
             @endforeach
         </tbody>
     </table>

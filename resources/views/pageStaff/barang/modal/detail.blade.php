@@ -22,7 +22,7 @@
             <!-- Modal body -->
             <div class="p-2">
                 <div class="flex flex-col items-center gap-5 p-4 md:flex-row">
-                    <div class="relative overflow-hidden border border-green-500 rounded-lg">
+                    <div class="relative overflow-hidden rounded-lg">
                         <img src="{{ asset($data->foto ?? 'image/barang.png') }}" alt="{{ $data->foto }}"
                             class="object-cover" style="width: 150px; height: 150px;">
                     </div>
