@@ -6,7 +6,7 @@
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 border-b rounded-t md:p-5 dark:border-gray-600">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Detail Barang
+                    Detail Link API
                 </h3>
                 <button type="button"
                     class="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto dark:hover:bg-gray-600 dark:hover:text-white"
@@ -22,48 +22,37 @@
             <!-- Modal body -->
             <div class="p-2">
                 <div class="flex flex-col items-center gap-5 p-4 md:flex-row">
-                    <div class="relative overflow-hidden border border-green-500 rounded-lg">
-                        <img src="{{ asset($data->foto ?? 'image/barang.png') }}" alt="{{ $data->foto }}"
-                            class="object-cover" style="width: 150px; height: 150px;">
-                    </div>
                     <div class="relative grid grid-cols-2 gap-2 overflow-x-auto">
                         <div class="space-y-2">
                             <p class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
-                                <span>Nama barang</span>
+                                <span>Link API</span>
                                 <span>:</span>
                             </p>
                             <p class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
-                                <span>Kategori</span>
+                                <span>IP</span>
                                 <span>:</span>
                             </p>
                             <p class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
-                                <span>Stok</span>
+                                <span>Port</span>
                                 <span>:</span>
                             </p>
                             <p class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
-                                <span>satuan</span>
-                                <span>:</span>
-                            </p>
-                            <p class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
-                                <span>Kondisi</span>
+                                <span>Status</span>
                                 <span>:</span>
                             </p>
                         </div>
                         <div class="space-y-2">
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->nama_barang ?? '-' }}
+                                {{ $data->link_api ?? '-' }}
                             </p>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->kategori->kategori ?? '-' }}
+                            <p class="text-sm text-gray-500 dark:text-gray-400" id="ip-{{ $data->id }}">
+                                Checking...
                             </p>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->stock->stock ?? '-' }}
+                            <p class="text-sm text-gray-500 dark:text-gray-400" id="port-{{ $data->id }}">
+                                Checking...
                             </p>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->satuan->satuan ?? '-' }}
-                            </p>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{ $data->kondisi->kondisi ?? '-' }}
+                            <p class="text-sm text-gray-500 dark:text-gray-400" id="status-{{ $data->id }}">
+                                Checking...
                             </p>
                         </div>
                     </div>

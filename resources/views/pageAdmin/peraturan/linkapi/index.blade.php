@@ -109,27 +109,43 @@
                 @endforeach
 
                 function checkApiStatus(url, id, token) {
-                    fetch(url, {
-                            method: 'GET',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': 'Bearer ' + token
-                            },
-                            timeout: 5000
-                        })
-                        .then(response => {
-                            if (response.ok) {
-                                document.getElementById('status-' + id).innerHTML =
-                                    '<span class="text-green-500">Active</span>';
-                            } else {
+                    try {
+                        let parsedUrl = new URL(url);
+                        let port = parsedUrl.port || (parsedUrl.protocol === 'https:' ? '443' : '80'); // Default port
+                        document.getElementById('port-' + id).textContent = port;
+
+                        fetch(url, {
+                                method: 'GET',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': 'Bearer ' + token
+                                },
+                                timeout: 5000
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                    // Mendapatkan IP dari header atau parsing URL
+                                    let ip = response.headers.get('x-forwarded-for') || response.url.match(
+                                        /\b\d{1,3}(\.\d{1,3}){3}\b/)[0] || '-';
+                                    document.getElementById('status-' + id).innerHTML =
+                                        '<span class="text-green-500">Active</span>';
+                                    document.getElementById('ip-' + id).textContent = ip; // Menampilkan IP
+                                } else {
+                                    document.getElementById('status-' + id).innerHTML =
+                                        '<span class="text-red-500">Inactive</span>';
+                                    document.getElementById('ip-' + id).textContent = '-'; // Jika gagal
+                                }
+                            })
+                            .catch(error => {
                                 document.getElementById('status-' + id).innerHTML =
                                     '<span class="text-red-500">Inactive</span>';
-                            }
-                        })
-                        .catch(error => {
-                            document.getElementById('status-' + id).innerHTML =
-                                '<span class="text-red-500">Inactive</span>';
-                        });
+                                document.getElementById('ip-' + id).textContent = '-'; // Jika error
+                            });
+                    } catch (e) {
+                        document.getElementById('port-' + id).textContent = '-';
+                        document.getElementById('status-' + id).innerHTML =
+                            '<span class="text-red-500">Error in URL</span>';
+                    }
                 }
             });
         </script>

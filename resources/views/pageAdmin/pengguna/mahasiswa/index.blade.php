@@ -126,8 +126,13 @@
                 loadTable(page);
             });
 
-            // Initial load
-            loadTable();
+            $(document).ready(function() {
+                $('#data-mahasiswa').DataTable({
+                    paging: false,
+                    scrollCollapse: true,
+                    scrollY: '300px'
+                });
+            });
         });
     </script>
 @endsection

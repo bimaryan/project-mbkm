@@ -1,5 +1,5 @@
 <div class="relative overflow-x-auto sm:rounded-lg">
-    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400" id="data-peminjaman">
+    <table class="w-full text-sm text-gray-500 dark:text-gray-400" id="data-peminjaman">
         <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
@@ -15,7 +15,7 @@
                     Jumlah Pinjam
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Tanggal Peminjaman 
+                    Tanggal Peminjaman
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Detail
@@ -23,7 +23,7 @@
                 <th scope="col" class="px-6 py-3">
                     Verifikasi
                 </th>
-                
+
             </tr>
         </thead>
         <tbody>
@@ -77,7 +77,7 @@
                                     </button>
                                 </div>
                             </form>
-                    
+
                             <!-- Form Pengembalian -->
                             <form action="{{ route('verifikasi.kembali', $item->id) }}" method="POST" class="flex items-center gap-1">
                                 @csrf
@@ -96,7 +96,7 @@
                             </form>
                         </div>
                     </td>
-                    
+
                 </tr>
             @endforeach
         </tbody>

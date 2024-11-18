@@ -19,7 +19,7 @@
                     </div>
                     <div>
                         <button class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800"
-                            data-modal-target="import-kelas" data-modal-toggle="import-kelas"><i
+                            data-modal-target="import-matakuliah" data-modal-toggle="import-matakuliah"><i
                                 class="fa-solid fa-file-import"></i>
                         </button>
                         @include('pageAdmin.matakuliah.modal.import')

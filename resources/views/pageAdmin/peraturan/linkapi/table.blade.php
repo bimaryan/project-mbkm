@@ -3,7 +3,6 @@
         <thead class="uppercase text-cen-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">Link API</th>
-                <th scope="col" class="px-6 py-3">Status</th>
                 <th scope="col" class="px-6 py-3 text-center">Aksi</th>
             </tr>
         </thead>
@@ -12,10 +11,13 @@
                 <tr id="link_api"
                     class="bg-white border-b dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
                     <td class="px-6 py-4">{{ $data->link_api }}</td>
-                    <td class="px-6 py-4">
-                        <span id="status-{{ $data->id }}" class="text-yellow-500">Checking...</span>
-                    </td>
                     <td scope="col" class="flex items-center justify-center gap-2 px-6 py-4">
+                        <button type="button" data-modal-target="detail{{ $data->id }}"
+                            data-modal-toggle="detail{{ $data->id }}"
+                            class="flex items-center px-2 py-2 text-sm text-white bg-yellow-400 rounded">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+
                         <!-- Delete Form -->
                         <form action="{{ url('settings/link-api/' . $data->id) }}" method="POST" class="inline">
                             @csrf
@@ -34,6 +36,8 @@
                         </button>
                     </td>
                 </tr>
+
+                @include('pageAdmin.peraturan.linkapi.modal.detail')
 
                 <!-- Edit Modal -->
                 <div id="edit{{ $data->id }}" tabindex="-1" aria-hidden="true"

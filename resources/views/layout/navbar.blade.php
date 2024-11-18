@@ -80,8 +80,7 @@
                                 class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:focus:ring-gray-600"
                                 aria-expanded="false" data-dropdown-toggle="dropdown-user">
                                 <span class="sr-only">Open user menu</span>
-                                <img class="w-8 h-8 rounded-full"
-                                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                                <img class="w-8 h-8 rounded-full" src="{{ asset('image/icon_profile.png') }}"
                                     alt="user photo">
                             </button>
                         </div>
@@ -163,12 +162,12 @@
                             Peminjaman</span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ url('settings/link-api') }}"
                         class="flex items-center p-2  rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ request::is('settings/link-api') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i class="fa-solid fa-link"></i> Link API</span>
                     </a>
-                </li>
+                </li> --}}
             @endif
             @if (Auth::user()->role->nama_role === 'Staff')
                 <li>
