@@ -16,6 +16,8 @@ class DashboardController extends Controller
         $totalAlat = Barang::where('kategori_id', 1)->count();
         $totalBahan = Barang::where('kategori_id', 2)->count();
 
+        // dd($totalAlat, $totalBahan);
+
         $peminjamanTerakhir30Hari = Peminjaman::whereRaw('CAST(tgl_pinjam AS DATE) >= ?', [now()->subDays(30)->toDateString()])->count();
 
         $persentasePeminjaman = ($totalPeminjaman > 0) ? ($peminjamanTerakhir30Hari / $totalPeminjaman) * 100 : 0;
