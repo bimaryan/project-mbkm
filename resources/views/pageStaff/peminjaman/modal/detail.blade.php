@@ -72,6 +72,10 @@
                             <span>Status Peminjaman</span>
                             <span>:</span>
                         </p>
+                        <p class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
+                            <span>Keterangan</span>
+                            <span>:</span>
+                        </p>
                     </div>
                     <!-- Values -->
                     <div class="space-y-3 text-left">
@@ -87,6 +91,7 @@
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->waktu_pinjam }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->waktu_kembali }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->status }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->keterangan ?? 'Tidak Keterangan' }}</p>
                     </div>
                 </div>
             </div>
