@@ -134,7 +134,13 @@ class HomeController extends Controller
 
     public function informasi()
     {
-        $peminjaman = Peminjaman::with('mahasiswa', 'barang', 'stock', 'ruangan')->paginate('5');
+        $user = Auth::user();
+
+        $peminjaman = Peminjaman::with(['mahasiswa', 'barang', 'stock', 'ruangan'])
+            ->whereHas('mahasiswa', function ($query) use ($user) {
+                $query->where('id', $user->id);
+            })
+            ->paginate(5);
 
         foreach ($peminjaman as $data) {
             $data->QR = QrCode::size(150)->generate($data->id);
