@@ -65,6 +65,10 @@ class LoginController extends Controller
             return redirect()->route('home');
         }
 
+        if (Auth::guard('dosen')->attempt(['username' => $credentials['identifier'], 'password' => $request->password])) {
+            return redirect()->route('home');
+        }
+
         return redirect()->back()->withErrors(['errors'],)->withInput();
     }
     

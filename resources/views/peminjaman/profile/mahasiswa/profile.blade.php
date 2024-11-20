@@ -1,4 +1,4 @@
-@extends('mahasiswa.profile.index')
+@extends('peminjaman.profile.index')
 
 @section('content-profile')
     <!-- Main Content -->
@@ -18,7 +18,7 @@
             @csrf
             @method('PUT')
             <div class="flex items-center mb-6">
-                <div class="relative overflow-hidden border border-4 border-green-500 rounded-full">
+                <div class="relative overflow-hidden border border-4 border-green-500 rounded-full d-full">
                     @if (isset(auth()->user()->foto) && auth()->user()->foto != '')
                         <img id="profileImage" src="{{ asset(auth()->user()->foto) }}" alt="Foto Profil"
                             class="object-cover rounded-full" style="width: 130px; height: 130px;">
@@ -45,6 +45,11 @@
                     Lengkap</label>
                 <input type="text" id="nama" name="nama" value="{{ auth()->user()->nama }}"
                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+            </div>
+            <div class="mb-4">
+                <label for="nim" class="block text-sm font-medium text-gray-700">NIM</label>
+                <input type="text" id="nim" name="nim" value="{{ auth()->user()->nim }}"
+                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50 disabled:bg-gray-100">
             </div>
             <div class="mb-4">
                 <label for="kelas_id" class="block text-sm font-medium text-gray-700">Kelas</label>

@@ -45,7 +45,7 @@ class HomeController extends Controller
 
         $barangKosong = $barangs->isEmpty();
 
-        return view('mahasiswa.home.index', [
+        return view('peminjaman.home.index', [
             'barangs' => $barangs,
             'kategoris' => $kategoris,
             'barangKosong' => $barangKosong
@@ -76,7 +76,7 @@ class HomeController extends Controller
 
         $barangKosong = $barangs->isEmpty();
 
-        return view('mahasiswa.katalog.index', [
+        return view('peminjaman.katalog.index', [
             'barangs' => $barangs,
             'kategoris' => $kategoris,
             'barangKosong' => $barangKosong,
@@ -170,68 +170,5 @@ class HomeController extends Controller
         return view('mahasiswa.riwayat.index', compact('riwayat'));
     }
 
-    public function viewProfile(Mahasiswa $mahasiswa)
-    {
-        $kelas = Kelas::all();
-        return view('mahasiswa.profile.profile', ['mahasiswa' => $mahasiswa], ['kelas' => $kelas]);
-    }
-
-    public function editProfile(Request $request, Mahasiswa $mahasiswa)
-    {
-        $request->validate([
-            'nama' => 'required|string',
-            'email' => 'required|email',
-            'telepon' => 'nullable|string',
-            'kelas_id' => 'required|exists:kelas,id',
-            'jenis_kelamin' => 'nullable|string',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ], [
-            'required.nama' => ':Nama harus diisi',
-            'required.email' => ':attribute harus diisi',
-            'required.telepon' => ':attribute harus diisi',
-            'required.jenis_kelamin' => ':attribute harus diisi',
-        ]);
-
-        if ($request->hasFile('foto')) {
-            if ($mahasiswa->foto && File::exists(public_path($mahasiswa->foto))) {
-                File::delete(public_path($mahasiswa->foto));
-            }
-
-            $foto = $request->file('foto')->move('foto_mahasiswa', time() . '_' . $request->file('foto')->getClientOriginalName());
-        } else {
-            $foto = $mahasiswa->foto;
-        }
-
-        $mahasiswa->update([
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'telepon' => $request->telepon,
-            'kelas_id' => $request->kelas_id,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'foto' => $foto
-        ]);
-
-        $data = Kelas::all();
-
-        return redirect()->route('profile', ['data' => $data])->with('success', 'Profile berhasil diperbarui.');
-    }
-
-    public function viewUbahKataSandi(Request $request, Mahasiswa $mahasiswa)
-    {
-        return view('mahasiswa.profile.ubahsandi', ['mahasiswa' => $mahasiswa]);
-    }
-
-    public function ubahKataSandi(Request $request, Mahasiswa $mahasiswa)
-    {
-        $request->validate([
-            'password' => 'required|string',
-            'konfirmasi_password' => 'required|string',
-        ]);
-
-        // Update password pengguna
-        $mahasiswa->password = Hash::make($request->password);
-        $mahasiswa->save();
-
-        return redirect()->route('profile')->with('success', 'Kata sandi berhasil diperbarui.');
-    }
+    
 }

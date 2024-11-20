@@ -1,7 +1,7 @@
 <nav class="fixed top-0 left-0 z-10 w-full bg-white border-gray-200 shadow-lg dark:bg-gray-900">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
         <a href="{{ route('home') }}" class="flex flex-col items-center space-x-3 rtl:space-x-reverse">
-            <img src="{{ asset('logo/silk-transparant.png') }}" class="w-24 hidden md:block"
+            <img src="{{ asset('logo/silk-transparant.png') }}" class="hidden w-24 md:block"
                 alt="{{ asset('logo/silk.png') }}" />
             <img src="{{ asset('logo/polindra.png') }}" class="w-10 md:hidden" alt="{{ asset('logo/polindra.png') }}" />
         </a>
@@ -63,6 +63,11 @@
                     <a href="{{ route('katalog') }}"
                         class="block py-2 px-3 rounded md:border-0 md:p-0
            {{ Route::is('katalog') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Katalog</a>
+                </li>
+                <li>
+                    <a href="{{ route('keranjang') }}"
+                        class="block py-2 px-3 rounded md:border-0 md:p-0
+           {{ Route::is('keranjang') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Peminjaman</a>
                 </li>
                 <li>
                     <a href="{{ route('mahasiswa.informasi') }}"
