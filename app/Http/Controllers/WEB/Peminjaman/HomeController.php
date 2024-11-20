@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\WEB\Mahasiswa;
+namespace App\Http\Controllers\WEB\Peminjaman;
 
 use App\Models\Barang;
 use App\Models\Kategori;
@@ -170,5 +170,5 @@ class HomeController extends Controller
         return view('mahasiswa.riwayat.index', compact('riwayat'));
     }
 
-    
+
 }

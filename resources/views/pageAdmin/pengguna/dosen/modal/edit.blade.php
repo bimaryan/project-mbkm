@@ -29,7 +29,7 @@
                         <div class="mb-2">
                             <label for="nama"
                                 class="block text-sm font-medium text-gray-700">Nama</label>
-                            <input type="text" name="nama_dosen" id="nama" value="{{ $data->nama_dosen }}"
+                            <input type="text" name="nama" id="nama" value="{{ $data->nama }}"
                                 class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                             @error('nama')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -39,6 +39,15 @@
                             <label for="nip"
                                 class="block text-sm font-medium text-gray-700">NIP</label>
                             <input type="number" name="nip" id="nip" value="{{ $data->nip }}"
+                                class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                            @error('nip')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-2">
+                            <label for="username"
+                                class="block text-sm font-medium text-gray-700">Username</label>
+                            <input type="text" name="username" id="username" value="{{ $data->username }}"
                                 class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                             @error('nip')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
