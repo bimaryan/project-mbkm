@@ -52,7 +52,7 @@
 </head>
 
 <body>
-    @include('mahasiswa.navbar.index')
+    @include('peminjaman.navbar.index')
 
     <div class="max-w-screen-xl p-6 mx-auto mt-14">
         <div class="flex justify-center items-center mt-6">
@@ -110,7 +110,7 @@
         </div>
     </div>
 
-    @include('mahasiswa.footer.index')
+    @include('peminjaman.footer.index')
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {

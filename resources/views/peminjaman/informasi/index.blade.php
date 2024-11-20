@@ -30,7 +30,7 @@
 </head>
 
 <body>
-    @include('mahasiswa.navbar.index')
+    @include('peminjaman.navbar.index')
 
     @if (session('success'))
         <script>
@@ -290,7 +290,7 @@
         </div>
     </div>
 
-    @include('mahasiswa.footer.index')
+    @include('peminjaman.footer.index')
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </body>

@@ -148,7 +148,7 @@ class HomeController extends Controller
             $data->waktu_kembali_unix = \Carbon\Carbon::parse($data->waktu_kembali)->timestamp;
         }
 
-        return view('mahasiswa.informasi.index', compact('peminjaman'));
+        return view('peminjaman.informasi.index', compact('peminjaman'));
     }
 
     public function riwayat()
@@ -167,8 +167,6 @@ class HomeController extends Controller
             $data->waktu_kembali_unix = \Carbon\Carbon::parse($data->waktu_kembali)->timestamp;
         }
 
-        return view('mahasiswa.riwayat.index', compact('riwayat'));
+        return view('peminjaman.riwayat.index', compact('riwayat'));
     }
-
-    
 }
