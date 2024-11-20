@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\WEB\Mahasiswa;
+namespace App\Http\Controllers\WEB\Peminjaman;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

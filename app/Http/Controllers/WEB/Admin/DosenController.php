@@ -8,7 +8,10 @@ use App\Imports\DosenImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
+
+use function Laravel\Prompts\password;
 
 class DosenController extends Controller
 {
@@ -38,20 +41,20 @@ class DosenController extends Controller
 
     public function storeDosen(Request $request)
     {
-        $request->validate([
-            'nama_dosen' => 'required',
+        $validatedData = $request->validate([
+            'nama' => 'required',
             'nip' => 'required',
+            'username' => 'required',
+
         ], [
-            'nama_dosen.required' => 'Nama harus di isi',
+            'nama.required' => 'Nama harus di isi',
             'nip.required' => 'NIP harus di isi',
+            'username.required' => 'Username harus di isi',
         ]);
 
-        DB::transaction(function () use ($request) {
-            $mahasiswa = new Dosen();
-            $mahasiswa->nama_dosen = $request->nama_dosen;
-            $mahasiswa->nip = $request->nip;
-            $mahasiswa->save();
-        });
+        $validatedData['password'] = Hash::make('polindra');
+
+        Dosen::create($validatedData);
 
         return redirect()->route('data-dosen')->with('success', 'Pendaftaran sudah berhasil.');
     }
@@ -59,13 +62,15 @@ class DosenController extends Controller
     public function editDosen(Request $request, Dosen $dosen)
     {
         $request->validate([
-            'nama_dosen' => 'required',
+            'nama' => 'required',
             'nip' => 'required',
+            'username' => 'required',
         ]);
 
         $dosen->update([
-            'nama_dosen' => $request->nama_dosen,
+            'nama' => $request->nama,
             'nip' => $request->nip,
+            'username' => $request->username,
         ]);
 
 
