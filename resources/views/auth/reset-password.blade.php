@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="icon" href="{{asset('logo/polindra.png')}}" type="image/x-icon">
-    <title>Reset &mdash; SILK</title>
+    <title>SILK &mdash; Reset</title>
     <style>
         .background {
             position: relative;
