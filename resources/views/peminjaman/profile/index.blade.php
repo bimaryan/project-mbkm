@@ -43,7 +43,7 @@
 </head>
 
 <body class="background">
-    @include('mahasiswa.navbar.index')
+    @include('peminjaman.navbar.index')
     <div>
         {{-- @yield('content') --}}
         <div class="max-w-screen-xl p-6 mx-auto mt-14">

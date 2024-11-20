@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Model;
 
 class Dosen extends Model
 {
@@ -11,7 +12,15 @@ class Dosen extends Model
 
     protected $table = 'dosens';
 
-    protected $fillable = ['nama_dosen', 'nip'];
+    protected $fillable = [
+        'nama',
+        'nip',
+        'username',
+        'email',
+        'telepon',
+        'jenis_kelamin',
+        'foto',
+    ];
 
     public function peminjaman()
     {

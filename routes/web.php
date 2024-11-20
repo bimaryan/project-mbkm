@@ -15,6 +15,8 @@ use App\Http\Controllers\WEB\Admin\MahasiswaController;
 use App\Http\Controllers\WEB\Admin\MataKuliahController;
 use App\Http\Controllers\WEB\Staff\PeminjamanController;
 use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
+use App\Http\Controllers\WEB\Mahasiswa\KeranjangController;
+use App\Http\Controllers\WEB\Mahasiswa\ProfileController;
 use App\Http\Controllers\WEB\Staff\LaporanController;
 
 
@@ -118,20 +120,21 @@ Route::middleware(['auth:admin'])->group(function () {
     });
 });
 
-Route::middleware(['auth:mahasiswa'])->group(function () {
+Route::group(['middleware' => ['multiGuard:dosen,mahasiswa']], function () {
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::get('home', [HomeController::class, 'home'])->name('home');
     Route::get('katalog', [HomeController::class, 'katalog'])->name('katalog');
+    Route::get('keranjang', [KeranjangController::class, 'index'])->name('keranjang');
     Route::get('katalog/peminjaman-barang/{nama_barang}', [HomeController::class, 'viewbarang'])->name('viewbarang');
     Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjaman'])->name('mahasiswa.peminjaman');
     Route::get('informasi', [HomeController::class, 'informasi'])->name('mahasiswa.informasi');
 
     Route::prefix('profile/')->group(function () {
-        Route::get('', [HomeController::class, 'viewProfile'])->name('profile');
-        Route::put('edit-profile/{mahasiswa}', [HomeController::class, 'editProfile'])->name('editProfile');
+        Route::get('', [ProfileController::class, 'viewProfile'])->name('profile');
+        Route::put('edit-profile/{user}', [ProfileController::class, 'editProfile'])->name('editProfile');
 
-        Route::get('ubah-kata-sandi', [HomeController::class, 'ViewUbahKataSandi'])->name('view-ubah-kata-sandi');
-        Route::put('ubah-kata-sandi/{mahasiswa}', [HomeController::class, 'ubahKataSandi'])->name('ubah-kata-sandi');
+        Route::get('ubah-kata-sandi', [ProfileController::class, 'ViewUbahKataSandi'])->name('view-ubah-kata-sandi');
+        Route::put('ubah-kata-sandi/{user}', [ProfileController::class, 'ubahKataSandi'])->name('ubah-kata-sandi');
     });
 });

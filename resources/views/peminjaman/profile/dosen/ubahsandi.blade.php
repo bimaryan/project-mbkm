@@ -1,4 +1,4 @@
-@extends('mahasiswa.profile.index')
+@extends('peminjaman.profile.index')
 
 @section('content-profile')
     <!-- Main Content -->
