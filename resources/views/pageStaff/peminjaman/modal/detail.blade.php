@@ -20,10 +20,13 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <div class="p-6">
-                <div class="flex flex-col gap-4 md:flex-row">
+            <div class="p-4 flex flex-col md:flex-row items-center gap-5">
+                <div class="w-44 flex justify-center rounded-lg">
+                    <img src="{{ asset($data->foto ?? 'image/barang.png') }}" alt="">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
                     <!-- Labels -->
-                    <div class="space-y-3 text-left">
+                    <div class="space-y-2">
                         <p class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
                             <span>NIM</span>
                             <span>:</span>
@@ -69,29 +72,34 @@
                             <span>:</span>
                         </p>
                         <p class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
-                            <span>Status Peminjaman</span>
+                            <span>Keterangan</span>
                             <span>:</span>
                         </p>
                         <p class="flex justify-between text-sm font-medium text-gray-900 dark:text-white">
-                            <span>Keterangan</span>
+                            <span>Status Peminjaman</span>
                             <span>:</span>
                         </p>
                     </div>
                     <!-- Values -->
-                    <div class="space-y-3 text-left">
+                    <div class="space-y-2">
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->mahasiswa->nim }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->mahasiswa->nama }}</p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->mahasiswa->kelas->nama_kelas }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            {{ $item->mahasiswa->kelas->nama_kelas }}
+                        </p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->matkul->mata_kuliah }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->dosen->nama_dosen }}</p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->ruangan->nama_ruangan ?? '-' }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            {{ $item->ruangan->nama_ruangan ?? '-' }}
+                        </p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->barang->nama_barang }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->stock_pinjam }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->tgl_pinjam }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->waktu_pinjam }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->waktu_kembali }}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            {{ $item->keterangan ?? 'Tidak Keterangan' }}</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->status }}</p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ $item->keterangan ?? 'Tidak Keterangan' }}</p>
                     </div>
                 </div>
             </div>

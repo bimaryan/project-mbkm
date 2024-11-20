@@ -151,6 +151,25 @@ class HomeController extends Controller
         return view('mahasiswa.informasi.index', compact('peminjaman'));
     }
 
+    public function riwayat()
+    {
+        $user = Auth::user();
+
+        $riwayat = Peminjaman::with(['mahasiswa', 'barang', 'stock', 'ruangan'])
+            ->whereHas('mahasiswa', function ($query) use ($user) {
+                $query->where('id', $user->id);
+            })
+            ->paginate(5);
+
+        foreach ($riwayat as $data) {
+            $data->QR = QrCode::size(150)->generate($data->id);
+            $data->waktu_pinjam_unix = \Carbon\Carbon::parse($data->waktu_pinjam)->timestamp;
+            $data->waktu_kembali_unix = \Carbon\Carbon::parse($data->waktu_kembali)->timestamp;
+        }
+
+        return view('mahasiswa.riwayat.index', compact('riwayat'));
+    }
+
     public function viewProfile(Mahasiswa $mahasiswa)
     {
         $kelas = Kelas::all();

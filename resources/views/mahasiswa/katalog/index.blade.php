@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://kit.fontawesome.com/f74deb4653.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="{{ asset('logo/polindra.png') }}" type="image/x-icon">
     <title>SILK &mdash; Katalog</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
@@ -17,6 +18,13 @@
         body {
             font-family: "Montserrat", sans-serif;
             font-style: normal;
+        }
+
+        .zoom-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
         .animate-card {
@@ -80,7 +88,7 @@
                     <a href="{{ route('viewbarang', ['nama_barang' => $data->nama_barang]) }}"
                         class="w-full p-3 border border-green-500 rounded-lg shadow-lg max-w-m">
                         <div class="flex justify-center w-full">
-                            <img src="{{ asset($data->foto) }}" class="object-cover zoom-image"
+                            <img src="{{ asset($data->foto ?? 'image/barang.png') }}" class="object-cover zoom-image"
                                 alt="{{ $data->nama_barang }}" />
                         </div>
                         <div class="mt-1">
