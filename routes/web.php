@@ -129,6 +129,7 @@ Route::group(['middleware' => ['multiGuard:dosen,mahasiswa']], function () {
     Route::get('katalog/peminjaman-barang/{nama_barang}', [HomeController::class, 'viewbarang'])->name('viewbarang');
     Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjaman'])->name('mahasiswa.peminjaman');
     Route::get('informasi', [HomeController::class, 'informasi'])->name('mahasiswa.informasi');
+    Route::get('riwayat', [HomeController::class, 'riwayat'])->name('mahasiswa.riwayat');
 
     Route::prefix('profile/')->group(function () {
         Route::get('', [ProfileController::class, 'viewProfile'])->name('profile');

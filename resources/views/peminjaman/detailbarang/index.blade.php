@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://kit.fontawesome.com/f74deb4653.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="{{ asset('logo/polindra.png') }}" type="image/x-icon">
     <title>SILK &mdash; Barang {{ $view->name }}</title>
 
     <style>
@@ -50,7 +51,7 @@
             <div class="space-y-3">
                 <p class="text-2xl font-semibold">{{ $view->nama_barang }}</p>
                 <div class="flex justify-center w-full">
-                    <img src="{{ asset($view->foto) }}" alt="{{ asset($view->foto) }}"
+                    <img src="{{ asset($view->foto ?? 'image/barang.png') }}" alt="{{ asset($view->foto) }}"
                         class="object-cover border border-green-500 rounded-lg shadow-lg image">
                 </div>
                 <div class="flex items-center justify-between">

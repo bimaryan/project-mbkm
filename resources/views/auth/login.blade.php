@@ -8,8 +8,8 @@
     {{-- @vite('resources/css/app.css') --}}
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="icon" href="{{asset('logo/polindra.png')}}" type="image/x-icon">
-    <title>Login &mdash; SILK</title>
+    <link rel="icon" href="{{ asset('logo/polindra.png') }}" type="image/x-icon">
+    <title>SILK &mdash; Login</title>
     <style>
         .background {
             position: relative;
@@ -77,7 +77,7 @@
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-600">Username/NIM</label>
                     <input type="text" id="name" name="identifier"
                         class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                        placeholder="2205036">
+                        placeholder="Masukkan Username/NIM">
                     @error('identifier')
                         <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
                     @enderror
@@ -88,7 +88,7 @@
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-600">Kata Sandi</label>
                     <input type="password" id="password" name="password"
                         class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                        placeholder="********">
+                        placeholder="Masukkan Password">
                     @error('password')
                         <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
                     @enderror

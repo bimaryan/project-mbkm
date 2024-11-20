@@ -84,10 +84,8 @@
                                 class="w-full p-3 border border-green-500 rounded-lg shadow-lg max-w-m">
                                 <div class="flex justify-center w-full">
 
-                                    <img src="{{ $data->foto ? url($data->foto) : url('uploads/barang/barang-default.jpeg') }}"
-                                        class="object-cover zoom-image"
+                                    <img src="{{ $data->foto ?? 'image/barang.png' }}" class="object-cover zoom-image"
                                         alt="{{ $data->nama_barang ?? 'Default Barang' }} " />
-
                                 </div>
                                 <div class="mt-1">
                                     <span
