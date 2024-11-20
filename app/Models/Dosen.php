@@ -16,6 +16,7 @@ class Dosen extends Model
         'nama',
         'nip',
         'username',
+        'password',
         'email',
         'telepon',
         'jenis_kelamin',

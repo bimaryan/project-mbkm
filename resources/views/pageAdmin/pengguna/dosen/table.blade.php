@@ -12,6 +12,9 @@
                     NIP/NIDN
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Username
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Aksi
                 </th>
             </tr>
@@ -23,12 +26,22 @@
                         {{ $loop->iteration }}
                     </td>
                     <td scope="col" class="px-6 py-3">
-                        {{ $data->nama_dosen }}
+                        {{ $data->nama }}
                     </td>
                     <td scope="col" class="px-6 py-3">
                         {{ $data->nip }}
                     </td>
+                    <td scope="col" class="px-6 py-3">
+                        {{ $data->username }}
+                    </td>
                     <td scope="col" class="flex items-center justify-center gap-2 px-6 py-3">
+                        <div>
+                            <button type="button" data-modal-target="detail{{ $data->id }}"
+                                data-modal-toggle="detail{{ $data->id }}"
+                                class="flex items-center px-2 py-2 text-sm text-white bg-yellow-400 rounded">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
                         <div>
                             <form id="delete-form-{{ $data->id }}"
                                 action="{{ route('data-dosen.delete', $data->id) }}" method="POST">
@@ -50,6 +63,8 @@
                     </td>
                 </tr>
 
+                {{-- MODAL DETAIL DOSEN --}}
+                @include('pageAdmin.pengguna.dosen.modal.detail')
                 {{-- MODAL EDIT DOSEN --}}
                 @include('pageAdmin.pengguna.dosen.modal.edit')
             @endforeach

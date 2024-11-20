@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\WEB\Mahasiswa;
+namespace App\Http\Controllers\WEB\Peminjaman;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dosen;
@@ -29,49 +29,45 @@ class ProfileController extends Controller
     public function editProfile(Request $request)
     {
         $user = Auth::user();
-        if ($user instanceof Dosen) {
 
+        if ($user instanceof Dosen) {
             $request->validate([
                 'nama' => 'required|string',
                 'nip' => 'required|string',
-                'username' => 'required|string|unique:dosens,username',
+                'username' => 'required|string',
                 'email' => 'required|email',
                 'telepon' => 'nullable|string',
                 'jenis_kelamin' => 'nullable|string',
                 'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            ], [
-                'required.nama' => ':Nama harus diisi',
-                'required.email' => ':attribute harus diisi',
-                'required.telepon' => ':attribute harus diisi',
-                'required.jenis_kelamin' => ':attribute harus diisi',
             ]);
 
-            
-            dd($request->all());
-
+            // Jika ada file foto di-request
             if ($request->hasFile('foto')) {
+                // Hapus foto lama jika ada
                 if ($user->foto && File::exists(public_path($user->foto))) {
                     File::delete(public_path($user->foto));
                 }
 
-                $foto = $request->file('foto')->move('foto_profile', time() . '_' . $request->file('foto')->getClientOriginalName());
+                // Simpan foto baru
+                $foto = $request->file('foto')->storeAs('foto_profile', time() . '_' . $request->file('foto')->getClientOriginalName());
             } else {
-                $foto = $user->foto;
+                $foto = $user->foto; // Tetap gunakan foto lama
             }
 
+            // Update data Dosen
             $user->update([
                 'nama' => $request->nama,
                 'nip' => $request->nip,
-                'email' => $request->email,
                 'username' => $request->username,
+                'email' => $request->email,
                 'telepon' => $request->telepon,
                 'jenis_kelamin' => $request->jenis_kelamin,
-                'foto' => $foto
+                'foto' => $foto,
             ]);
 
-            return view('peminjaman.profile.dosen.profile', ['dosen' => $user])->with('success', 'Profil berhasil diperbarui!');
+            return redirect()->route('profile.dosen')
+                ->with('success', 'Profil berhasil diperbarui!');
         } elseif ($user instanceof Mahasiswa) {
-            $data = Kelas::all();
             $request->validate([
                 'nama' => 'required|string',
                 'nim' => 'required|string',
@@ -80,23 +76,22 @@ class ProfileController extends Controller
                 'kelas_id' => 'required|exists:kelas,id',
                 'jenis_kelamin' => 'nullable|string',
                 'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            ], [
-                'required.nama' => ':Nama harus diisi',
-                'required.email' => ':attribute harus diisi',
-                'required.telepon' => ':attribute harus diisi',
-                'required.jenis_kelamin' => ':attribute harus diisi',
             ]);
 
+            // Jika ada file foto di-request
             if ($request->hasFile('foto')) {
+                // Hapus foto lama jika ada
                 if ($user->foto && File::exists(public_path($user->foto))) {
                     File::delete(public_path($user->foto));
                 }
 
-                $foto = $request->file('foto')->move('foto_profile', time() . '_' . $request->file('foto')->getClientOriginalName());
+                // Simpan foto baru
+                $foto = $request->file('foto')->storeAs('foto_profile', time() . '_' . $request->file('foto')->getClientOriginalName());
             } else {
-                $foto = $user->foto;
+                $foto = $user->foto; // Tetap gunakan foto lama
             }
 
+            // Update data Mahasiswa
             $user->update([
                 'nama' => $request->nama,
                 'nim' => $request->nim,
@@ -104,12 +99,14 @@ class ProfileController extends Controller
                 'telepon' => $request->telepon,
                 'kelas_id' => $request->kelas_id,
                 'jenis_kelamin' => $request->jenis_kelamin,
-                'foto' => $foto
+                'foto' => $foto,
             ]);
-            return view('peminjaman.profile.mahasiswa.profile', ['mahasiswa' => $user], ['kelas' => $data])->with('success', 'Profil berhasil diperbarui!');
 
-        } 
+            return redirect()->route('profile.mahasiswa') // Ubah ke route view mahasiswa
+                ->with('success', 'Profil berhasil diperbarui!');
+        }
 
+        // Jika bukan Dosen atau Mahasiswa
         return abort(404, 'Halaman tidak ditemukan');
     }
 

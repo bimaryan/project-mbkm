@@ -3,21 +3,21 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WEB\DashboardController;
 use App\Http\Controllers\WEB\Auth\LoginController;
+use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
 use App\Http\Controllers\WEB\Admin\AdminController;
 use App\Http\Controllers\WEB\Admin\DosenController;
 use App\Http\Controllers\WEB\Admin\LinkApiController;
+use App\Http\Controllers\WEB\Admin\MahasiswaController;
+use App\Http\Controllers\WEB\Admin\MataKuliahController;
 use App\Http\Controllers\WEB\Staff\RuanganController;
 use App\Http\Controllers\WEB\Staff\ProdukController;
 use App\Http\Controllers\WEB\Staff\SatuanController;
 use App\Http\Controllers\WEB\Staff\KategoriController;
-use App\Http\Controllers\WEB\Mahasiswa\HomeController;
-use App\Http\Controllers\WEB\Admin\MahasiswaController;
-use App\Http\Controllers\WEB\Admin\MataKuliahController;
 use App\Http\Controllers\WEB\Staff\PeminjamanController;
-use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
-use App\Http\Controllers\WEB\Mahasiswa\KeranjangController;
-use App\Http\Controllers\WEB\Mahasiswa\ProfileController;
 use App\Http\Controllers\WEB\Staff\LaporanController;
+use App\Http\Controllers\WEB\Peminjaman\KeranjangController;
+use App\Http\Controllers\WEB\Peminjaman\ProfileController;
+use App\Http\Controllers\WEB\Peminjaman\HomeController;
 
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
