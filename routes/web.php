@@ -5,6 +5,7 @@ use App\Http\Controllers\WEB\DashboardController;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
 use App\Http\Controllers\WEB\Admin\AdminController;
+use App\Http\Controllers\WEB\Admin\DokumenSpoController;
 use App\Http\Controllers\WEB\Admin\DosenController;
 use App\Http\Controllers\WEB\Admin\LinkApiController;
 use App\Http\Controllers\WEB\Admin\MahasiswaController;
@@ -77,6 +78,8 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::post('/data-mata-kuliah/proses', [MataKuliahController::class, 'storeMatakuliah'])->name('data-mata-kuliah.proses');
         Route::delete('/data-mata-kuliah/{matakuliah}/hapus', [MataKuliahController::class, 'deleteMatakuliah'])->name('data-mata-kuliah.delete');
         Route::put('/data-mata-kuliah/{matakuliah}/edit', [MataKuliahController::class, 'editMatakuliah'])->name('data-mata-kuliah.edit');
+
+        Route::get('data-dokumen-spo', [DokumenSpoController::class, 'index'])->name('data-dokumen-spo');
 
         // ROUTE DATA LINK API
         Route::resource('settings/link-api', LinkApiController::class);
