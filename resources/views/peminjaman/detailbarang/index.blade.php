@@ -31,7 +31,7 @@
 </head>
 
 <body>
-    @include('mahasiswa.navbar.index')
+    @include('peminjaman.navbar.index')
 
     <div class="max-w-screen-xl p-6 mx-auto mt-14">
         <div class="flex items-center mt-6">
@@ -127,7 +127,7 @@
                             class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                     </div>
 
-                    <div class="flex flex-row items-center gap-2 mb-4 w-full">
+                    <div class="flex flex-row items-center w-full gap-2 mb-4">
                         <div class="w-full">
                             <label for="waktu_pinjam" class="block text-lg font-medium text-gray-700">Waktu
                                 Peminjaman</label>

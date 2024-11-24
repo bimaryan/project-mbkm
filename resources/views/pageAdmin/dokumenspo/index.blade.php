@@ -29,7 +29,7 @@
                     </div>
                     <div>
 
-                        <button data-modal-target="tambah-kelas" data-modal-toggle="tambah-kelas"
+                        <button data-modal-target="tambah-spo" data-modal-toggle="tambah-spo"
                             class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800"><i
                                 class="fa-solid fa-plus"></i>
                         </button>

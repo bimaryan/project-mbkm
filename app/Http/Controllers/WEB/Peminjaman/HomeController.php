@@ -98,7 +98,7 @@ class HomeController extends Controller
             return redirect('/')->with('error', 'Data barang tidak ditemukan.');
         }
 
-        return view('mahasiswa.detailbarang.index', [
+        return view('peminjaman.detailbarang.index', [
             'view' => $view,
             'kelas' => $kelas,
             'stock' => $stock,
@@ -148,7 +148,7 @@ class HomeController extends Controller
             $data->waktu_kembali_unix = \Carbon\Carbon::parse($data->waktu_kembali)->timestamp;
         }
 
-        return view('mahasiswa.informasi.index', compact('peminjaman'));
+        return view('peminjaman.informasi.index', compact('peminjaman'));
     }
 
     public function riwayat()
