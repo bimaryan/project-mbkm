@@ -48,7 +48,7 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-2 relative" >
                         <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                         <input type="password" name="password" id="password" placeholder="Masukan Password"
                             class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
@@ -70,19 +70,6 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-
-
-                    <!-- Gambar -->
-                    {{-- <div class="mb-2">
-                                                <label for="foto"
-                                                    class="block text-sm font-medium text-gray-700">Foto</label>
-                                                <input type="file" name="foto" id="foto"
-                                                    class="block w-full px-3 mt-1 border border-green-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                                                @error('foto')
-                                                    <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                                                @enderror
-                                            </div> --}}
-
                 </div>
                 <button type="submit"
                     class="text-white bg-green-500 mt-4 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Simpan</button>

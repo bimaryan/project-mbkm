@@ -45,20 +45,20 @@ class LoginController extends Controller
         ]);
 
         if ($request->captcha != Session::get('captcha')) {
-            return redirect()->back()->withErrors(['captcha' => 'CAPTCHA tidak valid.'])->withInput();
+            return redirect()->back()->with('error', 'wrong_captcha')->withInput();
         }
 
         $credentials = $request->only('identifier', 'password');
 
         if (Auth::guard('admin')->attempt(['username' => $credentials['identifier'], 'password' => $request->password])) {
 
-            if (Auth::guard('admin')->user()->role_id = '1') {
-                return redirect()->route('dashboard');
-            } elseif (Auth::guard('admin')->user()->role_id == '2') {
+            $role = Auth::guard('admin')->user()->role_id;
+            if ($role == 1 || $role == 2) {
                 return redirect()->route('dashboard');
             } else {
-                return redirect()->back()->withErrors(['errors'])->withInput();
+                return redirect()->back()-with('error', 'wrong_credentials')->withInput();
             }
+
         }
 
         if (Auth::guard('mahasiswa')->attempt(['nim' => $credentials['identifier'], 'password' => $request->password])) {
@@ -69,9 +69,14 @@ class LoginController extends Controller
             return redirect()->route('home');
         }
 
-        return redirect()->back()->withErrors(['errors'],)->withInput();
+        if (empty($request->identifier) || empty($request->password)) {
+            return redirect()->back()->with('error', 'empty_fields')->withInput();
+
+        }
+
+        return redirect()->back()->with('error', 'wrong_credentials')->withInput();
     }
-    
+
     public function logout()
     {
         Auth::logout();

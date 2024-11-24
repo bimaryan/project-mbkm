@@ -79,7 +79,12 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::delete('/data-mata-kuliah/{matakuliah}/hapus', [MataKuliahController::class, 'deleteMatakuliah'])->name('data-mata-kuliah.delete');
         Route::put('/data-mata-kuliah/{matakuliah}/edit', [MataKuliahController::class, 'editMatakuliah'])->name('data-mata-kuliah.edit');
 
-        Route::get('data-dokumen-spo', [DokumenSpoController::class, 'index'])->name('data-dokumen-spo');
+        // ROUTE DATA SPO
+        Route::get('/data-spo', [DokumenSpoController::class, 'dokumenSPO'])->name('data-spo');
+        Route::post('/data-spo/proses', [DokumenSpoController::class, 'storeSPO'])->name('data-spo.proses');
+        Route::delete('/data-spo/{dokumen}/hapus', [DokumenSpoController::class, 'deleteSPO'])->name('data-spo.delete');
+        Route::put('/data-spo/{spo}/edit', [DokumenSpoController::class, 'editSPO'])->name('data-spo.edit');
+        Route::get('/download/{dokumen}', [DokumenSpoController::class, 'downloadSPO'])->name('download.spo');
 
         // ROUTE DATA LINK API
         Route::resource('settings/link-api', LinkApiController::class);

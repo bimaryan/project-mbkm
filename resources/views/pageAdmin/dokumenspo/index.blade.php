@@ -12,15 +12,24 @@
                     });
                 </script>
             @endif
+            @if (session('error'))
+                <script>
+                    Swal.fire({
+                        title: "Error",
+                        text: "{{ session('error') }}",
+                        icon: "danger",
+                        confirmButtonColor: "#3085d6",
+                    });
+                </script>
+            @endif
             <div class="p-4 bg-white rounded-lg shadow-lg">
                 <div class="flex items-center justify-between">
                     <div>
-                        <h3 class="text-2xl font-semibold text-green-500">Data Dokumen SPO</h3>
+                        <h3 class="text-2xl font-semibold text-green-500">Dokumen SPO</h3>
                     </div>
                     <div>
-                        
 
-                        <button data-modal-target="tambah-dokumenspo" data-modal-toggle="tambah-dokumenspo"
+                        <button data-modal-target="tambah-spo" data-modal-toggle="tambah-spo"
                             class="justify-center px-4 py-2 text-white bg-green-500 rounded hover:bg-green-800"><i
                                 class="fa-solid fa-plus"></i>
                         </button>
@@ -32,13 +41,13 @@
             </div>
 
             <div class="p-4 bg-white rounded-lg shadow-lg">
-                <div id='tableDokumenSPO'>
-                    @include('pageAdmin.dokumenspo.table')
+                <div id='tableSPO'>
+                    @include('pageAdmin.dokumenspo.table', ['dokumen' => $dokumen])
                 </div>
 
-                {{-- <div id="pageignitionLinks">
-                    {{ $kelas->links() }}
-                </div> --}}
+                <div id="pageignitionLinks">
+                    {{ $dokumen->links() }}
+                </div>
             </div>
 
         </div>
@@ -80,7 +89,7 @@
 
                 function loadTable(page = 1) {
                     $.ajax({
-                        url: "{{ route('data-mahasiswa') }}",
+                        url: "{{ route('data-spo') }}",
                         method: "GET",
                         data: {
                             // name: $('#filterName').val(),
@@ -92,14 +101,14 @@
                         },
                         success: function(response) {
                             // Replace table and pagination links
-                            $('#tableDokumenSPO').html($(response).find('#tableDokumenSPO').html());
+                            $('#tableSPO').html($(response).find('#tableSPO').html());
                             $('#paginationLinks').html($(response).find('#paginationLinks').html());
                         }
                     });
                 }
             });
             $(document).ready(function() {
-                $('#data-dokuemenspo').DataTable({
+                $('#data-spo').DataTable({
                     paging: false,
                     scrollCollapse: true,
                     scrollY: '300px'

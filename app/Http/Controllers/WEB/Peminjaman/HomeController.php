@@ -170,5 +170,5 @@ class HomeController extends Controller
         return view('mahasiswa.riwayat.index', compact('riwayat'));
     }
 
-    
+
 }
