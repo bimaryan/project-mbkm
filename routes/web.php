@@ -5,6 +5,7 @@ use App\Http\Controllers\WEB\DashboardController;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
 use App\Http\Controllers\WEB\Admin\AdminController;
+use App\Http\Controllers\WEB\Admin\DokumenSpoController;
 use App\Http\Controllers\WEB\Admin\DosenController;
 use App\Http\Controllers\WEB\Admin\LinkApiController;
 use App\Http\Controllers\WEB\Admin\MahasiswaController;
@@ -77,6 +78,13 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::post('/data-mata-kuliah/proses', [MataKuliahController::class, 'storeMatakuliah'])->name('data-mata-kuliah.proses');
         Route::delete('/data-mata-kuliah/{matakuliah}/hapus', [MataKuliahController::class, 'deleteMatakuliah'])->name('data-mata-kuliah.delete');
         Route::put('/data-mata-kuliah/{matakuliah}/edit', [MataKuliahController::class, 'editMatakuliah'])->name('data-mata-kuliah.edit');
+
+        // ROUTE DATA SPO
+        Route::get('/data-spo', [DokumenSpoController::class, 'dokumenSPO'])->name('data-spo');
+        Route::post('/data-spo/proses', [DokumenSpoController::class, 'storeSPO'])->name('data-spo.proses');
+        Route::delete('/data-spo/{dokumen}/hapus', [DokumenSpoController::class, 'deleteSPO'])->name('data-spo.delete');
+        Route::put('/data-spo/{spo}/edit', [DokumenSpoController::class, 'editSPO'])->name('data-spo.edit');
+        Route::get('/download/{dokumen}', [DokumenSpoController::class, 'downloadSPO'])->name('download.spo');
 
         // ROUTE DATA LINK API
         Route::resource('settings/link-api', LinkApiController::class);
