@@ -15,131 +15,111 @@ class ProfileController extends Controller
 {
     public function viewProfile()
     {
-        $user = Auth::user();
         $kelas = Kelas::all();
 
-        if ($user instanceof Mahasiswa) {
-            return view('peminjaman.profile.mahasiswa.profile', ['mahasiswa' => $user], ['kelas' => $kelas]);
-        } elseif ($user instanceof Dosen) {
-            return view('peminjaman.profile.dosen.profile', ['dosen' => $user]);
+        if (Auth::guard('dosen')->check()) {
+            $user = Auth::guard('dosen')->user();
+        } elseif (Auth::guard('mahasiswa')->check()) {
+            $user = Auth::guard('mahasiswa')->user();
+        } else {
+            abort(404, 'User not found');
         }
-        return abort(404, 'Halaman tidak ditemukan');
+
+        return view('peminjaman.profile.edit', compact('user', 'kelas'));
     }
 
-    public function editProfile(Request $request)
+    public function update(Request $request)
     {
-        $user = Auth::user();
+        if (Auth::guard('dosen')->check()) {
+            $user = Auth::guard('dosen')->user();
 
-        if ($user instanceof Dosen) {
             $request->validate([
-                'nama' => 'required|string',
-                'nip' => 'required|string',
-                'username' => 'required|string',
-                'email' => 'required|email',
-                'telepon' => 'nullable|string',
-                'jenis_kelamin' => 'nullable|string',
+                'nama' => 'required',
+                'nip' => 'required',
+                'username' => 'required|unique:dosens,username,' . $user->id,
+                'email' => 'required|string|email',
+                'telepon' => 'required',
+                'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
                 'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
-            // Jika ada file foto di-request
-            if ($request->hasFile('foto')) {
-                // Hapus foto lama jika ada
-                if ($user->foto && File::exists(public_path($user->foto))) {
-                    File::delete(public_path($user->foto));
-                }
+            $user->username = $request->username;
+            $user->nip = $request->nip;
+        } elseif (Auth::guard('mahasiswa')->check()) {
+            $user = Auth::guard('mahasiswa')->user();
 
-                // Simpan foto baru
-                $foto = $request->file('foto')->storeAs('foto_profile', time() . '_' . $request->file('foto')->getClientOriginalName());
-            } else {
-                $foto = $user->foto; // Tetap gunakan foto lama
-            }
-
-            // Update data Dosen
-            $user->update([
-                'nama' => $request->nama,
-                'nip' => $request->nip,
-                'username' => $request->username,
-                'email' => $request->email,
-                'telepon' => $request->telepon,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'foto' => $foto,
-            ]);
-
-            return redirect()->route('profile.dosen')
-                ->with('success', 'Profil berhasil diperbarui!');
-        } elseif ($user instanceof Mahasiswa) {
             $request->validate([
-                'nama' => 'required|string',
-                'nim' => 'required|string',
-                'email' => 'required|email',
-                'telepon' => 'nullable|string',
+                'nama' => 'required',
+                'nim' => 'required|unique:mahasiswas,nim,' . $user->id,
                 'kelas_id' => 'required|exists:kelas,id',
-                'jenis_kelamin' => 'nullable|string',
+                'email' => 'required|string|email',
+                'telepon' => 'required',
+                'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
                 'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
-            // Jika ada file foto di-request
-            if ($request->hasFile('foto')) {
-                // Hapus foto lama jika ada
-                if ($user->foto && File::exists(public_path($user->foto))) {
-                    File::delete(public_path($user->foto));
-                }
-
-                // Simpan foto baru
-                $foto = $request->file('foto')->storeAs('foto_profile', time() . '_' . $request->file('foto')->getClientOriginalName());
-            } else {
-                $foto = $user->foto; // Tetap gunakan foto lama
-            }
-
-            // Update data Mahasiswa
-            $user->update([
-                'nama' => $request->nama,
-                'nim' => $request->nim,
-                'email' => $request->email,
-                'telepon' => $request->telepon,
-                'kelas_id' => $request->kelas_id,
-                'jenis_kelamin' => $request->jenis_kelamin,
-                'foto' => $foto,
-            ]);
-
-            return redirect()->route('profile.mahasiswa') // Ubah ke route view mahasiswa
-                ->with('success', 'Profil berhasil diperbarui!');
+            $user->nim = $request->nim;
+            $user->kelas_id = $request->kelas_id;
+        } else {
+            abort(403, 'Unauthorized');
         }
 
-        // Jika bukan Dosen atau Mahasiswa
-        return abort(404, 'Halaman tidak ditemukan');
+        $user->nama = $request->nama;
+        $user->email = $request->email;
+        $user->telepon = $request->telepon;
+        $user->jenis_kelamin = $request->jenis_kelamin;
+
+        if ($request->hasFile('foto')) {
+            if ($user->foto !== null) {
+                File::delete(public_path('foto/' . $user->foto));
+            }
+            $image = $request->file('foto');
+            $name = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('foto'), $name);
+            $user->foto = $name;
+        }
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
     }
+
 
     public function viewUbahKataSandi()
     {
-        $user = Auth::user();
-        if ($user instanceof Mahasiswa) {
-            return view('peminjaman.profile.mahasiswa.ubahsandi', ['mahasiswa' => $user]);
-        } elseif ($user instanceof Dosen) {
-            return view('peminjaman.profile.dosen.ubahsandi', ['dosen' => $user]);
+        if (Auth::guard('dosen')->check()) {
+            $user = Auth::guard('dosen')->user();
+        } elseif (Auth::guard('mahasiswa')->check()) {
+            $user = Auth::guard('mahasiswa')->user();
+        } else {
+            abort(404, 'User not found');
         }
+
+        return view('peminjaman.profile.ubahsandi', compact('user'));
     }
 
     public function ubahKataSandi(Request $request, Mahasiswa $mahasiswa, Dosen $dosen)
     {
-        $user = Auth::user();
-
-        if ($user instanceof Mahasiswa) {
+        if (Auth::guard('dosen')->check()) {
+            $user = Auth::guard('dosen')->user();
             $request->validate([
                 'password' => 'required|string',
                 'konfirmasi_password' => 'required|string',
             ]);
 
-            $mahasiswa->password = Hash::make($request->password);
-            $mahasiswa->save();
-        } elseif ($user instanceof Dosen) {
+            $user->password = Hash::make($request->password);
+            $user->save();
+        } elseif (Auth::guard('mahasiswa')->check()) {
+            $user = Auth::guard('mahasiswa')->user();
             $request->validate([
                 'password' => 'required|string',
                 'konfirmasi_password' => 'required|string',
             ]);
 
-            $dosen->password = Hash::make($request->password);
-            $dosen->save();
+            $user->password = Hash::make($request->password);
+            $user->save();
+        } else {
+            abort(404, 'User not found');
         }
 
         return redirect()->back()->with('success', 'Kata sandi berhasil diperbarui!');

@@ -38,61 +38,6 @@
 </head>
 
 <body>
-
-
-    @if (session('errors'))
-        <script>
-            Swal.fire({
-                title: "Login Gagal",
-                text: '{{ session('error') }}',
-                icon: "error",
-                confirmButtonColor: "#3085d6",
-            });
-        </script>
-    @endif
-    {{-- @if (session('error'))
-        <script>
-            const errorType = "{{ session('error') }}"; // Bungkus dalam tanda kutip
-            console.log("Error Type:", errorType); // Debugging
-
-            switch (errorType) {
-                case 'wrong_credentials':
-                    Swal.fire({
-                        title: "Login Gagal",
-                        text: "Username/NIM atau Kata Sandi salah!",
-                        icon: "error",
-                        confirmButtonColor: "#3085d6",
-                    });
-                    break;
-                case 'wrong_captcha':
-                    Swal.fire({
-                        title: "Login Gagal",
-                        text: "Kode verifikasi tidak sesuai!",
-                        icon: "error",
-                        confirmButtonColor: "#3085d6",
-                    });
-                    break;
-                case 'empty_fields':
-                    Swal.fire({
-                        title: "Login Gagal",
-                        text: "Username/NIM dan Kata Sandi tidak boleh kosong!",
-                        icon: "error",
-                        confirmButtonColor: "#3085d6",
-                    });
-                    break;
-                default:
-                    Swal.fire({
-                        title: "Terjadi Kesalahan",
-                        text: "Silakan coba lagi nanti.",
-                        icon: "error",
-                        confirmButtonColor: "#3085d6",
-                    });
-            }
-        </script>
-    @endif --}}
-
-
-
     <div class="flex flex-col items-center justify-center h-screen p-4 space-y-4 background">
         <div class="flex justify-center">
             <img src="{{ asset('logo/polindra.png') }}" alt="" class="object-cover w-full h-24">
@@ -162,10 +107,18 @@
                 <button type="submit"
                     class="w-full px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Masuk</button>
             </form>
-
-            <!-- Forgot Password -->
         </div>
     </div>
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{ session('error') }}',
+            });
+        </script>
+    @endif
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
