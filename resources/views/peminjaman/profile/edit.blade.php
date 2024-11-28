@@ -13,8 +13,8 @@
                 });
             </script>
         @endif
-        <h1 class="mb-4 text-2xl font-semibold">Pengaturan Data Diri</h1>
-        <form action="{{ route('editProfile', auth()->user()->id) }}" method="POST" enctype="multipart/form-data">
+        <h1 class="mb-4 text-2xl font-semibold">Pengaturan Data Diri </h1>
+        <form action="{{ route('editProfile') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="flex items-center mb-6">
@@ -24,7 +24,8 @@
                             class="object-cover rounded-full" style="width: 130px; height: 130px;">
                     @else
                         <!-- Tampilan default jika tidak ada gambar -->
-                        <div class="flex items-center justify-center bg-gray-200 rounded-full" style="width: 130px; height: 130px;">
+                        <div class="flex items-center justify-center bg-gray-200 rounded-full"
+                            style="width: 130px; height: 130px;">
                             <i class="text-2xl text-gray-500 fas fa-upload"></i>
                         </div>
                     @endif
@@ -46,29 +47,53 @@
                 <input type="text" id="nama" name="nama" value="{{ auth()->user()->nama }}"
                     class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
             </div>
+<<<<<<< HEAD:resources/views/peminjaman/profile/dosen/profile.blade.php
             <div class="mb-4">
-                <label for="nim" class="block text-sm font-medium text-gray-700">NIM</label>
-                <input type="text" id="nim" name="nim" value="{{ auth()->user()->nim }}"
-                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50 disabled:bg-gray-100">
+                <label for="nip" class="block text-sm font-medium text-gray-700">NIP/NIDN</label>
+                <input type="number" id="nip" name="nip" value="{{ auth()->user()->nip }}" disabled
+                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
             </div>
+
             <div class="mb-4">
-                <label for="kelas_id" class="block text-sm font-medium text-gray-700">Kelas</label>
-                <select name="kelas_id" id="kelas_id"
-                    class="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
-                    @if (!$kelas->isEmpty())
-                        @foreach ($kelas as $kelas)
-                            <option value="{{ $kelas->id }}"
-                                {{ $kelas->id == auth()->user()->kelas_id ? 'selected' : '' }}>
-                                {{ $kelas->nama_kelas }}
-                            </option>
-                        @endforeach
-                        
-                    @endif
-                </select>
-                @error('role_id')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                @enderror
+                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" id="username" name="username" value="{{ auth()->user()->username }}"
+                    class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
             </div>
+
+=======
+            @if (Auth::guard('mahasiswa')->check())
+                <div class="mb-4">
+                    <label for="nim" class="block text-sm font-medium text-gray-700">NIM</label>
+                    <input type="text" id="nim" name="nim" value="{{ auth()->user()->nim }}"
+                        class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50 disabled:bg-gray-100">
+                </div>
+                <div class="mb-4">
+                    <label for="kelas_id" class="block text-sm font-medium text-gray-700">Kelas</label>
+                    <select name="kelas_id" id="kelas_id"
+                        class="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                        @if (!$kelas->isEmpty())
+                            @foreach ($kelas as $kelas)
+                                <option value="{{ $kelas->id }}"
+                                    {{ $kelas->id == auth()->user()->kelas_id ? 'selected' : '' }}>
+                                    {{ $kelas->nama_kelas }}
+                                </option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+            @elseif (Auth::guard('dosen')->check())
+                <div class="mb-4">
+                    <label for="nip" class="block text-sm font-medium text-gray-700">NIP/NIDN</label>
+                    <input type="text" id="nip" name="nip" value="{{ auth()->user()->nip }}"
+                        class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50 disabled:bg-gray-100">
+                </div>
+                <div class="mb-4">
+                    <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                    <input type="text" id="username" name="username" value="{{ auth()->user()->username }}"
+                        class="block w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50 disabled:bg-gray-100">
+                </div>
+            @endif
+>>>>>>> 2dd4ed6370eb5dbf1a73259d9543443952af7f68:resources/views/peminjaman/profile/edit.blade.php
             <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <input type="email" id="email" name="email" value="{{ auth()->user()->email }}"

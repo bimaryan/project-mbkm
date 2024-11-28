@@ -38,29 +38,6 @@
 </head>
 
 <body>
-
-    @if (session('errors'))
-        <script>
-            Swal.fire({
-                title: "Login Gagal",
-                text: 'Username/NIM atau Kata sandi salah!',
-                icon: "error",
-                confirmButtonColor: "#3085d6",
-            });
-        </script>
-    @endif
-
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                title: "Success",
-                text: "{{ session('success') }}",
-                icon: "success",
-                confirmButtonColor: "#3085d6",
-            });
-        </script>
-    @endif
-
     <div class="flex flex-col items-center justify-center h-screen p-4 space-y-4 background">
         <div class="flex justify-center">
             <img src="{{ asset('logo/polindra.png') }}" alt="" class="object-cover w-full h-24">
@@ -69,7 +46,7 @@
         <div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-lg">
             <h2 class="mb-6 text-3xl font-bold text-center text-green-500">Masuk</h2>
 
-            <form action="{{ route('login-process') }}" method="POST" class="space-y-4">
+            <form action="{{ route('login-process') }}" method="POST" class="space-y-4" enctype="multipart/form-data">
                 @csrf
 
                 <!-- Email -->
@@ -78,20 +55,28 @@
                     <input type="text" id="name" name="identifier"
                         class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         placeholder="Masukkan Username/NIM">
-                    @error('identifier')
+                    {{-- @error('identifier')
                         <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
-                    @enderror
+                    @enderror --}}
                 </div>
 
                 <!-- Password -->
-                <div>
+                <div class="relative ">
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-600">Kata Sandi</label>
                     <input type="password" id="password" name="password"
                         class="w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         placeholder="Masukkan Password">
-                    @error('password')
-                        <p class="mt-2 text-sm text-red-500">{{ $message }}</p>
-                    @enderror
+                    <button type="button" id="togglePassword"
+                        class="absolute inset-y-0 right-0 flex items-center pr-3 mt-7 mr-3">
+                        <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                    </button>
+
                 </div>
 
                 <div>
@@ -122,11 +107,37 @@
                 <button type="submit"
                     class="w-full px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Masuk</button>
             </form>
-
-            <!-- Forgot Password -->
         </div>
     </div>
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{ session('error') }}',
+            });
+        </script>
+    @endif
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+
+            togglePassword.addEventListener('click', () => {
+                // Toggle tipe input
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    eyeIcon.classList.replace('text-gray-500', 'text-green-500'); // Ganti warna ikon
+                } else {
+                    passwordInput.type = 'password';
+                    eyeIcon.classList.replace('text-green-500', 'text-gray-500'); // Kembalikan warna ikon
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -45,19 +45,17 @@ class LoginController extends Controller
         ]);
 
         if ($request->captcha != Session::get('captcha')) {
-            return redirect()->back()->withErrors(['captcha' => 'CAPTCHA tidak valid.'])->withInput();
+            return redirect()->back()->with('error', 'CAPTCHA yang dimasukkan salah')->withInput();
         }
 
         $credentials = $request->only('identifier', 'password');
 
         if (Auth::guard('admin')->attempt(['username' => $credentials['identifier'], 'password' => $request->password])) {
-
-            if (Auth::guard('admin')->user()->role_id = '1') {
-                return redirect()->route('dashboard');
-            } elseif (Auth::guard('admin')->user()->role_id == '2') {
+            $role = Auth::guard('admin')->user()->role_id;
+            if ($role == 1 || $role == 2) {
                 return redirect()->route('dashboard');
             } else {
-                return redirect()->back()->withErrors(['errors'])->withInput();
+                return redirect()->back()->with('error', 'Anda tidak memiliki akses ke dashboard')->withInput();
             }
         }
 
@@ -69,9 +67,10 @@ class LoginController extends Controller
             return redirect()->route('home');
         }
 
-        return redirect()->back()->withErrors(['errors'],)->withInput();
+        return redirect()->back()->with('error', 'Username/NIM atau kata sandi salah')->withInput();
     }
-    
+
+
     public function logout()
     {
         Auth::logout();

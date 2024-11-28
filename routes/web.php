@@ -5,6 +5,7 @@ use App\Http\Controllers\WEB\DashboardController;
 use App\Http\Controllers\WEB\Auth\LoginController;
 use App\Http\Controllers\WEB\Auth\ForgotPasswordController;
 use App\Http\Controllers\WEB\Admin\AdminController;
+use App\Http\Controllers\WEB\Admin\DokumenSpoController;
 use App\Http\Controllers\WEB\Admin\DosenController;
 use App\Http\Controllers\WEB\Admin\LinkApiController;
 use App\Http\Controllers\WEB\Admin\MahasiswaController;
@@ -78,6 +79,13 @@ Route::middleware(['auth:admin'])->group(function () {
         Route::delete('/data-mata-kuliah/{matakuliah}/hapus', [MataKuliahController::class, 'deleteMatakuliah'])->name('data-mata-kuliah.delete');
         Route::put('/data-mata-kuliah/{matakuliah}/edit', [MataKuliahController::class, 'editMatakuliah'])->name('data-mata-kuliah.edit');
 
+        // ROUTE DATA SPO
+        Route::get('/data-spo', [DokumenSpoController::class, 'dokumenSPO'])->name('data-spo');
+        Route::post('/data-spo/proses', [DokumenSpoController::class, 'storeSPO'])->name('data-spo.proses');
+        Route::delete('/data-spo/{dokumen}/hapus', [DokumenSpoController::class, 'deleteSPO'])->name('data-spo.delete');
+        Route::put('/data-spo/{spo}/edit', [DokumenSpoController::class, 'editSPO'])->name('data-spo.edit');
+        Route::get('/download/{dokumen}', [DokumenSpoController::class, 'downloadSPO'])->name('download.spo');
+
         // ROUTE DATA LINK API
         Route::resource('settings/link-api', LinkApiController::class);
     });
@@ -127,17 +135,16 @@ Route::group(['middleware' => ['multiGuard:dosen,mahasiswa']], function () {
     Route::get('katalog', [HomeController::class, 'katalog'])->name('katalog');
     Route::get('katalog/{nama_barang}', [HomeController::class, 'viewbarang'])->name('viewbarang');
     Route::get('keranjang', [KeranjangController::class, 'index'])->name('keranjang');
-    Route::post('keranjang/{barang}/{stock}', [KeranjangController::class, 'store'])->name('keranjang.tambah');
-    Route::delete('keranjang/{keranjang}', [KeranjangController::class, 'destroy'])->name('keranjang.hapus');
-    Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjamanStore'])->name('mahasiswa.peminjaman.tambah');
+    Route::get('katalog/peminjaman-barang/{nama_barang}', [HomeController::class, 'viewbarang'])->name('viewbarang');
+    Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjaman'])->name('mahasiswa.peminjaman');
     Route::get('informasi', [HomeController::class, 'informasi'])->name('mahasiswa.informasi');
     Route::get('riwayat', [HomeController::class, 'riwayat'])->name('mahasiswa.riwayat');
 
     Route::prefix('profile/')->group(function () {
         Route::get('', [ProfileController::class, 'viewProfile'])->name('profile');
-        Route::put('edit-profile/{user}', [ProfileController::class, 'editProfile'])->name('editProfile');
-
         Route::get('ubah-kata-sandi', [ProfileController::class, 'ViewUbahKataSandi'])->name('view-ubah-kata-sandi');
-        Route::put('ubah-kata-sandi/{user}', [ProfileController::class, 'ubahKataSandi'])->name('ubah-kata-sandi');
+
+        Route::put('edit-profile', [ProfileController::class, 'update'])->name('editProfile');
+        Route::put('ubah-kata-sandi', [ProfileController::class, 'ubahKataSandi'])->name('ubah-kata-sandi');
     });
 });

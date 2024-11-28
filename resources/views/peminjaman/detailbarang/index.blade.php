@@ -34,7 +34,11 @@
     </style>
 </head>
 
+<<<<<<< HEAD
 <body class="bg-gray-200">
+=======
+<body>
+>>>>>>> 2dd4ed6370eb5dbf1a73259d9543443952af7f68
     @include('peminjaman.navbar.index')
 
     <br>
@@ -112,10 +116,98 @@
         </div>
         <div class="max-w-screen-xl p-6 mx-auto mt-14 bg-white rounded-xl space-y-2">
             <div>
+<<<<<<< HEAD
                 <h2 class="text-lg font-medium">Deskripsi Barang</h2>
             </div>
             <div>
                 <p class="text-sm text-gray-100">{!! nl2br(e($view->deskripsi)) !!}</p>
+=======
+                <form action="{{ route('peminjaman', ['barang' => $view->id, 'stock' => $stock->id]) }}"
+                    method="POST">
+                    @csrf
+                    <div class="mb-4">
+                        <label for="kelas" class="block text-lg font-medium text-gray-700">Kelas</label>
+                        <p type="text" name="kelas" id="kelas"
+                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                            {{ Auth::user()->kelas->nama_kelas }}</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="matkul" class="block text-lg font-medium text-gray-700">Mata Kuliah</label>
+                        <select name="matkul_id" id="matkul"
+                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                            <option value="">Pilih Mata Kuliah</option>
+                            @foreach ($matkul as $matkuls)
+                                <option value="{{ $matkuls->id }}">{{ $matkuls->mata_kuliah }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="dosen" class="block text-lg font-medium text-gray-700">Dosen</label>
+                        <select name="dosen_id" id="dosen"
+                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                            <option value="">Pilih Dosen</option>
+                            @foreach ($dosen as $dosens)
+                                <option value="{{ $dosens->id }}">{{ $dosens->nama_dosen }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="rooms" class="block text-lg font-medium text-gray-700">Ruangan</label>
+                        <select name="ruangan_id" id="ruangan_id"
+                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                            <option value="">Pilih Ruangan</option>
+                            @foreach ($ruangan as $ruangan)
+                                <option value="{{ $ruangan->id }}">{{ $ruangan->nama_ruangan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="jumlah_pinjam" class="block text-lg font-medium text-gray-700">Jumlah</label>
+                        <input type="number" name="jumlah_pinjam" id="jumlah_pinjam" min="1"
+                            placeholder="Masukkan Jumlah Barang yang di pinjam"
+                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="tgl_pinjam" class="block text-lg font-medium text-gray-700">Tanggal Pinjam</label>
+                        <input type="text" datepicker datepicker-buttons datepicker-autoselect-today
+                            name="tgl_pinjam" id="tgl_pinjam" placeholder="Pilih tanggal pinjam"
+                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                    </div>
+
+                    <div class="flex flex-row items-center w-full gap-2 mb-4">
+                        <div class="w-full">
+                            <label for="waktu_pinjam" class="block text-lg font-medium text-gray-700">Waktu
+                                Peminjaman</label>
+                            <input type="time" name="waktu_pinjam" id="waktu_pinjam"
+                                class="w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                        </div>
+
+                        <div class="w-full">
+                            <label for="waktu_kembali" class="block text-lg font-medium text-gray-700">Waktu
+                                Pengembalian</label>
+                            <input type="time" name="waktu_kembali" id="waktu_kembali"
+                                class="w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="tgl_pinjam" class="block text-lg font-medium text-gray-700">Keterangan</label>
+                        <textarea type="text" name="keterangan" id="keterangan" rows="5"
+                            class="block w-full mt-1 border-gray-300 rounded-lg shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50"></textarea>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="submit"
+                            class="w-full px-4 py-2 text-white bg-green-500 rounded-md shadow-md hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+>>>>>>> 2dd4ed6370eb5dbf1a73259d9543443952af7f68
             </div>
         </div>
     </div>
