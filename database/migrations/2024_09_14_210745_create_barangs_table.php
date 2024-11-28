@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_barang');
             $table->string('foto')->nullable();
+            $table->text('deskripsi');
             $table->unsignedBigInteger('kategori_id');
             $table->unsignedBigInteger('satuan_id');
             $table->unsignedBigInteger('kondisi_id');

@@ -1,29 +1,38 @@
 <?php
 
-namespace App\Http\Controllers\WEB\Mahasiswa;
+namespace App\Http\Controllers\WEB\Peminjaman;
 
 use App\Models\Barang;
 use App\Models\Kategori;
-use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Dosen;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Kelas;
+use App\Models\Keranjang;
 use App\Models\MataKuliah;
 use App\Models\Peminjaman;
 use App\Models\Room;
 use App\Models\Ruangan;
 use App\Models\Stock;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class HomeController extends Controller
 {
     public function home(Request $request)
     {
+        $users = Auth::user();
         $kategori = $request->input('kategori');
+
+        if (!$users) {
+            return redirect()->route('login')->with('error', 'Anda harus login.');
+        }
+
+        $notifikasiKeranjang = Keranjang::with(['mahasiswa', 'dosen', 'barang'])
+            ->where('users_id', $users->id)
+            ->latest()
+            ->take(5)
+            ->get();
 
         $validCategories = ['Alat', 'Bahan'];
 
@@ -48,13 +57,22 @@ class HomeController extends Controller
         return view('peminjaman.home.index', [
             'barangs' => $barangs,
             'kategoris' => $kategoris,
-            'barangKosong' => $barangKosong
+            'barangKosong' => $barangKosong,
+            'notifikasiKeranjang' => $notifikasiKeranjang,
         ]);
     }
 
     public function katalog(Request $request)
     {
+        $user = Auth::user();
+
         $kategori = $request->input('kategori');
+
+        $notifikasiKeranjang = Keranjang::with(['mahasiswa', 'dosen', 'barang'])
+            ->where('users_id', $user->id)
+            ->latest()
+            ->take(5)
+            ->get();
 
         $validCategories = ['Alat', 'Bahan'];
 
@@ -80,13 +98,23 @@ class HomeController extends Controller
             'barangs' => $barangs,
             'kategoris' => $kategoris,
             'barangKosong' => $barangKosong,
-            'kategoriTerpilih' => $kategori
+            'kategoriTerpilih' => $kategori,
+            'notifikasiKeranjang' => $notifikasiKeranjang,
         ]);
     }
 
     public function viewbarang($nama_barang)
     {
         $view = Barang::where('nama_barang', $nama_barang)->first();
+
+        $user = Auth::user();
+
+        $notifikasiKeranjang = Keranjang::with(['mahasiswa', 'dosen', 'barang'])
+            ->where('users_id', $user->id)
+            ->latest()
+            ->take(5)
+            ->get();
+
         $kelas = Kelas::all();
         $dosen = Dosen::all();
         $matkul = MataKuliah::all();
@@ -98,17 +126,18 @@ class HomeController extends Controller
             return redirect('/')->with('error', 'Data barang tidak ditemukan.');
         }
 
-        return view('mahasiswa.detailbarang.index', [
+        return view('peminjaman.detailbarang.index', [
             'view' => $view,
             'kelas' => $kelas,
             'stock' => $stock,
             'matkul' => $matkul,
             'ruangan' => $ruangan,
-            'dosen' => $dosen
+            'dosen' => $dosen,
+            'notifikasiKeranjang' => $notifikasiKeranjang
         ]);
     }
 
-    public function peminjaman(Request $request, Barang $barang, Stock $stock, MataKuliah $matkul)
+    public function peminjamanStore(Request $request, Barang $barang, Stock $stock)
     {
         $mahasiswaId = Auth::user()->id;
 
@@ -120,7 +149,6 @@ class HomeController extends Controller
             'matkul_id' => $request->input('matkul_id'),
             'dosen_id' => $request->input('dosen_id'),
             'stock_pinjam' => $request->input('jumlah_pinjam'),
-            'QR' => rand(10000, 99999),
             'tgl_pinjam' => $request->input('tgl_pinjam'),
             'waktu_pinjam' => $request->input('waktu_pinjam'),
             'waktu_kembali' => $request->input('waktu_kembali'),
@@ -136,6 +164,12 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
+        $notifikasiKeranjang = Keranjang::with(['mahasiswa', 'dosen', 'barang'])
+            ->where('users_id', $user->id)
+            ->latest()
+            ->take(5)
+            ->get();
+
         $peminjaman = Peminjaman::with(['mahasiswa', 'barang', 'stock', 'ruangan'])
             ->whereHas('mahasiswa', function ($query) use ($user) {
                 $query->where('id', $user->id);
@@ -148,12 +182,18 @@ class HomeController extends Controller
             $data->waktu_kembali_unix = \Carbon\Carbon::parse($data->waktu_kembali)->timestamp;
         }
 
-        return view('mahasiswa.informasi.index', compact('peminjaman'));
+        return view('peminjaman.informasi.index', compact('peminjaman', 'notifikasiKeranjang'));
     }
 
     public function riwayat()
     {
         $user = Auth::user();
+
+        $notifikasiKeranjang = Keranjang::with(['mahasiswa', 'dosen', 'barang'])
+            ->where('users_id', $user->id)
+            ->latest()
+            ->take(5)
+            ->get();
 
         $riwayat = Peminjaman::with(['mahasiswa', 'barang', 'stock', 'ruangan'])
             ->whereHas('mahasiswa', function ($query) use ($user) {
@@ -167,8 +207,6 @@ class HomeController extends Controller
             $data->waktu_kembali_unix = \Carbon\Carbon::parse($data->waktu_kembali)->timestamp;
         }
 
-        return view('mahasiswa.riwayat.index', compact('riwayat'));
+        return view('peminjaman.riwayat.index', compact('riwayat', 'notifikasiKeranjang'));
     }
-
-    
 }

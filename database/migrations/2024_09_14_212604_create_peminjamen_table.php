@@ -19,13 +19,11 @@ return new class extends Migration
             $table->unsignedBigInteger('ruangan_id')->nullable();
             $table->unsignedBigInteger('matkul_id');
             $table->unsignedBigInteger('dosen_id');
-            $table->string('stock_pinjam');
-            $table->string('QR');
             $table->string('tgl_pinjam');
-            $table->time('waktu_pinjam');
-            $table->time('waktu_kembali');
-            $table->string('keterangan')->nullable();
-            $table->enum('status_pengembalian', ['Belum', 'Diserahkan'])->default('Belum');
+            $table->string('waktu_pinjam');
+            $table->string('waktu_kembali');
+            $table->string('SPO')->nullable();
+            $table->enum('status_pengembalian', ['Belum', 'Diserahkan', 'Habis'])->default('Belum');
             $table->enum('aprovals', ['Ya', 'Tidak', 'Belum']);
             $table->enum('status', ['Dipinjam', 'Dikembalikan', 'Menunggu Persetujuan']);
             $table->timestamps();

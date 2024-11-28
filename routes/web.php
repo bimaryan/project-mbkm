@@ -125,9 +125,11 @@ Route::group(['middleware' => ['multiGuard:dosen,mahasiswa']], function () {
 
     Route::get('home', [HomeController::class, 'home'])->name('home');
     Route::get('katalog', [HomeController::class, 'katalog'])->name('katalog');
+    Route::get('katalog/{nama_barang}', [HomeController::class, 'viewbarang'])->name('viewbarang');
     Route::get('keranjang', [KeranjangController::class, 'index'])->name('keranjang');
-    Route::get('katalog/peminjaman-barang/{nama_barang}', [HomeController::class, 'viewbarang'])->name('viewbarang');
-    Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjaman'])->name('mahasiswa.peminjaman');
+    Route::post('keranjang/{barang}/{stock}', [KeranjangController::class, 'store'])->name('keranjang.tambah');
+    Route::delete('keranjang/{keranjang}', [KeranjangController::class, 'destroy'])->name('keranjang.hapus');
+    Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjamanStore'])->name('mahasiswa.peminjaman.tambah');
     Route::get('informasi', [HomeController::class, 'informasi'])->name('mahasiswa.informasi');
     Route::get('riwayat', [HomeController::class, 'riwayat'])->name('mahasiswa.riwayat');
 

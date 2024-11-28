@@ -43,7 +43,7 @@
     </style>
 </head>
 
-<body class="background">
+<body class="bg-gray-200">
     @include('peminjaman.navbar.index')
     <div>
         {{-- @yield('content') --}}

@@ -11,7 +11,7 @@ class Barang extends Model
 
     protected $table = 'barangs';
 
-    protected $fillable = ['nama_barang', 'kategori_id', 'satuan_id',  'kondisi_id', 'foto'];
+    protected $fillable = ['nama_barang', 'kategori_id', 'satuan_id',  'deskripsi', 'kondisi_id', 'foto'];
 
     public function kondisi()
     {

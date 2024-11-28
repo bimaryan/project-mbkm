@@ -29,7 +29,7 @@
     </style>
 </head>
 
-<body>
+<body class="bg-gray-200">
     @include('peminjaman.navbar.index')
 
     @if (session('success'))

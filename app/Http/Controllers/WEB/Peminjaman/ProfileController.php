@@ -5,6 +5,7 @@ namespace App\Http\Controllers\WEB\Peminjaman;
 use App\Http\Controllers\Controller;
 use App\Models\Dosen;
 use App\Models\Kelas;
+use App\Models\Keranjang;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,10 +19,16 @@ class ProfileController extends Controller
         $user = Auth::user();
         $kelas = Kelas::all();
 
+        $notifikasiKeranjang = Keranjang::with(['mahasiswa', 'dosen', 'barang'])
+            ->where('users_id', $user->id)
+            ->latest()
+            ->take(5)
+            ->get();
+
         if ($user instanceof Mahasiswa) {
-            return view('peminjaman.profile.mahasiswa.profile', ['mahasiswa' => $user], ['kelas' => $kelas]);
+            return view('peminjaman.profile.mahasiswa.profile', ['mahasiswa' => $user, 'notifikasiKeranjang' => $notifikasiKeranjang], ['kelas' => $kelas]);
         } elseif ($user instanceof Dosen) {
-            return view('peminjaman.profile.dosen.profile', ['dosen' => $user]);
+            return view('peminjaman.profile.dosen.profile', ['dosen' => $user, 'notifikasiKeranjang' => $notifikasiKeranjang]);
         }
         return abort(404, 'Halaman tidak ditemukan');
     }
@@ -113,10 +120,17 @@ class ProfileController extends Controller
     public function viewUbahKataSandi()
     {
         $user = Auth::user();
+
+        $notifikasiKeranjang = Keranjang::with(['mahasiswa', 'dosen', 'barang'])
+            ->where('users_id', $user->id)
+            ->latest()
+            ->take(5)
+            ->get();
+
         if ($user instanceof Mahasiswa) {
             return view('peminjaman.profile.mahasiswa.ubahsandi', ['mahasiswa' => $user]);
         } elseif ($user instanceof Dosen) {
-            return view('peminjaman.profile.dosen.ubahsandi', ['dosen' => $user]);
+            return view('peminjaman.profile.dosen.ubahsandi', ['dosen' => $user, 'notifikasiKeranjang' => $notifikasiKeranjang]);
         }
     }
 

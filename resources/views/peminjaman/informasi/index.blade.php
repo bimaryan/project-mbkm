@@ -29,7 +29,7 @@
     </style>
 </head>
 
-<body>
+<body class="bg-gray-200">
     @include('peminjaman.navbar.index')
 
     @if (session('success'))
@@ -70,9 +70,9 @@
         </div>
 
         <div class="relative overflow-x-auto sm:rounded-lg">
-            <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
+            <table class="w-full bg-white text-sm text-center text-gray-500 dark:text-gray-400">
                 <thead
-                    class="text-xs text-gray-700 uppercase dark:text-gray-400 bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                    class="text-xs bg-gray-300 text-gray-700 uppercase dark:text-gray-400 bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">No</th>
                         <th scope="col" class="px-6 py-3">Nama Mahasiswa</th>
