@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div>
-                <form action="{{ route('mahasiswa.peminjaman', ['barang' => $view->id, 'stock' => $stock->id]) }}"
+                <form action="{{ route('peminjaman', ['barang' => $view->id, 'stock' => $stock->id]) }}"
                     method="POST">
                     @csrf
                     <div class="mb-4">
@@ -160,7 +160,7 @@
         </div>
     </div>
 
-    @include('mahasiswa.footer.index')
+    @include('peminjaman.footer.index')
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 </body>

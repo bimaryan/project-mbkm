@@ -65,14 +65,14 @@
            {{ Route::is('katalog') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Katalog</a>
                 </li>
                 <li>
-                    <a href="{{ route('mahasiswa.informasi') }}"
+                    <a href="{{ route('informasi') }}"
                         class="block py-2 px-3 rounded md:border-0 md:p-0
-           {{ Route::is('mahasiswa.informasi') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Informasi</a>
+           {{ Route::is('informasi') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Informasi</a>
                 </li>
                 <li>
-                    <a href="{{ route('mahasiswa.riwayat') }}"
+                    <a href="{{ route('riwayat') }}"
                         class="block py-2 px-3 rounded md:border-0 md:p-0
-           {{ Route::is('mahasiswa.riwayat') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Riwayat</a>
+           {{ Route::is('riwayat') ? 'text-white bg-green-700 md:text-green-700 md:bg-transparent' : 'text-gray-900 md:hover:text-green-700 dark:text-white dark:hover:bg-gray-700' }}">Riwayat</a>
                 </li>
             </ul>
         </div>

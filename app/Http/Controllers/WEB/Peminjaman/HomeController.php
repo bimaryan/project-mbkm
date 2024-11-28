@@ -129,7 +129,7 @@ class HomeController extends Controller
             'status' => 'Menunggu Persetujuan'
         ]);
 
-        return redirect()->route('mahasiswa.informasi')->with('success', 'Peminjaman berhasil dibuat dan menunggu persetujuan.');
+        return redirect()->route('informasi')->with('success', 'Peminjaman berhasil dibuat dan menunggu persetujuan.');
     }
 
     public function informasi()
@@ -167,7 +167,7 @@ class HomeController extends Controller
             $data->waktu_kembali_unix = \Carbon\Carbon::parse($data->waktu_kembali)->timestamp;
         }
 
-        return view('mahasiswa.riwayat.index', compact('riwayat'));
+        return view('peminjaman.riwayat.index', compact('riwayat'));
     }
 
 

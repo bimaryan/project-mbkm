@@ -45,20 +45,18 @@ class LoginController extends Controller
         ]);
 
         if ($request->captcha != Session::get('captcha')) {
-            return redirect()->back()->with('error', 'wrong_captcha')->withInput();
+            return redirect()->back()->with('error', 'CAPTCHA yang dimasukkan salah')->withInput();
         }
 
         $credentials = $request->only('identifier', 'password');
 
         if (Auth::guard('admin')->attempt(['username' => $credentials['identifier'], 'password' => $request->password])) {
-
             $role = Auth::guard('admin')->user()->role_id;
             if ($role == 1 || $role == 2) {
                 return redirect()->route('dashboard');
             } else {
-                return redirect()->back()-with('error', 'wrong_credentials')->withInput();
+                return redirect()->back()->with('error', 'Anda tidak memiliki akses ke dashboard')->withInput();
             }
-
         }
 
         if (Auth::guard('mahasiswa')->attempt(['nim' => $credentials['identifier'], 'password' => $request->password])) {
@@ -69,13 +67,9 @@ class LoginController extends Controller
             return redirect()->route('home');
         }
 
-        if (empty($request->identifier) || empty($request->password)) {
-            return redirect()->back()->with('error', 'empty_fields')->withInput();
-
-        }
-
-        return redirect()->back()->with('error', 'wrong_credentials')->withInput();
+        return redirect()->back()->with('error', 'Username/NIM atau kata sandi salah')->withInput();
     }
+
 
     public function logout()
     {

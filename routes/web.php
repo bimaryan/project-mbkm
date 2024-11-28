@@ -135,15 +135,15 @@ Route::group(['middleware' => ['multiGuard:dosen,mahasiswa']], function () {
     Route::get('katalog', [HomeController::class, 'katalog'])->name('katalog');
     Route::get('keranjang', [KeranjangController::class, 'index'])->name('keranjang');
     Route::get('katalog/peminjaman-barang/{nama_barang}', [HomeController::class, 'viewbarang'])->name('viewbarang');
-    Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjaman'])->name('mahasiswa.peminjaman');
-    Route::get('informasi', [HomeController::class, 'informasi'])->name('mahasiswa.informasi');
-    Route::get('riwayat', [HomeController::class, 'riwayat'])->name('mahasiswa.riwayat');
+    Route::post('peminjaman/{barang}/{stock}', [HomeController::class, 'peminjaman'])->name('peminjaman');
+    Route::get('informasi', [HomeController::class, 'informasi'])->name('informasi');
+    Route::get('riwayat', [HomeController::class, 'riwayat'])->name('riwayat');
 
     Route::prefix('profile/')->group(function () {
         Route::get('', [ProfileController::class, 'viewProfile'])->name('profile');
-        Route::put('edit-profile/{user}', [ProfileController::class, 'editProfile'])->name('editProfile');
-
         Route::get('ubah-kata-sandi', [ProfileController::class, 'ViewUbahKataSandi'])->name('view-ubah-kata-sandi');
-        Route::put('ubah-kata-sandi/{user}', [ProfileController::class, 'ubahKataSandi'])->name('ubah-kata-sandi');
+
+        Route::put('edit-profile', [ProfileController::class, 'update'])->name('editProfile');
+        Route::put('ubah-kata-sandi', [ProfileController::class, 'ubahKataSandi'])->name('ubah-kata-sandi');
     });
 });
