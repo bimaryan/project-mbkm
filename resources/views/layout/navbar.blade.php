@@ -159,7 +159,7 @@
                     <a href="{{ route('data-spo') }}"
                         class="flex items-center p-2  rounded-lg dark:text-gray-100 hover:bg-green-800 hover:text-white group  {{ Route::is('data-spo') ? 'bg-green-500 text-white' : '' }}">
                         <span class="flex-1 ms-3 whitespace-nowrap"><i
-                                class="fa-solid fa-chart-simple me-2"></i>Dokumen SPO</span>
+                                class="fa-regular fa-file-lines me-2"></i>Dokumen SPO</span>
                     </a>
                 </li>
                 <li>
